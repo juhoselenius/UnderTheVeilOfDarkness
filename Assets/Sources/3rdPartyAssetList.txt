@@ -1,3 +1,4 @@
 - Low-Poly Simple Nature Pack by Justcreate (https://assetstore.unity.com/packages/3d/environments/landscapes/low-poly-simple-nature-pack-162153)
 - MAST (Modular Asset Staging Tool) by Keith at Fertile Soil Productions (https://fertile-soil-productions.itch.io/temple-modular-collection)
 - Modular Temple Pack by Keith at Fertile Soil Productions (https://fertile-soil-productions.itch.io/mast)
+- iTween by Pixelplacement (https://assetstore.unity.com/packages/tools/animation/itween-84)
