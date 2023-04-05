@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - MAST_Holder
+  - Enemy
+  - Bullet
+  - PlayerWeapon
   layers:
   - Default
   - TransparentFX
