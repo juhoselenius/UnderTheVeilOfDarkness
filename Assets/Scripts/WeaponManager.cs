@@ -39,7 +39,16 @@ public class WeaponManager : MonoBehaviour
 
         if(Physics.Raycast(ray, out hit))
         {
-            destination = hit.point;
+            float distance = (hit.point - ray.GetPoint(0)).magnitude;
+            
+            if(distance > 2)
+            {
+                destination = hit.point;
+            }
+            else
+            {
+                destination = ray.GetPoint(10);
+            }
         }
         else
         {
