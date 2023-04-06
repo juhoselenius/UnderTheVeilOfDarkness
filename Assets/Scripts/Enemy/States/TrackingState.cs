@@ -2,73 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrackingState : IEnemyState
+public class TrackingState : IAiState
 {
-    private StatePatternEnemy enemy;
-
-    public TrackingState(StatePatternEnemy statePatternEnemy)
+    public AiStateId GetId()
     {
-        this.enemy = statePatternEnemy;
+        return AiStateId.TrackingState;
+    }
+    public void Enter(AiAgent agent)
+    {
+        
     }
 
-    public void UpdateState()
+    public void Perform(AiAgent agent)
     {
-        Look();
-        Hunt();
+        Look(agent);
+        Hunt(agent);
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void Exit(AiAgent agent)
     {
-        if (other.CompareTag("Player"))
+        
+    }
+
+    void Look(AiAgent agent)
+    {
+        // Visualize the ray in the Scene view (for debugging)
+        Debug.DrawRay(agent.eye.position, agent.eye.forward * agent.config.sightRange, Color.green);
+
+        RaycastHit hit;
+        if (Physics.Raycast(agent.eye.position, agent.eye.forward, out hit, agent.config.sightRange) && hit.collider.CompareTag("Player"))
         {
-            Debug.Log("The player triggers the enemy hearing area -> Move to the Alert state");
-            ToAlertState();
+            // If the ray hits the player, the enemy gets into the chase state and assing the chase target as the player
+            agent.chaseTarget = hit.transform;
+            agent.stateMachine.ChangeState(AiStateId.ChaseState);
         }
     }
 
-    public void ToAlertState()
+    void Hunt(AiAgent agent)
     {
-        enemy.currentState = enemy.alertState;
-    }
+        agent.navMeshAgent.destination = agent.lastKnownPlayerPosition;
+        agent.navMeshAgent.isStopped = false;
 
-    public void ToChaseState()
-    {
-        enemy.currentState = enemy.chaseState;
-    }
-
-    public void ToPatrolState()
-    {
-        // Ei voida käyttää, koska ollaan jo Patrol-tilassa. Jätetään tyhjäksi. 
-    }
-
-    public void ToTrackingState()
-    {
-
-    }
-
-    void Look()
-    {
-        //Visualisoidaan säde Scene ikkunassa.
-        Debug.DrawRay(enemy.raycastSource.position, enemy.raycastSource.forward * enemy.sightRange, Color.green);
-        RaycastHit hit; // Informaatio siitä mihin näkösäde osuu tallennetaan hit muuttujaan. 
-        if (Physics.Raycast(enemy.raycastSource.position, enemy.raycastSource.forward, out hit, enemy.sightRange) && hit.collider.CompareTag("Player"))
+        // Change to Alert State, when arrived at the last known player location
+        if (agent.navMeshAgent.remainingDistance <= agent.navMeshAgent.stoppingDistance && !agent.navMeshAgent.pathPending)
         {
-            // Tämä if toteutuu vain jos säde osuu pelaajaan
-            // Jos säde osuu pelaajaan, enemy menee Chase-tilaan ja silloin myös tietää, että ChaseTarget on kappale johon säde osui.
-            enemy.chaseTarget = hit.transform;
-            ToChaseState();
-        }
-    }
-
-    void Hunt()
-    {
-        enemy.navMeshAgent.destination = enemy.lastKnownPlayerPosition;
-        enemy.navMeshAgent.isStopped = false;
-
-        // Mennään alert-tilaan kun päästään viimeksi tiedettyyn pelaajan sijantiin. Navmeshissä on tähän työkalut
-        if (enemy.navMeshAgent.remainingDistance <= enemy.navMeshAgent.stoppingDistance && !enemy.navMeshAgent.pathPending)
-        {
-            ToAlertState();       
+            agent.stateMachine.ChangeState(AiStateId.AlertState);
         }
     }
 }

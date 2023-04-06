@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// https://www.youtube.com/watch?v=T5y7L1siFSY
+
 public class WeaponManager : MonoBehaviour
 {
     public Camera playerCam;

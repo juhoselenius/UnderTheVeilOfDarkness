@@ -1,79 +1,53 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ChaseState : IEnemyState
+public class ChaseState : IAiState
 {
-    private StatePatternEnemy enemy;
-
-    public ChaseState(StatePatternEnemy statePatternEnemy)
+    public AiStateId GetId()
     {
-        this.enemy = statePatternEnemy;
+        return AiStateId.ChaseState;
     }
 
-    public void UpdateState()
+    public void Enter(AiAgent agent)
     {
-        Look();
-        Chase();
+        
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void Perform(AiAgent agent)
     {
-
+        Look(agent);
+        Chase(agent);
     }
 
-    public void ToAlertState()
+    public void Exit(AiAgent agent)
     {
-        enemy.currentState = enemy.alertState;
+        
     }
 
-    public void ToChaseState()
+    void Look(AiAgent agent)
     {
-        // Ei k‰ytet‰, koska ollaan jo chase tilassa
-    }
+        // Vertor from the eye to the player
+        Vector3 enemyToTarget = agent.chaseTarget.position - agent.eye.position;
 
-    public void ToPatrolState()
-    {
-        // T‰t‰ harvemmin k‰ytet‰‰n. J‰tet‰‰n toistaiseksi tyhj‰ksi. 
-    }
+        // Visualize the ray in the Scene view (for debugging)
+        Debug.DrawRay(agent.eye.position, enemyToTarget, Color.red);
 
-    public void ToTrackingState()
-    {
-        enemy.currentState = enemy.trackingState;
-
-    }
-
-    void Look()
-    {
-
-        Vector3 enemyToTarget = enemy.chaseTarget.position - enemy.raycastSource.position; // Vektori silm‰st‰ pelaajaan. 
-
-
-        //Visualisoidaan s‰de Scene ikkunassa.
-        Debug.DrawRay(enemy.raycastSource.position, enemyToTarget, Color.red);
-        RaycastHit hit; // Informaatio siit‰ mihin n‰kˆs‰de osuu tallennetaan hit muuttujaan. 
-        if (Physics.Raycast(enemy.raycastSource.position, enemyToTarget, out hit, enemy.sightRange) && hit.collider.CompareTag("Player"))
+        RaycastHit hit; 
+        if (Physics.Raycast(agent.eye.position, enemyToTarget, out hit, agent.config.sightRange) && hit.collider.CompareTag("Player"))
         {
-            // Enemyn silm‰t on pelaajassa kiinni.
-            enemy.chaseTarget = hit.transform;
-
+            // Enemy has its eyes on the player
+            agent.chaseTarget = hit.transform;
         }
         else
         {
-            // Enemy jahtaa pelaajaa, mutta ei en‰‰ n‰e sit‰.  => Menn‰‰n Tracking tilaan. 
-            enemy.lastKnownPlayerPosition = enemy.chaseTarget.position;
-            ToTrackingState();
-
+            // If the enemy loses sight of the player while chasing, the enemy goes to the tracking state 
+            agent.lastKnownPlayerPosition = agent.chaseTarget.position;
+            agent.stateMachine.ChangeState(AiStateId.TrackingState);
         }
-
     }
 
-    void Chase()
+    void Chase(AiAgent agent)
     {
-        enemy.navMeshAgent.destination = enemy.chaseTarget.position;
-        enemy.navMeshAgent.isStopped = false; 
-
+        agent.navMeshAgent.destination = agent.chaseTarget.position;
+        agent.navMeshAgent.isStopped = false;
     }
-
-
 }

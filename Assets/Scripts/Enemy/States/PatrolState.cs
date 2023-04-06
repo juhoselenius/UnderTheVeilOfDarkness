@@ -1,83 +1,60 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PatrolState : IEnemyState
+public class PatrolState : IAiState
 {
-    private StatePatternEnemy enemy;
+    private int nextWaypoint;
+    private float waitTimer;
 
-    private int nextWaypoint; 
-
-    public PatrolState(StatePatternEnemy statePatternEnemy)
+    public AiStateId GetId()
     {
-        this.enemy = statePatternEnemy;
+        return AiStateId.PatrolState;
     }
 
-    public void UpdateState()
+    public void Enter(AiAgent agent)
     {
-        Look();
-        Patrol();
+        
+    }
+
+    public void Perform(AiAgent agent)
+    {
+        Look(agent);
+        Patrol(agent);
+    }
+
+    public void Exit(AiAgent agent)
+    {
 
     }
 
-    public void OnTriggerEnter(Collider other)
+    void Look(AiAgent agent)
     {
-        if (other.CompareTag("Player"))
+        // Visualize the ray in the Scene view (for debugging)
+        Debug.DrawRay(agent.eye.position, agent.eye.forward * agent.config.sightRange, Color.green);
+
+        RaycastHit hit; 
+        if (Physics.Raycast(agent.eye.position, agent.eye.forward, out hit, agent.config.sightRange) && hit.collider.CompareTag("Player"))
         {
-            Debug.Log("The player triggers the enemy hearing area -> Move to the Alert state");
-            ToAlertState();
+            // If the ray hits the player, the enemy gets into the chase state and assing the chase target as the player
+            agent.chaseTarget = hit.transform;
+            agent.stateMachine.ChangeState(AiStateId.ChaseState);
         }
     }
 
-    public void ToAlertState()
+    void Patrol(AiAgent agent)
     {
-        enemy.currentState = enemy.alertState;
-    }
+        agent.navMeshAgent.destination = agent.path.waypoints[nextWaypoint].position;
+        agent.navMeshAgent.isStopped = false;
 
-    public void ToChaseState()
-    {
-        enemy.currentState = enemy.chaseState;
-    }
-
-    public void ToPatrolState()
-    {
-        // Ei voida käyttää, koska ollaan jo Patrol-tilassa. Jätetään tyhjäksi. 
-    }
-
-    public void ToTrackingState()
-    {
-        enemy.currentState = enemy.trackingState; 
-
-    }
-
-    void Look()
-    {
-        //Visualisoidaan säde Scene ikkunassa.
-        Debug.DrawRay(enemy.raycastSource.position, enemy.raycastSource.forward * enemy.sightRange, Color.green);
-        RaycastHit hit; // Informaatio siitä mihin näkösäde osuu tallennetaan hit muuttujaan. 
-        if(Physics.Raycast(enemy.raycastSource.position, enemy.raycastSource.forward, out hit, enemy.sightRange) && hit.collider.CompareTag("Player"))
+        // Changing waypoint when current waypoint is reached through the NavMeshAgent
+        if (agent.navMeshAgent.remainingDistance <= agent.navMeshAgent.stoppingDistance && !agent.navMeshAgent.pathPending)
         {
-            // Tämä if toteutuu vain jos säde osuu pelaajaan
-            // Jos säde osuu pelaajaan, enemy menee Chase-tilaan ja silloin myös tietää, että ChaseTarget on kappale johon säde osui.
-            enemy.chaseTarget = hit.transform;
-            ToChaseState();
+            waitTimer += Time.deltaTime;
+            if(waitTimer > agent.config.patrolTurnWaitTime)
+            {
+                // Looping through waypoints
+                nextWaypoint = (nextWaypoint + 1) % agent.path.waypoints.Length;
+                waitTimer = 0;
+            }      
         }
-
     }
-
-    void Patrol()
-    {
-        enemy.navMeshAgent.destination = enemy.waypoints[nextWaypoint].position;
-        enemy.navMeshAgent.isStopped = false; 
-
-        // Vaihdetaan Waypointia kun päästään nykyiseen waypointiin. Navmeshissä on tähän työkalut
-        if(enemy.navMeshAgent.remainingDistance <= enemy.navMeshAgent.stoppingDistance && !enemy.navMeshAgent.pathPending)
-        {
-            nextWaypoint = (nextWaypoint + 1) % enemy.waypoints.Length; // looppaa waypointit läpi.        
-
-        }
-
-    }
-
-
 }
