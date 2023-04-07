@@ -63,7 +63,7 @@ public class PresetManager : MonoBehaviour
             {
                 presetMenu.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
-                Time.timeScale = 0;
+                Time.timeScale = 1;
             }
         }
         
