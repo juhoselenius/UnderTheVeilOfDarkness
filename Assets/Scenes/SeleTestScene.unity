@@ -568,6 +568,11 @@ Transform:
   m_Father: {fileID: 1761745124}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &1747884479 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 5086483059215192339, guid: c28c15efb53a11245b6dd9afac218c46, type: 3}
+  m_PrefabInstance: {fileID: 4920631385119806646}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1761745122
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,6 +637,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: cbd298f7afda4dc4ebe57c213bf806fd, type: 3}
+    - target: {fileID: 4920631386483009165, guid: c28c15efb53a11245b6dd9afac218c46, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1747884479}
+    - target: {fileID: 4920631386483009165, guid: c28c15efb53a11245b6dd9afac218c46, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920631386483009165, guid: c28c15efb53a11245b6dd9afac218c46, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5086483060022182105, guid: c28c15efb53a11245b6dd9afac218c46, type: 3}
       propertyPath: m_RootOrder
       value: 1

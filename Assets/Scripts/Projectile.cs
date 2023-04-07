@@ -11,6 +11,24 @@ public class Projectile : MonoBehaviour
     public float damage;
     
     private bool collided;
+    private float lifetime;
+    private float lifeTimer;
+
+    private void Awake()
+    {
+        lifeTimer = 0;
+        lifetime = 7f;
+    }
+
+    private void Update()
+    {
+        lifeTimer += Time.deltaTime;
+        
+        if(lifeTimer > lifetime)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
