@@ -9,7 +9,6 @@ public class WeaponManager : MonoBehaviour
     public Camera playerCam;
     public Transform projectileSpawn;
     public GameObject projectile;
-    public float projectileSpeed;
     public float fireRate = 4f;
     public float arcRange = 0f;
 
@@ -61,6 +60,7 @@ public class WeaponManager : MonoBehaviour
     void InstantiateProjectile()
     {
         GameObject firedProjectile = Instantiate(projectile, projectileSpawn.position, Quaternion.identity);
+        float projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
         firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawn.position).normalized * projectileSpeed;
 
         iTween.PunchPosition(firedProjectile, new Vector3(Random.Range(-arcRange, arcRange), Random.Range(-arcRange, arcRange), 0), Random.Range(0.5f, 2f));

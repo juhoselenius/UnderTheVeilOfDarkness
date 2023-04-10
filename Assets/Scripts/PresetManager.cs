@@ -24,6 +24,9 @@ public class PresetManager : MonoBehaviour
     public TextMeshProUGUI movementValueText;
     public TextMeshProUGUI attackValueText;
     public TextMeshProUGUI defenseValueText;
+
+    [SerializeField]
+    private Light playerLight;
     
     // Start is called before the first frame update
     void Awake()
@@ -36,6 +39,8 @@ public class PresetManager : MonoBehaviour
         presets[1] = preset2;
         presets[2] = preset3;
         currentPresetIndex = 0;
+
+        playerLight = GameObject.FindGameObjectWithTag("PlayerLight").GetComponent<Light>();
 
         sightSlider.value = presets[currentPresetIndex].sightAttribute;
         hearingSlider.value = presets[currentPresetIndex].hearingAttribute;
@@ -90,6 +95,7 @@ public class PresetManager : MonoBehaviour
     public void OnValueChangedSight(float newValue)
     {
         presets[currentPresetIndex].sightAttribute = newValue;
+        ChangeSight();
     }
 
     public void OnValueChangedHearing(float newValue)
@@ -110,5 +116,10 @@ public class PresetManager : MonoBehaviour
     public void OnValueChangedDefense(float newValue)
     {
         presets[currentPresetIndex].defenseAttribute = newValue;
+    }
+
+    private void ChangeSight()
+    {
+        playerLight.range = 2 * presets[currentPresetIndex].sightAttribute;
     }
 }

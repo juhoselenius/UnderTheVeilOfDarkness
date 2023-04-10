@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - PlayerWeapon
   - PresetMenu
+  - PlayerLight
   layers:
   - Default
   - TransparentFX

@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
 {
     public GameObject impactVFX;
     public float damage;
+    public float projectileSpeed;
     
     private bool collided;
     private float lifetime;
