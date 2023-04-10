@@ -42,11 +42,7 @@ public class PresetManager : MonoBehaviour
 
         playerLight = GameObject.FindGameObjectWithTag("PlayerLight").GetComponent<Light>();
 
-        sightSlider.value = presets[currentPresetIndex].sightAttribute;
-        hearingSlider.value = presets[currentPresetIndex].hearingAttribute;
-        movementSlider.value = presets[currentPresetIndex].movementAttribute;
-        attackSlider.value = presets[currentPresetIndex].attackAttribute;
-        defenseSlider.value = presets[currentPresetIndex].defenseAttribute;
+        UpdateSliderValues();
 
         presetMenu.SetActive(false);
     }
@@ -83,13 +79,7 @@ public class PresetManager : MonoBehaviour
         hearingSlider.value = Mathf.Clamp(hearingSlider.value, 0f, 100 - (sightSlider.value + movementSlider.value + attackSlider.value + defenseSlider.value));
         sightSlider.value = Mathf.Clamp(sightSlider.value, 0f, 100 - (hearingSlider.value + movementSlider.value + attackSlider.value + defenseSlider.value));
 
-        // Updating the values to the UI texts
-        totalAttributeValueText.text = totalAttributeValue.ToString() + " %";
-        sightValueText.text = presets[currentPresetIndex].sightAttribute.ToString() + " %";
-        hearingValueText.text = presets[currentPresetIndex].hearingAttribute.ToString() + " %";
-        movementValueText.text = presets[currentPresetIndex].movementAttribute.ToString() + " %";
-        attackValueText.text = presets[currentPresetIndex].attackAttribute.ToString() + " %";
-        defenseValueText.text = presets[currentPresetIndex].defenseAttribute.ToString() + " %";
+        UpdateTextValues();
     }
 
     public void OnValueChangedSight(float newValue)
@@ -118,8 +108,34 @@ public class PresetManager : MonoBehaviour
         presets[currentPresetIndex].defenseAttribute = newValue;
     }
 
+    public void DropdownMenuChange(int value)
+    {
+        currentPresetIndex = value;
+        UpdateSliderValues();
+    }
+
     private void ChangeSight()
     {
         playerLight.range = 2 * presets[currentPresetIndex].sightAttribute;
+    }
+
+    private void UpdateSliderValues()
+    {
+        sightSlider.value = presets[currentPresetIndex].sightAttribute;
+        hearingSlider.value = presets[currentPresetIndex].hearingAttribute;
+        movementSlider.value = presets[currentPresetIndex].movementAttribute;
+        attackSlider.value = presets[currentPresetIndex].attackAttribute;
+        defenseSlider.value = presets[currentPresetIndex].defenseAttribute;
+    }
+
+    private void UpdateTextValues()
+    {
+        // Updating the values to the UI texts
+        totalAttributeValueText.text = totalAttributeValue.ToString() + " %";
+        sightValueText.text = presets[currentPresetIndex].sightAttribute.ToString() + " %";
+        hearingValueText.text = presets[currentPresetIndex].hearingAttribute.ToString() + " %";
+        movementValueText.text = presets[currentPresetIndex].movementAttribute.ToString() + " %";
+        attackValueText.text = presets[currentPresetIndex].attackAttribute.ToString() + " %";
+        defenseValueText.text = presets[currentPresetIndex].defenseAttribute.ToString() + " %";
     }
 }
