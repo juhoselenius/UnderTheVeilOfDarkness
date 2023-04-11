@@ -14,7 +14,7 @@ namespace Visualization
 
         private void TakeDamage(int amount)
         {
-            _playerManager.updateHealth(-amount);
+            _playerManager.UpdateHealth(-amount);
         }
 
         private void OnTriggerEnter(Collider other)

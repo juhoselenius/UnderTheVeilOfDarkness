@@ -5,35 +5,35 @@ namespace Logic.Player
     public interface IPlayerManager
     {
         event Action<float> healthChanged;
-        float getHealth();
-        void updateHealth(float change);
+        float GetHealth();
+        void UpdateHealth(float change);
 
         event Action<int> livesChanged;
-        int getLives();
-        void updateLives(int change);
+        int GetLives();
+        void UpdateLives(int change);
 
         //event Action<Preset> presetChanged;
-        Preset getPreset(int presetIndex);
-        void updatePreset(Preset change);
+        Preset GetPreset(int presetIndex);
+        void UpdatePreset(Preset change);
 
         event Action<float> sightChanged;
-        float getSight(int presetIndex);
-        void updateSight(float newValue, int presetIndex);
+        float GetSight(int presetIndex);
+        void UpdateSight(float newValue, int presetIndex);
 
         event Action<float> hearingChanged;
-        float getHearing(int presetIndex);
-        void updateHearing(float newValue, int presetIndex);
+        float GetHearing(int presetIndex);
+        void UpdateHearing(float newValue, int presetIndex);
 
         event Action<float> movementChanged;
-        float getMovement(int presetIndex);
-        void updateMovement(float newValue, int presetIndex);
+        float GetMovement(int presetIndex);
+        void UpdateMovement(float newValue, int presetIndex);
 
         event Action<float> attackChanged;
-        float getAttack(int presetIndex);
-        void updateAttack(float newValue, int presetIndex);
+        float GetAttack(int presetIndex);
+        void UpdateAttack(float newValue, int presetIndex);
 
         event Action<float> defenseChanged;
-        float getDefense(int presetIndex);
-        void updateDefense(float newValue, int presetIndex);
+        float GetDefense(int presetIndex);
+        void UpdateDefense(float newValue, int presetIndex);
     }
 }
