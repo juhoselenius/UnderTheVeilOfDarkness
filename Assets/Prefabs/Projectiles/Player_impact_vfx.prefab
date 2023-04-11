@@ -9750,7 +9750,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2257409422903901610}
   m_Layer: 0
-  m_Name: vfx_impact
+  m_Name: Player_impact_vfx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

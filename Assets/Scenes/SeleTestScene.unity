@@ -252,6 +252,58 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &443905852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 443905854}
+  - component: {fileID: 443905853}
+  m_Layer: 0
+  m_Name: Context
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &443905853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443905852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdc2a435b821c454183fcb11faef033a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialPlayerState:
+    health: 100
+    maxHealth: 100
+    lives: 10
+    maxLives: 10
+    walkSpeed: 1
+    sprintSpeed: 1
+    currentPresetIndex: 0
+--- !u!4 &443905854
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443905852}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &448400806
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -404,7 +456,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -665,6 +717,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1282179597474302966, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0000076293945
+      objectReference: {fileID: 0}
     - target: {fileID: 3307738002158805220, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -721,10 +777,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3307738002525121958, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
+      propertyPath: playerLight
+      value: 
+      objectReference: {fileID: 4920631385119806647}
+    - target: {fileID: 3307738002525121958, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
+      propertyPath: playerMovement
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3307738002946744796, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3307738003492272057, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1747884479}
+    - target: {fileID: 8054968599582619656, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8054968599582619656, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
 --- !u!1001 &4920631385119806646
@@ -798,5 +874,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5086483060512203686, guid: c28c15efb53a11245b6dd9afac218c46, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086483060512203687, guid: c28c15efb53a11245b6dd9afac218c46, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086483060512203687, guid: c28c15efb53a11245b6dd9afac218c46, type: 3}
+      propertyPath: m_TagString
+      value: PlayerLight
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c28c15efb53a11245b6dd9afac218c46, type: 3}
+--- !u!108 &4920631385119806647 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 5086483060512203686, guid: c28c15efb53a11245b6dd9afac218c46, type: 3}
+  m_PrefabInstance: {fileID: 4920631385119806646}
+  m_PrefabAsset: {fileID: 0}

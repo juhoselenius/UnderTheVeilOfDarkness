@@ -1,5 +1,3 @@
-using System;
-
 public class Preset
 {
     public float sightAttribute;
@@ -7,7 +5,7 @@ public class Preset
     public float movementAttribute;
     public float attackAttribute;
     public float defenseAttribute;
-
+    
     public Preset()
     {
         sightAttribute = 20f;
@@ -17,3 +15,4 @@ public class Preset
         defenseAttribute = 20f;
     }
 }
+

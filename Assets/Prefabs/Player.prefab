@@ -115,8 +115,8 @@ MonoBehaviour:
   playerCam: {fileID: 5086483059215192339}
   projectileSpawn: {fileID: 4920631385675242137}
   projectile: {fileID: 3235484826052913327, guid: 023b9ccbd6e86e8409f216a2025f9a0d, type: 3}
-  projectileSpeed: 30
-  fireRate: 4
+  fireRate: 0
+  baseFireRate: 6
   arcRange: 0.3
 --- !u!1 &4920631385675242136
 GameObject:
@@ -469,6 +469,7 @@ GameObject:
   - component: {fileID: 5086483060022182105}
   - component: {fileID: 5086483060022182087}
   - component: {fileID: 5086483060022182086}
+  - component: {fileID: 1188691806512712266}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -525,8 +526,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 5086483060022182087}
-  walkSpeed: 10
-  sprintSpeed: 4
+  walkSpeed: 0
+  sprintSpeed: 0
   jumpSpeed: 2
   gravity: -18
   jumpHeight: 1.2
@@ -537,6 +538,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   state: 0
+--- !u!114 &1188691806512712266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5086483060022182106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aaac00fb2040c344be09dbd242ca3fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5086483060512203687
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,6 +560,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5086483060512203685}
   - component: {fileID: 5086483060512203686}
+  - component: {fileID: 569104721800048854}
   m_Layer: 0
   m_Name: PlayerLight
   m_TagString: Untagged
@@ -631,3 +645,16 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &569104721800048854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5086483060512203687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b13601523f3d54d8fcf09259148b8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerLight: {fileID: 0}
