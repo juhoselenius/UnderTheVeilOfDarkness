@@ -1,15 +1,10 @@
-using Logic.Player;
-using System;
-
 public class Preset
 {
-    
     public float sightAttribute;
     public float hearingAttribute;
     public float movementAttribute;
     public float attackAttribute;
     public float defenseAttribute;
-    
     
     public Preset()
     {
@@ -20,3 +15,4 @@ public class Preset
         defenseAttribute = 20f;
     }
 }
+

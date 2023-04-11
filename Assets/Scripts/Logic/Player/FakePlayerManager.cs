@@ -3,7 +3,7 @@ using UnityEditor.Presets;
 
 namespace Logic.Player
 {
-    class FakePlayerManager : IPlayerManager
+    class FakePlayerManager //: IPlayerManager
     {
         public event Action<float> healthChanged;
         public event Action<int> livesChanged;
@@ -16,14 +16,14 @@ namespace Logic.Player
         public event Action<float> movementChanged;
         public event Action<float> attackChanged;
         public event Action<float> defenseChanged;
-        */
+        
         public Preset preset1f = new Preset();
         public Preset preset2f = new Preset();
         public Preset preset3f = new Preset();
-
+        */
         
 
-        public float getHealth()
+        /*public float getHealth()
         {
             return 100;
         }

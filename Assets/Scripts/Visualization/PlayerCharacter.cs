@@ -7,7 +7,7 @@ namespace Visualization
     {
         public IPlayerManager _playerManager;
 
-        private void Start()
+        private void Awake()
         {
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
         }
