@@ -14,14 +14,14 @@ namespace Logic.Player
             _state = initialState;
         }
 
-        public event Action<int> livesChanged;
-        public event Action<float> healthChanged;
-        //public event Action<Preset> presetChanged;
-        public event Action<float> sightChanged;
-        public event Action<float> hearingChanged;
-        public event Action<float> movementChanged;
-        public event Action<float> attackChanged;
-        public event Action<float> defenseChanged;
+        public event Action<int> LivesChanged;
+        public event Action<float> HealthChanged;
+        public event Action<int> PresetChanged;
+        public event Action<float> SightChanged;
+        public event Action<float> HearingChanged;
+        public event Action<float> MovementChanged;
+        public event Action<float> AttackChanged;
+        public event Action<float> DefenseChanged;
 
         public float GetHealth()
         {
@@ -32,7 +32,7 @@ namespace Logic.Player
         {
             Debug.Log($"Damage in PlayerManager: {change}!");
             _state.health = Mathf.Clamp(_state.health + change, 0, _state.maxHealth);
-            healthChanged?.Invoke(_state.health);
+            HealthChanged?.Invoke(_state.health);
         }
 
         public int GetLives()
@@ -40,12 +40,16 @@ namespace Logic.Player
             return _state.lives;
         }
 
-
         public void UpdateLives(int change)
         {
             Debug.Log($"Lives in PlayerManager: {change}!");
             _state.lives = Mathf.Clamp(_state.lives + change, 0, _state.maxLives);
-            livesChanged?.Invoke(_state.lives);
+            LivesChanged?.Invoke(_state.lives);
+        }
+
+        public int GetCurrentPreset()
+        {
+            return _state.currentPresetIndex;
         }
 
         public Preset GetPreset(int presetIndex)
@@ -53,82 +57,95 @@ namespace Logic.Player
             return _state.presets[presetIndex];
         }
 
-        public void UpdatePreset(Preset change)
+        public void ChangePreset(int presetIndex)
         {
-            //_state.presets[presetIndex] = change;
-            //presetChanged?.Invoke(_state.preset1);
+            Debug.Log($"Current Preset Index in PlayerManager: {presetIndex}!");
+            _state.currentPresetIndex = presetIndex;
+            PresetChanged?.Invoke(_state.currentPresetIndex);
+            SightChanged?.Invoke(_state.presets[_state.currentPresetIndex].sightAttribute);
+            HearingChanged?.Invoke(_state.presets[_state.currentPresetIndex].hearingAttribute);
+            MovementChanged?.Invoke(_state.presets[_state.currentPresetIndex].movementAttribute);
+            AttackChanged?.Invoke(_state.presets[_state.currentPresetIndex].attackAttribute);
+            DefenseChanged?.Invoke(_state.presets[_state.currentPresetIndex].defenseAttribute);
         }
 
-        public float GetSight(int presetIndex)
+        public float GetSight()
         {
-            return _state.presets[presetIndex].sightAttribute;
+            return _state.presets[_state.currentPresetIndex].sightAttribute;
         }
 
-        public void UpdateSight(float newSightValue, int presetIndex)
+        public void UpdateSight(float newSightValue)
         {
-            Debug.Log($"Sight in PlayerManager: {newSightValue} in Preset{presetIndex}!");
-            float otherAttributeTotal = _state.presets[presetIndex].hearingAttribute + _state.presets[presetIndex].movementAttribute +
-                _state.presets[presetIndex].attackAttribute + _state.presets[presetIndex].defenseAttribute;
+            Debug.Log($"Sight in PlayerManager: {newSightValue} in Preset{_state.currentPresetIndex}!");
+            float otherAttributeTotal = _state.presets[_state.currentPresetIndex].hearingAttribute + 
+                _state.presets[_state.currentPresetIndex].movementAttribute +
+                _state.presets[_state.currentPresetIndex].attackAttribute + _state.presets[_state.currentPresetIndex].defenseAttribute;
 
-            _state.presets[presetIndex].sightAttribute = Mathf.Clamp(newSightValue, 0f, 100 - otherAttributeTotal);
-            sightChanged?.Invoke(_state.presets[presetIndex].sightAttribute);
+            _state.presets[_state.currentPresetIndex].sightAttribute = Mathf.Clamp(newSightValue, 0f, 100 - otherAttributeTotal);
+            SightChanged?.Invoke(_state.presets[_state.currentPresetIndex].sightAttribute);
         }
 
-        public float GetHearing(int presetIndex)
+        public float GetHearing()
         {
-            return _state.presets[presetIndex].hearingAttribute;
+            return _state.presets[_state.currentPresetIndex].hearingAttribute;
         }
 
-        public void UpdateHearing(float newHearingValue, int presetIndex)
+        public void UpdateHearing(float newHearingValue)
         {
-            Debug.Log($"Hearing in PlayerManager: {newHearingValue} in Preset{presetIndex}!");
-            float otherAttributeTotal = _state.presets[presetIndex].sightAttribute + _state.presets[presetIndex].movementAttribute +
-                _state.presets[presetIndex].attackAttribute + _state.presets[presetIndex].defenseAttribute;
+            Debug.Log($"Hearing in PlayerManager: {newHearingValue} in Preset{_state.currentPresetIndex}!");
+            float otherAttributeTotal = _state.presets[_state.currentPresetIndex].sightAttribute + 
+                _state.presets[_state.currentPresetIndex].movementAttribute +
+                _state.presets[_state.currentPresetIndex].attackAttribute + _state.presets[_state.currentPresetIndex].defenseAttribute;
 
-            _state.presets[presetIndex].hearingAttribute = Mathf.Clamp(newHearingValue, 0f, 100 - otherAttributeTotal);
-            hearingChanged?.Invoke(_state.presets[presetIndex].hearingAttribute);
+            _state.presets[_state.currentPresetIndex].hearingAttribute = Mathf.Clamp(newHearingValue, 0f, 100 - otherAttributeTotal);
+            HearingChanged?.Invoke(_state.presets[_state.currentPresetIndex].hearingAttribute);
         }
 
-        public float GetMovement(int presetIndex)
+        public float GetMovement()
         {
-            return _state.presets[presetIndex].movementAttribute;
+            return _state.presets[_state.currentPresetIndex].movementAttribute;
         }
 
-        public void UpdateMovement(float newMovementValue, int presetIndex)
+        public void UpdateMovement(float newMovementValue)
         {
-            Debug.Log($"Movement in PlayerManager: {newMovementValue} in Preset{presetIndex}!");
-            float otherAttributeTotal = _state.presets[presetIndex].sightAttribute + _state.presets[presetIndex].hearingAttribute +
-                _state.presets[presetIndex].attackAttribute + _state.presets[presetIndex].defenseAttribute;
-            _state.presets[presetIndex].movementAttribute = Mathf.Clamp(newMovementValue, 0f, 100 - otherAttributeTotal);
-            movementChanged?.Invoke(_state.presets[presetIndex].movementAttribute);
+            Debug.Log($"Movement in PlayerManager: {newMovementValue} in Preset{_state.currentPresetIndex}!");
+            float otherAttributeTotal = _state.presets[_state.currentPresetIndex].sightAttribute + 
+                _state.presets[_state.currentPresetIndex].hearingAttribute +
+                _state.presets[_state.currentPresetIndex].attackAttribute + _state.presets[_state.currentPresetIndex].defenseAttribute;
+
+            _state.presets[_state.currentPresetIndex].movementAttribute = Mathf.Clamp(newMovementValue, 0f, 100 - otherAttributeTotal);
+            MovementChanged?.Invoke(_state.presets[_state.currentPresetIndex].movementAttribute);
         }
 
-        public float GetAttack(int presetIndex)
+        public float GetAttack()
         {
-            return _state.presets[presetIndex].attackAttribute;
+            return _state.presets[_state.currentPresetIndex].attackAttribute;
         }
 
-        public void UpdateAttack(float newAttackValue, int presetIndex)
+        public void UpdateAttack(float newAttackValue)
         {
-            Debug.Log($"Attack in PlayerManager: {newAttackValue} in Preset{presetIndex}!");
-            float otherAttributeTotal = _state.presets[presetIndex].sightAttribute + _state.presets[presetIndex].hearingAttribute +
-                _state.presets[presetIndex].movementAttribute + _state.presets[presetIndex].defenseAttribute;
-            _state.presets[presetIndex].attackAttribute = Mathf.Clamp(newAttackValue, 0f, 100 - otherAttributeTotal);
-            attackChanged?.Invoke(_state.presets[presetIndex].attackAttribute);
+            Debug.Log($"Attack in PlayerManager: {newAttackValue} in Preset{_state.currentPresetIndex}!");
+            float otherAttributeTotal = _state.presets[_state.currentPresetIndex].sightAttribute + 
+                _state.presets[_state.currentPresetIndex].hearingAttribute +
+                _state.presets[_state.currentPresetIndex].movementAttribute + _state.presets[_state.currentPresetIndex].defenseAttribute;
+
+            _state.presets[_state.currentPresetIndex].attackAttribute = Mathf.Clamp(newAttackValue, 0f, 100 - otherAttributeTotal);
+            AttackChanged?.Invoke(_state.presets[_state.currentPresetIndex].attackAttribute);
         }
 
-        public float GetDefense(int presetIndex)
+        public float GetDefense()
         {
-            return _state.presets[presetIndex].defenseAttribute;
+            return _state.presets[_state.currentPresetIndex].defenseAttribute;
         }
 
-        public void UpdateDefense(float newDefenseValue, int presetIndex)
+        public void UpdateDefense(float newDefenseValue)
         {
-            Debug.Log($"Defense in PlayerManager: {newDefenseValue} in Preset{presetIndex}!");
-            float otherAttributeTotal = _state.presets[presetIndex].sightAttribute + _state.presets[presetIndex].hearingAttribute +
-                _state.presets[presetIndex].movementAttribute + _state.presets[presetIndex].attackAttribute;
-            _state.presets[presetIndex].defenseAttribute = Mathf.Clamp(newDefenseValue, 0f, 100 - otherAttributeTotal);
-            defenseChanged?.Invoke(_state.presets[presetIndex].defenseAttribute);
+            Debug.Log($"Defense in PlayerManager: {newDefenseValue} in Preset{_state.currentPresetIndex}!");
+            float otherAttributeTotal = _state.presets[_state.currentPresetIndex].sightAttribute + _state.presets[_state.currentPresetIndex].hearingAttribute +
+                _state.presets[_state.currentPresetIndex].movementAttribute + _state.presets[_state.currentPresetIndex].attackAttribute;
+
+            _state.presets[_state.currentPresetIndex].defenseAttribute = Mathf.Clamp(newDefenseValue, 0f, 100 - otherAttributeTotal);
+            DefenseChanged?.Invoke(_state.presets[_state.currentPresetIndex].defenseAttribute);
         }
 
         public void SaveState()

@@ -10,6 +10,8 @@ TagManager:
   - PlayerWeapon
   - PresetMenu
   - PlayerLight
+  - PlayerProjectile
+  - EnemyProjectile
   layers:
   - Default
   - TransparentFX

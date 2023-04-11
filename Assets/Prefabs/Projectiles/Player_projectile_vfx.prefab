@@ -4884,7 +4884,7 @@ GameObject:
   - component: {fileID: 827385456833883170}
   m_Layer: 0
   m_Name: Player_projectile_vfx
-  m_TagString: Bullet
+  m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4948,8 +4948,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impactVFX: {fileID: 4138439576473081691, guid: 1c519b9218a6cfc47b9439563d299e70, type: 3}
-  damage: 10
-  projectileSpeed: 30
+  damage: 0
+  baseDamage: 5
+  projectileSpeed: 0
+  projectileBaseSpeed: 40
+  beam: {fileID: 7109737904006169265}
 --- !u!1 &3614136285253803954
 GameObject:
   m_ObjectHideFlags: 0

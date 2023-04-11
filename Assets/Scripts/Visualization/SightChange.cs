@@ -1,18 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
+using Logic.Player;
 using UnityEngine;
 
-public class SightChange : MonoBehaviour
+namespace Visualization
 {
-    // Start is called before the first frame update
-    void Start()
+    public class SightChange : MonoBehaviour
     {
+        [SerializeField] private Light playerLight;
         
-    }
+        private IPlayerManager _playerManager;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        void Awake()
+        {
+            _playerManager = ServiceLocator.GetService<IPlayerManager>();
+            playerLight = GetComponent<Light>();
+        }
+
+        private void OnEnable()
+        {
+            _playerManager.SightChanged += ChangeSight;
+            ChangeSight(_playerManager.GetSight());
+
+        }
+
+        private void OnDisable()
+        {
+            _playerManager.SightChanged -= ChangeSight;
+        }
+
+        private void ChangeSight(float newValue)
+        {
+            playerLight.range = 0.5f * newValue;
+        }
     }
 }

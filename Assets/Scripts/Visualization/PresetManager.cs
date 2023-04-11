@@ -7,7 +7,6 @@ namespace Visualization
 {
     public class PresetManager : MonoBehaviour
     {
-        public int currentPresetIndex;
         public float totalAttributeValue;
 
         public GameObject presetMenu;
@@ -29,9 +28,7 @@ namespace Visualization
     
         void Start()
         {
-            _playerManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>()._playerManager;
-
-            currentPresetIndex = 0;
+            _playerManager = ServiceLocator.GetService<IPlayerManager>();
 
             UpdateSliderValues();
 
@@ -58,76 +55,72 @@ namespace Visualization
                     Time.timeScale = 1;
                 }
             }
-        
-            totalAttributeValue = _playerManager.GetSight(currentPresetIndex) + _playerManager.GetHearing(currentPresetIndex) +
-                _playerManager.GetMovement(currentPresetIndex) + _playerManager.GetAttack(currentPresetIndex) +
-                _playerManager.GetDefense(currentPresetIndex);
-
-            /* Limiting the slider values so they sum up maximum of 100
-            defenseSlider.value = Mathf.Clamp(defenseSlider.value, 0f, 100 - (sightSlider.value + hearingSlider.value + movementSlider.value + attackSlider.value));
-            attackSlider.value = Mathf.Clamp(attackSlider.value, 0f, 100 - (sightSlider.value + hearingSlider.value + movementSlider.value + defenseSlider.value));
-            movementSlider.value = Mathf.Clamp(movementSlider.value, 0f, 100 - (sightSlider.value + hearingSlider.value + attackSlider.value + defenseSlider.value));
-            hearingSlider.value = Mathf.Clamp(hearingSlider.value, 0f, 100 - (sightSlider.value + movementSlider.value + attackSlider.value + defenseSlider.value));
-            sightSlider.value = Mathf.Clamp(sightSlider.value, 0f, 100 - (hearingSlider.value + movementSlider.value + attackSlider.value + defenseSlider.value));
-            */
-            UpdateTextValues();
         }
 
         public void OnValueChangedSight(float newValue)
         {
-            _playerManager.UpdateSight(newValue, currentPresetIndex);
-            sightSlider.value = _playerManager.GetSight(currentPresetIndex);
+            _playerManager.UpdateSight(newValue);
+            sightSlider.value = _playerManager.GetSight();
+            UpdateTextValues();
         }
 
         public void OnValueChangedHearing(float newValue)
         {
-            _playerManager.UpdateHearing(newValue, currentPresetIndex);
-            hearingSlider.value = _playerManager.GetHearing(currentPresetIndex);
+            _playerManager.UpdateHearing(newValue);
+            hearingSlider.value = _playerManager.GetHearing();
+            UpdateTextValues();
         }
 
         public void OnValueChangedMovement(float newValue)
         {
-            _playerManager.UpdateMovement(newValue, currentPresetIndex);
-            movementSlider.value = _playerManager.GetMovement(currentPresetIndex);
+            _playerManager.UpdateMovement(newValue);
+            movementSlider.value = _playerManager.GetMovement();
+            UpdateTextValues();
         }
 
         public void OnValueChangedAttack(float newValue)
         {
-            _playerManager.UpdateAttack(newValue, currentPresetIndex);
-            attackSlider.value = _playerManager.GetAttack(currentPresetIndex);
+            _playerManager.UpdateAttack(newValue);
+            attackSlider.value = _playerManager.GetAttack();
+            UpdateTextValues();
         }
 
         public void OnValueChangedDefense(float newValue)
         {
-            _playerManager.UpdateDefense(newValue, currentPresetIndex);
-            defenseSlider.value = _playerManager.GetDefense(currentPresetIndex);
+            _playerManager.UpdateDefense(newValue);
+            defenseSlider.value = _playerManager.GetDefense();
+            UpdateTextValues();
         }
 
         public void DropdownMenuChange(int value)
         {
-            currentPresetIndex = value;
+            _playerManager.ChangePreset(value);
             UpdateSliderValues();
             UpdateTextValues();
         }
 
         private void UpdateSliderValues()
         {
-            sightSlider.value = _playerManager.GetSight(currentPresetIndex);
-            hearingSlider.value = _playerManager.GetHearing(currentPresetIndex);
-            movementSlider.value = _playerManager.GetMovement(currentPresetIndex);
-            attackSlider.value = _playerManager.GetAttack(currentPresetIndex);
-            defenseSlider.value = _playerManager.GetDefense(currentPresetIndex);
+            sightSlider.value = _playerManager.GetSight();
+            hearingSlider.value = _playerManager.GetHearing();
+            movementSlider.value = _playerManager.GetMovement();
+            attackSlider.value = _playerManager.GetAttack();
+            defenseSlider.value = _playerManager.GetDefense();
         }
 
         private void UpdateTextValues()
         {
+            // Calculating the total attribute value
+            totalAttributeValue = _playerManager.GetSight() + _playerManager.GetHearing() +
+                _playerManager.GetMovement() + _playerManager.GetAttack() + _playerManager.GetDefense();
+
             // Updating the values to the UI texts
             totalAttributeValueText.text = totalAttributeValue.ToString() + " %";
-            sightValueText.text = _playerManager.GetSight(currentPresetIndex).ToString() + " %";
-            hearingValueText.text = _playerManager.GetHearing(currentPresetIndex).ToString() + " %";
-            movementValueText.text = _playerManager.GetMovement(currentPresetIndex).ToString() + " %";
-            attackValueText.text = _playerManager.GetAttack(currentPresetIndex).ToString() + " %";
-            defenseValueText.text = _playerManager.GetDefense(currentPresetIndex).ToString() + " %";
+            sightValueText.text = _playerManager.GetSight().ToString() + " %";
+            hearingValueText.text = _playerManager.GetHearing().ToString() + " %";
+            movementValueText.text = _playerManager.GetMovement().ToString() + " %";
+            attackValueText.text = _playerManager.GetAttack().ToString() + " %";
+            defenseValueText.text = _playerManager.GetDefense().ToString() + " %";
         }
     }
 }
