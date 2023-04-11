@@ -1,8 +1,11 @@
+using Logic.Player;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Presets;
 using UnityEngine;
 using UnityEngine.UI;
+using Visualization;
 
 public class PresetManager : MonoBehaviour
 {
@@ -25,12 +28,19 @@ public class PresetManager : MonoBehaviour
     public TextMeshProUGUI attackValueText;
     public TextMeshProUGUI defenseValueText;
 
+    private IPlayerManager playerManager;
+
     [SerializeField]
     private Light playerLight;
-    
+
     // Start is called before the first frame update
+    
+        
+    
     void Awake()
     {
+
+        playerManager = GetComponent<PlayerCharacter>()._playerManager;
         Preset preset1 = new Preset();
         Preset preset2 = new Preset();
         Preset preset3 = new Preset();
@@ -43,6 +53,10 @@ public class PresetManager : MonoBehaviour
         playerLight = GameObject.FindGameObjectWithTag("PlayerLight").GetComponent<Light>();
 
         UpdateSliderValues();
+
+        playerManager.updatePreset1(preset1);
+        playerManager.updatePreset1(preset2);
+        playerManager.updatePreset1(preset3);
 
         presetMenu.SetActive(false);
     }
@@ -66,6 +80,9 @@ public class PresetManager : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 Time.timeScale = 1;
             }
+            playerManager.updatePreset1(presets[0]);
+            playerManager.updatePreset2(presets[1]);
+            playerManager.updatePreset3(presets[2]);
         }
         
         totalAttributeValue = presets[currentPresetIndex].sightAttribute + presets[currentPresetIndex].hearingAttribute +
