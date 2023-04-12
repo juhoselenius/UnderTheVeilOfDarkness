@@ -14,6 +14,22 @@ namespace Visualization
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown("1"))
+            {
+                _playerManager.ChangePreset(0);
+            }
+            else if (Input.GetKeyDown("2"))
+            {
+                _playerManager.ChangePreset(1);
+            }
+            else if (Input.GetKeyDown("3"))
+            {
+                _playerManager.ChangePreset(2);
+            }
+        }
+
         private void TakeDamage(float amount)
         {
             defense = _playerManager.GetDefense();
