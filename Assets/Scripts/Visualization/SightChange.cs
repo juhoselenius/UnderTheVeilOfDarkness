@@ -19,7 +19,6 @@ namespace Visualization
         {
             _playerManager.SightChanged += ChangeSight;
             ChangeSight(_playerManager.GetSight());
-
         }
 
         private void OnDisable()
