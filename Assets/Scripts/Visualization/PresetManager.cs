@@ -2,6 +2,7 @@ using Logic.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace Visualization
 {
@@ -32,7 +33,10 @@ namespace Visualization
 
             UpdateSliderValues();
 
-            presetMenu.SetActive(false);
+            if(SceneManager.GetActiveScene().name != "PresetManagement")
+            {
+                presetMenu.SetActive(false);
+            }
         }
 
         // Update is called once per frame
