@@ -1,7 +1,10 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class ChaseState : IAiState
 {
+
     public AiStateId GetId()
     {
         return AiStateId.ChaseState;
@@ -50,4 +53,6 @@ public class ChaseState : IAiState
         agent.navMeshAgent.destination = agent.chaseTarget.position;
         agent.navMeshAgent.isStopped = false;
     }
+
+ 
 }
