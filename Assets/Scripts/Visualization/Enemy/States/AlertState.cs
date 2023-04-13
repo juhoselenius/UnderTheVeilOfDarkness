@@ -34,6 +34,7 @@ public class AlertState : IAiState
         if (Physics.Raycast(agent.eye.position, agent.eye.forward, out hit, agent.config.sightRange) && hit.collider.CompareTag("Player"))
         {
             // If the ray hits the player, the enemy gets into the chase state and assing the chase target as the player
+            
             agent.chaseTarget = hit.transform;
             searchTimer = 0;
             agent.stateMachine.ChangeState(AiStateId.ChaseState);

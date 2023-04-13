@@ -44,7 +44,10 @@ public class AiAgent : MonoBehaviour
     void Update()
     {
         stateMachine.PerformState();
-
+        if (stateMachine.currentState == AiStateId.PatrolState || stateMachine.currentState == AiStateId.ChaseState || stateMachine.currentState == AiStateId.TrackingState)
+        {
+            FindObjectOfType<AudioManager>().Play("EnemyWalk");
+        }
         if (stateMachine.currentState == AiStateId.ChaseState)
         {
             fireRateTimer += Time.deltaTime;
@@ -53,6 +56,8 @@ public class AiAgent : MonoBehaviour
         {
             fireRateTimer = 0;
         }
+
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -60,6 +65,7 @@ public class AiAgent : MonoBehaviour
         if (other.CompareTag("Player") && (stateMachine.currentState == AiStateId.PatrolState || stateMachine.currentState == AiStateId.TrackingState))
         {
             // The player enters the sensing area of the enemy, so the enemy enters the Alert State
+            FindObjectOfType<AudioManager>().Play("Alert");
             alertPlayerPosition = other.transform.position;
             stateMachine.ChangeState(AiStateId.AlertState);
         }

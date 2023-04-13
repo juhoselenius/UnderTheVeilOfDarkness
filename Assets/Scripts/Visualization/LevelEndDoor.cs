@@ -8,6 +8,7 @@ namespace Visualization
 {
     public class LevelEndDoor : MonoBehaviour
     {
+        
         private IGameManager _gameManager;
         private ScreenFader fader;
         public Animator animator;
@@ -27,6 +28,14 @@ namespace Visualization
             {
                 OpenDoor();
             }
+            
+            if (_gameManager.GetobjectivesCollected() == 2 && SceneManager.GetActiveScene().name == "Level2")
+            {
+                
+                OpenDoor();
+            }
+
+            
         }
 
         private void OnEnable()

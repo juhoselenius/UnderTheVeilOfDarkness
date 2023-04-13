@@ -37,6 +37,8 @@ namespace Data
 
         public float defenseFactor;
 
+        
+
         public Player()
         {
             health = 100;
@@ -72,6 +74,8 @@ namespace Data
             projectileColliderRadiusFactor = 0.0079f;
 
             defenseFactor = 0.5f;
+
+            
         }
     }
 }

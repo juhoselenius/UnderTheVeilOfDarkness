@@ -70,6 +70,7 @@ namespace Visualization
                 collided = true;
 
                 GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
+                FindObjectOfType<AudioManager>().Play("OnHit");
                 Destroy(impact, 2f);
 
                 Destroy(gameObject);
@@ -81,6 +82,7 @@ namespace Visualization
                 collided = true;
 
                 GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
+                FindObjectOfType<AudioManager>().Play("OnHit");
                 Destroy(impact, 2f);
 
                 Destroy(gameObject);
