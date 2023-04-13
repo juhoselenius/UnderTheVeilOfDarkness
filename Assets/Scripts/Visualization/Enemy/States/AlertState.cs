@@ -1,4 +1,5 @@
 using UnityEngine;
+using Visualization;
 
 public class AlertState : IAiState
 {
@@ -45,18 +46,25 @@ public class AlertState : IAiState
         // Stop the enemy in the Alert State
         agent.navMeshAgent.isStopped = true;
 
-        Vector3 direction = (agent.alertPlayerPosition - agent.transform.position).normalized;
-        Debug.Log(direction);
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        if(agent.backFromTracking)
+        {
+            agent.transform.Rotate(0, agent.config.searchTurnSpeed * Time.deltaTime, 0);
+            searchTimer += Time.deltaTime;
+        }
+        else
+        {
+            Vector3 direction = (agent.alertPlayerPosition - agent.transform.position).normalized;
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
 
-        agent.transform.rotation = Quaternion.RotateTowards(agent.transform.rotation, targetRotation, agent.config.searchTurnSpeed * Time.deltaTime);
-        searchTimer += Time.deltaTime;
+            agent.transform.rotation = Quaternion.RotateTowards(agent.transform.rotation, targetRotation, agent.config.searchTurnSpeed * Time.deltaTime);
+            searchTimer += Time.deltaTime;
+        }
         
-
         if (searchTimer >= agent.config.searchDuration)
         {
             // The enemy gets tired of searching and goes back to the Patrol State 
             searchTimer = 0;
+            agent.backFromTracking = false;
             agent.stateMachine.ChangeState(AiStateId.PatrolState);
         }
     }

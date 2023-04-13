@@ -28,6 +28,8 @@ namespace Visualization
             {
                 _playerManager.ChangePreset(2);
             }
+
+            //Debug.Log("Player Health: " + _playerManager.GetHealth());
         }
 
         private void TakeDamage(float amount)
@@ -39,17 +41,29 @@ namespace Visualization
         private void OnTriggerEnter(Collider other)
         {
             // Player takes damage from enemy projectiles
-            if (other.tag == "EnemyProjectile")
+            if (other.gameObject.tag == "EnemyProjectile")
             {
-                TakeDamage(other.GetComponent<Projectile>().damage);
-            }
-
-            //Player takes damage from enemy melee
-            if(other.tag == "Enemy")
-            {
-                TakeDamage(other.GetComponent<Enemy>().meleeDamage);
+                Debug.Log("Player got hit by enemy projectile");
+                TakeDamage(other.gameObject.GetComponent<Projectile>().damage);
             }
             
+            // Check if player dies
+            if (_playerManager.GetHealth() <= 0)
+            {
+                Die();
+            }
+        }
+
+        // Melee doesn't work!!!
+        private void OnCollisionEnter(Collision collision)
+        {
+            //Player takes damage from enemy melee
+            if (collision.gameObject.tag == "Enemy")
+            {
+                Debug.Log("Player got hit by melee");
+                TakeDamage(collision.gameObject.GetComponent<Enemy>().meleeDamage);
+            }
+
             // Check if player dies
             if (_playerManager.GetHealth() <= 0)
             {
@@ -60,6 +74,7 @@ namespace Visualization
         private void Die()
         {
             // Code for what happens when player dies
+            Debug.Log("Player is dead!");
         }
     }
 }

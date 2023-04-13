@@ -8,6 +8,8 @@ namespace Logic.Player
         float GetHealth();
         void UpdateHealth(float change);
 
+        float GetMaxHealth();
+
         event Action<int> LivesChanged;
         int GetLives();
         void UpdateLives(int change);
