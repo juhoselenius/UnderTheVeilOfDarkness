@@ -46,6 +46,7 @@ public class TrackingState : IAiState
         // Change to Alert State, when arrived at the last known player location
         if (agent.navMeshAgent.remainingDistance <= agent.navMeshAgent.stoppingDistance && !agent.navMeshAgent.pathPending)
         {
+            agent.backFromTracking = true;
             agent.stateMachine.ChangeState(AiStateId.AlertState);
         }
     }

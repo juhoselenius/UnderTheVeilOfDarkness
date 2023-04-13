@@ -22,8 +22,11 @@ public class AiAgent : MonoBehaviour
     public Vector3 lastKnownPlayerPosition;
 
     public Vector3 alertPlayerPosition;
+    public bool backFromTracking;
 
     public AiAgentConfig config;
+
+    public AiStateId currentState;
 
     private void Awake()
     {
@@ -38,16 +41,14 @@ public class AiAgent : MonoBehaviour
     void Start()
     {
         stateMachine.ChangeState(initialState);
+        backFromTracking = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         stateMachine.PerformState();
-        if (stateMachine.currentState == AiStateId.PatrolState || stateMachine.currentState == AiStateId.ChaseState || stateMachine.currentState == AiStateId.TrackingState)
-        {
-            FindObjectOfType<AudioManager>().Play("EnemyWalk");
-        }
+
         if (stateMachine.currentState == AiStateId.ChaseState)
         {
             fireRateTimer += Time.deltaTime;
@@ -57,7 +58,7 @@ public class AiAgent : MonoBehaviour
             fireRateTimer = 0;
         }
 
-        
+        currentState = stateMachine.currentState;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -65,7 +66,18 @@ public class AiAgent : MonoBehaviour
         if (other.CompareTag("Player") && (stateMachine.currentState == AiStateId.PatrolState || stateMachine.currentState == AiStateId.TrackingState))
         {
             // The player enters the sensing area of the enemy, so the enemy enters the Alert State
-            FindObjectOfType<AudioManager>().Play("Alert");
+            backFromTracking = false;
+            alertPlayerPosition = other.transform.position;
+            stateMachine.ChangeState(AiStateId.AlertState);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player") && (stateMachine.currentState == AiStateId.PatrolState || stateMachine.currentState == AiStateId.TrackingState))
+        {
+            // The player enters the sensing area of the enemy, so the enemy enters the Alert State
+            backFromTracking = false;
             alertPlayerPosition = other.transform.position;
             stateMachine.ChangeState(AiStateId.AlertState);
         }

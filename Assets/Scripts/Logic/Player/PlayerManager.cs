@@ -35,6 +35,11 @@ namespace Logic.Player
             HealthChanged?.Invoke(_state.health);
         }
 
+        public float GetMaxHealth()
+        {
+            return _state.maxHealth;
+        }
+
         public int GetLives()
         {
             return _state.lives;

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5103746165825236519}
   m_Layer: 8
   m_Name: Pupil
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -244,7 +244,7 @@ MonoBehaviour:
   fireRateTimer: 0
   fireRate: 2
   projectileSpawn: {fileID: 7829361757747212724}
-  arcRange: 0.3
+  arcRange: 0
   ignoreLayerProjectile:
     serializedVersion: 2
     m_Bits: 512
@@ -252,7 +252,9 @@ MonoBehaviour:
   chaseTarget: {fileID: 0}
   lastKnownPlayerPosition: {x: 0, y: 0, z: 0}
   alertPlayerPosition: {x: 0, y: 0, z: 0}
+  backFromTracking: 0
   config: {fileID: 11400000, guid: ab3554f3a7edb314299f9c247dafddf0, type: 2}
+  currentState: 0
 --- !u!114 &5123345015890038205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,7 +269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   health: 0
-  meleeDamage: 0
+  meleeDamage: 10
 --- !u!135 &5123345015890038204
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -292,7 +294,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.68
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5123345016067644659
 GameObject:
@@ -307,7 +309,7 @@ GameObject:
   - component: {fileID: 5123345016067644657}
   m_Layer: 8
   m_Name: Eye
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -47,9 +47,12 @@ namespace Visualization
 
         private void Start()
         {
-            projectileCollider.radius = 0.01f + _playerManager.GetAttack() * 0.0079f;
-            ParticleSystem.MainModule main = beam.main;
-            main.startSize = 0.1f + _playerManager.GetAttack() * 0.049f;
+            if(gameObject.tag == "PlayerProjectile")
+            {
+                projectileCollider.radius = 0.01f + _playerManager.GetAttack() * 0.0079f;
+                ParticleSystem.MainModule main = beam.main;
+                main.startSize = 0.1f + _playerManager.GetAttack() * 0.049f;
+            }
         }
 
         private void Update()

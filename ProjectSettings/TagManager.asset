@@ -12,6 +12,7 @@ TagManager:
   - PlayerLight
   - PlayerProjectile
   - EnemyProjectile
+  - EnemyBody
   layers:
   - Default
   - TransparentFX
@@ -21,9 +22,9 @@ TagManager:
   - UI
   - Ground
   - Projectile
-  - 
-  - 
-  - 
+  - Enemy
+  - EnemyProjectile
+  - Player
   - 
   - 
   - 
