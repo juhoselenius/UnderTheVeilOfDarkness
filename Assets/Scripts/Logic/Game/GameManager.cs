@@ -14,8 +14,90 @@ namespace Logic.Game
             _gameState = initialGameState;
         }
 
+        public event Action<bool> IntroLevelObjectivesCleared;
         public event Action<bool> IntroLevelCleared;
         public event Action<bool> Level2Cleared;
+
+        public bool GetMoveLeft()
+        {
+            return _gameState.moveLeft;
+        }
+
+        public bool GetMoveRight()
+        {
+            return _gameState.moveRight;
+        }
+
+        public bool GetMoveForward()
+        {
+            return _gameState.moveForward;
+        }
+
+        public bool GetMoveBackward()
+        {
+            return _gameState.moveBackward;
+        }
+
+        public bool GetJump()
+        {
+            return _gameState.jump;
+        }
+
+        public bool GetShoot()
+        {
+            return _gameState.shoot;
+        }
+
+        public bool GetChangePreset()
+        {
+            return _gameState.changePreset;
+        }
+
+        public bool GetIntroLevelObjectivesCleared()
+        {
+            return _gameState.introLevelObjectivesCleared;
+        }
+
+        public void UpdateMoveLeft()
+        {
+            _gameState.moveLeft = true;
+        }
+
+        public void UpdateMoveRight()
+        {
+            _gameState.moveRight = true;
+        }
+
+        public void UpdateMoveForward()
+        {
+            _gameState.moveForward = true;
+        }
+
+        public void UpdateMoveBackward()
+        {
+            _gameState.moveBackward = true;
+        }
+
+        public void UpdateJump()
+        {
+            _gameState.jump = true;
+        }
+
+        public void UpdateShoot()
+        {
+            _gameState.shoot = true;
+        }
+
+        public void UpdateChangePreset()
+        {
+            _gameState.changePreset = true;
+        }
+
+        public void UpdateIntroLevelObjectivesCleared()
+        {
+            _gameState.introLevelObjectivesCleared = true;
+            IntroLevelObjectivesCleared?.Invoke(_gameState.introLevelObjectivesCleared);
+        }
 
         public bool GetIntroLevelCleared()
         {

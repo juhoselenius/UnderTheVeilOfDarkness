@@ -64,7 +64,19 @@ namespace Visualization
 
         private void OnCollisionEnter(Collision collision)
         {
-            if(collision.gameObject.tag != "PlayerProjectile" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
+            // Player projectile collisions
+            if(gameObject.tag == "PlayerProjectile" && collision.gameObject.tag != "PlayerProjectile" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
+            {
+                collided = true;
+
+                GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
+                Destroy(impact, 2f);
+
+                Destroy(gameObject);
+            }
+
+            // Enemy projectile collisions
+            if(gameObject.tag == "EnemyProjectile" && collision.gameObject.tag != "EnemyProjectile" && collision.gameObject.tag != "Enemy")
             {
                 collided = true;
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 256915415601141464}
   - component: {fileID: 7756368158331182133}
   - component: {fileID: 1666601196712804874}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4881,7 +4881,7 @@ GameObject:
   - component: {fileID: 3774199533536063089}
   - component: {fileID: 6702961564858810114}
   - component: {fileID: 4171260276240471413}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9749,7 +9749,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2257409422903901610}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Player_impact_vfx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
