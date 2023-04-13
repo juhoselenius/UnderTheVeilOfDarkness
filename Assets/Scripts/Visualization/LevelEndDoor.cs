@@ -11,7 +11,6 @@ namespace Visualization
         private IGameManager _gameManager;
         private ScreenFader fader;
         public Animator animator;
-        public bool openDoor;
 
         private void Awake()
         {

@@ -96,6 +96,7 @@ namespace Logic.Game
         public void UpdateIntroLevelObjectivesCleared()
         {
             _gameState.introLevelObjectivesCleared = true;
+            IntroLevelObjectivesCleared?.Invoke(_gameState.introLevelObjectivesCleared);
         }
 
         public bool GetIntroLevelCleared()

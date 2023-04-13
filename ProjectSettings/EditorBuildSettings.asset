@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Options.unity
     guid: 686751bdd85cbf3429802a27f5ebb47c
+  - enabled: 1
+    path: Assets/Scenes/PresetManagement.unity
+    guid: 037bcc52756687649aa7406a5f29b6d5
   m_configObjects: {}

@@ -14,7 +14,7 @@ namespace Visualization
         public GameObject projectile;
         public float fireRate;
         public float baseFireRate;
-        public float arcRange = 0f;
+        public float arcRange;
 
         private Vector3 destination;
         private float timeToFire;

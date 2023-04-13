@@ -45,8 +45,13 @@ public class AlertState : IAiState
         // Stop the enemy in the Alert State
         agent.navMeshAgent.isStopped = true;
 
-        agent.transform.Rotate(0, agent.config.searchTurnSpeed * Time.deltaTime, 0);
+        Vector3 direction = (agent.alertPlayerPosition - agent.transform.position).normalized;
+        Debug.Log(direction);
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+        agent.transform.rotation = Quaternion.RotateTowards(agent.transform.rotation, targetRotation, agent.config.searchTurnSpeed * Time.deltaTime);
         searchTimer += Time.deltaTime;
+        
 
         if (searchTimer >= agent.config.searchDuration)
         {
