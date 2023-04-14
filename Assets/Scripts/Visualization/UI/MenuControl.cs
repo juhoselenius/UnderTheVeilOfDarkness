@@ -29,6 +29,16 @@ public class MenuControl : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void LoadHowToPlay()
+    {
+        SceneManager.LoadScene("HowToPlay");
+    }
+
+    public void LoadPresetManagement()
+    {
+        SceneManager.LoadScene("PresetManagement");
+    }
+
     public void LoadIntroLevel()
     {
         SceneManager.LoadScene("Level1");
@@ -36,6 +46,7 @@ public class MenuControl : MonoBehaviour
 
     public void LoadLevel2()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         SceneManager.LoadScene("Level2");
     }
 

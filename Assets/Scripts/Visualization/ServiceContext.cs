@@ -6,11 +6,23 @@ namespace Visualization
 {
     public class ServiceContext : MonoBehaviour
     {
+        public static ServiceContext context;
+        
         [SerializeField] private Data.Player initialPlayerState;
         [SerializeField] private Data.Game initialGameState;
 
         private void Awake()
         {
+            if (context == null)
+            {
+                DontDestroyOnLoad(gameObject);
+                context = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+
             RegisterServices();
         }
 

@@ -30,6 +30,7 @@ public class AiAgent : MonoBehaviour
 
     private void Awake()
     {
+        
         navMeshAgent = GetComponent<NavMeshAgent>();
         stateMachine = new AiStateMachine(this);
         stateMachine.RegisterState(new PatrolState());
@@ -40,6 +41,7 @@ public class AiAgent : MonoBehaviour
 
     void Start()
     {
+        
         stateMachine.ChangeState(initialState);
         backFromTracking = false;
     }
@@ -69,6 +71,7 @@ public class AiAgent : MonoBehaviour
             backFromTracking = false;
             alertPlayerPosition = other.transform.position;
             stateMachine.ChangeState(AiStateId.AlertState);
+            FindObjectOfType<AudioManager>().Play("Alert");
         }
     }
 

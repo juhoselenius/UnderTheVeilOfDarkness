@@ -12,6 +12,7 @@ namespace Visualization
         private IGameManager _gameManager;
         private ScreenFader fader;
         public Animator animator;
+        public bool levelObjectivesDone;
 
         private void Awake()
         {
@@ -22,16 +23,20 @@ namespace Visualization
         // Update is called once per frame
         void Update()
         {
-            if(_gameManager.GetMoveLeft() && _gameManager.GetMoveRight() && _gameManager.GetMoveForward() && _gameManager.GetMoveBackward()
+            /*if(_gameManager.GetMoveLeft() && _gameManager.GetMoveRight() && _gameManager.GetMoveForward() && _gameManager.GetMoveBackward()
                 && _gameManager.GetJump() && _gameManager.GetShoot() && _gameManager.GetChangePreset() 
                 && SceneManager.GetActiveScene().name == "Level1")
             {
                 OpenDoor();
+            }*/
+
+            if(levelObjectivesDone)
+            {
+                OpenDoor();
             }
             
-            if (_gameManager.GetobjectivesCollected() == 2 && SceneManager.GetActiveScene().name == "Level2")
+            if (_gameManager.GetobjectivesCollected() == 2 &&  SceneManager.GetActiveScene().name == "Level2" && _gameManager.GetallEnemiesCleared() == 7 )
             {
-                
                 OpenDoor();
             }
 
