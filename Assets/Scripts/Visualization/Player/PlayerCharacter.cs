@@ -1,5 +1,6 @@
 using Logic.Player;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Visualization
 {
@@ -75,6 +76,7 @@ namespace Visualization
         {
             // Code for what happens when player dies
             Debug.Log("Player is dead!");
+            SceneManager.LoadScene("GameOver");
         }
     }
 }

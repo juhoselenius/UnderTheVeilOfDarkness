@@ -66,11 +66,8 @@ namespace Logic.Game
 
         public int GetobjectivesCollected()
         {
-           
             return _gameState.objectivesCollected;
         }
-
-
 
         public void UpdateMoveLeft()
         {
@@ -142,20 +139,12 @@ namespace Logic.Game
             Debug.Log("AllEnemiesDead");
             _gameState.allEnemiesCleared = true;
             allEnemiesCleared?.Invoke(_gameState.allEnemiesCleared);
-
         }
 
         public void SetobjectivesCollected()
         {
             _gameState.objectivesCollected += 1;
-            Debug.Log("Objectives Collected") ;
-              
-
-                
-
-           
-            
-
+            Debug.Log("Objectives Collected");
         }
     }
 }

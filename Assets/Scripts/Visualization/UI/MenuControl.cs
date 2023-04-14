@@ -41,6 +41,7 @@ public class MenuControl : MonoBehaviour
 
     public void LoadLevel2()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         SceneManager.LoadScene("Level2");
     }
 
