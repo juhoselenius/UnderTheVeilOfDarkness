@@ -13,7 +13,8 @@ namespace Logic.Game
         {
             _gameState = initialGameState;
         }
-
+        public event Action<bool> allEnemiesCleared;
+        public event Action<bool> objectivesCollected;
         public event Action<bool> IntroLevelObjectivesCleared;
         public event Action<bool> IntroLevelCleared;
         public event Action<bool> Level2Cleared;
@@ -57,6 +58,19 @@ namespace Logic.Game
         {
             return _gameState.introLevelObjectivesCleared;
         }
+
+        public bool GetallEnemiesCleared()
+        {
+            return _gameState.allEnemiesCleared;
+        }
+
+        public int GetobjectivesCollected()
+        {
+           
+            return _gameState.objectivesCollected;
+        }
+
+
 
         public void UpdateMoveLeft()
         {
@@ -121,6 +135,27 @@ namespace Logic.Game
             Debug.Log($"Finished Level 2!");
             _gameState.level2Cleared = true;
             Level2Cleared?.Invoke(_gameState.level2Cleared);
+        }
+
+        public void SetallEnemiesCleared()
+        {
+            Debug.Log("AllEnemiesDead");
+            _gameState.allEnemiesCleared = true;
+            allEnemiesCleared?.Invoke(_gameState.allEnemiesCleared);
+
+        }
+
+        public void SetobjectivesCollected()
+        {
+            _gameState.objectivesCollected += 1;
+            Debug.Log("Objectives Collected") ;
+              
+
+                
+
+           
+            
+
         }
     }
 }

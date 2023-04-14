@@ -30,6 +30,7 @@ namespace Visualization
         private void EnemyDie()
         {
             // Here code for what happens when the enemy dies
+            FindObjectOfType<AudioManager>().Play("EnemyDeath");
             Destroy(gameObject);
         }
     }

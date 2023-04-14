@@ -62,6 +62,7 @@ namespace Visualization
 
         void InstantiateProjectile()
         {
+            FindObjectOfType<AudioManager>().Play("Shoot");
             GameObject firedProjectile = Instantiate(projectile, projectileSpawn.position, Quaternion.identity);
             float projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
             firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawn.position).normalized * projectileSpeed;
