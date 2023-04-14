@@ -47,7 +47,23 @@ namespace Visualization
 
         private void Start()
         {
-            if(gameObject.tag == "PlayerProjectile")
+            if (gameObject.tag == "PlayerProjectile")
+            {
+                damage = baseDamage + _playerManager.GetAttack() * 0.1f;
+                projectileSpeed = projectileBaseSpeed - _playerManager.GetAttack() * 0.35f;
+            }
+            else
+            {
+                damage = baseDamage;
+                projectileSpeed = projectileBaseSpeed;
+            }
+
+            projectileCollider = GetComponent<SphereCollider>();
+
+            lifeTimer = 0;
+            lifetime = 7f; // Projectile lives for 7 seconds if does not collide
+
+            if (gameObject.tag == "PlayerProjectile")
             {
                 projectileCollider.radius = 0.01f + _playerManager.GetAttack() * 0.0079f;
                 ParticleSystem.MainModule main = beam.main;
