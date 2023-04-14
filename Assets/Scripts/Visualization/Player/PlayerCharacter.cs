@@ -76,6 +76,8 @@ namespace Visualization
         {
             // Code for what happens when player dies
             Debug.Log("Player is dead!");
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             SceneManager.LoadScene("GameOver");
         }
     }
