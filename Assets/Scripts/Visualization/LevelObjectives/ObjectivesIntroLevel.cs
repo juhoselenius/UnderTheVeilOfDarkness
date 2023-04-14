@@ -8,13 +8,14 @@ namespace Visualization
     {
         public LevelEndDoor endDoor;
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if(other.tag == "Player")
-            {
-                endDoor.levelObjectivesDone = true;
-            }
-        }
+
+       // private void OnTriggerEnter(Collider other)
+        //{
+        //    if(other.tag == "Player")
+         //   {
+         //       endDoor.levelObjectivesDone = true;
+         //   }
+       // }
     }
 
 }
