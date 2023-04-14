@@ -15,7 +15,7 @@ namespace Visualization
         public float fireRate;
         public float baseFireRate;
         public float arcRange;
-
+        public bool shooting;
         private Vector3 destination;
         private float timeToFire;
         
@@ -29,12 +29,14 @@ namespace Visualization
         {
             if(Input.GetButton("Fire1") && Time.time >= timeToFire)
             {
+                shooting = true;
                 timeToFire = Time.time + 1 / fireRate;
                 Shoot();
             }
+            shooting = false;
         }
 
-        void Shoot()
+       public void Shoot()
         {
             Ray ray = playerCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
             RaycastHit hit;
