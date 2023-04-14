@@ -32,8 +32,7 @@ public class EnemyBulletScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-       
-        
+           
             if (collision.gameObject.tag != "EnemyProjectile" && collision.gameObject.tag != "Enemy" )
             {
                 collided = true;
