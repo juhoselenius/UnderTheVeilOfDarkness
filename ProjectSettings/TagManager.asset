@@ -12,6 +12,7 @@ TagManager:
   - PlayerLight
   - PlayerProjectile
   - EnemyProjectile
+  - TurretMissile
   - EnemyBody
   layers:
   - Default
