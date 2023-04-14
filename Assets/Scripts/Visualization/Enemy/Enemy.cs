@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Visualization
@@ -7,9 +8,12 @@ namespace Visualization
         public float maxHealth;
         [SerializeField] private float health;
         public float meleeDamage;
-
+        public Rigidbody rb;
+        public float cooldownTimer;
+        [SerializeField] private float cooldown = 5f;
         void Start()
         {
+            rb = GetComponent<Rigidbody>();
             health = maxHealth;
         }
 
@@ -19,6 +23,15 @@ namespace Visualization
             if(collision.gameObject.tag == "PlayerProjectile")
             {
                 health -= collision.gameObject.GetComponent<Projectile>().damage;
+            }
+            else if(collision.gameObject.tag == "IceBullet")
+            {
+                health -= collision.gameObject.GetComponent<Projectile>().damage;
+                rb.isKinematic = true;
+                cooldownTimer -= Time.deltaTime;
+                if (cooldownTimer > 0) return;
+                cooldownTimer = cooldown;
+                rb.isKinematic = false;
             }
 
             if (health <= 0)
