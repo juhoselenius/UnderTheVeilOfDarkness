@@ -1,16 +1,29 @@
 using UnityEngine;
+using Logic.Game;
 
 namespace Visualization
 {
     public class Enemy : MonoBehaviour
     {
+        private IGameManager _gameManager;
         public float maxHealth;
         [SerializeField] private float health;
         public float meleeDamage;
 
+        private void Awake()
+        {
+            _gameManager = ServiceLocator.GetService<IGameManager>();
+
+        }
         void Start()
         {
+            
             health = maxHealth;
+        }
+
+        private void Update()
+        {
+            FindObjectOfType<AudioManager>().Play("EnemyWalk");
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -30,7 +43,9 @@ namespace Visualization
         private void EnemyDie()
         {
             // Here code for what happens when the enemy dies
+            _gameManager.SetallEnemiesCleared();
             FindObjectOfType<AudioManager>().Play("EnemyDeath");
+            FindObjectOfType<AudioManager>().StopPlay("EnemyWalk");
             Destroy(gameObject);
         }
     }

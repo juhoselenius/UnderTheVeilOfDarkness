@@ -59,7 +59,7 @@ namespace Logic.Game
             return _gameState.introLevelObjectivesCleared;
         }
 
-        public bool GetallEnemiesCleared()
+        public int GetallEnemiesCleared()
         {
             return _gameState.allEnemiesCleared;
         }
@@ -140,8 +140,8 @@ namespace Logic.Game
         public void SetallEnemiesCleared()
         {
             Debug.Log("AllEnemiesDead");
-            _gameState.allEnemiesCleared = true;
-            allEnemiesCleared?.Invoke(_gameState.allEnemiesCleared);
+            _gameState.allEnemiesCleared +=1 ;
+            
 
         }
 
@@ -149,13 +149,8 @@ namespace Logic.Game
         {
             _gameState.objectivesCollected += 1;
             Debug.Log("Objectives Collected") ;
-              
-
-                
-
+                             
            
-            
-
         }
     }
 }
