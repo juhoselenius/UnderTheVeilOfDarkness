@@ -47,9 +47,12 @@ namespace Visualization
 
         private void Start()
         {
-            projectileCollider.radius = 0.01f + _playerManager.GetAttack() * 0.0079f;
-            ParticleSystem.MainModule main = beam.main;
-            main.startSize = 0.1f + _playerManager.GetAttack() * 0.049f;
+            if(gameObject.tag == "PlayerProjectile")
+            {
+                projectileCollider.radius = 0.01f + _playerManager.GetAttack() * 0.0079f;
+                ParticleSystem.MainModule main = beam.main;
+                main.startSize = 0.1f + _playerManager.GetAttack() * 0.049f;
+            }
         }
 
         private void Update()
@@ -64,11 +67,25 @@ namespace Visualization
 
         private void OnCollisionEnter(Collision collision)
         {
-            if(collision.gameObject.tag != "PlayerProjectile" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
+            // Player projectile collisions
+            if(gameObject.tag == "PlayerProjectile" && collision.gameObject.tag != "PlayerProjectile" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
             {
                 collided = true;
 
                 GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
+                FindObjectOfType<AudioManager>().Play("OnHit");
+                Destroy(impact, 2f);
+
+                Destroy(gameObject);
+            }
+
+            // Enemy projectile collisions
+            if(gameObject.tag == "EnemyProjectile" && collision.gameObject.tag != "EnemyProjectile" && collision.gameObject.tag != "Enemy")
+            {
+                collided = true;
+
+                GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
+                FindObjectOfType<AudioManager>().Play("OnHit");
                 Destroy(impact, 2f);
 
                 Destroy(gameObject);

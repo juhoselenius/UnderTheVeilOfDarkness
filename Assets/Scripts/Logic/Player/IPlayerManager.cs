@@ -8,6 +8,8 @@ namespace Logic.Player
         float GetHealth();
         void UpdateHealth(float change);
 
+        float GetMaxHealth();
+
         event Action<int> LivesChanged;
         int GetLives();
         void UpdateLives(int change);
@@ -36,5 +38,28 @@ namespace Logic.Player
         event Action<float> DefenseChanged;
         float GetDefense();
         void UpdateDefense(float newValue);
+
+        // Attribute Preset base and factor value getters
+        float GetSightFactor();
+
+        float GetHearingFactor();
+
+        float GetBaseWalkSpeed();
+        float GetBaseSprintSpeed();
+        float GetWalkSpeedFactor();
+        float GetSprintSpeedFactor();
+
+        float GetBaseProjectileDamage();
+        float GetBaseProjectileSpeed();
+        float GetBaseFireRate();
+        float GetBaseParticleStartSize();
+        float GetBaseProjectileColliderRadius();
+        float GetProjectileDamageFactor();
+        float GetProjectileSpeedFactor();
+        float GetFireRateFactor();
+        float GetParticleStartSizeFactor();
+        float GetProjectileColliderRadiusFactor();
+
+        float GetDefenseFactor();
     }
 }

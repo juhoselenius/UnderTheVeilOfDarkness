@@ -35,6 +35,11 @@ namespace Logic.Player
             HealthChanged?.Invoke(_state.health);
         }
 
+        public float GetMaxHealth()
+        {
+            return _state.maxHealth;
+        }
+
         public int GetLives()
         {
             return _state.lives;
@@ -146,6 +151,92 @@ namespace Logic.Player
 
             _state.presets[_state.currentPresetIndex].defenseAttribute = Mathf.Clamp(newDefenseValue, 0f, 100 - otherAttributeTotal);
             DefenseChanged?.Invoke(_state.presets[_state.currentPresetIndex].defenseAttribute);
+        }
+
+        // Attribute Preset base and factor value getters
+        public float GetSightFactor()
+        {
+            return _state.sightFactor;
+        }
+
+        public float GetHearingFactor()
+        {
+            return _state.hearingFactor;
+        }
+
+        public float GetBaseWalkSpeed()
+        {
+            return _state.baseWalkSpeed;
+        }
+
+        public float GetBaseSprintSpeed()
+        {
+            return _state.baseSprintSpeed;
+        }
+
+        public float GetWalkSpeedFactor()
+        {
+            return _state.walkSpeedFactor;
+        }
+
+        public float GetSprintSpeedFactor()
+        {
+            return _state.sprintSpeedFactor;
+        }
+
+        public float GetBaseProjectileDamage()
+        {
+            return _state.baseProjectileDamage;
+        }
+
+        public float GetBaseProjectileSpeed()
+        {
+            return _state.baseProjectileSpeed;
+        }
+
+        public float GetBaseFireRate()
+        {
+            return _state.baseFireRate;
+        }
+
+        public float GetBaseParticleStartSize()
+        {
+            return _state.baseParticleStartSize;
+        }
+
+        public float GetBaseProjectileColliderRadius()
+        {
+            return _state.baseProjectileColliderRadius;
+        }
+
+        public float GetProjectileDamageFactor()
+        {
+            return _state.projectileDamageFactor;
+        }
+
+        public float GetProjectileSpeedFactor()
+        {
+            return _state.projectileSpeedFactor;
+        }
+
+        public float GetFireRateFactor()
+        {
+            return _state.fireRateFactor;
+        }
+
+        public float GetParticleStartSizeFactor()
+        {
+            return _state.particleStartSizeFactor;
+        }
+
+        public float GetProjectileColliderRadiusFactor()
+        {
+            return _state.projectileColliderRadiusFactor;
+        }
+
+        public float GetDefenseFactor()
+        {
+            return _state.defenseFactor;
         }
 
         public void SaveState()

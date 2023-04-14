@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sightRange: 10
   patrolTurnWaitTime: 1
-  searchTurnSpeed: 150
+  searchTurnSpeed: 200
   searchDuration: 3

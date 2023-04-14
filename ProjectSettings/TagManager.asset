@@ -13,6 +13,7 @@ TagManager:
   - PlayerProjectile
   - EnemyProjectile
   - TurretMissile
+  - EnemyBody
   layers:
   - Default
   - TransparentFX
@@ -21,10 +22,10 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
-  - 
-  - 
-  - 
+  - Projectile
+  - Enemy
+  - EnemyProjectile
+  - Player
   - 
   - 
   - 

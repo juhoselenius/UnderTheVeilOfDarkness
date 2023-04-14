@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Visualization;
 
 public class ChaseState : IAiState
 {
@@ -19,6 +20,11 @@ public class ChaseState : IAiState
     {
         Look(agent);
         Chase(agent);
+        if (agent.fireRateTimer > agent.fireRate)
+        {
+            agent.fireRateTimer = 0;
+            Shoot(agent);
+        }
     }
 
     public void Exit(AiAgent agent)
@@ -35,7 +41,7 @@ public class ChaseState : IAiState
         Debug.DrawRay(agent.eye.position, enemyToTarget, Color.red);
 
         RaycastHit hit; 
-        if (Physics.Raycast(agent.eye.position, enemyToTarget, out hit, agent.config.sightRange) && hit.collider.CompareTag("Player"))
+        if (Physics.Raycast(agent.eye.position, enemyToTarget, out hit, agent.config.sightRange, ~agent.ignoreLayerProjectile) && hit.collider.CompareTag("Player"))
         {
             // Enemy has its eyes on the player
             agent.chaseTarget = hit.transform;
@@ -52,6 +58,15 @@ public class ChaseState : IAiState
     {
         agent.navMeshAgent.destination = agent.chaseTarget.position;
         agent.navMeshAgent.isStopped = false;
+    }
+
+    void Shoot(AiAgent agent)
+    {
+        GameObject firedProjectile = GameObject.Instantiate(agent.enemyProjectilePrefab, agent.projectileSpawn.position, Quaternion.identity);
+        float projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
+        firedProjectile.GetComponent<Rigidbody>().velocity = (agent.chaseTarget.position - agent.projectileSpawn.position).normalized * projectileSpeed;
+
+        iTween.PunchPosition(firedProjectile, new Vector3(Random.Range(-agent.arcRange, agent.arcRange), Random.Range(-agent.arcRange, agent.arcRange), 0), Random.Range(0.5f, 2f));
     }
 
  
