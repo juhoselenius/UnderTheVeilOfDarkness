@@ -29,6 +29,11 @@ public class MenuControl : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void LoadHowToPlay()
+    {
+        SceneManager.LoadScene("HowToPlay");
+    }
+
     public void LoadPresetManagement()
     {
         SceneManager.LoadScene("PresetManagement");
