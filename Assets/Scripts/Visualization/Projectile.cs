@@ -9,7 +9,8 @@ namespace Visualization
     public class Projectile : MonoBehaviour
     {
         public GameObject impactVFX;
-
+        public GameObject explosionFX;
+        public GameObject trailFX;
         public float damage;
         public float baseDamage;
 
@@ -32,6 +33,11 @@ namespace Visualization
             {
                 damage = baseDamage + _playerManager.GetAttack() * 0.1f;
                 projectileSpeed = projectileBaseSpeed - _playerManager.GetAttack() * 0.35f;
+            }
+            else if(gameObject.tag == "IceBullet")
+            {
+                damage = baseDamage + _playerManager.GetAttack() * 0.2f;
+                projectileSpeed = projectileBaseSpeed - _playerManager.GetAttack() * 0.45f;
             }
             else
             {
@@ -69,6 +75,11 @@ namespace Visualization
                 ParticleSystem.MainModule main = beam.main;
                 main.startSize = 0.1f + _playerManager.GetAttack() * 0.049f;
             }
+            else if(gameObject.tag == "IceBullet")
+            {
+                projectileCollider.radius = 0.01f + _playerManager.GetAttack() * 0.0079f;
+                Instantiate(trailFX, transform.position, Quaternion.identity);
+            }
         }
 
         private void Update()
@@ -103,6 +114,17 @@ namespace Visualization
                 GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
                 FindObjectOfType<AudioManager>().Play("OnHit");
                 Destroy(impact, 2f);
+
+                Destroy(gameObject);
+            }
+
+            if (gameObject.tag == "IceBullet" && collision.gameObject.tag != "IceBullet" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
+            {
+                collided = true;
+                GameObject impact = Instantiate(explosionFX, collision.contacts[0].point, Quaternion.identity);
+
+                FindObjectOfType<AudioManager>().Play("OnHit");
+
 
                 Destroy(gameObject);
             }
