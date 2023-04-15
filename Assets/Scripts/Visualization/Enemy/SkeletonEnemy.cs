@@ -37,7 +37,8 @@ public class SkeletonEnemy : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(playerInDetectionRange)
+        
+        if (playerInDetectionRange)
         {
             if(playerInAttackRange)
             {
@@ -105,6 +106,7 @@ public class SkeletonEnemy : MonoBehaviour
 
     public void Walk()
     {
+        
         enemyNavMeshAgent.speed = walkSpeed;
         animator.SetBool("Walk", true);
     }

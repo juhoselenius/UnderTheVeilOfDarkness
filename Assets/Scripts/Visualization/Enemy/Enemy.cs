@@ -41,8 +41,7 @@ namespace Visualization
         {
             // Here code for what happens when the enemy dies
             _gameManager.SetallEnemiesCleared();
-            FindObjectOfType<AudioManager>().Play("EnemyDeath");
-            FindObjectOfType<AudioManager>().StopPlay("EnemyWalk");
+         
             Destroy(gameObject);
         }
     }

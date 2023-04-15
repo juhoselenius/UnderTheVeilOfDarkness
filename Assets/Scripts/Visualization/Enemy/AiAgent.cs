@@ -71,7 +71,7 @@ public class AiAgent : MonoBehaviour
             backFromTracking = false;
             alertPlayerPosition = other.transform.position;
             stateMachine.ChangeState(AiStateId.AlertState);
-            FindObjectOfType<AudioManager>().Play("Alert");
+           
         }
     }
 
