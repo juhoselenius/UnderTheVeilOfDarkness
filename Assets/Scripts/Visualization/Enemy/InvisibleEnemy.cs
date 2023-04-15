@@ -15,6 +15,8 @@ namespace Visualization
         public GameObject ground;
         public GameObject body;
         public float positionHeight;
+        public AudioSource audioSource;
+        public AudioClip clip;
 
         // Start is called before the first frame update
         void Start()
@@ -50,11 +52,17 @@ namespace Visualization
 
         void Shoot(Vector3 targetPosition)
         {
+            playSound();
             GameObject firedProjectile = GameObject.Instantiate(enemyProjectilePrefab, projectileSpawn.position, Quaternion.identity);
             float projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
             firedProjectile.GetComponent<Rigidbody>().velocity = (targetPosition - projectileSpawn.position).normalized * projectileSpeed;
 
             iTween.PunchPosition(firedProjectile, new Vector3(Random.Range(-arcRange, arcRange), Random.Range(-arcRange, arcRange), 0), Random.Range(0.5f, 2f));
+        }
+        public void playSound()
+        {
+
+            audioSource.PlayOneShot(clip);
         }
     }
 }

@@ -110,6 +110,7 @@ public class SkeletonEnemy : MonoBehaviour
 
     public void Run()
     {
+        
         enemyNavMeshAgent.speed = runSpeed;
         animator.SetBool("Run", true);
     }
