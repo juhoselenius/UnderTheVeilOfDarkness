@@ -5,7 +5,6 @@ using Visualization;
 
 public class ChaseState : IAiState
 {
-
     public AiStateId GetId()
     {
         return AiStateId.ChaseState;
