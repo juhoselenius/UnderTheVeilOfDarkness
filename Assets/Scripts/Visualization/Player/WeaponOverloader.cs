@@ -20,7 +20,7 @@ namespace Visualization
             overLoadMin = 0f;
             overLoadMax = 100f;
             currentOverLoad= 0f;
-            overLoadSpeed = 1f;
+            overLoadSpeed = 0f;
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
             wpnMngr = GetComponent<WeaponManager>();
             projectile = GetComponent<Projectile>();
