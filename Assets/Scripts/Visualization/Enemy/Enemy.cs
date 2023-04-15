@@ -1,3 +1,4 @@
+using Logic.Game;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -5,6 +6,8 @@ namespace Visualization
 {
     public class Enemy : MonoBehaviour
     {
+        private IGameManager _gameManager;
+
         public GameObject enemyPrefab;
         
         public float maxHealth;
@@ -13,6 +16,11 @@ namespace Visualization
         public Rigidbody rb;
         public float cooldownTimer;
         [SerializeField] private float cooldown = 5f;
+
+        private void Awake()
+        {
+            _gameManager = ServiceLocator.GetService<IGameManager>();
+        }
 
         void Start()
         {
@@ -46,7 +54,9 @@ namespace Visualization
         private void EnemyDie()
         {
             // Here code for what happens when the enemy dies
+            _gameManager.SetallEnemiesCleared();
             FindObjectOfType<AudioManager>().Play("EnemyDeath");
+            FindObjectOfType<AudioManager>().StopPlay("EnemyWalk");
             Destroy(enemyPrefab);
         }
     }
