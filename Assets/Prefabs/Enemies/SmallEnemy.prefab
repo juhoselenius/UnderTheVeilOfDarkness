@@ -268,9 +268,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c2dcf5c1f6494445af789f34b2300b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 5123345015890038147}
   maxHealth: 100
   health: 0
   meleeDamage: 10
+  rb: {fileID: 0}
+  cooldownTimer: 0
+  cooldown: 5
 --- !u!135 &5123345015890038204
 SphereCollider:
   m_ObjectHideFlags: 0

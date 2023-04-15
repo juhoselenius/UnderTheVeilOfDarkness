@@ -5,12 +5,15 @@ namespace Visualization
 {
     public class Enemy : MonoBehaviour
     {
+        public GameObject enemyPrefab;
+        
         public float maxHealth;
         [SerializeField] private float health;
         public float meleeDamage;
         public Rigidbody rb;
         public float cooldownTimer;
         [SerializeField] private float cooldown = 5f;
+
         void Start()
         {
             rb = GetComponent<Rigidbody>();
@@ -44,7 +47,7 @@ namespace Visualization
         {
             // Here code for what happens when the enemy dies
             FindObjectOfType<AudioManager>().Play("EnemyDeath");
-            Destroy(gameObject);
+            Destroy(enemyPrefab);
         }
     }
 }

@@ -41,8 +41,8 @@ namespace Visualization
 
         void Start()
         {
-            walkSpeed = 1f + 0.1f * _playerManager.GetMovement();
-            sprintSpeed = 1f + 0.2f * _playerManager.GetMovement();
+            walkSpeed = 1f + 0.05f * _playerManager.GetMovement();
+            sprintSpeed = 1f + 0.1f * _playerManager.GetMovement();
         }
     
         void Update()
