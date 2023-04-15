@@ -54,17 +54,6 @@ namespace Visualization
             }
         }
 
-        // Melee doesn't work!!!
-        private void OnCollisionEnter(Collision collision)
-        {
-            //Player takes damage from enemy melee
-            if (collision.gameObject.tag == "Enemy")
-            {
-                Debug.Log("Player got hit by melee");
-                TakeDamage(collision.gameObject.GetComponent<Enemy>().meleeDamage);
-            }
-        }
-
         private void Die()
         {
             // Code for what happens when player dies

@@ -36,15 +36,13 @@ namespace Visualization
 
         private void Awake()
         {
-            
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
         }
 
         void Start()
         {
-            
-            walkSpeed = 1f + 0.1f * _playerManager.GetMovement();
-            sprintSpeed = 1f + 0.2f * _playerManager.GetMovement();
+            walkSpeed = 1f + 0.05f * _playerManager.GetMovement();
+            sprintSpeed = 1f + 0.1f * _playerManager.GetMovement();
         }
     
         void Update()
@@ -64,7 +62,6 @@ namespace Visualization
 
             if(Input.GetButtonDown("Jump")&& isGrounded)
             {
-                FindObjectOfType<AudioManager>().Play("SkeletonWalk");
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             }
 
