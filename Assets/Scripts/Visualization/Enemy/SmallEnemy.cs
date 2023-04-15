@@ -29,6 +29,8 @@ public class SmallEnemy : MonoBehaviour
     public float fireRate; // The pause between shots in seconds
     public Transform projectileSpawn;
     public float arcRange;
+    public AudioSource audioSource;
+    public AudioClip clip;
 
     private void Awake()
     {
@@ -113,10 +115,17 @@ public class SmallEnemy : MonoBehaviour
 
     void Shoot(Vector3 targetPosition)
     {
+        playSound();
         GameObject firedProjectile = GameObject.Instantiate(enemyProjectilePrefab, projectileSpawn.position, Quaternion.identity);
         float projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
         firedProjectile.GetComponent<Rigidbody>().velocity = (targetPosition - projectileSpawn.position).normalized * projectileSpeed;
 
         iTween.PunchPosition(firedProjectile, new Vector3(Random.Range(-arcRange, arcRange), Random.Range(-arcRange, arcRange), 0), Random.Range(0.5f, 2f));
+    }
+
+    public void playSound()
+    {
+
+        audioSource.PlayOneShot(clip);
     }
 }

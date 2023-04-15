@@ -20,7 +20,9 @@ namespace Visualization
         private float timeToFire;
         public WeaponOverloader weaponOverloader;
         public GameObject firedProjectile;
-        
+        public AudioSource audioSource;
+        public AudioClip clip;
+
         void Awake()
         {
             shooting = false;
@@ -36,6 +38,7 @@ namespace Visualization
                 
                 timeToFire = Time.time + 1 / fireRate;
                 Shoot();
+                playSound();
                 
             }
             else if (!Input.GetButton("Fire1"))
@@ -78,7 +81,7 @@ namespace Visualization
 
         void InstantiateProjectile()
         {
-            FindObjectOfType<AudioManager>().Play("Shoot");
+            
             firedProjectile = Instantiate(projectile, projectileSpawn.position, Quaternion.identity);
             float projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
             firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawn.position).normalized * projectileSpeed;
@@ -100,6 +103,12 @@ namespace Visualization
         void ChangeFireRate(float newValue)
         {
             fireRate = baseFireRate - newValue * 0.05f;
+        }
+
+        public void playSound()
+        {
+
+            audioSource.PlayOneShot(clip);
         }
     }
 }
