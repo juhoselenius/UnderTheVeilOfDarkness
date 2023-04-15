@@ -34,11 +34,11 @@ namespace Visualization
             if (wpnMngr.shooting)
             {
                 Debug.Log("Tuleeko ees ekaan");
-                if (gameObject.GetComponent<WeaponManager>().firedProjectile.tag == "PlayerProjectile")
+                if (gameObject.GetComponent<WeaponManager>().projectile.tag == "PlayerProjectile")
                 {
                     overLoadSpeed = 5;
                 }
-                else if (gameObject.GetComponent<WeaponManager>().firedProjectile.tag == "IceBullet")
+                else if (gameObject.GetComponent<WeaponManager>().projectile.tag == "IceBullet")
                 {
                     overLoadSpeed = 8;
                 }
