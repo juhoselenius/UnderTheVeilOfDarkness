@@ -1,5 +1,6 @@
 using Logic.Player;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Visualization
@@ -10,35 +11,63 @@ namespace Visualization
         public float overLoadMin;
         public float currentOverLoad;
         public float overLoadSpeed;
-        public IPlayerManager _playerManager;
-        public GameObject obj;
-        private WeaponManager wpnMngr;
-        private Projectile projectile;
+        public bool overLoaded;              
+        public WeaponManager wpnMngr;
+        public GameObject projectile;
+        public float cooldownTimer;     
+        [SerializeField] private float cooldown = 3f;
         // Start is called before the first frame update
         void Start()
         {
+            overLoaded= false;
             overLoadMin = 0f;
             overLoadMax = 100f;
-            currentOverLoad= 0f;
-            overLoadSpeed = 0f;
-            _playerManager = ServiceLocator.GetService<IPlayerManager>();
-            wpnMngr = GetComponent<WeaponManager>();
-            projectile = GetComponent<Projectile>();
+            currentOverLoad = 0f;
+            overLoadSpeed = 1f;          
+            
+            
         }
 
         // Update is called once per frame
         void Update()
         {
-            if(wpnMngr.shooting)
+            if (wpnMngr.shooting)
             {
-                if (projectile.tag == "PlayerProjectile")
+                Debug.Log("Tuleeko ees ekaan");
+                if (gameObject.GetComponent<WeaponManager>().firedProjectile.tag == "PlayerProjectile")
                 {
-                    
+                    overLoadSpeed = 5;
                 }
-                else if (projectile.tag == "IceBullet")
+                else if (gameObject.GetComponent<WeaponManager>().firedProjectile.tag == "IceBullet")
                 {
-                    
+                    overLoadSpeed = 8;
                 }
+                if(currentOverLoad < overLoadMax)
+                {
+                    currentOverLoad += overLoadSpeed * Time.deltaTime;
+                    Debug.Log("Mitä vittua");
+                }
+                
+                Debug.Log("Current overload: " + currentOverLoad);
+                if (currentOverLoad >= overLoadMax)
+                {
+                    overLoaded = true;
+                    cooldownTimer -= Time.deltaTime;
+                    if (cooldownTimer > 0) return;
+                    cooldownTimer = cooldown;
+                    overLoaded = false;
+                }
+            }
+            else
+            {
+                if ((currentOverLoad -3 * Time.deltaTime) >= overLoadMin)
+                {
+                    currentOverLoad -= 3 * Time.deltaTime;
+                    Debug.Log("Current overload: " + currentOverLoad);
+                }
+
+                
+
             }
         }
     }
