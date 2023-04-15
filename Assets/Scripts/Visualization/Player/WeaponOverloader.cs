@@ -36,7 +36,7 @@ namespace Visualization
                 
                 if (gameObject.GetComponent<WeaponManager>().projectile.tag == "PlayerProjectile")
                 {
-                    overLoadSpeed = 5;
+                    overLoadSpeed = 15;
                 }
                 else if (gameObject.GetComponent<WeaponManager>().projectile.tag == "IceBullet")
                 {
@@ -55,7 +55,7 @@ namespace Visualization
                     cooldownTimer -= Time.deltaTime;
                     if (cooldownTimer > 0) return;
                     cooldownTimer = cooldown;
-                    overLoaded = false;
+                    
                 }
             }
             else
@@ -66,7 +66,7 @@ namespace Visualization
                     Debug.Log("Current overload: " + currentOverLoad);
                 }
 
-                
+                overLoaded = false;
 
             }
         }
