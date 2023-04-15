@@ -36,7 +36,7 @@ namespace Visualization
 
             foreach (AudioSource source in audioSources)
             {
-                source.maxDistance = 1f + newDistance * 0.5f;
+                source.maxDistance = 1f + newDistance * 0.2f;
             }
         }
     }
