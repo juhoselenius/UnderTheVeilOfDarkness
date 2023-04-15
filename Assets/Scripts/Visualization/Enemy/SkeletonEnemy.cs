@@ -35,13 +35,6 @@ public class SkeletonEnemy : MonoBehaviour
         sphereCollider.radius = sightRange;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
         if(playerInDetectionRange)
@@ -60,9 +53,9 @@ public class SkeletonEnemy : MonoBehaviour
             }
             else
             {
-                animator.SetBool("Run", true);
+                Run();
                 enemyNavMeshAgent.transform.LookAt(playerTransform);
-                enemyNavMeshAgent.SetDestination(playerTransform.position + new Vector3(0, 0, 0.099f));
+                enemyNavMeshAgent.SetDestination(playerTransform.position + new Vector3(0, 0, 2f));
             }
             
         }
@@ -120,11 +113,6 @@ public class SkeletonEnemy : MonoBehaviour
     {
         enemyNavMeshAgent.speed = runSpeed;
         animator.SetBool("Run", true);
-    }
-
-    public void Attack()
-    {
-        animator.SetTrigger("Attack");
     }
 
     public void Die()

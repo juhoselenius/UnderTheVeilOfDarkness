@@ -55,6 +55,12 @@ public class MenuControl : MonoBehaviour
         Application.Quit();
     }
 
+    public void Retry()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     // Functions for the Preset Management scene
     public void TogglePresetInfo()
     {
