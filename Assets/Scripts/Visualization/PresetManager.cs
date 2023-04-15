@@ -37,13 +37,18 @@ namespace Visualization
             {
                 presetMenu.SetActive(false);
             }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
         }
 
         // Update is called once per frame
         void Update()
         {
             // Toggling Preset Menu on and off
-            if(Input.GetKeyDown(KeyCode.Escape))
+            if(Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != "PresetManagement")
             {
                 if(!presetMenu.activeInHierarchy)
                 {

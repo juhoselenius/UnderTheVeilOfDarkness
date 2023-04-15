@@ -1,5 +1,6 @@
 using Logic.Player;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Visualization
 {
@@ -32,10 +33,15 @@ namespace Visualization
             //Debug.Log("Player Health: " + _playerManager.GetHealth());
         }
 
-        private void TakeDamage(float amount)
+        public void TakeDamage(float amount)
         {
             defense = _playerManager.GetDefense();
             _playerManager.UpdateHealth(-amount + (defense * 0.005f)); // The defense reduction factor is 0.005 here
+
+            if (_playerManager.GetHealth() <= 0)
+            {
+                Die();
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -45,12 +51,6 @@ namespace Visualization
             {
                 Debug.Log("Player got hit by enemy projectile");
                 TakeDamage(other.gameObject.GetComponent<Projectile>().damage);
-            }
-            
-            // Check if player dies
-            if (_playerManager.GetHealth() <= 0)
-            {
-                Die();
             }
         }
 
@@ -63,18 +63,15 @@ namespace Visualization
                 Debug.Log("Player got hit by melee");
                 TakeDamage(collision.gameObject.GetComponent<Enemy>().meleeDamage);
             }
-
-            // Check if player dies
-            if (_playerManager.GetHealth() <= 0)
-            {
-                Die();
-            }
         }
 
         private void Die()
         {
             // Code for what happens when player dies
             Debug.Log("Player is dead!");
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            SceneManager.LoadScene("GameOver");
         }
     }
 }
