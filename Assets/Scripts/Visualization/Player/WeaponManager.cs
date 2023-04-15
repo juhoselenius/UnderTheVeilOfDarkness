@@ -15,55 +15,71 @@ namespace Visualization
         public float fireRate;
         public float baseFireRate;
         public float arcRange;
-
+        public bool shooting;
         private Vector3 destination;
         private float timeToFire;
+        public WeaponOverloader weaponOverloader;
+        public GameObject firedProjectile;
         
         void Awake()
         {
+            shooting = false;
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
             fireRate = baseFireRate - _playerManager.GetAttack() * 0.05f;
+            weaponOverloader = GetComponent<WeaponOverloader>();
         }
 
         void Update()
         {
             if(Input.GetButton("Fire1") && Time.time >= timeToFire)
             {
+                
                 timeToFire = Time.time + 1 / fireRate;
                 Shoot();
+                
             }
+            else if (!Input.GetButton("Fire1"))
+            {
+                shooting = false;
+            }
+            
         }
 
-        void Shoot()
+       public void Shoot()
         {
-            Ray ray = playerCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-            RaycastHit hit;
-
-            if(Physics.Raycast(ray, out hit))
+            shooting = true;
+            if (weaponOverloader.overLoaded == false)
             {
-                float distance = (hit.point - ray.GetPoint(0)).magnitude;
-            
-                if(distance > 2)
+                Ray ray = playerCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit))
                 {
-                    destination = hit.point;
+                    float distance = (hit.point - ray.GetPoint(0)).magnitude;
+
+                    if (distance > 2)
+                    {
+                        destination = hit.point;
+                    }
+                    else
+                    {
+                        destination = ray.GetPoint(10);
+                    }
                 }
                 else
                 {
-                    destination = ray.GetPoint(10);
+                    destination = ray.GetPoint(100);
                 }
-            }
-            else
-            {
-                destination = ray.GetPoint(100);
-            }
 
-            InstantiateProjectile();
+                InstantiateProjectile();
+            }
+           
         }
 
         void InstantiateProjectile()
         {
             FindObjectOfType<AudioManager>().Play("Shoot");
-            GameObject firedProjectile = Instantiate(projectile, projectileSpawn.position, Quaternion.identity);
+            firedProjectile = Instantiate(projectile, projectileSpawn.position, Quaternion.identity);
             float projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
             firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawn.position).normalized * projectileSpeed;
 
