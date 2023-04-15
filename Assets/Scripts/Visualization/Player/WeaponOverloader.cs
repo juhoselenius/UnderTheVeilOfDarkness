@@ -33,7 +33,7 @@ namespace Visualization
         {
             if (wpnMngr.shooting)
             {
-                Debug.Log("Tuleeko ees ekaan");
+                
                 if (gameObject.GetComponent<WeaponManager>().projectile.tag == "PlayerProjectile")
                 {
                     overLoadSpeed = 5;
@@ -45,7 +45,7 @@ namespace Visualization
                 if(currentOverLoad < overLoadMax)
                 {
                     currentOverLoad += overLoadSpeed * Time.deltaTime;
-                    Debug.Log("Mitä vittua");
+                    
                 }
                 
                 Debug.Log("Current overload: " + currentOverLoad);
