@@ -176,7 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5123345015890038207}
   - component: {fileID: 5123345015890038146}
-  - component: {fileID: 5123345015890038206}
+  - component: {fileID: 2765013784225042823}
   - component: {fileID: 5123345015890038205}
   - component: {fileID: 5123345015890038204}
   - component: {fileID: 5761635532002977161}
@@ -201,6 +201,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5123345017052095166}
+  - {fileID: 6763991210682949284}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -214,7 +215,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -226,7 +227,7 @@ NavMeshAgent:
   m_BaseOffset: 1.19
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5123345015890038206
+--- !u!114 &2765013784225042823
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,27 +236,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 5123345015890038147}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bab9a879b9e450141ac491708c8a28bf, type: 3}
+  m_Script: {fileID: 11500000, guid: d3b60595873929647afe0f471d305359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialState: 0
-  navMeshAgent: {fileID: 5123345015890038146}
-  path: {fileID: 0}
+  playerTransform: {fileID: 0}
+  player: {fileID: 0}
+  patrolPath: {fileID: 0}
+  playerInDetectionRange: 0
+  playerInAttackRange: 0
+  walkSpeed: 1
+  runSpeed: 2
+  sightRange: 10
+  patrolTurnWaitTime: 1
+  meleeDamage: 15
+  meleeRate: 1.5
   enemyProjectilePrefab: {fileID: 3235484826052913327, guid: 999dd6c6d203d6342a2906d86b78cb44, type: 3}
   fireRateTimer: 0
-  fireRate: 2
+  fireRate: 1
   projectileSpawn: {fileID: 7829361757747212724}
-  arcRange: 0
-  ignoreLayerProjectile:
-    serializedVersion: 2
-    m_Bits: 512
-  eye: {fileID: 7829361757747212724}
-  chaseTarget: {fileID: 0}
-  lastKnownPlayerPosition: {x: 0, y: 0, z: 0}
-  alertPlayerPosition: {x: 0, y: 0, z: 0}
-  backFromTracking: 0
-  config: {fileID: 11400000, guid: ab3554f3a7edb314299f9c247dafddf0, type: 2}
-  currentState: 0
+  arcRange: 0.1
 --- !u!114 &5123345015890038205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,9 +267,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c2dcf5c1f6494445af789f34b2300b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 5123345015890038147}
   maxHealth: 100
   health: 0
-  meleeDamage: 10
+  meleeDamage: 15
+  rb: {fileID: 0}
+  cooldownTimer: 0
+  cooldown: 5
 --- !u!135 &5123345015890038204
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -691,3 +694,62 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6763991210682949285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6763991210682949284}
+  - component: {fileID: 1095351523606669825}
+  - component: {fileID: 6763991210682949291}
+  m_Layer: 0
+  m_Name: MeleeRangeDetection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6763991210682949284
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6763991210682949285}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5123345015890038207}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1095351523606669825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6763991210682949285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20fec43f62c03be42b78cf88eb13e153, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smally: {fileID: 2765013784225042823}
+--- !u!65 &6763991210682949291
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6763991210682949285}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 1.6}

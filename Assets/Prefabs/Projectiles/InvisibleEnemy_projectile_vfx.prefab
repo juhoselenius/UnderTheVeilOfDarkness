@@ -4918,7 +4918,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.01
+  m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5744563239986284592
 Rigidbody:
@@ -4954,7 +4954,7 @@ MonoBehaviour:
   damage: 0
   baseDamage: 10
   projectileSpeed: 0
-  projectileBaseSpeed: 40
+  projectileBaseSpeed: 20
   beam: {fileID: 7109737904006169265}
 --- !u!1 &3614136285253803954
 GameObject:

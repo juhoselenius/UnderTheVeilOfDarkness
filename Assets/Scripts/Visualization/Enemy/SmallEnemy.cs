@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Visualization;
 
-public class SkeletonEnemy : MonoBehaviour
+public class SmallEnemy : MonoBehaviour
 {
     private NavMeshAgent enemyNavMeshAgent;
     private Animator animator;
@@ -24,25 +24,31 @@ public class SkeletonEnemy : MonoBehaviour
     public float meleeDamage;
     public float meleeRate;
 
+    public GameObject enemyProjectilePrefab;
+    public float fireRateTimer;
+    public float fireRate; // The pause between shots in seconds
+    public Transform projectileSpawn;
+    public float arcRange;
+
     private void Awake()
     {
         enemyNavMeshAgent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
         sphereCollider = GetComponent<SphereCollider>();
         sphereCollider.radius = sightRange;
     }
 
     void FixedUpdate()
     {
-        if(playerInDetectionRange)
+        if (playerInDetectionRange)
         {
-            if(playerInAttackRange)
+            if (playerInAttackRange)
             {
-                animator.SetTrigger("Attack");
+                //animator.SetTrigger("Attack");
                 enemyNavMeshAgent.transform.LookAt(playerTransform);
-                
+
                 meleeTimer += Time.fixedDeltaTime;
-                if(meleeTimer > meleeRate)
+                if (meleeTimer > meleeRate)
                 {
                     meleeTimer = 0;
                     player.TakeDamage(meleeDamage);
@@ -50,22 +56,28 @@ public class SkeletonEnemy : MonoBehaviour
             }
             else
             {
-                Run();
+                fireRateTimer += Time.deltaTime;
+
+                if (fireRateTimer > fireRate)
+                {
+                    fireRateTimer = 0;
+                    Shoot(playerTransform.position);
+                }
+
+                enemyNavMeshAgent.speed = runSpeed;
                 enemyNavMeshAgent.transform.LookAt(playerTransform);
-                enemyNavMeshAgent.SetDestination(playerTransform.position + new Vector3(0, 0, 2f));
+                enemyNavMeshAgent.SetDestination(playerTransform.position + new Vector3(0, 0, 1f));
             }
-            
         }
         else
         {
-            animator.SetBool("Run", false);
             Patrol();
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
             playerInDetectionRange = true;
         }
@@ -83,37 +95,28 @@ public class SkeletonEnemy : MonoBehaviour
     {
         enemyNavMeshAgent.destination = patrolPath.waypoints[nextWaypoint].position;
         enemyNavMeshAgent.isStopped = false;
-        Walk();
+        enemyNavMeshAgent.speed = walkSpeed;
 
         // Changing waypoint when current waypoint is reached through the NavMeshAgent
         if (enemyNavMeshAgent.remainingDistance <= enemyNavMeshAgent.stoppingDistance && !enemyNavMeshAgent.pathPending)
         {
-            animator.SetBool("Walk", false);
             waitTimer += Time.deltaTime;
             if (waitTimer > patrolTurnWaitTime)
             {
                 // Looping through waypoints
                 nextWaypoint = (nextWaypoint + 1) % patrolPath.waypoints.Length;
                 waitTimer = 0;
-                Walk();
+                enemyNavMeshAgent.speed = walkSpeed;
             }
         }
     }
 
-    public void Walk()
+    void Shoot(Vector3 targetPosition)
     {
-        enemyNavMeshAgent.speed = walkSpeed;
-        animator.SetBool("Walk", true);
-    }
+        GameObject firedProjectile = GameObject.Instantiate(enemyProjectilePrefab, projectileSpawn.position, Quaternion.identity);
+        float projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
+        firedProjectile.GetComponent<Rigidbody>().velocity = (targetPosition - projectileSpawn.position).normalized * projectileSpeed;
 
-    public void Run()
-    {
-        enemyNavMeshAgent.speed = runSpeed;
-        animator.SetBool("Run", true);
-    }
-
-    public void Die()
-    {
-        animator.SetTrigger("Die");
+        iTween.PunchPosition(firedProjectile, new Vector3(Random.Range(-arcRange, arcRange), Random.Range(-arcRange, arcRange), 0), Random.Range(0.5f, 2f));
     }
 }

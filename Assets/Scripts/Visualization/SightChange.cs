@@ -28,7 +28,7 @@ namespace Visualization
 
         private void ChangeSight(float newValue)
         {
-            playerLight.range = 0.5f * newValue;
+            playerLight.range = 0.3f * newValue;
         }
     }
 }

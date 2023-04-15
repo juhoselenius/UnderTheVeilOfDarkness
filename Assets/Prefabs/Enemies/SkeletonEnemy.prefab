@@ -710,6 +710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c2dcf5c1f6494445af789f34b2300b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 4411053162758453188}
   maxHealth: 200
   health: 200
   meleeDamage: 20
