@@ -4952,7 +4952,7 @@ MonoBehaviour:
   explosionFX: {fileID: 0}
   trailFX: {fileID: 0}
   damage: 0
-  baseDamage: 5
+  baseDamage: 10
   projectileSpeed: 0
   projectileBaseSpeed: 40
   beam: {fileID: 7109737904006169265}

@@ -39,7 +39,7 @@ namespace Visualization
             overLoadMax = 100f;
             currentOverLoad = 0f;
             cooldownTimeOverload = 3f;
-            cooldownTimeShooting = 100f;
+            cooldownTimeShooting = 10f;
         }
 
         private void Start()
