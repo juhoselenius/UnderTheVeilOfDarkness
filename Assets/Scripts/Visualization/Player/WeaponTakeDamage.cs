@@ -1,10 +1,13 @@
 using Logic.Player;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Visualization;
 
 namespace Visualization
 {
-    public class PlayerCharacter : MonoBehaviour
+    public class WeaponTakeDamage : MonoBehaviour
     {
         public IPlayerManager _playerManager;
 
@@ -13,24 +16,6 @@ namespace Visualization
         private void Awake()
         {
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown("1"))
-            {
-                _playerManager.ChangePreset(0);
-            }
-            else if (Input.GetKeyDown("2"))
-            {
-                _playerManager.ChangePreset(1);
-            }
-            else if (Input.GetKeyDown("3"))
-            {
-                _playerManager.ChangePreset(2);
-            }
-
-            //Debug.Log("Player Health: " + _playerManager.GetHealth());
         }
 
         public void TakeDamage(float amount)
@@ -44,13 +29,13 @@ namespace Visualization
             }
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnCollisionEnter(Collision collision)
         {
             // Player takes damage from enemy projectiles
-            if (other.gameObject.tag == "EnemyProjectile")
+            if (collision.gameObject.tag == "EnemyProjectile")
             {
                 Debug.Log("Player got hit by enemy projectile");
-                TakeDamage(other.gameObject.GetComponent<Projectile>().damage);
+                TakeDamage(collision.gameObject.GetComponent<Projectile>().damage);
             }
         }
 

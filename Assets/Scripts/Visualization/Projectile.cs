@@ -31,13 +31,17 @@ namespace Visualization
 
             if (gameObject.tag == "PlayerProjectile")
             {
-                damage = baseDamage + _playerManager.GetAttack() * 0.1f;
-                projectileSpeed = projectileBaseSpeed - _playerManager.GetAttack() * 0.35f;
+                //damage = baseDamage + _playerManager.GetAttack() * 0.1f;
+                //projectileSpeed = projectileBaseSpeed - _playerManager.GetAttack() * 0.35f;
+                damage = baseDamage;
+                projectileSpeed = projectileBaseSpeed;
             }
             else if(gameObject.tag == "IceBullet")
             {
-                damage = baseDamage + _playerManager.GetAttack() * 0.2f;
-                projectileSpeed = projectileBaseSpeed - _playerManager.GetAttack() * 0.45f;
+                //damage = baseDamage + _playerManager.GetAttack() * 0.2f;
+                //projectileSpeed = projectileBaseSpeed - _playerManager.GetAttack() * 0.45f;
+                damage = baseDamage;
+                projectileSpeed = projectileBaseSpeed;
             }
             else
             {
@@ -53,23 +57,9 @@ namespace Visualization
 
         private void Start()
         {
-            if (gameObject.tag == "PlayerProjectile")
-            {
-                damage = baseDamage + _playerManager.GetAttack() * 0.1f;
-                projectileSpeed = projectileBaseSpeed - _playerManager.GetAttack() * 0.35f;
-            }
-            else
-            {
-                damage = baseDamage;
-                projectileSpeed = projectileBaseSpeed;
-            }
 
-            projectileCollider = GetComponent<SphereCollider>();
-
-            lifeTimer = 0;
-            lifetime = 7f; // Projectile lives for 7 seconds if does not collide
-
-            if (gameObject.tag == "PlayerProjectile")
+            // Increasing size of the projectile collider and the particle system
+            /*if (gameObject.tag == "PlayerProjectile")
             {
                 projectileCollider.radius = 0.01f + _playerManager.GetAttack() * 0.0079f;
                 ParticleSystem.MainModule main = beam.main;
@@ -79,7 +69,7 @@ namespace Visualization
             {
                 projectileCollider.radius = 0.01f + _playerManager.GetAttack() * 0.0079f;
                 Instantiate(trailFX, transform.position, Quaternion.identity);
-            }
+            }*/
         }
 
         private void Update()
@@ -112,6 +102,8 @@ namespace Visualization
                 collided = true;
 
                 GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
+
+                Debug.Log("EnemyProjectile collided with " + collision.gameObject.tag);
                
                 Destroy(impact, 2f);
 

@@ -15,43 +15,97 @@ namespace Visualization
         public float fireRate;
         public float baseFireRate;
         public float arcRange;
-        public bool shooting;
         private Vector3 destination;
         private float timeToFire;
-        public WeaponOverloader weaponOverloader;
         public GameObject firedProjectile;
         public AudioSource audioSource;
         public AudioClip clip;
 
+        // Overloading variables
+        public float overLoadMax;
+        private float overLoadMin;
+        public float currentOverLoad;
+        public bool overLoaded;
+        [SerializeField] private float cooldownTimeOverload;
+        [SerializeField] private float cooldownTimeShooting;
+
         void Awake()
         {
-            shooting = false;
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
-            fireRate = baseFireRate - _playerManager.GetAttack() * 0.05f;
-            weaponOverloader = GetComponent<WeaponOverloader>();
+            fireRate = baseFireRate + _playerManager.GetAttack() * 0.05f;
+
+            overLoaded = false;
+            overLoadMin = 0f;
+            overLoadMax = 100f;
+            currentOverLoad = 0f;
+            cooldownTimeOverload = 3f;
+            cooldownTimeShooting = 10f;
+        }
+
+        private void Start()
+        {
+            /*overLoaded = false;
+            overLoadMin = 0f;
+            overLoadMax = 100f;
+            currentOverLoad = 0f;
+            cooldownTimeOverload = 3f;
+            cooldownTimeShooting = 100f;*/
         }
 
         void Update()
         {
             if(Input.GetButton("Fire1") && Time.time >= timeToFire)
             {
-                
-                timeToFire = Time.time + 1 / fireRate;
-                Shoot();
-                playSound();
-                
+                if(overLoaded)
+                {
+                    if(currentOverLoad > overLoadMin)
+                    {
+                        currentOverLoad -= Time.deltaTime * (overLoadMax / cooldownTimeOverload);
+                    }
+                    else
+                    {
+                        overLoaded = false;
+                    }
+                }
+                else
+                {
+                    timeToFire = Time.time + 1 / fireRate;
+                    Shoot();
+                }
             }
-            else if (!Input.GetButton("Fire1"))
+            else
             {
-                shooting = false;
+                if(overLoaded)
+                {
+                    // Decreasing overload when overloaded and not pressing shoot
+                    if(currentOverLoad > overLoadMin)
+                    {
+                        currentOverLoad -= Time.deltaTime * (overLoadMax / cooldownTimeOverload);
+                    }
+                    else
+                    {
+                        overLoaded = false;
+                        currentOverLoad = 0f;
+                    }
+                }
+                else
+                {
+                    // Decreasing overload when not overloaded and not pressing shoot
+                    if (currentOverLoad > overLoadMin)
+                    {
+                        currentOverLoad -= Time.deltaTime * (overLoadMax / cooldownTimeShooting);
+                    }
+                    else
+                    {
+                        currentOverLoad = 0f;
+                    }
+                }
             }
-            
         }
 
        public void Shoot()
         {
-            shooting = true;
-            if (weaponOverloader.overLoaded == false)
+            if (overLoaded == false)
             {
                 Ray ray = playerCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
                 RaycastHit hit;
@@ -75,18 +129,34 @@ namespace Visualization
                 }
 
                 InstantiateProjectile();
+                playSound();
             }
-           
         }
 
         void InstantiateProjectile()
         {
-            
             firedProjectile = Instantiate(projectile, projectileSpawn.position, Quaternion.identity);
             float projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
             firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawn.position).normalized * projectileSpeed;
 
             iTween.PunchPosition(firedProjectile, new Vector3(Random.Range(-arcRange, arcRange), Random.Range(-arcRange, arcRange), 0), Random.Range(0.5f, 2f));
+            
+            // Increasing overload bar and checking if it filled up
+            if(projectile.tag == "PlayerProjectile")
+            {
+                currentOverLoad += 15;
+            }
+
+            if (projectile.tag == "IceBullet")
+            {
+                currentOverLoad += 8;
+            }
+
+            if (currentOverLoad >= overLoadMax)
+            {
+                currentOverLoad = overLoadMax;
+                overLoaded = true;
+            }
         }
 
         private void OnEnable()
@@ -102,7 +172,7 @@ namespace Visualization
 
         void ChangeFireRate(float newValue)
         {
-            fireRate = baseFireRate - newValue * 0.05f;
+            fireRate = baseFireRate + newValue * 0.05f;
         }
 
         public void playSound()
