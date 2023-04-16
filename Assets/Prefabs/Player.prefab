@@ -641,6 +641,7 @@ GameObject:
   - component: {fileID: 4920631385023035389}
   - component: {fileID: 4920631385023035384}
   - component: {fileID: 2288191313208121289}
+  - component: {fileID: 3959810293943724773}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: PlayerWeapon
@@ -850,6 +851,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3959810293943724773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4920631385023035391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea3187dcf1711cc4d8766deb2388209c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4920631385675242136
 GameObject:
   m_ObjectHideFlags: 0
