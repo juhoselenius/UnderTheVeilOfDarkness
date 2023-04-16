@@ -249,7 +249,7 @@ MonoBehaviour:
   runSpeed: 2
   sightRange: 10
   patrolTurnWaitTime: 1
-  meleeDamage: 15
+  meleeDamage: 10
   meleeRate: 1.5
   enemyProjectilePrefab: {fileID: 3235484826052913327, guid: 999dd6c6d203d6342a2906d86b78cb44, type: 3}
   fireRateTimer: 0
@@ -273,7 +273,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 5123345015890038147}
   maxHealth: 100
   health: 0
-  meleeDamage: 15
+  meleeDamage: 10
   rb: {fileID: 0}
   cooldownTimer: 0
   cooldown: 5

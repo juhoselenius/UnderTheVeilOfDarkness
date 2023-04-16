@@ -1,4 +1,5 @@
 using Logic.Game;
+using Logic.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Visualization
     {
         
         private IGameManager _gameManager;
+        private IPlayerManager _playerManager;
         private ScreenFader fader;
         public Animator animator;
         public bool levelObjectivesDone;
@@ -17,6 +19,7 @@ namespace Visualization
         private void Awake()
         {
             _gameManager = ServiceLocator.GetService<IGameManager>();
+            _playerManager = ServiceLocator.GetService<IPlayerManager>();
             fader = GetComponent<ScreenFader>();
         }
 
