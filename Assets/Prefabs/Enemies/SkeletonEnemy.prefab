@@ -716,6 +716,9 @@ MonoBehaviour:
   maxHealth: 200
   health: 200
   meleeDamage: 20
+  rb: {fileID: 0}
+  cooldownTimer: 0
+  cooldown: 5
 --- !u!136 &4411053162758453184
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -747,7 +750,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 41b5781294b7da44ebaad3bd7be35926, type: 3}
   - {fileID: 8300000, guid: 27c1afdeb55574a48831d6f430f1cbac, type: 3}
   - {fileID: 8300000, guid: 3bf9975566f9cd847977ed3ebb6fd3e3, type: 3}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 3220756071152559570}
   pos: 0
 --- !u!82 &3220756071152559570
 AudioSource:
@@ -759,7 +762,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 5161162529683745053, guid: 7f7d1d8a214fa4e429ef3428676ecec5, type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 82b9e7907a6c3154b86a53c1be46ff71, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

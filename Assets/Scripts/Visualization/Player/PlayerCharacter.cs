@@ -36,7 +36,7 @@ namespace Visualization
         public void TakeDamage(float amount)
         {
             defense = _playerManager.GetDefense();
-            _playerManager.UpdateHealth(-amount + (defense * 0.005f)); // The defense reduction factor is 0.005 here
+            _playerManager.UpdateHealth(-amount * (1f - (defense * 0.005f))); // The defense reduction factor is 0.005 here
 
             if (_playerManager.GetHealth() <= 0)
             {

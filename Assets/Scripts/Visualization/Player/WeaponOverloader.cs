@@ -31,7 +31,7 @@ namespace Visualization
         // Update is called once per frame
         void Update()
         {
-            if (wpnMngr.shooting)
+            /*if (wpnMngr.shooting)
             {
                 
                 if (gameObject.GetComponent<WeaponManager>().projectile.tag == "PlayerProjectile")
@@ -68,7 +68,7 @@ namespace Visualization
 
                 overLoaded = false;
 
-            }
+            }*/
         }
     }
 }
