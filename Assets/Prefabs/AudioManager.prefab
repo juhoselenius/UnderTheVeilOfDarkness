@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5713035021700665249}
-  - component: {fileID: 5713035021700665248}
+  - component: {fileID: 2030375679510265900}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5713035021700665248
+--- !u!114 &2030375679510265900
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,10 +45,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
+  - name: EnemyDeath
+    clip: {fileID: 8300000, guid: 59a116649c550d84c8de680f5e2e8987, type: 3}
+    volume: 0.94
+    pitch: 1
+    spatialBlend: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Shoot
+    clip: {fileID: 8300000, guid: 5ff5bd936a30a904da907f35c8dd382e, type: 3}
+    volume: 0.846
+    pitch: 1
+    spatialBlend: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: OnHit
+    clip: {fileID: 8300000, guid: 380a61624a607f042ab5e96218f37633, type: 3}
+    volume: 0.759
+    pitch: 1
+    spatialBlend: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Alert
+    clip: {fileID: 8300000, guid: 9812d4f7e430ac6479f6923ca2896468, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: EnemyWalk
+    clip: {fileID: 8300000, guid: 410e6d4f5fd688643aec210edfd2dab7, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 1
+    loop: 0
+    source: {fileID: 0}
   - name: SkeletonWalk
     clip: {fileID: 8300000, guid: 3bf9975566f9cd847977ed3ebb6fd3e3, type: 3}
     volume: 1
-    pitch: 0
+    pitch: 1
     spatialBlend: 1
     loop: 1
     source: {fileID: 0}
