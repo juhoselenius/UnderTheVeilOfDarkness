@@ -33,16 +33,23 @@ namespace Visualization
         {
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
             fireRate = baseFireRate + _playerManager.GetAttack() * 0.05f;
-        }
 
-        private void Start()
-        {
             overLoaded = false;
             overLoadMin = 0f;
             overLoadMax = 100f;
             currentOverLoad = 0f;
             cooldownTimeOverload = 3f;
             cooldownTimeShooting = 100f;
+        }
+
+        private void Start()
+        {
+            /*overLoaded = false;
+            overLoadMin = 0f;
+            overLoadMax = 100f;
+            currentOverLoad = 0f;
+            cooldownTimeOverload = 3f;
+            cooldownTimeShooting = 100f;*/
         }
 
         void Update()
@@ -77,6 +84,7 @@ namespace Visualization
                     }
                     else
                     {
+                        overLoaded = false;
                         currentOverLoad = 0f;
                     }
                 }
