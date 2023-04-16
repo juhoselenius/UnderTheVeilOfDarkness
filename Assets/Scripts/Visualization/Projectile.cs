@@ -102,6 +102,8 @@ namespace Visualization
                 collided = true;
 
                 GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
+
+                Debug.Log("EnemyProjectile collided with " + collision.gameObject.tag);
                
                 Destroy(impact, 2f);
 
