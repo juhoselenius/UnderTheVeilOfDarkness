@@ -514,13 +514,19 @@ MonoBehaviour:
   projectileSpawn: {fileID: 4920631385675242137}
   projectile: {fileID: 3235484826052913327, guid: 023b9ccbd6e86e8409f216a2025f9a0d, type: 3}
   fireRate: 0
-  baseFireRate: 6
+  baseFireRate: 1
   arcRange: 0.3
   shooting: 0
   weaponOverloader: {fileID: 0}
   firedProjectile: {fileID: 0}
   audioSource: {fileID: 2288191313208121289}
   clip: {fileID: 8300000, guid: 5ff5bd936a30a904da907f35c8dd382e, type: 3}
+  cooldownTimer: 0
+  overLoadMax: 0
+  overLoadMin: 0
+  currentOverLoad: 0
+  overLoadSpeed: 0
+  overLoaded: 0
 --- !u!82 &2288191313208121289
 AudioSource:
   m_ObjectHideFlags: 0
