@@ -60,6 +60,7 @@ namespace Visualization
             Debug.Log("Player is dead!");
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            _playerManager.UpdateHealth(1000f);
             SceneManager.LoadScene("GameOver");
         }
     }
