@@ -15,6 +15,7 @@ TagManager:
   - TurretMissile
   - EnemyBody
   - IceBullet
+  - Rock
   layers:
   - Default
   - TransparentFX
