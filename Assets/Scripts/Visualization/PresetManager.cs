@@ -120,16 +120,16 @@ namespace Visualization
         private void UpdateTextValues()
         {
             // Calculating the total attribute value
-            totalAttributeValue = _playerManager.GetSight() + _playerManager.GetHearing() +
-                _playerManager.GetMovement() + _playerManager.GetAttack() + _playerManager.GetDefense();
+            totalAttributeValue = 10f - (_playerManager.GetSight() + _playerManager.GetHearing() +
+                _playerManager.GetMovement() + _playerManager.GetAttack() + _playerManager.GetDefense());
 
             // Updating the values to the UI texts
-            totalAttributeValueText.text = totalAttributeValue.ToString() + " %";
-            sightValueText.text = _playerManager.GetSight().ToString() + " %";
-            hearingValueText.text = _playerManager.GetHearing().ToString() + " %";
-            movementValueText.text = _playerManager.GetMovement().ToString() + " %";
-            attackValueText.text = _playerManager.GetAttack().ToString() + " %";
-            defenseValueText.text = _playerManager.GetDefense().ToString() + " %";
+            totalAttributeValueText.text = totalAttributeValue.ToString();
+            sightValueText.text = _playerManager.GetSight().ToString();
+            hearingValueText.text = _playerManager.GetHearing().ToString();
+            movementValueText.text = _playerManager.GetMovement().ToString();
+            attackValueText.text = _playerManager.GetAttack().ToString();
+            defenseValueText.text = _playerManager.GetDefense().ToString();
         }
     }
 }

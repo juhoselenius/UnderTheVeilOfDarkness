@@ -44,12 +44,7 @@ namespace Visualization
 
         private void Start()
         {
-            /*overLoaded = false;
-            overLoadMin = 0f;
-            overLoadMax = 100f;
-            currentOverLoad = 0f;
-            cooldownTimeOverload = 3f;
-            cooldownTimeShooting = 100f;*/
+            
         }
 
         void Update()

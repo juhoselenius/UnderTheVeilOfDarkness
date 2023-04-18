@@ -86,7 +86,7 @@ namespace Logic.Player
                 _state.presets[_state.currentPresetIndex].movementAttribute +
                 _state.presets[_state.currentPresetIndex].attackAttribute + _state.presets[_state.currentPresetIndex].defenseAttribute;
 
-            _state.presets[_state.currentPresetIndex].sightAttribute = Mathf.Clamp(newSightValue, 0f, 100 - otherAttributeTotal);
+            _state.presets[_state.currentPresetIndex].sightAttribute = Mathf.Clamp(newSightValue, 0f, 10 - otherAttributeTotal);
             SightChanged?.Invoke(_state.presets[_state.currentPresetIndex].sightAttribute);
         }
 
@@ -102,7 +102,7 @@ namespace Logic.Player
                 _state.presets[_state.currentPresetIndex].movementAttribute +
                 _state.presets[_state.currentPresetIndex].attackAttribute + _state.presets[_state.currentPresetIndex].defenseAttribute;
 
-            _state.presets[_state.currentPresetIndex].hearingAttribute = Mathf.Clamp(newHearingValue, 0f, 100 - otherAttributeTotal);
+            _state.presets[_state.currentPresetIndex].hearingAttribute = Mathf.Clamp(newHearingValue, 0f, 10 - otherAttributeTotal);
             HearingChanged?.Invoke(_state.presets[_state.currentPresetIndex].hearingAttribute);
         }
 
@@ -118,7 +118,7 @@ namespace Logic.Player
                 _state.presets[_state.currentPresetIndex].hearingAttribute +
                 _state.presets[_state.currentPresetIndex].attackAttribute + _state.presets[_state.currentPresetIndex].defenseAttribute;
 
-            _state.presets[_state.currentPresetIndex].movementAttribute = Mathf.Clamp(newMovementValue, 0f, 100 - otherAttributeTotal);
+            _state.presets[_state.currentPresetIndex].movementAttribute = Mathf.Clamp(newMovementValue, 0f, 10 - otherAttributeTotal);
             MovementChanged?.Invoke(_state.presets[_state.currentPresetIndex].movementAttribute);
         }
 
@@ -134,7 +134,7 @@ namespace Logic.Player
                 _state.presets[_state.currentPresetIndex].hearingAttribute +
                 _state.presets[_state.currentPresetIndex].movementAttribute + _state.presets[_state.currentPresetIndex].defenseAttribute;
 
-            _state.presets[_state.currentPresetIndex].attackAttribute = Mathf.Clamp(newAttackValue, 0f, 100 - otherAttributeTotal);
+            _state.presets[_state.currentPresetIndex].attackAttribute = Mathf.Clamp(newAttackValue, 0f, 10 - otherAttributeTotal);
             AttackChanged?.Invoke(_state.presets[_state.currentPresetIndex].attackAttribute);
         }
 
@@ -149,94 +149,8 @@ namespace Logic.Player
             float otherAttributeTotal = _state.presets[_state.currentPresetIndex].sightAttribute + _state.presets[_state.currentPresetIndex].hearingAttribute +
                 _state.presets[_state.currentPresetIndex].movementAttribute + _state.presets[_state.currentPresetIndex].attackAttribute;
 
-            _state.presets[_state.currentPresetIndex].defenseAttribute = Mathf.Clamp(newDefenseValue, 0f, 100 - otherAttributeTotal);
+            _state.presets[_state.currentPresetIndex].defenseAttribute = Mathf.Clamp(newDefenseValue, 0f, 10 - otherAttributeTotal);
             DefenseChanged?.Invoke(_state.presets[_state.currentPresetIndex].defenseAttribute);
-        }
-
-        // Attribute Preset base and factor value getters
-        public float GetSightFactor()
-        {
-            return _state.sightFactor;
-        }
-
-        public float GetHearingFactor()
-        {
-            return _state.hearingFactor;
-        }
-
-        public float GetBaseWalkSpeed()
-        {
-            return _state.baseWalkSpeed;
-        }
-
-        public float GetBaseSprintSpeed()
-        {
-            return _state.baseSprintSpeed;
-        }
-
-        public float GetWalkSpeedFactor()
-        {
-            return _state.walkSpeedFactor;
-        }
-
-        public float GetSprintSpeedFactor()
-        {
-            return _state.sprintSpeedFactor;
-        }
-
-        public float GetBaseProjectileDamage()
-        {
-            return _state.baseProjectileDamage;
-        }
-
-        public float GetBaseProjectileSpeed()
-        {
-            return _state.baseProjectileSpeed;
-        }
-
-        public float GetBaseFireRate()
-        {
-            return _state.baseFireRate;
-        }
-
-        public float GetBaseParticleStartSize()
-        {
-            return _state.baseParticleStartSize;
-        }
-
-        public float GetBaseProjectileColliderRadius()
-        {
-            return _state.baseProjectileColliderRadius;
-        }
-
-        public float GetProjectileDamageFactor()
-        {
-            return _state.projectileDamageFactor;
-        }
-
-        public float GetProjectileSpeedFactor()
-        {
-            return _state.projectileSpeedFactor;
-        }
-
-        public float GetFireRateFactor()
-        {
-            return _state.fireRateFactor;
-        }
-
-        public float GetParticleStartSizeFactor()
-        {
-            return _state.particleStartSizeFactor;
-        }
-
-        public float GetProjectileColliderRadiusFactor()
-        {
-            return _state.projectileColliderRadiusFactor;
-        }
-
-        public float GetDefenseFactor()
-        {
-            return _state.defenseFactor;
         }
 
         public void SaveState()

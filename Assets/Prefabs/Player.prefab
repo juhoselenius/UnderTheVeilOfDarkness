@@ -244,6 +244,56 @@ MonoBehaviour:
   health: 0
   previousHealth: 0
   maxHealth: 0
+--- !u!1 &1598112747833067061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3703122311283964264}
+  - component: {fileID: 6821288557757222352}
+  m_Layer: 0
+  m_Name: ShieldSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3703122311283964264
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1598112747833067061}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.42, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5086483059215192338}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6821288557757222352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1598112747833067061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48907880cafe8ef4b97fd72b21c6a449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shieldPrefabs:
+  - {fileID: 0}
+  - {fileID: 6122034718196711358, guid: 19a124fe583f9e046ae38a1314495277, type: 3}
+  - {fileID: 3580637635003737539, guid: 7d3910ba14875c844afa9e04f6413714, type: 3}
+  - {fileID: 8973129075113111314, guid: 81f6a09cbd6df624dae44ab867387947, type: 3}
+  - {fileID: 5267800074483019297, guid: bc07a1a9bac7e1f47b19fc7be3328a74, type: 3}
 --- !u!1 &2433931574674762652
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,7 +692,7 @@ GameObject:
   - component: {fileID: 4920631385023035384}
   - component: {fileID: 2288191313208121289}
   - component: {fileID: 3959810293943724773}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Weapon
   m_TagString: PlayerWeapon
   m_Icon: {fileID: 0}
@@ -663,7 +713,7 @@ Transform:
   m_Children:
   - {fileID: 4920631385675242137}
   m_Father: {fileID: 5086483059215192338}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &4920631385023035387
 MeshFilter:
@@ -1107,6 +1157,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3703122311283964264}
   - {fileID: 5086483060512203685}
   - {fileID: 4920631385023035388}
   m_Father: {fileID: 5086483060022182105}
@@ -1346,7 +1397,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5086483059215192338}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &5086483060512203686
 Light:

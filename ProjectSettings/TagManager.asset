@@ -15,7 +15,7 @@ TagManager:
   - TurretMissile
   - EnemyBody
   - IceBullet
-  - Rock
+  - Shield
   layers:
   - Default
   - TransparentFX
@@ -28,7 +28,7 @@ TagManager:
   - Enemy
   - EnemyProjectile
   - Player
-  - 
+  - Shield
   - 
   - 
   - 
