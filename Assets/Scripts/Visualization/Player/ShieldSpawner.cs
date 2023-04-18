@@ -11,13 +11,11 @@ namespace Visualization
 
         public GameObject[] shieldPrefabs;
 
-        // Start is called before the first frame update
         void Awake()
         {
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
         }
 
-        // Update is called once per frame
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.E))
@@ -26,12 +24,13 @@ namespace Visualization
                 {
                     if(_playerManager.GetDefense() == 1)
                     {
-                        Instantiate(shieldPrefabs[(int)_playerManager.GetDefense()], gameObject.transform.position, Quaternion.identity);
+                        GameObject shield = Instantiate(shieldPrefabs[(int)_playerManager.GetDefense()], gameObject.transform.position, gameObject.transform.rotation);
                     }
                     else
                     {
-                        GameObject shield = Instantiate(shieldPrefabs[(int)_playerManager.GetDefense()], gameObject.transform.position, Quaternion.identity);
+                        GameObject shield = Instantiate(shieldPrefabs[(int)_playerManager.GetDefense()], gameObject.transform, false);
                         shield.transform.parent = gameObject.transform;
+                        shield.transform.localPosition = Vector3.zero;
                     }
                 }
             }

@@ -290,10 +290,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shieldPrefabs:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 1840508903390572520, guid: bc07a1a9bac7e1f47b19fc7be3328a74, type: 3}
+  - {fileID: 6122034718196711358, guid: 19a124fe583f9e046ae38a1314495277, type: 3}
+  - {fileID: 3580637635003737539, guid: 7d3910ba14875c844afa9e04f6413714, type: 3}
+  - {fileID: 8973129075113111314, guid: 81f6a09cbd6df624dae44ab867387947, type: 3}
+  - {fileID: 5267800074483019297, guid: bc07a1a9bac7e1f47b19fc7be3328a74, type: 3}
 --- !u!1 &2433931574674762652
 GameObject:
   m_ObjectHideFlags: 0
