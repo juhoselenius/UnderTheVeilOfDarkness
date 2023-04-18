@@ -27,7 +27,7 @@ namespace Visualization
 
         private void OnDisable()
         {
-            _playerManager.HealthChanged -= UpdateAudioDistance;
+            _playerManager.HearingChanged -= UpdateAudioDistance;
         }
 
         private void UpdateAudioDistance(float newDistance)
