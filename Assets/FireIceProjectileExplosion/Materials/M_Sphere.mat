@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Sphere
-  m_Shader: {fileID: 101, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 611f6c893519f874cb39adbb6db99682, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 0
@@ -118,6 +118,6 @@ Material:
     - _TilingOffsetAlphaMaskPolarUV: {r: 0, g: 0, b: 0, a: 0}
     - _TilingOffsetMainTexPolarUV: {r: 0, g: 0, b: 0, a: 0}
     - _Tint: {r: 3.2073464, g: 0, b: 0, a: 1}
-    - _Tint_01: {r: 3.4440894, g: 3.4440894, b: 3.4440894, a: 1}
-    - _Tint_02: {r: 19.468573, g: 19.468573, b: 19.468573, a: 0}
+    - _Tint_01: {r: 0.12890813, g: 0.45253527, b: 4.7216797, a: 1}
+    - _Tint_02: {r: 0.2039561, g: 0.15614666, b: 16.92033, a: 0}
   m_BuildTextureStacks: []

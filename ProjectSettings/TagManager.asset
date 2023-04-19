@@ -16,6 +16,8 @@ TagManager:
   - EnemyBody
   - IceBullet
   - Shield
+  - FireBullet
+  - Rock
   layers:
   - Default
   - TransparentFX
