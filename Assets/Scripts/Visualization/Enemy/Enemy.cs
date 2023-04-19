@@ -31,7 +31,7 @@ namespace Visualization
         private void OnCollisionEnter(Collision collision)
         {
             Debug.Log("Enemy was hit");
-            if(collision.gameObject.tag == "PlayerProjectile")
+            if(collision.gameObject.tag == "PlayerProjectile" || collision.gameObject.tag =="Bullet" || collision.gameObject.tag == "FireBullet")
             {
                 health -= collision.gameObject.GetComponent<Projectile>().damage;
             }
