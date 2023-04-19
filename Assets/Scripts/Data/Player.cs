@@ -58,7 +58,7 @@ namespace Data
             hearingFactor = 0.5f;
 
             baseWalkSpeed = 1f;
-            baseSprintSpeed = 1f;
+            baseSprintSpeed = 2f;
             walkSpeedFactor = 0.1f;
             sprintSpeedFactor = 0.2f;
 
