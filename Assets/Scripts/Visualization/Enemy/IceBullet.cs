@@ -61,6 +61,7 @@ namespace Visualization
             {
                 collided = true;
                 GameObject impact = Instantiate(explosionFX, collision.contacts[0].point, Quaternion.identity);
+               
                 
                 FindObjectOfType<AudioManager>().Play("OnHit");
                 

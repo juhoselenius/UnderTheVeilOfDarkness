@@ -42,8 +42,15 @@ namespace Visualization
                 //projectileSpeed = projectileBaseSpeed - _playerManager.GetAttack() * 0.45f;
                 damage = baseDamage;
                 projectileSpeed = projectileBaseSpeed;
+                //Instantiate(trailFX, transform.position, Quaternion.identity);
             }
-            else
+            else if(gameObject.tag == "FireBullet")
+            {
+                damage = baseDamage;
+                projectileSpeed = projectileBaseSpeed;
+                //Instantiate(trailFX, transform.position, Quaternion.identity);
+            }
+            else 
             {
                 damage = baseDamage;
                 projectileSpeed = projectileBaseSpeed;
@@ -114,6 +121,18 @@ namespace Visualization
             {
                 collided = true;
                 GameObject impact = Instantiate(explosionFX, collision.contacts[0].point, Quaternion.identity);
+                
+
+                FindObjectOfType<AudioManager>().Play("OnHit");
+
+
+                Destroy(gameObject);
+            }
+            if (gameObject.tag == "FireBullet" && collision.gameObject.tag != "FireBullet" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
+            {
+                collided = true;
+                GameObject impact = Instantiate(explosionFX, collision.contacts[0].point, Quaternion.identity);
+
 
                 FindObjectOfType<AudioManager>().Play("OnHit");
 
