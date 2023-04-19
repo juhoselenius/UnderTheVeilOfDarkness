@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 namespace Visualization
 {
@@ -24,6 +25,8 @@ namespace Visualization
         public TextMeshProUGUI movementValueText;
         public TextMeshProUGUI attackValueText;
         public TextMeshProUGUI defenseValueText;
+
+        
 
         private IPlayerManager _playerManager;
     
@@ -91,7 +94,7 @@ namespace Visualization
         {
             _playerManager.UpdateAttack(newValue);
             attackSlider.value = _playerManager.GetAttack();
-            UpdateTextValues();
+            UpdateTextValues();           
         }
 
         public void OnValueChangedDefense(float newValue)

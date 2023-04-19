@@ -20,20 +20,27 @@ namespace Visualization
         public GameObject firedProjectile;
         public AudioSource audioSource;
         public AudioClip clip;
+        public GameObject muzzle;
 
         // Overloading variables
         public float overLoadMax;
         private float overLoadMin;
         public float currentOverLoad;
         public bool overLoaded;
+        public GameObject[] projectiles;
+        
+        
         [SerializeField] private float cooldownTimeOverload;
         [SerializeField] private float cooldownTimeShooting;
+        
 
         void Awake()
         {
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
             fireRate = baseFireRate + _playerManager.GetAttack() * 0.05f;
-
+            
+            //projectile = projectiles[(int)_playerManager.GetAttack()];          
+            
             overLoaded = false;
             overLoadMin = 0f;
             overLoadMax = 100f;
@@ -131,6 +138,10 @@ namespace Visualization
         void InstantiateProjectile()
         {
             firedProjectile = Instantiate(projectile, projectileSpawn.position, Quaternion.identity);
+            if(projectile.tag == "PlayerProjectile")
+            {
+                Instantiate(muzzle, projectileSpawn.position, projectileSpawn.rotation, projectileSpawn.transform);
+            }
             float projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
             firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawn.position).normalized * projectileSpeed;
 
@@ -157,17 +168,19 @@ namespace Visualization
         private void OnEnable()
         {
             _playerManager.AttackChanged += ChangeFireRate;
-            ChangeFireRate(_playerManager.GetAttack());
+            ChangeFireRate(_playerManager.GetAttack());                  
         }
 
         private void OnDisable()
         {
             _playerManager.AttackChanged -= ChangeFireRate;
+            
         }
 
         void ChangeFireRate(float newValue)
         {
             fireRate = baseFireRate + newValue * 0.05f;
+            //projectile = projectiles[(int)_playerManager.GetAttack()];
         }
 
         public void playSound()
