@@ -82,7 +82,7 @@ namespace Visualization
 
         
             
-            if (Input.GetKeyDown(KeyCode.F) && _playerManager.GetMovement() == 4)
+            if (Input.GetKeyDown(KeyCode.LeftControl) && _playerManager.GetMovement() == 4)
             {
               
                     StartCoroutine(Dodge());
