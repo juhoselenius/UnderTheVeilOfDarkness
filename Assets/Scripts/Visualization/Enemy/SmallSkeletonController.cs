@@ -4,44 +4,51 @@ using Visualization;
 
 public class SmallSkeletonController: MonoBehaviour
 {
-    private NavMeshAgent enemyNavMeshAgent;
     private Animator animator;
-    private SphereCollider sphereCollider;
-    private int nextWaypoint;
-    private float waitTimer;
-
-    private float meleeTimer;
-
-    public Transform playerTransform; // Main Camera of the player has to be dragged here
-    public PlayerCharacter player;
-    
-    public bool playerInDetectionRange = false;
-    public bool playerInAttackRange = false;
+    private NavMeshAgent enemyNavMeshAgent = null;
+    public Transform target;
     public float walkSpeed;
     public float runSpeed;
-    public float sightRange;
-    public float patrolTurnWaitTime;
     public float meleeDamage;
     public float meleeRate;
+    private float meleeTimer;
+
+    public PlayerCharacter player;
+
+    public bool trapSet = false;
+
 
     private void Awake()
     {
-        enemyNavMeshAgent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
-        sphereCollider = GetComponent<SphereCollider>();
-        sphereCollider.radius = sightRange;
+        GetReferencer();
+        
+        
     }
 
-    void FixedUpdate()
+    private void Update()
     {
+        if (trapSet = true)
+        {
+            MoveToTarget();
+        }
+    }
 
-            Run();
-                enemyNavMeshAgent.transform.LookAt(playerTransform);
-                enemyNavMeshAgent.SetDestination(playerTransform.position + new Vector3(0, 0, 2f));
-            if (playerInAttackRange)
-            {
+    private void MoveToTarget()
+    {
+        
+        enemyNavMeshAgent.SetDestination(target.position);
+        Walk();
+        Run();
+        RotateToTarget();
+        float distanceToTarget = Vector3.Distance(target.position, transform.position);
+
+        if (distanceToTarget <= enemyNavMeshAgent.stoppingDistance)
+        {
+            animator.SetBool("Run", false);
+            animator.SetBool("Walk", false);
+        
                 animator.SetTrigger("Attack");
-                enemyNavMeshAgent.transform.LookAt(playerTransform);
+                enemyNavMeshAgent.transform.LookAt(target);
 
                 meleeTimer += Time.fixedDeltaTime;
                 if (meleeTimer > meleeRate)
@@ -50,18 +57,34 @@ public class SmallSkeletonController: MonoBehaviour
                     player.TakeDamage(meleeDamage);
                 }
             }
-                
-            
-
+            else
+            {
+                Run();
+                enemyNavMeshAgent.transform.LookAt(target);
+                enemyNavMeshAgent.SetDestination(target.position);
+            }
         
-       
+     
+    }
+    private void GetReferencer()
+    {
+        enemyNavMeshAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
 
-   
+    private void RotateToTarget()
+    {
 
-    
 
- 
+        enemyNavMeshAgent.transform.LookAt(target);
+    }
+
+    public void Walk()
+    {
+
+        enemyNavMeshAgent.speed = walkSpeed;
+        animator.SetBool("Walk", true);
+    }
 
     public void Run()
     {
@@ -74,4 +97,12 @@ public class SmallSkeletonController: MonoBehaviour
     {
         animator.SetTrigger("Die");
     }
+
+    public void attack()
+    {
+        
+    }
+
+
+
 }
