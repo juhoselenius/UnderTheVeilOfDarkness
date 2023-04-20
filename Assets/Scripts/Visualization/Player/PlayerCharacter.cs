@@ -15,6 +15,7 @@ namespace Visualization
         private void Awake()
         {
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
+            currentPresetCooldown = 0;
         }
 
         private void Update()
@@ -25,6 +26,7 @@ namespace Visualization
             }
             else
             {
+                currentPresetCooldown = 0;
                 if (Input.GetKeyDown("1"))
                 {
                     _playerManager.ChangePreset(0);
