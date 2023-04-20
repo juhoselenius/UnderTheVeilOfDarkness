@@ -7,6 +7,8 @@ namespace Visualization
     public class PlayerCharacter : MonoBehaviour
     {
         public IPlayerManager _playerManager;
+        public float currentPresetCooldown;
+        public float maxPresetCooldown;
 
         private float defense;
 
@@ -17,20 +19,28 @@ namespace Visualization
 
         private void Update()
         {
-            if (Input.GetKeyDown("1"))
+            if(currentPresetCooldown > 0)
             {
-                _playerManager.ChangePreset(0);
+                currentPresetCooldown -= Time.deltaTime;
             }
-            else if (Input.GetKeyDown("2"))
+            else
             {
-                _playerManager.ChangePreset(1);
+                if (Input.GetKeyDown("1"))
+                {
+                    _playerManager.ChangePreset(0);
+                    currentPresetCooldown = maxPresetCooldown;
+                }
+                else if (Input.GetKeyDown("2"))
+                {
+                    _playerManager.ChangePreset(1);
+                    currentPresetCooldown = maxPresetCooldown;
+                }
+                else if (Input.GetKeyDown("3"))
+                {
+                    _playerManager.ChangePreset(2);
+                    currentPresetCooldown = maxPresetCooldown;
+                }
             }
-            else if (Input.GetKeyDown("3"))
-            {
-                _playerManager.ChangePreset(2);
-            }
-
-            //Debug.Log("Player Health: " + _playerManager.GetHealth());
         }
 
         public void TakeDamage(float amount)
