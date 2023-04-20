@@ -21,6 +21,7 @@ namespace Visualization
         public AudioSource audioSource;
         public AudioClip clip;
         public GameObject muzzle;
+        
 
         // Overloading variables
         public float overLoadMax;
@@ -28,6 +29,11 @@ namespace Visualization
         public float currentOverLoad;
         public bool overLoaded;
         public GameObject[] projectiles;
+        private float attack;
+        public GameObject weapon1;
+        public GameObject weapon2;
+        public GameObject hand;
+        public Transform handTransform;
         
         
         [SerializeField] private float cooldownTimeOverload;
@@ -38,8 +44,10 @@ namespace Visualization
         {
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
             fireRate = baseFireRate + _playerManager.GetAttack() * 0.05f;
-            
-            //projectile = projectiles[(int)_playerManager.GetAttack()];          
+            attack = _playerManager.GetAttack();
+            projectile = projectiles[(int)attack];
+
+            chooseWeapon();
             
             overLoaded = false;
             overLoadMin = 0f;
@@ -137,8 +145,17 @@ namespace Visualization
 
         void InstantiateProjectile()
         {
-            firedProjectile = Instantiate(projectile, projectileSpawn.position, Quaternion.identity);
-            if(projectile.tag == "PlayerProjectile")
+            if(projectile.tag == "Rock")
+            {
+                firedProjectile = Instantiate(projectile, handTransform.position, Quaternion.identity);
+            }
+            else
+            {
+                firedProjectile = Instantiate(projectile, projectileSpawn.position, Quaternion.identity);
+            }
+                    
+            
+            if(projectile.tag == "PlayerProjectile" || projectile.tag =="Bullet")
             {
                 Instantiate(muzzle, projectileSpawn.position, projectileSpawn.rotation, projectileSpawn.transform);
             }
@@ -146,9 +163,17 @@ namespace Visualization
             firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawn.position).normalized * projectileSpeed;
 
             iTween.PunchPosition(firedProjectile, new Vector3(Random.Range(-arcRange, arcRange), Random.Range(-arcRange, arcRange), 0), Random.Range(0.5f, 2f));
-            
+
             // Increasing overload bar and checking if it filled up
-            if(projectile.tag == "PlayerProjectile")
+            if (projectile.tag == "Bullet")
+            {
+                currentOverLoad += 20;
+            }
+            if (projectile.tag == "PlayerProjectile")
+            {
+                currentOverLoad += 15;
+            }
+            if (projectile.tag == "FireBullet")
             {
                 currentOverLoad += 15;
             }
@@ -180,7 +205,8 @@ namespace Visualization
         void ChangeFireRate(float newValue)
         {
             fireRate = baseFireRate + newValue * 0.05f;
-            //projectile = projectiles[(int)_playerManager.GetAttack()];
+            chooseWeapon();
+            projectile = projectiles[(int)_playerManager.GetAttack()];
         }
 
         public void playSound()
@@ -188,5 +214,32 @@ namespace Visualization
 
             audioSource.PlayOneShot(clip);
         }
+
+        private void chooseWeapon()
+        {
+            attack = _playerManager.GetAttack();
+            if (attack == 0)
+            {
+                hand.SetActive(true);
+                weapon1.SetActive(false);
+                weapon2.SetActive(false);
+                
+            }
+            else if (attack == 1 || attack == 2)
+            {
+                weapon1.SetActive(true);
+                weapon2.SetActive(false);
+                hand.SetActive(false);
+                
+            }
+            else if (attack == 3 || attack == 4)
+            {
+                weapon2.SetActive(true);
+                hand.SetActive(false);
+                weapon1.SetActive(false);
+                
+
+            }
+        }     
     }
 }
