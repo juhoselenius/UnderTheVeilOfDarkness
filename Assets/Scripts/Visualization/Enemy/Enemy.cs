@@ -18,13 +18,15 @@ namespace Visualization
         public float cooldownTimer;
         public float knockBackForce;
         public float brake;
-        public Vector3 direction;
+        public float enemyBaseSpeed;
+        public Vector3 direction;       
         
         [SerializeField] private float cooldown = 5f;
 
         private void Awake()
         {
             _gameManager = ServiceLocator.GetService<IGameManager>();
+            enemyBaseSpeed = 1f;
         }
 
         void Start()
@@ -38,15 +40,16 @@ namespace Visualization
             Debug.Log("Enemy was hit");
             if(collision.gameObject.tag == "PlayerProjectile" || collision.gameObject.tag =="Bullet" || collision.gameObject.tag == "FireBullet" || collision.gameObject.tag == "Rock")
             {
-                health -= collision.gameObject.GetComponent<Projectile>().damage;
-                StartCoroutine(knockBack());
-                Debug.Log("Direction: " + direction);
-                
-                
+                health -= collision.gameObject.GetComponent<Projectile>().damage;                                        
+                direction = (transform.position - collision.transform.position).normalized;
+                StartCoroutine(knockBack());                       
             }
             else if(collision.gameObject.tag == "IceBullet")
             {
                 health -= collision.gameObject.GetComponent<Projectile>().damage;
+                direction = (transform.position - collision.transform.position).normalized;
+                StartCoroutine(knockBack());
+                enemyBaseSpeed -= 0.25f;
                 /*
                 rb.isKinematic = true;
                 cooldownTimer -= Time.deltaTime;
@@ -54,6 +57,7 @@ namespace Visualization
                 cooldownTimer = cooldown;
                 rb.isKinematic = false;
                 */
+                
             }
 
             if (health <= 0)
@@ -75,7 +79,7 @@ namespace Visualization
            float knockBacktime = Time.time;
             while (Time.time < knockBacktime + 0.2f)
             {
-                transform.position += (direction * Time.deltaTime * knockBackForce);
+                transform.position += (direction * Time.deltaTime * knockBackForce);             
                 yield return null;
             }
             

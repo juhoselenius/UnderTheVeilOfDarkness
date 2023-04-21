@@ -1,6 +1,7 @@
 using Logic.Player;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Visualization;
@@ -12,7 +13,8 @@ namespace Visualization
         public IPlayerManager _playerManager;
 
         private float defense;
-
+        public float knockBackForce;
+        private Vector3 direction;
         private void Awake()
         {
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
@@ -36,8 +38,23 @@ namespace Visualization
             if (collision.gameObject.tag == "EnemyProjectile")
             {
                 Debug.Log("Player got hit by enemy projectile");               
-                TakeDamage(collision.gameObject.GetComponent<Projectile>().damage);           
+                TakeDamage(collision.gameObject.GetComponent<Projectile>().damage);
+                direction = (GameObject.FindGameObjectWithTag("Player").transform.position - collision.transform.position).normalized;
+                Debug.Log("Direction weaponTD: " + direction);
+                StartCoroutine(knockBack());
             }
+        }
+
+        IEnumerator knockBack()
+        {
+            float knockBacktime = Time.time;
+            while (Time.time < knockBacktime + 0.2f)
+            {
+                GameObject.FindGameObjectWithTag("Player").transform.position += (direction * Time.deltaTime * knockBackForce);
+                //transform.position += (direction * Time.deltaTime * knockBackForce);
+                yield return null;
+            }
+
         }
 
 

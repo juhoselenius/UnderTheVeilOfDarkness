@@ -66,7 +66,7 @@ public class SmallEnemy : MonoBehaviour
                     Shoot(playerTransform.position);
                 }
 
-                enemyNavMeshAgent.speed = runSpeed;
+                enemyNavMeshAgent.speed = runSpeed * gameObject.GetComponent<Enemy>().enemyBaseSpeed;
                 enemyNavMeshAgent.transform.LookAt(playerTransform);
                 enemyNavMeshAgent.SetDestination(playerTransform.position + new Vector3(0, 0, 1f));
             }
