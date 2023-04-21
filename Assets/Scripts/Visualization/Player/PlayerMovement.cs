@@ -1,7 +1,9 @@
 using Logic.Player;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace Visualization
 {
@@ -27,9 +29,7 @@ namespace Visualization
         public int jumpRemaining;
         public float dodgeSpeed;
         public float dodgeTime;
-        
-
-
+ 
 
         Vector3 velocity;
         bool isGrounded;
@@ -43,13 +43,14 @@ namespace Visualization
 
         private void Awake()
         {
-            _playerManager = ServiceLocator.GetService<IPlayerManager>();
+            _playerManager = ServiceLocator.GetService<IPlayerManager>();          
         }
 
         void Start()
         {
             walkSpeed = 2f + 0.05f * _playerManager.GetMovement();
             sprintSpeed = 2f + 0.1f * _playerManager.GetMovement();
+                     
         }
     
         void Update()
@@ -89,9 +90,7 @@ namespace Visualization
                    
                 
             }
-
-          
-          
+           
 
             velocity.y += gravity * Time.deltaTime;
 
@@ -147,7 +146,6 @@ namespace Visualization
                 yield return null;
             }
         }
-
-    
+       
     }
 }

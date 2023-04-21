@@ -8,14 +8,15 @@ namespace Visualization
     {
         public IPlayerManager _playerManager;
         public float currentPresetCooldown;
-        public float maxPresetCooldown;
-
+        public float maxPresetCooldown;      
         private float defense;
+        
 
         private void Awake()
         {
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
-            currentPresetCooldown = 0;
+            currentPresetCooldown = 0;         
+            
         }
 
         private void Update()
@@ -62,7 +63,7 @@ namespace Visualization
             if (other.gameObject.tag == "EnemyProjectile")
             {
                 Debug.Log("Player got hit by enemy projectile");
-                TakeDamage(other.gameObject.GetComponent<Projectile>().damage);
+                TakeDamage(other.gameObject.GetComponent<Projectile>().damage);          
             }
         }
 

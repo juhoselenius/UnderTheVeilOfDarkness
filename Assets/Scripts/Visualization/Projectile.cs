@@ -139,6 +139,15 @@ namespace Visualization
 
                 Destroy(gameObject);
             }
+            if (gameObject.tag == "Bullet" && collision.gameObject.tag != "Bullet" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
+            {
+                collided = true;
+                
+                FindObjectOfType<AudioManager>().Play("OnHit");
+
+
+                Destroy(gameObject);
+            }
         }
     }
 }
