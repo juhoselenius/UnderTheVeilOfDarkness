@@ -2140,6 +2140,7 @@ GameObject:
   - component: {fileID: 7226147610599305274}
   - component: {fileID: 1740460856664480518}
   - component: {fileID: 3501967152824449711}
+  - component: {fileID: 7226147610599305275}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -2299,7 +2300,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 972376286}
+      - m_Target: {fileID: 7226147610599305275}
         m_TargetAssemblyTypeName: MenuControl, Assembly-CSharp
         m_MethodName: LoadMainMenu
         m_Mode: 1
@@ -2759,6 +2760,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 429744989807896728}
   m_CullTransparentMesh: 1
+--- !u!114 &7226147610599305275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429744989807896728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c38add561bea32d4493f605a62601c65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  presetInfoCanvas: {fileID: 0}
 --- !u!224 &7541082657771001204
 RectTransform:
   m_ObjectHideFlags: 0
