@@ -1,6 +1,7 @@
 using Logic.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 namespace Visualization
 {
@@ -14,7 +15,8 @@ namespace Visualization
         public float currentHearingCooldown;
         public float maxHearingCooldown;
         public GameObject xRayCamera;
-
+        public float knockBackForce;
+        private Vector3 direction;
         private float defense;
 
         private void Awake()
@@ -94,6 +96,9 @@ namespace Visualization
             {
                 Debug.Log("Player got hit by enemy projectile");
                 TakeDamage(other.gameObject.GetComponent<Projectile>().damage);
+                direction = (GameObject.FindGameObjectWithTag("Player").transform.position - other.gameObject.transform.position).normalized;
+                Debug.Log("Direction PC: " + direction);
+                StartCoroutine(knockBack());
             }
         }
 
@@ -105,6 +110,18 @@ namespace Visualization
             Cursor.visible = true;
             _playerManager.UpdateHealth(1000f);
             SceneManager.LoadScene("GameOver");
+        }
+
+        IEnumerator knockBack()
+        {
+            float knockBacktime = Time.time;
+            while (Time.time < knockBacktime + 0.2f)
+            {
+                GameObject.FindGameObjectWithTag("Player").transform.position += (direction * Time.deltaTime * knockBackForce);
+                Debug.Log("Pelaajan transform: " + direction);
+                yield return null;
+            }
+
         }
     }
 }

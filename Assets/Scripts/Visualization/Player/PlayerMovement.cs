@@ -18,7 +18,8 @@ namespace Visualization
         public float jumpSpeed;
         public float gravity;
         public float jumpHeight;
-
+        
+        public float knockBackForce;
         public KeyCode sprintKey = KeyCode.LeftShift;
 
         public Transform groundCheck;
@@ -133,6 +134,8 @@ namespace Visualization
             }
         }
 
+       
+
         IEnumerator Dodge()
         {
             float startTime = Time.time;
@@ -146,6 +149,5 @@ namespace Visualization
                 yield return null;
             }
         }
-       
     }
 }

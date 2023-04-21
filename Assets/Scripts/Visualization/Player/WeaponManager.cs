@@ -36,7 +36,7 @@ namespace Visualization
         public GameObject hand;
         public Transform handTransform;
         
-        public Vector3 dir;
+        
         
         [SerializeField] private float cooldownTimeOverload;
         [SerializeField] private float cooldownTimeShooting;
@@ -61,7 +61,7 @@ namespace Visualization
 
         private void Start()
         {
-            
+           
         }
 
         void Update()
@@ -145,7 +145,7 @@ namespace Visualization
                 {
                     destination = ray.GetPoint(100);
                    
-                }
+                }             
                 
                 InstantiateProjectile();
                 playSound();
