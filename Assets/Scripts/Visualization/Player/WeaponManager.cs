@@ -1,4 +1,5 @@
 using Logic.Player;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 // https://www.youtube.com/watch?v=T5y7L1siFSY
@@ -35,6 +36,7 @@ namespace Visualization
         public GameObject hand;
         public Transform handTransform;
         
+        public Vector3 dir;
         
         [SerializeField] private float cooldownTimeOverload;
         [SerializeField] private float cooldownTimeShooting;
@@ -43,7 +45,7 @@ namespace Visualization
         void Awake()
         {
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
-            fireRate = baseFireRate + _playerManager.GetAttack() * 0.05f;
+            fireRate = baseFireRate + _playerManager.GetAttack() * 0.2f;
             attack = _playerManager.GetAttack();
             projectile = projectiles[(int)attack];
 
@@ -53,7 +55,7 @@ namespace Visualization
             overLoadMin = 0f;
             overLoadMax = 100f;
             currentOverLoad = 0f;
-            cooldownTimeOverload = 3f;
+            cooldownTimeOverload = 5f;
             cooldownTimeShooting = 10f;
         }
 
@@ -119,6 +121,7 @@ namespace Visualization
             {
                 Ray ray = playerCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
                 RaycastHit hit;
+               
 
                 if (Physics.Raycast(ray, out hit))
                 {
@@ -127,17 +130,23 @@ namespace Visualization
                     if (distance > 2)
                     {
                         destination = hit.point;
+                       
+
                     }
                     else
                     {
                         destination = ray.GetPoint(10);
+                      
+
                     }
+                    
                 }
                 else
                 {
                     destination = ray.GetPoint(100);
+                   
                 }
-
+                
                 InstantiateProjectile();
                 playSound();
             }
@@ -167,20 +176,20 @@ namespace Visualization
             // Increasing overload bar and checking if it filled up
             if (projectile.tag == "Bullet")
             {
-                currentOverLoad += 20;
+                currentOverLoad += 15;
             }
             if (projectile.tag == "PlayerProjectile")
             {
-                currentOverLoad += 15;
+                currentOverLoad += 20;
             }
             if (projectile.tag == "FireBullet")
             {
-                currentOverLoad += 15;
+                currentOverLoad += 25;
             }
 
             if (projectile.tag == "IceBullet")
             {
-                currentOverLoad += 8;
+                currentOverLoad += 30;
             }
 
             if (currentOverLoad >= overLoadMax)
@@ -204,7 +213,7 @@ namespace Visualization
 
         void ChangeFireRate(float newValue)
         {
-            fireRate = baseFireRate + newValue * 0.05f;
+            fireRate = baseFireRate + newValue * 0.15f;
             chooseWeapon();
             projectile = projectiles[(int)_playerManager.GetAttack()];
         }

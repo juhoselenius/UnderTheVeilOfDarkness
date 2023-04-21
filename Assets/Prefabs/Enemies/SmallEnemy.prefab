@@ -274,8 +274,10 @@ MonoBehaviour:
   maxHealth: 100
   health: 0
   meleeDamage: 10
-  rb: {fileID: 0}
   cooldownTimer: 0
+  knockBackForce: 20
+  brake: 250
+  direction: {x: 0, y: 0, z: 0}
   cooldown: 5
 --- !u!135 &5123345015890038204
 SphereCollider:

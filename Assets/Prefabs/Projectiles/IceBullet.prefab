@@ -132,7 +132,7 @@ MonoBehaviour:
   explosionFX: {fileID: 443653445314069269, guid: 7e3e8e2f6ecdbb04a982af0a14f2d887, type: 3}
   trailFX: {fileID: 7624496878921423553, guid: 7ba892263bec55a45b3073eb74e7dc9a, type: 3}
   damage: 0
-  baseDamage: 20
+  baseDamage: 25
   projectileSpeed: 0
   projectileBaseSpeed: 50
   beam: {fileID: 0}

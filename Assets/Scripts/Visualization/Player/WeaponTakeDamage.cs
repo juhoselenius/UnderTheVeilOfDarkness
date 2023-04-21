@@ -28,16 +28,18 @@ namespace Visualization
                 Die();
             }
         }
+ 
 
         private void OnCollisionEnter(Collision collision)
         {
             // Player takes damage from enemy projectiles
             if (collision.gameObject.tag == "EnemyProjectile")
             {
-                Debug.Log("Player got hit by enemy projectile");
-                TakeDamage(collision.gameObject.GetComponent<Projectile>().damage);
+                Debug.Log("Player got hit by enemy projectile");               
+                TakeDamage(collision.gameObject.GetComponent<Projectile>().damage);           
             }
         }
+
 
         private void Die()
         {
