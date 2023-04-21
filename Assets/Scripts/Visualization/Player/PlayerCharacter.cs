@@ -7,8 +7,13 @@ namespace Visualization
     public class PlayerCharacter : MonoBehaviour
     {
         public IPlayerManager _playerManager;
+        
         public float currentPresetCooldown;
         public float maxPresetCooldown;
+
+        public float currentHearingCooldown;
+        public float maxHearingCooldown;
+        public GameObject xRayCamera;
 
         private float defense;
 
@@ -16,6 +21,7 @@ namespace Visualization
         {
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
             currentPresetCooldown = 0;
+            currentHearingCooldown = 0;
         }
 
         private void Update()
@@ -41,6 +47,31 @@ namespace Visualization
                 {
                     _playerManager.ChangePreset(2);
                     currentPresetCooldown = maxPresetCooldown;
+                }
+            }
+
+            // Activating X-Ray camera with "R"
+            if (currentHearingCooldown > 0)
+            {
+                currentHearingCooldown -= Time.deltaTime;
+            }
+            else
+            {
+                currentHearingCooldown = 0;
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    if(_playerManager.GetHearing() >= 3f)
+                    {
+                        if(xRayCamera.activeInHierarchy)
+                        {
+                            xRayCamera.SetActive(false);
+                        }
+                        else
+                        {
+                            xRayCamera.SetActive(true);
+                        }
+                        currentHearingCooldown = maxHearingCooldown;
+                    }
                 }
             }
         }

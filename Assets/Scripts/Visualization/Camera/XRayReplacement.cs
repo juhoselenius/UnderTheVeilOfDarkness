@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Logic.Player;
 
 [ExecuteInEditMode]
 public class XRayReplacement : MonoBehaviour
 {
+    public IPlayerManager _playerManager;
+
     public Shader XRayShader;
-    public float transitionTime = 3f;
+    public float transitionTime;
     public float startNearClip;
     public float endNearClip;
     public float startFarClip;
@@ -14,14 +17,29 @@ public class XRayReplacement : MonoBehaviour
 
     private Camera cam;
 
-    private void Start()
+    private void Awake()
     {
+        _playerManager = ServiceLocator.GetService<IPlayerManager>();
+
         cam = GetComponent<Camera>();
+        if(gameObject.activeInHierarchy)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     private void OnEnable()
     {
-        StartCoroutine(ChangeClippingPlanes());
+        if(_playerManager.GetHearing() == 3f)
+        {
+            StartCoroutine(ChangeClippingPlanes());
+        }
+
+        if(_playerManager.GetHearing() == 4)
+        {
+            cam.nearClipPlane = 0.5f;
+            cam.farClipPlane = 100f;
+        }
         cam.SetReplacementShader(XRayShader, "XRay");
     }
 
@@ -51,5 +69,6 @@ public class XRayReplacement : MonoBehaviour
 
         cam.nearClipPlane = endNearClip;
         cam.farClipPlane = endFarClip;
+        gameObject.SetActive(false);
     }
 }
