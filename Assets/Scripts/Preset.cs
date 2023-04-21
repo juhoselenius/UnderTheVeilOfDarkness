@@ -8,11 +8,11 @@ public class Preset
     
     public Preset()
     {
-        sightAttribute = 20f;
-        hearingAttribute = 20f;
-        movementAttribute = 20f;
-        attackAttribute = 20f;
-        defenseAttribute = 20f;
+        sightAttribute = 2f;
+        hearingAttribute = 2f;
+        movementAttribute = 2f;
+        attackAttribute = 2f;
+        defenseAttribute = 2f;
     }
 }
 

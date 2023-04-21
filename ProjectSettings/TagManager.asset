@@ -14,6 +14,10 @@ TagManager:
   - EnemyProjectile
   - TurretMissile
   - EnemyBody
+  - IceBullet
+  - Shield
+  - FireBullet
+  - Rock
   layers:
   - Default
   - TransparentFX
@@ -26,7 +30,7 @@ TagManager:
   - Enemy
   - EnemyProjectile
   - Player
-  - 
+  - Shield
   - 
   - 
   - 

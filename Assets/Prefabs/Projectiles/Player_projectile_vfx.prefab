@@ -4949,8 +4949,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impactVFX: {fileID: 4138439576473081691, guid: 1c519b9218a6cfc47b9439563d299e70, type: 3}
+  explosionFX: {fileID: 0}
+  trailFX: {fileID: 0}
   damage: 0
-  baseDamage: 5
+  baseDamage: 15
   projectileSpeed: 0
   projectileBaseSpeed: 40
   beam: {fileID: 7109737904006169265}
@@ -4963,10 +4965,10 @@ AudioSource:
   m_GameObject: {fileID: 3235484826052913327}
   m_Enabled: 0
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -2599787926251656520, guid: 7f7d1d8a214fa4e429ef3428676ecec5, type: 2}
   m_audioClip: {fileID: 8300000, guid: 5ff5bd936a30a904da907f35c8dd382e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.874
   m_Pitch: 1
   Loop: 0
   Mute: 0

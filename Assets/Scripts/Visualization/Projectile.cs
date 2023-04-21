@@ -9,7 +9,8 @@ namespace Visualization
     public class Projectile : MonoBehaviour
     {
         public GameObject impactVFX;
-
+        public GameObject explosionFX;
+        public GameObject trailFX;
         public float damage;
         public float baseDamage;
 
@@ -30,10 +31,26 @@ namespace Visualization
 
             if (gameObject.tag == "PlayerProjectile")
             {
-                damage = baseDamage + _playerManager.GetAttack() * 0.1f;
-                projectileSpeed = projectileBaseSpeed - _playerManager.GetAttack() * 0.35f;
+                //damage = baseDamage + _playerManager.GetAttack() * 0.1f;
+                //projectileSpeed = projectileBaseSpeed - _playerManager.GetAttack() * 0.35f;
+                damage = baseDamage;
+                projectileSpeed = projectileBaseSpeed;
             }
-            else
+            else if(gameObject.tag == "IceBullet")
+            {
+                //damage = baseDamage + _playerManager.GetAttack() * 0.2f;
+                //projectileSpeed = projectileBaseSpeed - _playerManager.GetAttack() * 0.45f;
+                damage = baseDamage;
+                projectileSpeed = projectileBaseSpeed;
+                //Instantiate(trailFX, transform.position, Quaternion.identity);
+            }
+            else if(gameObject.tag == "FireBullet")
+            {
+                damage = baseDamage;
+                projectileSpeed = projectileBaseSpeed;
+                //Instantiate(trailFX, transform.position, Quaternion.identity);
+            }
+            else 
             {
                 damage = baseDamage;
                 projectileSpeed = projectileBaseSpeed;
@@ -47,12 +64,19 @@ namespace Visualization
 
         private void Start()
         {
-            if(gameObject.tag == "PlayerProjectile")
+
+            // Increasing size of the projectile collider and the particle system
+            /*if (gameObject.tag == "PlayerProjectile")
             {
                 projectileCollider.radius = 0.01f + _playerManager.GetAttack() * 0.0079f;
                 ParticleSystem.MainModule main = beam.main;
                 main.startSize = 0.1f + _playerManager.GetAttack() * 0.049f;
             }
+            else if(gameObject.tag == "IceBullet")
+            {
+                projectileCollider.radius = 0.01f + _playerManager.GetAttack() * 0.0079f;
+                Instantiate(trailFX, transform.position, Quaternion.identity);
+            }*/
         }
 
         private void Update()
@@ -73,7 +97,7 @@ namespace Visualization
                 collided = true;
 
                 GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
-                FindObjectOfType<AudioManager>().Play("OnHit");
+               
                 Destroy(impact, 2f);
 
                 Destroy(gameObject);
@@ -85,8 +109,42 @@ namespace Visualization
                 collided = true;
 
                 GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
-                FindObjectOfType<AudioManager>().Play("OnHit");
+
+                Debug.Log("EnemyProjectile collided with " + collision.gameObject.tag);
+               
                 Destroy(impact, 2f);
+
+                Destroy(gameObject);
+            }
+
+            if (gameObject.tag == "IceBullet" && collision.gameObject.tag != "IceBullet" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
+            {
+                collided = true;
+                GameObject impact = Instantiate(explosionFX, collision.contacts[0].point, Quaternion.identity);
+                
+
+                FindObjectOfType<AudioManager>().Play("OnHit");
+
+
+                Destroy(gameObject);
+            }
+            if (gameObject.tag == "FireBullet" && collision.gameObject.tag != "FireBullet" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
+            {
+                collided = true;
+                GameObject impact = Instantiate(explosionFX, collision.contacts[0].point, Quaternion.identity);
+
+
+                FindObjectOfType<AudioManager>().Play("OnHit");
+
+
+                Destroy(gameObject);
+            }
+            if (gameObject.tag == "Bullet" && collision.gameObject.tag != "Bullet" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
+            {
+                collided = true;
+                
+                FindObjectOfType<AudioManager>().Play("OnHit");
+
 
                 Destroy(gameObject);
             }

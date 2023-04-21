@@ -28,7 +28,7 @@ namespace Visualization
 
         private void ChangeSight(float newValue)
         {
-            playerLight.range = 0.5f * newValue;
+            RenderSettings.fogEndDistance = (5f * newValue) + 5f;
         }
     }
 }

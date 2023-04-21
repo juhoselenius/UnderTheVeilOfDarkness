@@ -1,6 +1,7 @@
 using Logic.Player;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Visualization
 {
@@ -9,11 +10,19 @@ namespace Visualization
         [SerializeField] private TextMeshProUGUI currentPresetText;
 
         private IPlayerManager _playerManager;
+        public Image filler;
+        private PlayerCharacter pCharacter;
 
         void Awake()
         {
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
             currentPresetText = GetComponent<TextMeshProUGUI>();
+            pCharacter = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>();
+        }
+
+        private void Update()
+        {
+            filler.fillAmount = pCharacter.currentPresetCooldown / pCharacter.maxPresetCooldown;
         }
 
         private void OnEnable()

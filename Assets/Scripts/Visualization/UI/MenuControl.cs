@@ -29,6 +29,16 @@ public class MenuControl : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void LoadHowToPlay()
+    {
+        SceneManager.LoadScene("HowToPlay");
+    }
+
+    public void LoadPresetManagement()
+    {
+        SceneManager.LoadScene("PresetManagement");
+    }
+
     public void LoadIntroLevel()
     {
         SceneManager.LoadScene("Level1");
@@ -36,12 +46,19 @@ public class MenuControl : MonoBehaviour
 
     public void LoadLevel2()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         SceneManager.LoadScene("Level2");
     }
 
     public void QuitApplication()
     {
         Application.Quit();
+    }
+
+    public void Retry()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     // Functions for the Preset Management scene
