@@ -5,12 +5,14 @@ using UnityEngine;
 public class MeleeRangeDetection : MonoBehaviour
 {
     public SkeletonEnemy skelly;
+    public SmallSkeletonController smallSkelly;
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
             skelly.playerInAttackRange = true;
+            smallSkelly.playerInAttackRange = true;
         }
     }
 
