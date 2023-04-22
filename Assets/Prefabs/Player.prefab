@@ -1825,7 +1825,7 @@ MonoBehaviour:
   jumpSpeed: 2
   gravity: -18
   jumpHeight: 1.2
-  knockBackForce: 0
+  knockBackForce: 2
   sprintKey: 304
   groundCheck: {fileID: 5086483059998552435}
   groundDistance: 0.2
