@@ -59,16 +59,24 @@ namespace Visualization
 
         private void OnEnable()
         {
-            _playerManager.PresetChanged += UpdateShield;
-            UpdateShield(_playerManager.GetCurrentPreset());
+            _playerManager.PresetChanged += UpdateShieldFromPreset;
+            _playerManager.DefenseChanged += UpdateShieldFromDefense;
+            UpdateShieldFromPreset(_playerManager.GetCurrentPreset());
+            UpdateShieldFromDefense(_playerManager.GetDefense());
         }
 
         private void OnDisable()
         {
-            _playerManager.PresetChanged -= UpdateShield;
+            _playerManager.PresetChanged -= UpdateShieldFromPreset;
+            _playerManager.DefenseChanged -= UpdateShieldFromDefense;
         }
 
-        void UpdateShield(int currentPreset)
+        void UpdateShieldFromPreset(int currentPreset)
+        {
+            shieldIcon.sprite = shieldSprite[(int)_playerManager.GetDefense()];
+        }
+
+        void UpdateShieldFromDefense(float currentDefense)
         {
             shieldIcon.sprite = shieldSprite[(int)_playerManager.GetDefense()];
         }
