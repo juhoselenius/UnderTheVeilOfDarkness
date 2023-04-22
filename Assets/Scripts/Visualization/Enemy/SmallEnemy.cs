@@ -1,3 +1,4 @@
+using Logic.Player;
 using UnityEngine;
 using UnityEngine.AI;
 using Visualization;
@@ -5,7 +6,6 @@ using Visualization;
 public class SmallEnemy : MonoBehaviour
 {
     private NavMeshAgent enemyNavMeshAgent;
-    private Animator animator;
     private SphereCollider sphereCollider;
     private int nextWaypoint;
     private float waitTimer;
@@ -31,11 +31,18 @@ public class SmallEnemy : MonoBehaviour
     public float arcRange;
     public AudioSource audioSource;
     public AudioClip clip;
+    public GameObject soundTextShoot;
+    public GameObject soundTextMove;
+    public float soundTextOffset;
+    public float soundTime;
+    private float soundTimer;
+
+    private IPlayerManager _playerManager;
 
     private void Awake()
     {
+        _playerManager = ServiceLocator.GetService<IPlayerManager>();
         enemyNavMeshAgent = GetComponent<NavMeshAgent>();
-        //animator = GetComponent<Animator>();
         sphereCollider = GetComponent<SphereCollider>();
         sphereCollider.radius = sightRange;
     }
@@ -74,6 +81,21 @@ public class SmallEnemy : MonoBehaviour
         else
         {
             Patrol();
+        }
+
+        if (_playerManager.GetHearing() == 2f)
+        {
+            soundTimer += Time.deltaTime;
+            if(soundTimer > soundTime)
+            {
+                soundTimer = 0;
+                soundTextMove.GetComponent<SoundToText>().textSound = "Wob";
+                Instantiate(soundTextMove, gameObject.transform.position, Quaternion.identity);
+            }
+        }
+        else
+        {
+            soundTimer = 0;
         }
     }
 
@@ -125,7 +147,13 @@ public class SmallEnemy : MonoBehaviour
 
     public void playSound()
     {
-
         audioSource.PlayOneShot(clip);
+
+        if (_playerManager.GetHearing() == 2f)
+        {
+            soundTextShoot.GetComponent<SoundToText>().textSound = "Pew";
+            Vector3 newTextPosition = new Vector3(transform.position.x, transform.position.y + soundTextOffset, transform.position.z);
+            Instantiate(soundTextShoot, newTextPosition, Quaternion.identity);
+        }
     }
 }

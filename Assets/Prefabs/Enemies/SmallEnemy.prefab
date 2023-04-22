@@ -258,6 +258,10 @@ MonoBehaviour:
   arcRange: 0.1
   audioSource: {fileID: -7949735867838877915}
   clip: {fileID: 8300000, guid: e70eb034c8ae4fe42b00d809716998e4, type: 3}
+  soundTextShoot: {fileID: 6995708917316292458, guid: 29f213387011784499a837b64b1e7df5, type: 3}
+  soundTextMove: {fileID: 6995708917316292458, guid: 29f213387011784499a837b64b1e7df5, type: 3}
+  soundTextOffset: 0.5
+  soundTime: 1.5
 --- !u!114 &5123345015890038205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,6 +281,7 @@ MonoBehaviour:
   cooldownTimer: 0
   knockBackForce: 4
   brake: 250
+  enemyBaseSpeed: 0
   direction: {x: 0, y: 0, z: 0}
   cooldown: 5
 --- !u!135 &5123345015890038204
@@ -773,7 +778,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f9e47cfdac5c75a4c91e73387bb68a01, type: 2}
+  - {fileID: 2100000, guid: 437f83f69218325479633e0376ae5b09, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

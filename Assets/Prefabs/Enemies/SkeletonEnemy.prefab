@@ -337,7 +337,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: ae0fa1a0bb2425e4d925a414e542e28c, type: 3}
+  - {fileID: 2100000, guid: 0459d273db1327d4b97ba7683842919b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -716,8 +716,11 @@ MonoBehaviour:
   maxHealth: 200
   health: 200
   meleeDamage: 20
-  rb: {fileID: 0}
   cooldownTimer: 0
+  knockBackForce: 0
+  brake: 0
+  enemyBaseSpeed: 0
+  direction: {x: 0, y: 0, z: 0}
   cooldown: 5
 --- !u!136 &4411053162758453184
 CapsuleCollider:
@@ -752,6 +755,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3bf9975566f9cd847977ed3ebb6fd3e3, type: 3}
   audioSource: {fileID: 3220756071152559570}
   pos: 0
+  soundText: {fileID: 0}
 --- !u!82 &3220756071152559570
 AudioSource:
   m_ObjectHideFlags: 0
