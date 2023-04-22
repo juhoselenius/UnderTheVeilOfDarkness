@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Logic.Player;
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class XRayReplacement : MonoBehaviour
 {
     public IPlayerManager _playerManager;

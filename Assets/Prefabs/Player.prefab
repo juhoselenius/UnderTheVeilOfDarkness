@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3561213779476529181
 Transform:
   m_ObjectHideFlags: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   XRayShader: {fileID: 4800000, guid: fbf7cc3a671f6264fa417b5d451e523f, type: 3}
   transitionTime: 5
   startNearClip: 0.5
-  endNearClip: 100
+  endNearClip: 99
   startFarClip: 1
   endFarClip: 100
 --- !u!1 &327956258933882442
