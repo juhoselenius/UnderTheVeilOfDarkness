@@ -31,12 +31,10 @@ namespace Visualization
         public bool overLoaded;
         public GameObject[] projectiles;
         private float attack;
-        public GameObject weapon1;
+        public GameObject primaryWeapon;
         public GameObject weapon2;
         public GameObject hand;
         public Transform handTransform;
-        
-        
         
         [SerializeField] private float cooldownTimeOverload;
         [SerializeField] private float cooldownTimeShooting;
@@ -208,7 +206,6 @@ namespace Visualization
         private void OnDisable()
         {
             _playerManager.AttackChanged -= ChangeFireRate;
-            
         }
 
         void ChangeFireRate(float newValue)
@@ -230,24 +227,13 @@ namespace Visualization
             if (attack == 0)
             {
                 hand.SetActive(true);
-                weapon1.SetActive(false);
-                weapon2.SetActive(false);
-                
+                primaryWeapon.SetActive(false);
             }
-            else if (attack == 1 || attack == 2)
+            else
             {
-                weapon1.SetActive(true);
-                weapon2.SetActive(false);
+                primaryWeapon.SetActive(true);
                 hand.SetActive(false);
                 
-            }
-            else if (attack == 3 || attack == 4)
-            {
-                weapon2.SetActive(true);
-                hand.SetActive(false);
-                weapon1.SetActive(false);
-                
-
             }
         }     
     }
