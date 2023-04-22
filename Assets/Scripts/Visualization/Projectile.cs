@@ -142,7 +142,11 @@ namespace Visualization
             if (gameObject.tag == "Bullet" && collision.gameObject.tag != "Bullet" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
             {
                 collided = true;
-                
+                GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
+
+                Debug.Log("EnemyProjectile collided with " + collision.gameObject.tag);
+
+                Destroy(impact, 2f);
                 FindObjectOfType<AudioManager>().Play("OnHit");
 
 
