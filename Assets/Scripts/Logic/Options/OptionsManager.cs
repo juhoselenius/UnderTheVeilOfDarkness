@@ -66,5 +66,16 @@ namespace Logic.Options
             _optionsState.sfxVolume = value;
             sfxVolumeChanged?.Invoke(_optionsState.sfxVolume);
         }
+
+        public void SaveState()
+        {
+            JsonUtility.ToJson(_optionsState);
+        }
+
+        public void LoadState()
+        {
+            var stateFromFile = "";
+            _optionsState = JsonUtility.FromJson<Data.Options>(stateFromFile);
+        }
     }
 }
