@@ -497,6 +497,11 @@ MonoBehaviour:
     allEnemiesCleared: 0
     objectivesCollected: 0
     level2Cleared: 0
+  initialOptionsState:
+    mouseSensitivity: 300
+    reverseMouse: 0
+    musicVolume: 50
+    sfxVolume: 50
 --- !u!4 &443905854
 Transform:
   m_ObjectHideFlags: 0
