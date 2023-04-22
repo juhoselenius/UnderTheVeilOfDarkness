@@ -7,9 +7,6 @@ namespace Visualization
     public class OverloadUI : MonoBehaviour
     {
         public WeaponManager wManager;
-        public WeaponManager wManager1;
-        public WeaponManager wManager2;
-        public WeaponManager[] wManagers;
         public Image filler;
         public Sprite overloadedFiller;
         public Sprite notOverloadedFiller;
@@ -26,28 +23,12 @@ namespace Visualization
         }
         void Start()
         {
-            if(_playerManager.GetAttack() >= 1 && _playerManager.GetAttack() <= 2)
-            {
-                wManager = wManager1;
-            }
-            else if(_playerManager.GetAttack() >= 3 && _playerManager.GetAttack() <= 4)
-            {
-                wManager = wManager2;
-            }
             maxOverload = wManager.overLoadMax;
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (_playerManager.GetAttack() >= 1 && _playerManager.GetAttack() <= 2)
-            {
-                wManager = wManager1;
-            }
-            else if (_playerManager.GetAttack() >= 3 && _playerManager.GetAttack() <= 4)
-            {
-                wManager = wManager2;
-            }
             if (wManager.overLoaded)
             {
                 filler.sprite = overloadedFiller;

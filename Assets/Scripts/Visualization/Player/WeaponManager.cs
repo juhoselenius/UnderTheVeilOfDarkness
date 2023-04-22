@@ -20,9 +20,8 @@ namespace Visualization
         public GameObject firedProjectile;
         public AudioSource audioSource;
         public AudioClip clip;
-        public GameObject muzzle;
+        //public GameObject muzzle;
         
-
         // Overloading variables
         public float overLoadMax;
         private float overLoadMin;
@@ -30,11 +29,8 @@ namespace Visualization
         public bool overLoaded;
         public GameObject[] projectiles;
         private float attack;
-        public GameObject weapon1;
-        public GameObject weapon2;
+        public GameObject primaryWeapon;
         public GameObject hand;
-        public Transform handTransform;
-        
         
         [SerializeField] private float cooldownTimeOverload;
         [SerializeField] private float cooldownTimeShooting;
@@ -43,7 +39,7 @@ namespace Visualization
         void Awake()
         {
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
-            fireRate = baseFireRate + _playerManager.GetAttack() * 0.05f;
+            fireRate = baseFireRate + _playerManager.GetAttack() * 0.2f; // The fire rate factor
             attack = _playerManager.GetAttack();
             projectile = projectiles[(int)attack];
 
@@ -53,13 +49,8 @@ namespace Visualization
             overLoadMin = 0f;
             overLoadMax = 100f;
             currentOverLoad = 0f;
-            cooldownTimeOverload = 3f;
+            cooldownTimeOverload = 5f;
             cooldownTimeShooting = 10f;
-        }
-
-        private void Start()
-        {
-            
         }
 
         void Update()
@@ -136,8 +127,8 @@ namespace Visualization
                 else
                 {
                     destination = ray.GetPoint(100);
-                }
-
+                }             
+                
                 InstantiateProjectile();
                 playSound();
             }
@@ -147,40 +138,26 @@ namespace Visualization
         {
             if(projectile.tag == "Rock")
             {
-                firedProjectile = Instantiate(projectile, handTransform.position, Quaternion.identity);
+                firedProjectile = Instantiate(projectile, hand.transform.position, Quaternion.identity);
             }
             else
             {
                 firedProjectile = Instantiate(projectile, projectileSpawn.position, Quaternion.identity);
             }
-                    
             
-            if(projectile.tag == "PlayerProjectile" || projectile.tag =="Bullet")
+            /*if(projectile.tag == "PlayerProjectile" || projectile.tag =="Bullet")
             {
                 Instantiate(muzzle, projectileSpawn.position, projectileSpawn.rotation, projectileSpawn.transform);
-            }
+            }*/
+
             float projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
             firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawn.position).normalized * projectileSpeed;
 
-            iTween.PunchPosition(firedProjectile, new Vector3(Random.Range(-arcRange, arcRange), Random.Range(-arcRange, arcRange), 0), Random.Range(0.5f, 2f));
-
             // Increasing overload bar and checking if it filled up
-            if (projectile.tag == "Bullet")
+            if(_playerManager.GetAttack() > 0)
             {
-                currentOverLoad += 20;
-            }
-            if (projectile.tag == "PlayerProjectile")
-            {
-                currentOverLoad += 15;
-            }
-            if (projectile.tag == "FireBullet")
-            {
-                currentOverLoad += 15;
-            }
-
-            if (projectile.tag == "IceBullet")
-            {
-                currentOverLoad += 8;
+                iTween.PunchPosition(firedProjectile, new Vector3(Random.Range(-arcRange, arcRange), Random.Range(-arcRange, arcRange), 0), Random.Range(0.5f, 2f));
+                currentOverLoad += 10 + _playerManager.GetAttack() * 5f;
             }
 
             if (currentOverLoad >= overLoadMax)
@@ -188,6 +165,25 @@ namespace Visualization
                 currentOverLoad = overLoadMax;
                 overLoaded = true;
             }
+
+
+            /*if (projectile.tag == "Bullet")
+            {
+                currentOverLoad += 15;
+            }
+            if (projectile.tag == "PlayerProjectile")
+            {
+                currentOverLoad += 20;
+            }
+            if (projectile.tag == "FireBullet")
+            {
+                currentOverLoad += 25;
+            }
+
+            if (projectile.tag == "IceBullet")
+            {
+                currentOverLoad += 30;
+            }*/
         }
 
         private void OnEnable()
@@ -199,12 +195,11 @@ namespace Visualization
         private void OnDisable()
         {
             _playerManager.AttackChanged -= ChangeFireRate;
-            
         }
 
         void ChangeFireRate(float newValue)
         {
-            fireRate = baseFireRate + newValue * 0.05f;
+            fireRate = baseFireRate + newValue * 0.15f;
             chooseWeapon();
             projectile = projectiles[(int)_playerManager.GetAttack()];
         }
@@ -221,24 +216,13 @@ namespace Visualization
             if (attack == 0)
             {
                 hand.SetActive(true);
-                weapon1.SetActive(false);
-                weapon2.SetActive(false);
-                
+                primaryWeapon.SetActive(false);
             }
-            else if (attack == 1 || attack == 2)
+            else
             {
-                weapon1.SetActive(true);
-                weapon2.SetActive(false);
+                primaryWeapon.SetActive(true);
                 hand.SetActive(false);
                 
-            }
-            else if (attack == 3 || attack == 4)
-            {
-                weapon2.SetActive(true);
-                hand.SetActive(false);
-                weapon1.SetActive(false);
-                
-
             }
         }     
     }

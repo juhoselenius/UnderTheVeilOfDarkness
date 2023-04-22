@@ -12,7 +12,7 @@ namespace Visualization
         public float totalAttributeValue;
 
         public GameObject presetMenu;
-    
+       
         public Slider sightSlider;
         public Slider hearingSlider;
         public Slider movementSlider;
@@ -133,6 +133,6 @@ namespace Visualization
             movementValueText.text = _playerManager.GetMovement().ToString();
             attackValueText.text = _playerManager.GetAttack().ToString();
             defenseValueText.text = _playerManager.GetDefense().ToString();
-        }
+        }       
     }
 }
