@@ -1,3 +1,4 @@
+using Logic.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,8 +18,15 @@ namespace Visualization
         public float positionHeight;
         public AudioSource audioSource;
         public AudioClip clip;
+        public GameObject soundText;
 
-        // Start is called before the first frame update
+        private IPlayerManager _playerManager;
+
+        private void Awake()
+        {
+            _playerManager = ServiceLocator.GetService<IPlayerManager>();
+        }
+
         void Start()
         {
             Vector3 groundPosition = ground.transform.position;
@@ -27,7 +35,6 @@ namespace Visualization
             fireRateTimer = fireRate - 0.01f;
         }
 
-        // Update is called once per frame
         void Update()
         {
         
@@ -61,8 +68,13 @@ namespace Visualization
         }
         public void playSound()
         {
-
             audioSource.PlayOneShot(clip);
+
+            if (_playerManager.GetHearing() == 2f)
+            {
+                soundText.GetComponent<SoundToText>().textSound = "Pew";
+                Instantiate(soundText, body.transform.position, Quaternion.identity);
+            }
         }
     }
 }

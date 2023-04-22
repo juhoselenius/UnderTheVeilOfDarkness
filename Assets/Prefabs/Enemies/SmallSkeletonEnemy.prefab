@@ -401,7 +401,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: ae0fa1a0bb2425e4d925a414e542e28c, type: 3}
+  - {fileID: 2100000, guid: 0459d273db1327d4b97ba7683842919b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -716,6 +716,7 @@ MonoBehaviour:
   meleeDamage: 20
   meleeRate: 1
   player: {fileID: 1188691806512712266, guid: c28c15efb53a11245b6dd9afac218c46, type: 3}
+  trapSet: 0
 --- !u!135 &4223351811982175128
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -745,8 +746,11 @@ MonoBehaviour:
   maxHealth: 200
   health: 200
   meleeDamage: 20
-  rb: {fileID: 0}
   cooldownTimer: 0
+  knockBackForce: 0
+  brake: 0
+  enemyBaseSpeed: 0
+  direction: {x: 0, y: 0, z: 0}
   cooldown: 5
 --- !u!114 &5134084170338489347
 MonoBehaviour:

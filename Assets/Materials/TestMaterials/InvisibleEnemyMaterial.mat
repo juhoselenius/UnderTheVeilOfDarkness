@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: InvisibleEnemyMaterial
-  m_Shader: {fileID: 4800000, guid: 17203846acec58a40a07690f6a6629a4, type: 3}
+  m_Shader: {fileID: 4800000, guid: bc06ec7cf1a6f8d48b2cc348b85cb319, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _ALPHAPREMULTIPLY_ON
@@ -59,6 +59,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Alpha: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -73,6 +74,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Transparency: 0
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:
