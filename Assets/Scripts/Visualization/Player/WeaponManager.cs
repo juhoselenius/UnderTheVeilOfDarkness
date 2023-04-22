@@ -1,5 +1,4 @@
 using Logic.Player;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 // https://www.youtube.com/watch?v=T5y7L1siFSY
@@ -21,9 +20,8 @@ namespace Visualization
         public GameObject firedProjectile;
         public AudioSource audioSource;
         public AudioClip clip;
-        public GameObject muzzle;
+        //public GameObject muzzle;
         
-
         // Overloading variables
         public float overLoadMax;
         private float overLoadMin;
@@ -32,9 +30,7 @@ namespace Visualization
         public GameObject[] projectiles;
         private float attack;
         public GameObject primaryWeapon;
-        public GameObject weapon2;
         public GameObject hand;
-        public Transform handTransform;
         
         [SerializeField] private float cooldownTimeOverload;
         [SerializeField] private float cooldownTimeShooting;
@@ -43,7 +39,7 @@ namespace Visualization
         void Awake()
         {
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
-            fireRate = baseFireRate + _playerManager.GetAttack() * 0.2f;
+            fireRate = baseFireRate + _playerManager.GetAttack() * 0.2f; // The fire rate factor
             attack = _playerManager.GetAttack();
             projectile = projectiles[(int)attack];
 
@@ -55,11 +51,6 @@ namespace Visualization
             currentOverLoad = 0f;
             cooldownTimeOverload = 5f;
             cooldownTimeShooting = 10f;
-        }
-
-        private void Start()
-        {
-           
         }
 
         void Update()
@@ -119,7 +110,6 @@ namespace Visualization
             {
                 Ray ray = playerCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
                 RaycastHit hit;
-               
 
                 if (Physics.Raycast(ray, out hit))
                 {
@@ -128,21 +118,15 @@ namespace Visualization
                     if (distance > 2)
                     {
                         destination = hit.point;
-                       
-
                     }
                     else
                     {
                         destination = ray.GetPoint(10);
-                      
-
                     }
-                    
                 }
                 else
                 {
                     destination = ray.GetPoint(100);
-                   
                 }             
                 
                 InstantiateProjectile();
@@ -154,25 +138,36 @@ namespace Visualization
         {
             if(projectile.tag == "Rock")
             {
-                firedProjectile = Instantiate(projectile, handTransform.position, Quaternion.identity);
+                firedProjectile = Instantiate(projectile, hand.transform.position, Quaternion.identity);
             }
             else
             {
                 firedProjectile = Instantiate(projectile, projectileSpawn.position, Quaternion.identity);
             }
-                    
             
-            if(projectile.tag == "PlayerProjectile" || projectile.tag =="Bullet")
+            /*if(projectile.tag == "PlayerProjectile" || projectile.tag =="Bullet")
             {
                 Instantiate(muzzle, projectileSpawn.position, projectileSpawn.rotation, projectileSpawn.transform);
-            }
+            }*/
+
             float projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
             firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawn.position).normalized * projectileSpeed;
 
-            iTween.PunchPosition(firedProjectile, new Vector3(Random.Range(-arcRange, arcRange), Random.Range(-arcRange, arcRange), 0), Random.Range(0.5f, 2f));
-
             // Increasing overload bar and checking if it filled up
-            if (projectile.tag == "Bullet")
+            if(_playerManager.GetAttack() > 0)
+            {
+                iTween.PunchPosition(firedProjectile, new Vector3(Random.Range(-arcRange, arcRange), Random.Range(-arcRange, arcRange), 0), Random.Range(0.5f, 2f));
+                currentOverLoad += 10 + _playerManager.GetAttack() * 5f;
+            }
+
+            if (currentOverLoad >= overLoadMax)
+            {
+                currentOverLoad = overLoadMax;
+                overLoaded = true;
+            }
+
+
+            /*if (projectile.tag == "Bullet")
             {
                 currentOverLoad += 15;
             }
@@ -188,13 +183,7 @@ namespace Visualization
             if (projectile.tag == "IceBullet")
             {
                 currentOverLoad += 30;
-            }
-
-            if (currentOverLoad >= overLoadMax)
-            {
-                currentOverLoad = overLoadMax;
-                overLoaded = true;
-            }
+            }*/
         }
 
         private void OnEnable()

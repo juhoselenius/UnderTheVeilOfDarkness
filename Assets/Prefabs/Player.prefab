@@ -566,6 +566,37 @@ MonoBehaviour:
   - {fileID: 3580637635003737539, guid: 7d3910ba14875c844afa9e04f6413714, type: 3}
   - {fileID: 8973129075113111314, guid: 81f6a09cbd6df624dae44ab867387947, type: 3}
   - {fileID: 5267800074483019297, guid: bc07a1a9bac7e1f47b19fc7be3328a74, type: 3}
+--- !u!1 &2325243883488057568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5215479021106703037}
+  m_Layer: 10
+  m_Name: HandPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5215479021106703037
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2325243883488057568}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.27, y: 0, z: 2.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4920631385023035388}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2433931574674762652
 GameObject:
   m_ObjectHideFlags: 0
@@ -1212,6 +1243,7 @@ Transform:
   m_Children:
   - {fileID: 4920631385675242137}
   - {fileID: 1128023947397045417}
+  - {fileID: 5215479021106703037}
   m_Father: {fileID: 5086483059215192338}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
@@ -1250,7 +1282,6 @@ MonoBehaviour:
   firedProjectile: {fileID: 0}
   audioSource: {fileID: 2288191313208121289}
   clip: {fileID: 8300000, guid: 5ff5bd936a30a904da907f35c8dd382e, type: 3}
-  muzzle: {fileID: 0}
   overLoadMax: 0
   currentOverLoad: 0
   overLoaded: 0
@@ -1260,10 +1291,8 @@ MonoBehaviour:
   - {fileID: 3235484826052913327, guid: 023b9ccbd6e86e8409f216a2025f9a0d, type: 3}
   - {fileID: 4867995539832589939, guid: cfe820f90f2351e4a85fb43fe86f449a, type: 3}
   - {fileID: 3688773661204392409, guid: 2b22cfc46fcf6414e97bed14557f457d, type: 3}
-  weapon1: {fileID: 1128023947397005449}
-  weapon2: {fileID: 4920631385023035391}
-  hand: {fileID: 0}
-  handTransform: {fileID: 0}
+  primaryWeapon: {fileID: 1128023947397005449}
+  hand: {fileID: 2325243883488057568}
   cooldownTimeOverload: 0
   cooldownTimeShooting: 0
 --- !u!114 &3959810293943724773
@@ -1690,7 +1719,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148fb3f0519cb0a438e0676c9f4f2b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 40
   playerObject: {fileID: 5086483060022182105}
 --- !u!1 &5086483059998552436
 GameObject:
@@ -2040,9 +2068,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wManager: {fileID: 4920631385023035384}
-  wManager1: {fileID: 0}
-  wManager2: {fileID: 4920631385023035384}
-  wManagers: []
   filler: {fileID: 5007576068239679745}
   overloadedFiller: {fileID: 21300000, guid: d1d0c280d08760649a1e3d938ba01f68, type: 3}
   notOverloadedFiller: {fileID: 21300000, guid: 2c6534b4a1bc8944f9ede4d347a63a41, type: 3}
