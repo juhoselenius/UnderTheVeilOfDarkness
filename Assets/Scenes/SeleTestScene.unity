@@ -975,43 +975,43 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1269563000476300283, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1269563000627291906, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1269563000741391939, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1269563000777568190, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1269563001111535135, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1269563001144945708, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1269563001702553281, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1269563002336265829, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3307738002158805220, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3307738002229925142, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3307738002525121952, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_Name
@@ -1019,7 +1019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3307738002525121952, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3307738002525121953, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_RootOrder

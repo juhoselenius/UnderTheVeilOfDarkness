@@ -12,33 +12,28 @@ public class SmallSkeletonController: MonoBehaviour
     public float meleeDamage;
     public float meleeRate;
     private float meleeTimer;
-    public bool playerInAttackRange = false;
 
     public PlayerCharacter player;
 
-    public bool trapSet = false;
+    public bool trapSet;
 
 
     private void Awake()
     {
-        GetReferencer();
-        
-        
+        GetReferences();
+        trapSet = false;
     }
 
     private void Update()
     {
-        trapSet = false;
         if (trapSet == true)
         {
             MoveToTarget();
-            
         }
     }
 
     private void MoveToTarget()
     {
-        
         enemyNavMeshAgent.SetDestination(target.position);
         Walk();
         Run();
@@ -50,26 +45,24 @@ public class SmallSkeletonController: MonoBehaviour
             animator.SetBool("Run", false);
             animator.SetBool("Walk", false);
         
-                animator.SetTrigger("Attack");
-                enemyNavMeshAgent.transform.LookAt(target);
+            animator.SetTrigger("Attack");
+            enemyNavMeshAgent.transform.LookAt(target);
 
-                meleeTimer += Time.fixedDeltaTime;
-                if (meleeTimer > meleeRate)
-                {
-                    meleeTimer = 0;
-                    player.TakeDamage(meleeDamage);
-                }
-            }
-            else
+            meleeTimer += Time.fixedDeltaTime;
+            if (meleeTimer > meleeRate)
             {
-                Run();
-                enemyNavMeshAgent.transform.LookAt(target);
-                enemyNavMeshAgent.SetDestination(target.position);
+                meleeTimer = 0;
+                player.TakeDamage(meleeDamage);
             }
-        
-     
+        }
+        else
+        {
+            Run();
+            enemyNavMeshAgent.transform.LookAt(target);
+            enemyNavMeshAgent.SetDestination(target.position);
+        }
     }
-    private void GetReferencer()
+    private void GetReferences()
     {
         enemyNavMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
@@ -77,21 +70,17 @@ public class SmallSkeletonController: MonoBehaviour
 
     private void RotateToTarget()
     {
-
-
         enemyNavMeshAgent.transform.LookAt(target);
     }
 
     public void Walk()
     {
-
         enemyNavMeshAgent.speed = walkSpeed;
         animator.SetBool("Walk", true);
     }
 
     public void Run()
     {
-
         enemyNavMeshAgent.speed = runSpeed;
         animator.SetBool("Run", true);
     }
@@ -100,12 +89,4 @@ public class SmallSkeletonController: MonoBehaviour
     {
         animator.SetTrigger("Die");
     }
-
-    public void attack()
-    {
-        
-    }
-
-
-
 }

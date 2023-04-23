@@ -755,7 +755,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3bf9975566f9cd847977ed3ebb6fd3e3, type: 3}
   audioSource: {fileID: 3220756071152559570}
   pos: 0
-  soundText: {fileID: 0}
+  soundText: {fileID: 6995708917316292458, guid: 29f213387011784499a837b64b1e7df5, type: 3}
 --- !u!82 &3220756071152559570
 AudioSource:
   m_ObjectHideFlags: 0

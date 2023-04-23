@@ -2,6 +2,8 @@ using Logic.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.UI;
+using Logic.Game;
 
 namespace Visualization
 {
@@ -15,9 +17,14 @@ namespace Visualization
         public float currentHearingCooldown;
         public float maxHearingCooldown;
         public GameObject xRayCamera;
+        public GameObject mainCamera;
         public float knockBackForce;
         private Vector3 direction;
         private float defense;
+
+        public Sprite[] hearingSprite;
+        public Image hearingIcon;
+        public Image filler;
 
         private void Awake()
         {
@@ -76,12 +83,26 @@ namespace Visualization
                     }
                 }
             }
+
+            filler.fillAmount = currentHearingCooldown / maxHearingCooldown;
+        }
+
+        private void OnEnable()
+        {
+            _playerManager.HearingChanged += UpdateHearing;
+            UpdateHearing(_playerManager.GetHearing());
+        }
+
+        private void OnDisable()
+        {
+            _playerManager.HearingChanged -= UpdateHearing;
         }
 
         public void TakeDamage(float amount)
         {
             //defense = _playerManager.GetDefense();
-            _playerManager.UpdateHealth(-amount * (1f - (defense * 0.005f))); // The defense reduction factor is 0.005 here
+            //_playerManager.UpdateHealth(-amount * (1f - (defense * 0.005f))); // The defense reduction factor is 0.005 here
+            _playerManager.UpdateHealth(-amount);
 
             if (_playerManager.GetHealth() <= 0)
             {
@@ -97,8 +118,8 @@ namespace Visualization
                 Debug.Log("Player got hit by enemy projectile");
                 TakeDamage(other.gameObject.GetComponent<Projectile>().damage);
                 direction = (GameObject.FindGameObjectWithTag("Player").transform.position - other.gameObject.transform.position).normalized;
-                Debug.Log("Direction PC: " + direction);
-                StartCoroutine(knockBack());
+                //Debug.Log("Direction PC: " + direction);
+                StartCoroutine(KnockBack());
             }
         }
 
@@ -112,16 +133,28 @@ namespace Visualization
             SceneManager.LoadScene("GameOver");
         }
 
-        IEnumerator knockBack()
+        IEnumerator KnockBack()
         {
             float knockBacktime = Time.time;
             while (Time.time < knockBacktime + 0.2f)
             {
                 GameObject.FindGameObjectWithTag("Player").transform.position += (direction * Time.deltaTime * knockBackForce);
-                Debug.Log("Pelaajan transform: " + direction);
                 yield return null;
             }
+        }
 
+        void UpdateHearing(float newValue)
+        {
+            if(newValue == 0)
+            {
+                mainCamera.GetComponent<AudioListener>().enabled = false;
+                hearingIcon.sprite = hearingSprite[0];
+            }
+            else
+            {
+                mainCamera.GetComponent<AudioListener>().enabled = true;
+                hearingIcon.sprite = hearingSprite[1];
+            }
         }
     }
 }
