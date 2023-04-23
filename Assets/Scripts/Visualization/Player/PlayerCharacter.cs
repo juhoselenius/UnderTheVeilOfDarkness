@@ -17,7 +17,6 @@ namespace Visualization
         public float currentHearingCooldown;
         public float maxHearingCooldown;
         public GameObject xRayCamera;
-        public GameObject mainCamera;
         public float knockBackForce;
         private Vector3 direction;
         private float defense;
@@ -147,12 +146,12 @@ namespace Visualization
         {
             if(newValue == 0)
             {
-                mainCamera.GetComponent<AudioListener>().enabled = false;
+                
                 hearingIcon.sprite = hearingSprite[0];
             }
             else
             {
-                mainCamera.GetComponent<AudioListener>().enabled = true;
+                
                 hearingIcon.sprite = hearingSprite[1];
             }
         }
