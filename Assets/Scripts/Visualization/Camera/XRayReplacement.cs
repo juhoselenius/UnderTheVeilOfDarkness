@@ -9,7 +9,8 @@ public class XRayReplacement : MonoBehaviour
     public IPlayerManager _playerManager;
 
     public Shader XRayShader;
-    public float transitionTime;
+    public float transitionTimePulse;
+    public float transitionTimeXRay;
     public float startNearClip;
     public float endNearClip;
     public float startFarClip;
@@ -37,8 +38,7 @@ public class XRayReplacement : MonoBehaviour
 
         if(_playerManager.GetHearing() == 4)
         {
-            cam.nearClipPlane = 0.5f;
-            cam.farClipPlane = 100f;
+            StartCoroutine(StayInXRay());
         }
         cam.SetReplacementShader(XRayShader, "XRay");
     }
@@ -49,26 +49,41 @@ public class XRayReplacement : MonoBehaviour
         cam.farClipPlane = startFarClip;
 
         float timer = 0f;
-        while (timer < transitionTime)
+        while (timer < transitionTimePulse)
         {
             timer += Time.deltaTime;
-            float t = Mathf.Clamp01(timer / transitionTime);
+            float t = Mathf.Clamp01(timer / transitionTimePulse);
             cam.farClipPlane = Mathf.Lerp(startFarClip, endFarClip, t);
             yield return null;
         }
 
         //Near clipping plane
         timer = 0f;
-        while (timer < transitionTime)
+        while (timer < transitionTimePulse)
         {
             timer += Time.deltaTime;
-            float t = Mathf.Clamp01(timer / transitionTime);
+            float t = Mathf.Clamp01(timer / transitionTimePulse);
             cam.nearClipPlane = Mathf.Lerp(startNearClip, endNearClip, t);
             yield return null;
         }
 
         cam.nearClipPlane = endNearClip;
         cam.farClipPlane = endFarClip;
+        gameObject.SetActive(false);
+    }
+
+    private IEnumerator StayInXRay()
+    {
+        cam.nearClipPlane = 0.5f;
+        cam.farClipPlane = 100f;
+
+        float timer = 0f;
+        while (timer < transitionTimeXRay)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
         gameObject.SetActive(false);
     }
 }

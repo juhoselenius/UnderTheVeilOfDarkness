@@ -16,18 +16,13 @@ namespace Data
 
         public bool introLevelObjectivesCleared;
 
-        
-        
-        
         public bool introLevelCleared;
 
         //Level 2 objectives
         public int allEnemiesCleared;
         public int objectivesCollected;
         
-
         //Level 2 objective booleans here
-
         public bool level2Cleared;
 
         public Game()
@@ -49,7 +44,6 @@ namespace Data
             allEnemiesCleared = 0;
             objectivesCollected = 0;
             level2Cleared = false;
-            
         }
     }
 }

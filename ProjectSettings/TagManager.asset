@@ -18,6 +18,7 @@ TagManager:
   - Shield
   - FireBullet
   - Rock
+  - SmallSkeleton
   layers:
   - Default
   - TransparentFX

@@ -6717,7 +6717,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Issuing points to the Movement attribute awards the player different passive
-    skills
+    skills and increase in the movement speed
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7e368aaddf6eb3848a651c07d35d4661, type: 2}
   m_sharedMaterial: {fileID: 2120275704088736017, guid: 7e368aaddf6eb3848a651c07d35d4661, type: 2}
@@ -9229,7 +9229,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Gun with ? ammo
+  m_text: Gun with faster ammo
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7e368aaddf6eb3848a651c07d35d4661, type: 2}
   m_sharedMaterial: {fileID: 2120275704088736017, guid: 7e368aaddf6eb3848a651c07d35d4661, type: 2}
@@ -10257,7 +10257,7 @@ GameObject:
   - component: {fileID: 1905631243}
   - component: {fileID: 1905631242}
   m_Layer: 5
-  m_Name: HearingInfoText
+  m_Name: InfoText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

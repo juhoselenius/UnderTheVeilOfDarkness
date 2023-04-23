@@ -32,8 +32,8 @@ namespace Logic.Game
         int GetallEnemiesCleared();
         void SetallEnemiesCleared();
         event Action<bool> objectivesCollected;
-        int GetobjectivesCollected();
-        void SetobjectivesCollected();
+        int GetObjectivesCollected();
+        void SetObjectivesCollected();
 
         // Level 2
         

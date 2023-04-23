@@ -82,7 +82,6 @@ namespace Visualization
                 transform.position += (direction * Time.deltaTime * knockBackForce);             
                 yield return null;
             }
-            
         }
     }
 }
