@@ -26,8 +26,6 @@ namespace Visualization
         public TextMeshProUGUI attackValueText;
         public TextMeshProUGUI defenseValueText;
 
-        
-
         private IPlayerManager _playerManager;
     
         void Start()
