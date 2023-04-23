@@ -12,6 +12,7 @@ public class SmallSkeletonController: MonoBehaviour
     public float meleeDamage;
     public float meleeRate;
     private float meleeTimer;
+    public bool playerInAttackRange = false;
 
     public PlayerCharacter player;
 
@@ -27,9 +28,11 @@ public class SmallSkeletonController: MonoBehaviour
 
     private void Update()
     {
-        if (trapSet = true)
+        trapSet = false;
+        if (trapSet == true)
         {
             MoveToTarget();
+            
         }
     }
 
