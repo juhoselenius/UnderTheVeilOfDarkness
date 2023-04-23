@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class MenuControl : MonoBehaviour
 {
     public GameObject presetInfoCanvas;
+    public GameObject presetMenu;
+
+    public GameObject[] attributeInfoCanvas;
     
     // Start is called before the first frame update
     void Start()
@@ -67,10 +70,31 @@ public class MenuControl : MonoBehaviour
         if (!presetInfoCanvas.activeInHierarchy)
         {
             presetInfoCanvas.SetActive(true);
+            presetMenu.SetActive(false);
         }
         else
         {
             presetInfoCanvas.SetActive(false);
+            presetMenu.SetActive(true);
+        }
+    }
+
+    public void DropdownMenuChange(int value)
+    {
+        int i = 0;
+
+        while (i < attributeInfoCanvas.Length)
+        {
+            if(i == value)
+            {
+                attributeInfoCanvas[i].SetActive(true);
+            }
+            else
+            {
+                attributeInfoCanvas[i].SetActive(false);
+            }
+
+            i++;
         }
     }
 }
