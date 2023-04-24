@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
-    public GameObject[] smallSkeletons;
+    private GameObject[] smallSkeletons;
 
     private void Start()
     {
@@ -18,7 +18,10 @@ public class Trap : MonoBehaviour
             for(int i = 0; i < smallSkeletons.Length; i++)
             {
                 Debug.Log("Activated skeletons");
-                smallSkeletons[i].GetComponent<SmallSkeletonController>().trapSet = true;
+                if (smallSkeletons[i] != null)
+                {
+                    smallSkeletons[i].GetComponent<SmallSkeletonController>().trapSet = true;
+                }
             }
         }
     }

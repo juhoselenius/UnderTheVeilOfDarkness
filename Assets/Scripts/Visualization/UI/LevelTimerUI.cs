@@ -36,7 +36,7 @@ namespace Visualization
             {
                 if(_gameManager.GetallEnemiesCleared() < 18)
                 {
-                    currentLevelTime -= levelTime;
+                    currentLevelTime -= Time.deltaTime;
                     timeText.text = ((int)Mathf.Round(currentLevelTime)).ToString();
                 }
                 else
