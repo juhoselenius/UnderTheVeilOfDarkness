@@ -2247,7 +2247,6 @@ MonoBehaviour:
   currentHearingCooldown: 0
   maxHearingCooldown: 11
   xRayCamera: {fileID: 205228369341251186}
-  mainCamera: {fileID: 5086483059215192341}
   knockBackForce: 0
   hearingSprite:
   - {fileID: 21300000, guid: 52d470bae1a70764695bd86039a4e0ac, type: 3}
@@ -2536,7 +2535,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7817918022904883116
 RectTransform:
   m_ObjectHideFlags: 0
