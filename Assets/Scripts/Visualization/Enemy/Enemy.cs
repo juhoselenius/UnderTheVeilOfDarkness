@@ -1,6 +1,5 @@
 using Logic.Game;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Visualization
@@ -82,7 +81,6 @@ namespace Visualization
                 transform.position += (direction * Time.deltaTime * knockBackForce);             
                 yield return null;
             }
-            
         }
     }
 }

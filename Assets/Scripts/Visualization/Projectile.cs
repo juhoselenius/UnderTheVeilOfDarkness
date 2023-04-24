@@ -121,24 +121,24 @@ namespace Visualization
             {
                 collided = true;
                 GameObject impact = Instantiate(explosionFX, collision.contacts[0].point, Quaternion.identity);
-                
+                //GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
 
                 FindObjectOfType<AudioManager>().Play("OnHit");
 
-
                 Destroy(gameObject);
             }
+
             if (gameObject.tag == "FireBullet" && collision.gameObject.tag != "FireBullet" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
             {
                 collided = true;
                 GameObject impact = Instantiate(explosionFX, collision.contacts[0].point, Quaternion.identity);
-
+                //GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
 
                 FindObjectOfType<AudioManager>().Play("OnHit");
 
-
                 Destroy(gameObject);
             }
+
             if (gameObject.tag == "Bullet" && collision.gameObject.tag != "Bullet" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
             {
                 collided = true;

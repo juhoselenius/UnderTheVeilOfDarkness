@@ -8,30 +8,19 @@ namespace Visualization
 {
     public class ObjectiveCollected : MonoBehaviour
     {
-        
         private IGameManager _gameManager;
+
         private void Awake()
         {
             _gameManager = ServiceLocator.GetService<IGameManager>();
-           
         }
-
-
-
-        void Update()
-        {
-           
-
-        }
-
 
         private void OnTriggerEnter (Collider other)
         {
             if (other.tag == "Player")
             {
-                _gameManager.SetobjectivesCollected();
+                _gameManager.SetObjectivesCollected();
                 Destroy(gameObject);
-                
             }
         }
     }

@@ -4,16 +4,25 @@ using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
+    private GameObject[] smallSkeletons;
 
-    public SmallSkeletonController smallSkelly;
-    // Start is called before the first frame update
+    private void Start()
+    {
+        smallSkeletons = GameObject.FindGameObjectsWithTag("SmallSkeleton");
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            
-            smallSkelly.trapSet = true;
+            for(int i = 0; i < smallSkeletons.Length; i++)
+            {
+                Debug.Log("Activated skeletons");
+                if (smallSkeletons[i] != null)
+                {
+                    smallSkeletons[i].GetComponent<SmallSkeletonController>().trapSet = true;
+                }
+            }
         }
     }
 }

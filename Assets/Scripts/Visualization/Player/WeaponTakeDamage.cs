@@ -1,10 +1,7 @@
 using Logic.Player;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Visualization;
 
 namespace Visualization
 {
