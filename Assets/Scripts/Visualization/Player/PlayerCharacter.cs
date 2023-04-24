@@ -146,12 +146,12 @@ namespace Visualization
         {
             if(newValue == 0)
             {
-                
+                AudioListener.volume = 0f;
                 hearingIcon.sprite = hearingSprite[0];
             }
             else
             {
-                
+                AudioListener.volume = 1.0f;
                 hearingIcon.sprite = hearingSprite[1];
             }
         }
