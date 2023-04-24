@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Logic.Options;
-using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
 
@@ -23,9 +20,8 @@ namespace Visualization
         private void Awake()
         {
             _optionsManager = ServiceLocator.GetService<IOptionsManager>();
-
-            
         }
+
         private void Start()
         {
             mouseSensitivitySlider.value = _optionsManager.getMouseSensitivity();
@@ -39,14 +35,12 @@ namespace Visualization
 
             sfxVolumeSlider.value = _optionsManager.getSfxVolume();
             sfxValue.text = sfxVolumeSlider.value.ToString();
-
         }
 
         public void setMouseSensitivity()
         {
             _optionsManager.updateMouseSensitivity(mouseSensitivitySlider.value);
             mousevalue.text = mouseSensitivitySlider.value.ToString();
-            
         }
 
         public void setReverseMouse()
