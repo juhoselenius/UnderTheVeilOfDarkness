@@ -47,7 +47,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textSound: Stomp
   moveSpeed: 1
-  playerTransform: {fileID: 0}
   textLifeTime: 1
   soundText: {fileID: 6995708919278297247}
 --- !u!1 &6995708919278297246
@@ -61,7 +60,7 @@ GameObject:
   - component: {fileID: 6995708919278297249}
   - component: {fileID: 6995708919278297248}
   - component: {fileID: 6995708919278297247}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TextForSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +127,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &6995708919278297247
 MonoBehaviour:
