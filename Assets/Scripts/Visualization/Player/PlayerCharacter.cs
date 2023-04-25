@@ -41,17 +41,17 @@ namespace Visualization
             else
             {
                 currentPresetCooldown = 0;
-                if (Input.GetKeyDown("1"))
+                if (Input.GetKeyDown("1") && _playerManager.GetCurrentPreset() != 0)
                 {
                     _playerManager.ChangePreset(0);
                     currentPresetCooldown = maxPresetCooldown;
                 }
-                else if (Input.GetKeyDown("2"))
+                else if (Input.GetKeyDown("2") && _playerManager.GetCurrentPreset() != 1)
                 {
                     _playerManager.ChangePreset(1);
                     currentPresetCooldown = maxPresetCooldown;
                 }
-                else if (Input.GetKeyDown("3"))
+                else if (Input.GetKeyDown("3") && _playerManager.GetCurrentPreset() != 2)
                 {
                     _playerManager.ChangePreset(2);
                     currentPresetCooldown = maxPresetCooldown;
