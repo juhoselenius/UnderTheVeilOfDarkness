@@ -22,10 +22,10 @@ namespace Visualization
             soundText.text = textSound;
             transform.LookAt(playerTransform);
         
-            // Rotate additional 30 degrees
+            /*// Rotate additional 30 degrees
             Vector3 newRotation = transform.localEulerAngles;
             newRotation.z -= 30f;
-            transform.localEulerAngles = newRotation;
+            transform.localEulerAngles = newRotation;*/
 
             remainingLifetime = textLifeTime;
         }
