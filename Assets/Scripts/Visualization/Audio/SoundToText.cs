@@ -1,44 +1,57 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class SoundToText : MonoBehaviour
+namespace Visualization
 {
-    public string textSound;
-    public float moveSpeed;
-    public float textLifeTime;
-
-    public TextMeshPro soundText;
-
-    private Transform playerTransform;
-
-    // Start is called before the first frame update
-    void Start()
+    public class SoundToText : MonoBehaviour
     {
-        playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        public string textSound;
+        public float moveSpeed;
+        public float textLifeTime;
+
+        public TextMeshPro soundText;
+
+        private Transform playerTransform;
+        private float remainingLifetime;
+
+        // Start is called before the first frame update
+        void Start()
+        {
+            playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         
-        soundText.text = textSound;
-        transform.LookAt(playerTransform);
+            soundText.text = textSound;
+            transform.LookAt(playerTransform);
         
-        // Rotate additional 30 degrees
-        Vector3 newRotation = transform.localEulerAngles;
-        newRotation.z -= 30f;
-        transform.localEulerAngles = newRotation;
+            // Rotate additional 30 degrees
+            Vector3 newRotation = transform.localEulerAngles;
+            newRotation.z -= 30f;
+            transform.localEulerAngles = newRotation;
 
-        Destroy(gameObject, textLifeTime);
-    }
+            remainingLifetime = textLifeTime;
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // Calculate the amount to move the object this frame
-        float distanceToMove = -moveSpeed * Time.deltaTime;
+        // Update is called once per frame
+        void Update()
+        {
+            // Calculate the amount to move the object this frame
+            float distanceToMove = -moveSpeed * Time.deltaTime;
 
-        // Calculate the direction to move in based on the current rotation of the object
-        Vector3 moveDirection = transform.rotation * Vector3.right;
+            // Calculate the direction to move in based on the current rotation of the object
+            Vector3 moveDirection = transform.rotation * Vector3.right;
 
-        // Move the object in the calculated direction
-        transform.Translate(moveDirection * distanceToMove, Space.World);
+            // Move the object in the calculated direction
+            transform.Translate(moveDirection * distanceToMove, Space.World);
+
+            // Calculate the new scale based on remaining lifetime.
+            float scale = remainingLifetime / textLifeTime;
+            soundText.transform.localScale = new Vector3(scale, scale, scale);
+
+            remainingLifetime -= Time.deltaTime;
+
+            if (remainingLifetime <= 0f)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }

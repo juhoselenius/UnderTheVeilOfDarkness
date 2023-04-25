@@ -14,7 +14,7 @@ namespace Data
 
         public Options()
         {
-            mouseSensitivity = 100f;
+            mouseSensitivity = 40f;
             reverseMouse = false;
             musicVolume = 50f;
             sfxVolume = 50f;

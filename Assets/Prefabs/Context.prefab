@@ -81,7 +81,7 @@ MonoBehaviour:
     objectivesCollected: 0
     level2Cleared: 0
   initialOptionsState:
-    mouseSensitivity: 100
+    mouseSensitivity: 40
     reverseMouse: 0
     musicVolume: 50
     sfxVolume: 50
