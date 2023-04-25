@@ -987,7 +987,6 @@ GameObject:
   m_Component:
   - component: {fileID: 733440780}
   - component: {fileID: 733440779}
-  - component: {fileID: 733440778}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -995,14 +994,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &733440778
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 733440777}
-  m_Enabled: 1
 --- !u!20 &733440779
 Camera:
   m_ObjectHideFlags: 0
@@ -1206,7 +1197,6 @@ GameObject:
   m_Component:
   - component: {fileID: 972376287}
   - component: {fileID: 972376286}
-  - component: {fileID: 972376289}
   m_Layer: 0
   m_Name: MenuControl
   m_TagString: Untagged
@@ -1227,6 +1217,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   presetInfoCanvas: {fileID: 0}
+  presetMenu: {fileID: 0}
+  attributeInfoCanvas: []
 --- !u!4 &972376287
 Transform:
   m_ObjectHideFlags: 0
@@ -1242,59 +1234,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &972376289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 972376285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdc2a435b821c454183fcb11faef033a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialPlayerState:
-    health: 100
-    maxHealth: 100
-    lives: 10
-    maxLives: 10
-    currentPresetIndex: 0
-    sightFactor: 0.5
-    hearingFactor: 0.5
-    baseWalkSpeed: 1
-    baseSprintSpeed: 2
-    walkSpeedFactor: 0.1
-    sprintSpeedFactor: 0.2
-    baseProjectileDamage: 5
-    baseProjectileSpeed: 40
-    baseFireRate: 6
-    baseParticleStartSize: 0.1
-    baseProjectileColliderRadius: 0.01
-    projectileDamageFactor: 0.1
-    projectileSpeedFactor: 0.35
-    fireRateFactor: 0.05
-    particleStartSizeFactor: 0.049
-    projectileColliderRadiusFactor: 0.0079
-    defenseFactor: 0.5
-  initialGameState:
-    moveLeft: 0
-    moveRight: 0
-    moveForward: 0
-    moveBackward: 0
-    jump: 0
-    shoot: 0
-    changePreset: 0
-    introLevelObjectivesCleared: 0
-    introLevelCleared: 0
-    allEnemiesCleared: 0
-    objectivesCollected: 0
-    level2Cleared: 0
-  initialOptionsState:
-    mouseSensitivity: 300
-    reverseMouse: 0
-    musicVolume: 50
-    sfxVolume: 50
 --- !u!1 &1001965864
 GameObject:
   m_ObjectHideFlags: 0
@@ -2773,6 +2712,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   presetInfoCanvas: {fileID: 0}
+  presetMenu: {fileID: 0}
+  attributeInfoCanvas: []
 --- !u!224 &7541082657771001204
 RectTransform:
   m_ObjectHideFlags: 0
