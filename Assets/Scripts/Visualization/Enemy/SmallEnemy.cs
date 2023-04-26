@@ -36,6 +36,7 @@ public class SmallEnemy : MonoBehaviour
     public float soundTextOffset;
     public float soundTime;
     private float soundTimer;
+    private bool hit;
 
     private IPlayerManager _playerManager;
 
@@ -78,6 +79,12 @@ public class SmallEnemy : MonoBehaviour
                 enemyNavMeshAgent.SetDestination(playerTransform.position + new Vector3(0, 0, 1f));
             }
         }
+        else if (hit)
+        {
+            enemyNavMeshAgent.speed = runSpeed * gameObject.GetComponent<Enemy>().enemyBaseSpeed * 2;
+            enemyNavMeshAgent.transform.LookAt(playerTransform);         
+            enemyNavMeshAgent.SetDestination(playerTransform.position + new Vector3(0, 0, 3f));
+        }
         else
         {
             Patrol();
@@ -104,6 +111,12 @@ public class SmallEnemy : MonoBehaviour
         if (other.tag == "Player")
         {
             playerInDetectionRange = true;
+        }
+        if (other.CompareTag("Rock") || other.CompareTag("Bullet") || other.CompareTag("PlayerProjectile") || other.CompareTag("FireBullet") || other.CompareTag("IceBullet"))
+
+        {
+            hit = true;
+           
         }
     }
 

@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b60595873929647afe0f471d305359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
+  playerTransform: {fileID: 5086483060022182105, guid: c28c15efb53a11245b6dd9afac218c46, type: 3}
   player: {fileID: 0}
   patrolPath: {fileID: 0}
   playerInDetectionRange: 0
