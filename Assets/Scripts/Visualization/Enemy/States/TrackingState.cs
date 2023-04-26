@@ -41,13 +41,14 @@ public class TrackingState : IAiState
     void Hunt(AiAgent agent)
     {
         agent.navMeshAgent.destination = agent.lastKnownPlayerPosition;
-        agent.navMeshAgent.isStopped = false;
+        agent.navMeshAgent.isStopped = false;       
 
         // Change to Alert State, when arrived at the last known player location
         if (agent.navMeshAgent.remainingDistance <= agent.navMeshAgent.stoppingDistance && !agent.navMeshAgent.pathPending)
         {
             agent.backFromTracking = true;
             agent.stateMachine.ChangeState(AiStateId.AlertState);
+            Debug.Log("lastknownplayerpos trackingstaten huntissa: " + agent.lastKnownPlayerPosition);
         }
     }
 }

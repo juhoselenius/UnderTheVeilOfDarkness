@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -71,8 +69,10 @@ public class AiAgent : MonoBehaviour
             backFromTracking = false;
             alertPlayerPosition = other.transform.position;
             stateMachine.ChangeState(AiStateId.AlertState);
+            Debug.Log("Meni ontriggeriin AiAgentissa");
            
         }
+         
     }
 
     private void OnTriggerStay(Collider other)

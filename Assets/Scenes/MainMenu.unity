@@ -700,6 +700,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   presetInfoCanvas: {fileID: 0}
+  presetMenu: {fileID: 0}
+  attributeInfoCanvas: []
 --- !u!4 &2098297549
 Transform:
   m_ObjectHideFlags: 0

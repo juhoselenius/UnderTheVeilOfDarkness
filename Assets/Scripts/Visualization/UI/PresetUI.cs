@@ -7,22 +7,46 @@ namespace Visualization
 {
     public class PresetUI : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI currentPresetText;
-
         private IPlayerManager _playerManager;
+
+        public TextMeshProUGUI currentPresetText;
         public Image filler;
-        private PlayerCharacter pCharacter;
+        public float currentPresetCooldown;
+        public float maxPresetCooldown;
 
         void Awake()
         {
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
-            currentPresetText = GetComponent<TextMeshProUGUI>();
-            pCharacter = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>();
+            currentPresetCooldown = 0;
         }
 
         private void Update()
         {
-            filler.fillAmount = pCharacter.currentPresetCooldown / pCharacter.maxPresetCooldown;
+            if (currentPresetCooldown > 0)
+            {
+                currentPresetCooldown -= Time.deltaTime;
+            }
+            else
+            {
+                currentPresetCooldown = 0;
+                if (Input.GetKeyDown("1") && _playerManager.GetCurrentPreset() != 0)
+                {
+                    _playerManager.ChangePreset(0);
+                    currentPresetCooldown = maxPresetCooldown;
+                }
+                else if (Input.GetKeyDown("2") && _playerManager.GetCurrentPreset() != 1)
+                {
+                    _playerManager.ChangePreset(1);
+                    currentPresetCooldown = maxPresetCooldown;
+                }
+                else if (Input.GetKeyDown("3") && _playerManager.GetCurrentPreset() != 2)
+                {
+                    _playerManager.ChangePreset(2);
+                    currentPresetCooldown = maxPresetCooldown;
+                }
+            }
+
+            filler.fillAmount = currentPresetCooldown / maxPresetCooldown;
         }
 
         private void OnEnable()
