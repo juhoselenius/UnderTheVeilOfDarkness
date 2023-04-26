@@ -18,7 +18,8 @@ namespace Visualization
         public float knockBackForce;
         public float brake;
         public float enemyBaseSpeed;
-        public Vector3 direction;       
+        public Vector3 direction;
+       
         
         [SerializeField] private float cooldown = 5f;
 
@@ -32,6 +33,7 @@ namespace Visualization
         {
             direction = new Vector3(0,0,0); 
             health = maxHealth;
+            
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -41,7 +43,8 @@ namespace Visualization
             {
                 health -= collision.gameObject.GetComponent<Projectile>().damage;                                        
                 direction = (transform.position - collision.transform.position).normalized;
-                StartCoroutine(knockBack());                       
+                StartCoroutine(knockBack());
+                
             }
             else if(collision.gameObject.tag == "IceBullet")
             {
@@ -49,6 +52,7 @@ namespace Visualization
                 direction = (transform.position - collision.transform.position).normalized;
                 StartCoroutine(knockBack());
                 enemyBaseSpeed -= 0.25f;
+                
                 /*
                 rb.isKinematic = true;
                 cooldownTimer -= Time.deltaTime;
