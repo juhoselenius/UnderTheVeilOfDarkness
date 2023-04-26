@@ -25,6 +25,9 @@ namespace Visualization
         public TextMeshProUGUI attackValueText;
         public TextMeshProUGUI defenseValueText;
 
+        public TextMeshProUGUI infoTitleText;
+        public TextMeshProUGUI infoDescriptionText;
+
         private IPlayerManager _playerManager;
     
         void Start()
@@ -71,6 +74,46 @@ namespace Visualization
             _playerManager.UpdateSight(newValue);
             sightSlider.value = _playerManager.GetSight();
             UpdateTextValues();
+
+            if(SceneManager.GetActiveScene().name == "PresetManagement")
+            {
+                Image sliderFillImage = sightSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>();
+                Image sliderHandleImage = sightSlider.transform.GetChild(2).GetChild(0).GetComponent<Image>();
+
+                switch ((int)_playerManager.GetSight())
+                {
+                    case 0:
+                        infoTitleText.text = "Sight - 0";
+                        infoDescriptionText.text = "See no evil...";
+                        sliderFillImage.color = new Color(0.8f, 0.2f, 0);
+                        sliderHandleImage.color = new Color(0.8f, 0.2f, 0);
+                        break;
+                    case 1:
+                        infoTitleText.text = "Sight - 1";
+                        infoDescriptionText.text = "See evil at a small distance...\n\nlike, really really small";
+                        sliderFillImage.color = new Color(1f, 0.6f, 0.4f);
+                        sliderHandleImage.color = new Color(1f, 0.4f, 0.1f);
+                        break;
+                    case 2:
+                        infoTitleText.text = "Sight - 2";
+                        infoDescriptionText.text = "See evil a biiiit further away";
+                        sliderFillImage.color = new Color(1f, 0.8f, 0.4f);
+                        sliderHandleImage.color = new Color(1f, 0.8f, 0);
+                        break;
+                    case 3:
+                        infoTitleText.text = "Sight - 3";
+                        infoDescriptionText.text = "See evil much further away";
+                        sliderFillImage.color = new Color(0.6f, 0.8f, 0.4f);
+                        sliderHandleImage.color = new Color(0.4f, 0.8f, 0.2f);
+                        break;
+                    case 4:
+                        infoTitleText.text = "Sight - 4";
+                        infoDescriptionText.text = "Okay, you know how this escalates by now, right?";
+                        sliderFillImage.color = new Color(0.3f, 0.6f, 0);
+                        sliderHandleImage.color = new Color(0.2f, 0.4f, 0);
+                        break;
+                }
+            }
         }
 
         public void OnValueChangedHearing(float newValue)
@@ -78,6 +121,46 @@ namespace Visualization
             _playerManager.UpdateHearing(newValue);
             hearingSlider.value = _playerManager.GetHearing();
             UpdateTextValues();
+
+            if (SceneManager.GetActiveScene().name == "PresetManagement")
+            {
+                Image sliderFillImage = hearingSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>();
+                Image sliderHandleImage = hearingSlider.transform.GetChild(2).GetChild(0).GetComponent<Image>();
+
+                switch ((int)_playerManager.GetHearing())
+                {
+                    case 0:
+                        infoTitleText.text = "Hearing - 0";
+                        infoDescriptionText.text = "Hear no evil... Wait, what?";
+                        sliderFillImage.color = new Color(0.8f, 0.2f, 0);
+                        sliderHandleImage.color = new Color(0.8f, 0.2f, 0);
+                        break;
+                    case 1:
+                        infoTitleText.text = "Hearing - 1";
+                        infoDescriptionText.text = "You hear things... like, normally";
+                        sliderFillImage.color = new Color(1f, 0.6f, 0.4f);
+                        sliderHandleImage.color = new Color(1f, 0.4f, 0.1f);
+                        break;
+                    case 2:
+                        infoTitleText.text = "Hearing - 2";
+                        infoDescriptionText.text = "Textual hearing\n\nNoises made by enemies are displayed as text";
+                        sliderFillImage.color = new Color(1f, 0.8f, 0.4f);
+                        sliderHandleImage.color = new Color(1f, 0.8f, 0);
+                        break;
+                    case 3:
+                        infoTitleText.text = "Hearing - 3";
+                        infoDescriptionText.text = "Sonar hearing\n\nEnemies that make noise are revealed briefly by a sonar pulse";
+                        sliderFillImage.color = new Color(0.6f, 0.8f, 0.4f);
+                        sliderHandleImage.color = new Color(0.4f, 0.8f, 0.2f);
+                        break;
+                    case 4:
+                        infoTitleText.text = "Hearing - 4";
+                        infoDescriptionText.text = "Visual hearing\n\nEnemies that make noise are revealed permanently";
+                        sliderFillImage.color = new Color(0.3f, 0.6f, 0);
+                        sliderHandleImage.color = new Color(0.2f, 0.4f, 0);
+                        break;
+                }
+            }
         }
 
         public void OnValueChangedMovement(float newValue)
@@ -85,13 +168,93 @@ namespace Visualization
             _playerManager.UpdateMovement(newValue);
             movementSlider.value = _playerManager.GetMovement();
             UpdateTextValues();
+
+            if (SceneManager.GetActiveScene().name == "PresetManagement")
+            {
+                Image sliderFillImage = movementSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>();
+                Image sliderHandleImage = movementSlider.transform.GetChild(2).GetChild(0).GetComponent<Image>();
+
+                switch ((int)_playerManager.GetMovement())
+                {
+                    case 0:
+                        infoTitleText.text = "Movement - 0";
+                        infoDescriptionText.text = "You're slow... and got no skills";
+                        sliderFillImage.color = new Color(0.8f, 0.2f, 0);
+                        sliderHandleImage.color = new Color(0.8f, 0.2f, 0);
+                        break;
+                    case 1:
+                        infoTitleText.text = "Movement - 1";
+                        infoDescriptionText.text = "Increased movement speed from the previous point level\n\nAdded jump skill";
+                        sliderFillImage.color = new Color(1f, 0.6f, 0.4f);
+                        sliderHandleImage.color = new Color(1f, 0.4f, 0.1f);
+                        break;
+                    case 2:
+                        infoTitleText.text = "Movement - 2";
+                        infoDescriptionText.text = "Increased movement speed from the previous point level\n\nAdded double jump skill";
+                        sliderFillImage.color = new Color(1f, 0.8f, 0.4f);
+                        sliderHandleImage.color = new Color(1f, 0.8f, 0);
+                        break;
+                    case 3:
+                        infoTitleText.text = "Movement - 3";
+                        infoDescriptionText.text = "Increased movement speed from the previous point level\n\nAdded double jump and sprint skills";
+                        sliderFillImage.color = new Color(0.6f, 0.8f, 0.4f);
+                        sliderHandleImage.color = new Color(0.4f, 0.8f, 0.2f);
+                        break;
+                    case 4:
+                        infoTitleText.text = "Movement - 4";
+                        infoDescriptionText.text = "Increased movement speed from the previous point level\n\nAdded double jump, sprint and dodge skills";
+                        sliderFillImage.color = new Color(0.3f, 0.6f, 0);
+                        sliderHandleImage.color = new Color(0.2f, 0.4f, 0);
+                        break;
+                }
+            }
         }
 
         public void OnValueChangedAttack(float newValue)
         {
             _playerManager.UpdateAttack(newValue);
             attackSlider.value = _playerManager.GetAttack();
-            UpdateTextValues();           
+            UpdateTextValues();
+
+            if (SceneManager.GetActiveScene().name == "PresetManagement")
+            {
+                Image sliderFillImage = attackSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>();
+                Image sliderHandleImage = attackSlider.transform.GetChild(2).GetChild(0).GetComponent<Image>();
+
+                switch ((int)_playerManager.GetAttack())
+                {
+                    case 0:
+                        infoTitleText.text = "Attack - 0";
+                        infoDescriptionText.text = "Throw stones... that's it.";
+                        sliderFillImage.color = new Color(0.8f, 0.2f, 0);
+                        sliderHandleImage.color = new Color(0.8f, 0.2f, 0);
+                        break;
+                    case 1:
+                        infoTitleText.text = "Attack - 1";
+                        infoDescriptionText.text = "You get a gun... wow!\n\nBase fire rate and no ammo perks";
+                        sliderFillImage.color = new Color(1f, 0.6f, 0.4f);
+                        sliderHandleImage.color = new Color(1f, 0.4f, 0.1f);
+                        break;
+                    case 2:
+                        infoTitleText.text = "Attack - 2";
+                        infoDescriptionText.text = "Increased fire rate from the previous point level\n\n!!!AMMO PERK???!!!";
+                        sliderFillImage.color = new Color(1f, 0.8f, 0.4f);
+                        sliderHandleImage.color = new Color(1f, 0.8f, 0);
+                        break;
+                    case 3:
+                        infoTitleText.text = "Attack - 3";
+                        infoDescriptionText.text = "Increased fire rate from the previous point level\n\nFire ammo that !!!DO What???!!!";
+                        sliderFillImage.color = new Color(0.6f, 0.8f, 0.4f);
+                        sliderHandleImage.color = new Color(0.4f, 0.8f, 0.2f);
+                        break;
+                    case 4:
+                        infoTitleText.text = "Attack - 4";
+                        infoDescriptionText.text = "Increased fire rate from the previous point level\n\nIce ammo that slow down the enemy";
+                        sliderFillImage.color = new Color(0.3f, 0.6f, 0);
+                        sliderHandleImage.color = new Color(0.2f, 0.4f, 0);
+                        break;
+                }
+            }
         }
 
         public void OnValueChangedDefense(float newValue)
@@ -99,6 +262,46 @@ namespace Visualization
             _playerManager.UpdateDefense(newValue);
             defenseSlider.value = _playerManager.GetDefense();
             UpdateTextValues();
+
+            if (SceneManager.GetActiveScene().name == "PresetManagement")
+            {
+                Image sliderFillImage = defenseSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>();
+                Image sliderHandleImage = defenseSlider.transform.GetChild(2).GetChild(0).GetComponent<Image>();
+
+                switch ((int)_playerManager.GetDefense())
+                {
+                    case 0:
+                        infoTitleText.text = "Defense - 0";
+                        infoDescriptionText.text = "No additional defense. You're on your own, kid.";
+                        sliderFillImage.color = new Color(0.8f, 0.2f, 0);
+                        sliderHandleImage.color = new Color(0.8f, 0.2f, 0);
+                        break;
+                    case 1:
+                        infoTitleText.text = "Defense - 1";
+                        infoDescriptionText.text = "You get an itsy-bitsy shield which stays where you put it";
+                        sliderFillImage.color = new Color(1f, 0.6f, 0.4f);
+                        sliderHandleImage.color = new Color(1f, 0.4f, 0.1f);
+                        break;
+                    case 2:
+                        infoTitleText.text = "Defense - 2";
+                        infoDescriptionText.text = "You get a shield covering most of the front sector and it moves with you";
+                        sliderFillImage.color = new Color(1f, 0.8f, 0.4f);
+                        sliderHandleImage.color = new Color(1f, 0.8f, 0);
+                        break;
+                    case 3:
+                        infoTitleText.text = "Defense - 3";
+                        infoDescriptionText.text = "You get a half-sphere shield covering the whole front sector and it moves with you";
+                        sliderFillImage.color = new Color(0.6f, 0.8f, 0.4f);
+                        sliderHandleImage.color = new Color(0.4f, 0.8f, 0.2f);
+                        break;
+                    case 4:
+                        infoTitleText.text = "Defense - 4";
+                        infoDescriptionText.text = "You get a full-sphere shield covering you from all directions and it moves with you";
+                        sliderFillImage.color = new Color(0.3f, 0.6f, 0);
+                        sliderHandleImage.color = new Color(0.2f, 0.4f, 0);
+                        break;
+                }
+            }
         }
 
         public void DropdownMenuChange(int value)
@@ -110,11 +313,11 @@ namespace Visualization
 
         private void UpdateSliderValues()
         {
-            sightSlider.value = _playerManager.GetSight();
-            hearingSlider.value = _playerManager.GetHearing();
-            movementSlider.value = _playerManager.GetMovement();
-            attackSlider.value = _playerManager.GetAttack();
             defenseSlider.value = _playerManager.GetDefense();
+            attackSlider.value = _playerManager.GetAttack();
+            movementSlider.value = _playerManager.GetMovement();
+            hearingSlider.value = _playerManager.GetHearing();
+            sightSlider.value = _playerManager.GetSight();
         }
 
         private void UpdateTextValues()

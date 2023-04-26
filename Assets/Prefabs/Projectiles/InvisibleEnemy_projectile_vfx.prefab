@@ -4955,7 +4955,7 @@ MonoBehaviour:
   damage: 0
   baseDamage: 10
   projectileSpeed: 0
-  projectileBaseSpeed: 20
+  projectileBaseSpeed: 15
   beam: {fileID: 7109737904006169265}
 --- !u!82 &5799449658614443731
 AudioSource:
