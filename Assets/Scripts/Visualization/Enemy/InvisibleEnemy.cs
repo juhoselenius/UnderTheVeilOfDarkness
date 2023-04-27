@@ -53,14 +53,14 @@ namespace Visualization
                     Vector3 playerPosition = other.transform.position;
                     Shoot(playerPosition);
                 }
-
             }
         }
 
         void Shoot(Vector3 targetPosition)
         {
             playSound();
-            GameObject firedProjectile = GameObject.Instantiate(enemyProjectilePrefab, projectileSpawn.position, Quaternion.identity);
+            GameObject firedProjectile = Instantiate(enemyProjectilePrefab, projectileSpawn.position, Quaternion.identity);
+            firedProjectile.GetComponent<Projectile>().originTransform = projectileSpawn.transform;
             float projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
             firedProjectile.GetComponent<Rigidbody>().velocity = (targetPosition - projectileSpawn.position).normalized * projectileSpeed;
 

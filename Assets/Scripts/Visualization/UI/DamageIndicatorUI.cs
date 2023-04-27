@@ -13,7 +13,7 @@ namespace Visualization
     {
         [SerializeField] private DamageIndicator indicatorPrefab;
         [SerializeField] private RectTransform holder;
-        [SerializeField] private new Camera camera;
+        [SerializeField] private Camera cam;
         [SerializeField] private Transform player;
 
         private Dictionary<Transform, DamageIndicator> indicators = new Dictionary<Transform, DamageIndicator>();
@@ -49,7 +49,7 @@ namespace Visualization
 
         bool InSight(Transform t)
         {
-            Vector3 screenpoint = camera.WorldToViewportPoint(t.position);
+            Vector3 screenpoint = cam.WorldToViewportPoint(t.position);
             return screenpoint.z > 0 && screenpoint.x > 0 && screenpoint.x < 1 && screenpoint.y > 0 && screenpoint.y < 1;
         }
     }

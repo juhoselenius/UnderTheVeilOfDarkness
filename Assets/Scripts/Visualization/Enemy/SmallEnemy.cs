@@ -152,6 +152,7 @@ public class SmallEnemy : MonoBehaviour
     {
         playSound();
         GameObject firedProjectile = GameObject.Instantiate(enemyProjectilePrefab, projectileSpawn.position, Quaternion.identity);
+        firedProjectile.GetComponent<Projectile>().originTransform = gameObject.transform;
         float projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
         firedProjectile.GetComponent<Rigidbody>().velocity = (targetPosition - projectileSpawn.position).normalized * projectileSpeed;
 

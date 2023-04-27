@@ -688,7 +688,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicatorPrefab: {fileID: 6053567093216980612, guid: 066d7afd2b48b2542ad2236f35e59a2e, type: 3}
   holder: {fileID: 7319879830884749720}
-  camera: {fileID: 5086483059215192339}
+  cam: {fileID: 5086483059215192339}
   player: {fileID: 5086483059215192338}
 --- !u!1 &1587912684580277188
 GameObject:

@@ -23,6 +23,8 @@ namespace Visualization
 
         public IPlayerManager _playerManager;
 
+        public Transform originTransform;
+
         private void Awake()
         {
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
@@ -124,7 +126,10 @@ namespace Visualization
             {
                 collided = true;
 
-                GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
+                if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeletonEnemy")
+                {
+                    GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
+                }
 
                 GameObject impact = Instantiate(explosionFX, collision.contacts[0].point, Quaternion.identity);
                 //GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
@@ -138,7 +143,10 @@ namespace Visualization
             {
                 collided = true;
 
-                GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
+                if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeletonEnemy")
+                {
+                    GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
+                }
 
                 GameObject impact = Instantiate(explosionFX, collision.contacts[0].point, Quaternion.identity);
                 //GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
@@ -152,7 +160,10 @@ namespace Visualization
             {
                 collided = true;
 
-                GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
+                if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeletonEnemy")
+                {
+                    GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
+                }
 
                 GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
 

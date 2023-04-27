@@ -44,9 +44,9 @@ namespace Visualization
                 Debug.Log("Player got hit by enemy projectile");
 
                 // Show damage indicator if damage comes from out of view
-                if(!DamageIndicatorUI.CheckIfObjectInSight(other.transform))
+                if(!DamageIndicatorUI.CheckIfObjectInSight(other.GetComponent<Projectile>().originTransform))
                 {
-                    DamageIndicatorUI.CreateIndicator(other.transform);
+                    DamageIndicatorUI.CreateIndicator(other.GetComponent<Projectile>().originTransform);
                 }
 
                 TakeDamage(other.gameObject.GetComponent<Projectile>().damage);

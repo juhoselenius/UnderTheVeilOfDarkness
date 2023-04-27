@@ -1,8 +1,6 @@
 using Logic.Game;
-using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Visualization
 {
@@ -34,7 +32,6 @@ namespace Visualization
         {
             direction = new Vector3(0,0,0); 
             health = maxHealth;
-            
         }
 
         private void OnCollisionEnter(Collision collision)
