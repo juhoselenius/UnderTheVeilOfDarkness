@@ -160,7 +160,7 @@ namespace Visualization
                         break;
                     case 4:
                         infoTitleText.text = "Hearing - 4";
-                        infoDescriptionText.text = "Visual hearing\n\nEnemies that make noise are revealed permanently";
+                        infoDescriptionText.text = "Visual hearing\n\nEnemies that make noise are revealed instantly for a longer period of time";
                         sliderFillImage.color = new Color(0.3f, 0.6f, 0);
                         sliderHandleImage.color = new Color(0.2f, 0.4f, 0);
                         break;
