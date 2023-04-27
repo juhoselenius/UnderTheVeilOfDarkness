@@ -49,8 +49,15 @@ namespace Visualization
 
         bool InSight(Transform t)
         {
-            Vector3 screenpoint = cam.WorldToViewportPoint(t.position);
-            return screenpoint.z > 0 && screenpoint.x > 0 && screenpoint.x < 1 && screenpoint.y > 0 && screenpoint.y < 1;
+            if(t != null)
+            {
+                Vector3 screenpoint = cam.WorldToViewportPoint(t.position);
+                return screenpoint.z > 0 && screenpoint.x > 0 && screenpoint.x < 1 && screenpoint.y > 0 && screenpoint.y < 1;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 
