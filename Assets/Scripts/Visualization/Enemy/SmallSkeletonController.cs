@@ -12,6 +12,7 @@ public class SmallSkeletonController: MonoBehaviour
     public float meleeDamage;
     public float meleeRate;
     private float meleeTimer;
+    public bool playerInAttackRange = false;
 
     public PlayerCharacter player;
 
@@ -40,7 +41,7 @@ public class SmallSkeletonController: MonoBehaviour
         RotateToTarget();
         float distanceToTarget = Vector3.Distance(target.position, transform.position);
 
-        if (distanceToTarget <= enemyNavMeshAgent.stoppingDistance)
+        if (playerInAttackRange)
         {
             animator.SetBool("Run", false);
             animator.SetBool("Walk", false);
@@ -91,5 +92,13 @@ public class SmallSkeletonController: MonoBehaviour
     public void Die()
     {
         animator.SetTrigger("Die");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            playerInAttackRange = true;
+        }
     }
 }
