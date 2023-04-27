@@ -96,7 +96,7 @@ namespace Visualization
             {
                 collided = true;
 
-                if(collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeletonEnemy")
+                if(collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeleton")
                 {
                     GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
                 }
