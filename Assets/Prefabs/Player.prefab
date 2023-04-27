@@ -3443,7 +3443,10 @@ MonoBehaviour:
   xRayCamera: {fileID: 205228369341251186}
   hearingSprite:
   - {fileID: 21300000, guid: 52d470bae1a70764695bd86039a4e0ac, type: 3}
-  - {fileID: 21300000, guid: 9fe2f84d0ffc5034796b790ef3d8a0f8, type: 3}
+  - {fileID: 21300000, guid: 730fe92162d4e404380a420a942b4860, type: 3}
+  - {fileID: 21300000, guid: dca749c3b72bf4c49852bde4c1be58d7, type: 3}
+  - {fileID: 21300000, guid: 39f6eecdd6ebf4141a99f4489d5fa7c4, type: 3}
+  - {fileID: 21300000, guid: 48cde59e8c0ac7c48898a603f3e92d9c, type: 3}
   hearingIcon: {fileID: 6177991578103245871}
   filler: {fileID: 4797875946842314562}
 --- !u!1 &8603173092447232321

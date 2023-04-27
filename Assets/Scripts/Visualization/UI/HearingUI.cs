@@ -67,15 +67,28 @@ namespace Visualization
 
         void UpdateHearing(float newValue)
         {
-            if (newValue == 0)
+            switch(newValue)
             {
-                AudioListener.volume = 0f;
-                hearingIcon.sprite = hearingSprite[0];
-            }
-            else
-            {
-                AudioListener.volume = 1.0f;
-                hearingIcon.sprite = hearingSprite[1];
+                case 0:
+                    AudioListener.volume = 0f;
+                    hearingIcon.sprite = hearingSprite[0];
+                    break;
+                case 1:
+                    AudioListener.volume = 1.0f;
+                    hearingIcon.sprite = hearingSprite[1];
+                    break;
+                case 2:
+                    AudioListener.volume = 1.0f;
+                    hearingIcon.sprite = hearingSprite[2];
+                    break;
+                case 3:
+                    AudioListener.volume = 1.0f;
+                    hearingIcon.sprite = hearingSprite[3];
+                    break;
+                case 4:
+                    AudioListener.volume = 1.0f;
+                    hearingIcon.sprite = hearingSprite[4];
+                    break;
             }
         }
     }
