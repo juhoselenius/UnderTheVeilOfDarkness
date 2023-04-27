@@ -94,7 +94,10 @@ namespace Visualization
             {
                 collided = true;
 
-                GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
+                if(collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeletonEnemy")
+                {
+                    GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
+                }
 
                 GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
                

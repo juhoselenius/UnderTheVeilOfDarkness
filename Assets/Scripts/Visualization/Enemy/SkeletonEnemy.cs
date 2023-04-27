@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using Visualization;
@@ -41,6 +42,7 @@ public class SkeletonEnemy : MonoBehaviour
             {
                 animator.SetTrigger("Attack");
                 enemyNavMeshAgent.transform.LookAt(playerTransform);
+                //enemyNavMeshAgent.transform.LookAt(new Vector3(playerTransform.position.x, transform.position.y, playerTransform.position.z));
                 
                 meleeTimer += Time.fixedDeltaTime;
                 if(meleeTimer > meleeRate)
