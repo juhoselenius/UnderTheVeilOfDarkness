@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using Visualization;
+using static UnityEngine.GraphicsBuffer;
 
 public class SkeletonEnemy : MonoBehaviour
 {
@@ -41,9 +42,9 @@ public class SkeletonEnemy : MonoBehaviour
             if(playerInAttackRange)
             {
                 animator.SetTrigger("Attack");
-                enemyNavMeshAgent.transform.LookAt(playerTransform);
-                //enemyNavMeshAgent.transform.LookAt(new Vector3(playerTransform.position.x, transform.position.y, playerTransform.position.z));
-                
+                Vector3 targetPosition = new Vector3(playerTransform.position.x, this.transform.position.y, playerTransform.position.z);
+                enemyNavMeshAgent.transform.LookAt(targetPosition);
+
                 meleeTimer += Time.fixedDeltaTime;
                 if(meleeTimer > meleeRate)
                 {
@@ -54,7 +55,8 @@ public class SkeletonEnemy : MonoBehaviour
             else
             {
                 Run();
-                enemyNavMeshAgent.transform.LookAt(playerTransform);
+                Vector3 targetPosition = new Vector3(playerTransform.position.x, this.transform.position.y, playerTransform.position.z);
+                enemyNavMeshAgent.transform.LookAt(targetPosition);
                 enemyNavMeshAgent.SetDestination(playerTransform.position + new Vector3(0, 0, 2f));
             }
             

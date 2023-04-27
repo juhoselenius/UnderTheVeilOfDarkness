@@ -46,7 +46,8 @@ public class SmallSkeletonController: MonoBehaviour
             animator.SetBool("Walk", false);
         
             animator.SetTrigger("Attack");
-            enemyNavMeshAgent.transform.LookAt(target);
+            Vector3 targetPosition = new Vector3(target.position.x, this.transform.position.y, target.position.z);
+            enemyNavMeshAgent.transform.LookAt(targetPosition);
 
             meleeTimer += Time.fixedDeltaTime;
             if (meleeTimer > meleeRate)
@@ -58,7 +59,8 @@ public class SmallSkeletonController: MonoBehaviour
         else
         {
             Run();
-            enemyNavMeshAgent.transform.LookAt(target);
+            Vector3 targetPosition = new Vector3(target.position.x, this.transform.position.y, target.position.z);
+            enemyNavMeshAgent.transform.LookAt(targetPosition);
             enemyNavMeshAgent.SetDestination(target.position);
         }
     }
@@ -70,7 +72,8 @@ public class SmallSkeletonController: MonoBehaviour
 
     private void RotateToTarget()
     {
-        enemyNavMeshAgent.transform.LookAt(target);
+        Vector3 targetPosition = new Vector3(target.position.x, this.transform.position.y, target.position.z);
+        enemyNavMeshAgent.transform.LookAt(targetPosition);
     }
 
     public void Walk()
