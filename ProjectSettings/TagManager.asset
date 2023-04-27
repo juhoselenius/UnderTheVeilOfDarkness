@@ -19,6 +19,8 @@ TagManager:
   - FireBullet
   - Rock
   - SmallSkeleton
+  - Hitmarker
+  - Crosshair
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,8 @@
 using Logic.Game;
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Visualization
 {
@@ -19,8 +21,7 @@ namespace Visualization
         public float brake;
         public float enemyBaseSpeed;
         public Vector3 direction;
-       
-        
+
         [SerializeField] private float cooldown = 5f;
 
         private void Awake()
@@ -72,7 +73,7 @@ namespace Visualization
         private void EnemyDie()
         {
             // Here code for what happens when the enemy dies
-            _gameManager.SetallEnemiesCleared();
+            _gameManager.SetLevel2EnemiesLeft();
             FindObjectOfType<AudioManager>().Play("EnemyDeath");
             FindObjectOfType<AudioManager>().StopPlay("EnemyWalk");
             Destroy(enemyPrefab);

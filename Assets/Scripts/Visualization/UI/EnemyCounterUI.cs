@@ -33,7 +33,7 @@ public class EnemyCounterUI : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().name == "Level2")
         {
-            enemyCounterText.text = "Enemies left: " + (18 - _gameManager.GetallEnemiesCleared()).ToString();
+            enemyCounterText.text = "Enemies left: " + (_gameManager.GetLevel2EnemiesLeft()).ToString();
         }
     }
 }

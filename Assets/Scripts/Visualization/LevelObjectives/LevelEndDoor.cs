@@ -38,7 +38,7 @@ namespace Visualization
                 OpenDoor();
             }
             
-            if (_gameManager.GetObjectivesCollected() == 2 &&  SceneManager.GetActiveScene().name == "Level2" && _gameManager.GetallEnemiesCleared() == 18)
+            if (SceneManager.GetActiveScene().name == "Level2" && _gameManager.GetLevel2ObjectivesLeft() == 0 && _gameManager.GetLevel2EnemiesLeft() == 0)
             {
                 OpenDoor();
             }

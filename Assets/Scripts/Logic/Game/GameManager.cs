@@ -14,10 +14,10 @@ namespace Logic.Game
             _gameState = initialGameState;
         }
 
-        public event Action<bool> allEnemiesCleared;
-        public event Action<bool> objectivesCollected;
         public event Action<bool> IntroLevelObjectivesCleared;
         public event Action<bool> IntroLevelCleared;
+        public event Action<int> Level2EnemiesLeftChanged;
+        public event Action<int> Level2ObjectivesLeftChanged;
         public event Action<bool> Level2Cleared;
 
         public bool GetMoveLeft()
@@ -58,16 +58,6 @@ namespace Logic.Game
         public bool GetIntroLevelObjectivesCleared()
         {
             return _gameState.introLevelObjectivesCleared;
-        }
-
-        public int GetallEnemiesCleared()
-        {
-            return _gameState.allEnemiesCleared;
-        }
-
-        public int GetObjectivesCollected()
-        {
-            return _gameState.objectivesCollected;
         }
 
         public void UpdateMoveLeft()
@@ -116,11 +106,6 @@ namespace Logic.Game
             return _gameState.introLevelCleared;
         }
 
-        public bool GetLevel2Cleared()
-        {
-            return _gameState.level2Cleared;
-        }
-
         public void SetIntroLevelCleared()
         {
             Debug.Log($"Finished Intro Level!");
@@ -128,23 +113,39 @@ namespace Logic.Game
             IntroLevelCleared?.Invoke(_gameState.introLevelCleared);
         }
 
+        public int GetLevel2EnemiesLeft()
+        {
+            return _gameState.level2EnemiesLeft;
+        }
+
+        public int GetLevel2ObjectivesLeft()
+        {
+            return _gameState.level2ObjectivesLeft;
+        }
+
+        public bool GetLevel2Cleared()
+        {
+            return _gameState.level2Cleared;
+        }
+
+        public void SetLevel2EnemiesLeft()
+        {
+            Debug.Log("Game Manager: Enemy is dead");
+            _gameState.level2EnemiesLeft -=1;
+            Level2EnemiesLeftChanged?.Invoke(GetLevel2EnemiesLeft());
+        }
+
+        public void SetLevel2ObjectivesLeft()
+        {
+            Debug.Log("Game Manager: Level 2 Objective Collected");
+            _gameState.level2ObjectivesLeft -= 1;
+        }
+
         public void SetLevel2Cleared()
         {
             Debug.Log($"Finished Level 2!");
             _gameState.level2Cleared = true;
             Level2Cleared?.Invoke(_gameState.level2Cleared);
-        }
-
-        public void SetallEnemiesCleared()
-        {
-            Debug.Log("AllEnemiesDead");
-            _gameState.allEnemiesCleared +=1 ;
-        }
-
-        public void SetObjectivesCollected()
-        {
-            _gameState.objectivesCollected += 1;
-            Debug.Log("Objectives Collected") ;
         }
     }
 }

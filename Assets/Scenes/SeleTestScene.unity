@@ -400,7 +400,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4411053162758453188, guid: 1bbdb8056c62a3a47ab163d112129dcc, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4411053162758453190, guid: 1bbdb8056c62a3a47ab163d112129dcc, type: 3}
       propertyPath: player
@@ -714,7 +714,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5123345015890038147, guid: 3a4abf399f11a964ba8b8d12352e2c71, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5123345015890038206, guid: 3a4abf399f11a964ba8b8d12352e2c71, type: 3}
       propertyPath: path
@@ -847,7 +847,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026975309}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.8, y: 0, z: 0}
+  m_LocalPosition: {x: 12.87, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -974,9 +974,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc28163fd319974e8979658dc4260ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundTime: 2
-  soundTimer: 0
-  soundTextMove: {fileID: 6995708917316292458, guid: 29f213387011784499a837b64b1e7df5, type: 3}
 --- !u!135 &1562627218
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1064,43 +1061,43 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1269563000476300283, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1269563000627291906, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1269563000741391939, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1269563000777568190, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1269563001111535135, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1269563001144945708, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1269563001702553281, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1269563002336265829, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3307738002158805220, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3307738002229925142, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3307738002525121952, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_Name
@@ -1108,7 +1105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3307738002525121952, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3307738002525121953, guid: 7615d7c50ec938546947c50679b1ceed, type: 3}
       propertyPath: m_RootOrder
@@ -1184,7 +1181,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1731947390}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.7, y: 0, z: 0}
+  m_LocalPosition: {x: -29.2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

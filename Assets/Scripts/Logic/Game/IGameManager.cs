@@ -28,14 +28,13 @@ namespace Logic.Game
         void SetIntroLevelCleared();
 
         // Level 2 Objectives
-        event Action<bool> allEnemiesCleared;
-        int GetallEnemiesCleared();
-        void SetallEnemiesCleared();
-        event Action<bool> objectivesCollected;
-        int GetObjectivesCollected();
-        void SetObjectivesCollected();
-
-        // Level 2
+        event Action<int> Level2EnemiesLeftChanged;
+        int GetLevel2EnemiesLeft();
+        void SetLevel2EnemiesLeft();
+        
+        event Action<int> Level2ObjectivesLeftChanged;
+        int GetLevel2ObjectivesLeft();
+        void SetLevel2ObjectivesLeft();
         
         event Action<bool> Level2Cleared;
         bool GetLevel2Cleared();
