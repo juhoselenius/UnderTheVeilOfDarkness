@@ -4,6 +4,10 @@ namespace Logic.Game
 {
     public interface IGameManager
     {
+        event Action<bool> GamePaused;
+        bool GetGamePaused();
+        void SetGamePaused();
+        
         // Intro Level
         bool GetMoveLeft();
         bool GetMoveRight();

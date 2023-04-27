@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Logic.Game;
 
 namespace Visualization
 {
@@ -29,10 +30,12 @@ namespace Visualization
         public TextMeshProUGUI infoDescriptionText;
 
         private IPlayerManager _playerManager;
+        private IGameManager _gameManager;
     
         void Start()
         {
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
+            _gameManager = ServiceLocator.GetService<IGameManager>();
 
             UpdateSliderValues();
 
@@ -55,6 +58,7 @@ namespace Visualization
             {
                 if(!presetMenu.activeInHierarchy)
                 {
+                    _gameManager.SetGamePaused();
                     Time.timeScale = 0;
                     presetMenu.SetActive(true);
                     Cursor.lockState = CursorLockMode.None;
@@ -62,6 +66,7 @@ namespace Visualization
                 }
                 else
                 {
+                    _gameManager.SetGamePaused();
                     presetMenu.SetActive(false);
                     Cursor.lockState = CursorLockMode.Locked;
                     Time.timeScale = 1;

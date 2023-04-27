@@ -5,6 +5,8 @@ namespace Data
     [Serializable]
     public class Game
     {
+        public bool gamePaused;
+        
         // Intro Level objectives
         public bool moveLeft;
         public bool moveRight;
@@ -25,6 +27,8 @@ namespace Data
 
         public Game()
         {
+            gamePaused = false;
+            
             // Intro level
             moveLeft = false;
             moveRight = false;

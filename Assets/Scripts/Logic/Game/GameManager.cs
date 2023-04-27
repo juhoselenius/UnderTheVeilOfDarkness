@@ -14,12 +14,32 @@ namespace Logic.Game
             _gameState = initialGameState;
         }
 
+        public event Action<bool> GamePaused;
         public event Action<bool> IntroLevelObjectivesCleared;
         public event Action<bool> IntroLevelCleared;
         public event Action<int> Level2EnemiesLeftChanged;
         public event Action<int> Level2ObjectivesLeftChanged;
         public event Action<bool> Level2Cleared;
 
+        public bool GetGamePaused()
+        {
+            return _gameState.gamePaused;
+        }
+
+        public void SetGamePaused()
+        {
+            if(_gameState.gamePaused)
+            {
+                _gameState.gamePaused = false;
+            }
+            else
+            {
+                _gameState.gamePaused = true;
+            }
+
+            GamePaused?.Invoke(_gameState.gamePaused);
+        }
+        
         public bool GetMoveLeft()
         {
             return _gameState.moveLeft;
