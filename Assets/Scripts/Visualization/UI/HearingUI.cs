@@ -10,20 +10,20 @@ namespace Visualization
 
         public float currentHearingCooldown;
         public float maxHearingCooldown;
+        public float maxPulseCooldown;
+        public float maxRayCooldown;
         public GameObject xRayCamera;
 
         public Sprite[] hearingSprite;
         public Image hearingIcon;
         public Image filler;
 
-        // Start is called before the first frame update
         void Awake()
         {
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
             currentHearingCooldown = 0;
         }
 
-        // Update is called once per frame
         void Update()
         {
             // Activating X-Ray camera with "Q"
@@ -46,6 +46,16 @@ namespace Visualization
                         {
                             xRayCamera.SetActive(true);
                         }
+
+                        if(_playerManager.GetHearing() == 3f)
+                        {
+                            maxHearingCooldown = maxPulseCooldown;
+                        }
+                        else
+                        {
+                            maxHearingCooldown = maxRayCooldown;
+                        }
+
                         currentHearingCooldown = maxHearingCooldown;
                     }
                 }

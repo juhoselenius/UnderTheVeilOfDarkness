@@ -89,8 +89,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   XRayShader: {fileID: 4800000, guid: fbf7cc3a671f6264fa417b5d451e523f, type: 3}
-  transitionTimePulse: 5
-  transitionTimeXRay: 10
+  transitionTimePulse: 4
+  transitionTimeXRay: 8
   startNearClip: 0.5
   endNearClip: 99
   startFarClip: 1
@@ -3439,7 +3439,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHearingCooldown: 0
-  maxHearingCooldown: 11
+  maxHearingCooldown: 16
+  maxPulseCooldown: 11
+  maxRayCooldown: 16
   xRayCamera: {fileID: 205228369341251186}
   hearingSprite:
   - {fileID: 21300000, guid: 52d470bae1a70764695bd86039a4e0ac, type: 3}
