@@ -106,9 +106,7 @@ namespace Visualization
                 health -= (collidedObjectDamage / 30);
                 Instantiate(impact, transform.position, Quaternion.identity);
                 if (cooldownTimer > 0)return;
-                cooldownTimer = burnCoolDown;            
-                    
-                
+                cooldownTimer = burnCoolDown;                         
             }
         }
     }

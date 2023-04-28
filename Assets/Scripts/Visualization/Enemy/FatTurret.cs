@@ -204,11 +204,9 @@ public class FatTurret : MonoBehaviour
             cooldownTimer = cooldown;
             Instantiate(turretAmmo, shootPoint.position, shootPoint.rotation);
             ps1.Play();
-        
-        
+              
     }
 
-    
 }
 
     
