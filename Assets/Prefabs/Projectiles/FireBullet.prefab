@@ -137,6 +137,8 @@ MonoBehaviour:
   projectileSpeed: 0
   projectileBaseSpeed: 45
   beam: {fileID: 0}
+  rb: {fileID: 0}
+  originTransform: {fileID: 0}
 --- !u!1001 &4405891198184947471
 PrefabInstance:
   m_ObjectHideFlags: 0

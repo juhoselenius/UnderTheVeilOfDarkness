@@ -4885,6 +4885,7 @@ GameObject:
   - component: {fileID: 8931884065720748852}
   - component: {fileID: -7401065181555983549}
   - component: {fileID: 427690990311252536}
+  - component: {fileID: 5882963886678964648}
   m_Layer: 2
   m_Name: bullet_particle
   m_TagString: Bullet
@@ -5003,13 +5004,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impactVFX: {fileID: 4138439576473081691, guid: ca264e343fe91214c8d1a01abbf6b878, type: 3}
-  explosionFX: {fileID: 0}
+  explosionFX: {fileID: 4138439576473081691, guid: ca264e343fe91214c8d1a01abbf6b878, type: 3}
   trailFX: {fileID: 7370923005276404255}
   damage: 0
   baseDamage: 10
   projectileSpeed: 0
   projectileBaseSpeed: 35
   beam: {fileID: 5060409426998525973}
+  rb: {fileID: 8931884065720748852}
+  originTransform: {fileID: 0}
 --- !u!136 &427690990311252536
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5024,6 +5027,19 @@ CapsuleCollider:
   m_Height: 0.121707864
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &5882963886678964648
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5405972755638468422}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.039354004, y: 3, z: 0.10560568}
+  m_Center: {x: 0, y: 0.026119724, z: -0.000000007450581}
 --- !u!1 &7370923005276404255
 GameObject:
   m_ObjectHideFlags: 0

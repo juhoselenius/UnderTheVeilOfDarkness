@@ -19,6 +19,10 @@ namespace Visualization
         public float brake;
         public float enemyBaseSpeed;
         public Vector3 direction;
+        private float collidedObjectDamage;
+        public GameObject impact;
+        public Vector3 burnEffect;
+        private float burnCoolDown;
 
         [SerializeField] private float cooldown = 5f;
 
@@ -26,6 +30,7 @@ namespace Visualization
         {
             _gameManager = ServiceLocator.GetService<IGameManager>();
             enemyBaseSpeed = 1f;
+            burnCoolDown = 0.5f;
         }
 
         void Start()
@@ -37,7 +42,7 @@ namespace Visualization
         private void OnCollisionEnter(Collision collision)
         {
             Debug.Log("Enemy was hit");
-            if(collision.gameObject.tag == "PlayerProjectile" || collision.gameObject.tag =="Bullet" || collision.gameObject.tag == "FireBullet" || collision.gameObject.tag == "Rock")
+            if(collision.gameObject.tag == "PlayerProjectile" || collision.gameObject.tag =="Bullet" || collision.gameObject.tag == "Rock")
             {
                 health -= collision.gameObject.GetComponent<Projectile>().damage;                                        
                 direction = (transform.position - collision.transform.position).normalized;
@@ -59,6 +64,14 @@ namespace Visualization
                 rb.isKinematic = false;
                 */
                 
+            }
+            else if(collision.gameObject.tag == "FireBullet")
+            {             
+                direction = (transform.position - collision.transform.position).normalized;              
+                
+                collidedObjectDamage = collision.gameObject.GetComponent<Projectile>().damage;
+                //StartCoroutine(knockBack());
+                burn();
             }
 
             if (health <= 0)
@@ -84,5 +97,19 @@ namespace Visualization
                 yield return null;
             }
         }
+
+        private void burn()
+        {
+            float burntime = Time.time;
+            
+                cooldownTimer -= Time.deltaTime;
+                health -= (collidedObjectDamage / 30);
+                Instantiate(impact, transform.position, Quaternion.identity);
+                if (cooldownTimer > 0)return;
+                cooldownTimer = burnCoolDown;            
+                    
+                
+            }
+        }
     }
-}
+

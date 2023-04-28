@@ -11,7 +11,7 @@ namespace Visualization
         public GameObject trailFX;
         public float damage;
         public float baseDamage;
-
+        private bool enemyCollided;
         public float projectileSpeed;
         public float projectileBaseSpeed;
     
@@ -20,7 +20,7 @@ namespace Visualization
         public ParticleSystem beam;
         private float lifetime;
         private float lifeTimer;
-
+        public Rigidbody rb;
         public IPlayerManager _playerManager;
 
         public Transform originTransform;
@@ -87,6 +87,7 @@ namespace Visualization
             {
                 Destroy(gameObject);
             }
+
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -159,22 +160,19 @@ namespace Visualization
             if (gameObject.tag == "Bullet" && collision.gameObject.tag != "Bullet" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
             {
                 collided = true;
-
+                rb.velocity = new Vector3(0, 0, 0);
+            }
                 if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeletonEnemy")
                 {
+                    enemyCollided= true;    
                     GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
+                    GameObject impact = Instantiate(explosionFX, collision.contacts[0].point, Quaternion.identity);
+                    Debug.Log("EnemyProjectile collided with " + collision.gameObject.tag);
+  
+                    Destroy(gameObject);
                 }
-
-                GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
-
-                Debug.Log("EnemyProjectile collided with " + collision.gameObject.tag);
-
-                Destroy(impact, 2f);
-                FindObjectOfType<AudioManager>().Play("OnHit");
-
-
-                Destroy(gameObject);
+            
             }
         }
     }
-}
+

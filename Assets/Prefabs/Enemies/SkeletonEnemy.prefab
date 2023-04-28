@@ -676,7 +676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6b11eec8914d147b6f8be77da6237a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
+  playerCameraTransform: {fileID: 0}
   player: {fileID: 0}
   patrolPath: {fileID: 0}
   playerInDetectionRange: 0
@@ -721,6 +721,8 @@ MonoBehaviour:
   brake: 0
   enemyBaseSpeed: 0
   direction: {x: 0, y: 0, z: 0}
+  impact: {fileID: 4867995539832589939, guid: cfe820f90f2351e4a85fb43fe86f449a, type: 3}
+  burnEffect: {x: 0, y: 0, z: 0}
   cooldown: 5
 --- !u!136 &4411053162758453184
 CapsuleCollider:
