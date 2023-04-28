@@ -2,23 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeRangeSmall : MonoBehaviour
+namespace Visualization
 {
-    public SmallEnemy smally;
-
-    private void OnTriggerEnter(Collider other)
+    public class MeleeRangeSmall : MonoBehaviour
     {
-        if (other.tag == "Player")
+        public SmallEnemy smally;
+
+        private void OnTriggerEnter(Collider other)
         {
-            smally.playerInAttackRange = true;
+            if (other.tag == "Player")
+            {
+                smally.playerInAttackRange = true;
+            }
         }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
+        private void OnTriggerExit(Collider other)
         {
-            smally.playerInAttackRange = false;
+            if (other.tag == "Player")
+            {
+                smally.playerInAttackRange = false;
+            }
         }
     }
 }
