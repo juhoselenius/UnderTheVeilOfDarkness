@@ -7394,7 +7394,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Gun with base ammo
+  m_text: Gun and ammo with no perks
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7e368aaddf6eb3848a651c07d35d4661, type: 2}
   m_sharedMaterial: {fileID: 2120275704088736017, guid: 7e368aaddf6eb3848a651c07d35d4661, type: 2}
@@ -9499,7 +9499,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Gun with faster ammo
+  m_text: Gun with ammo that sticks to surfaces
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7e368aaddf6eb3848a651c07d35d4661, type: 2}
   m_sharedMaterial: {fileID: 2120275704088736017, guid: 7e368aaddf6eb3848a651c07d35d4661, type: 2}

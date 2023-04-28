@@ -54,6 +54,13 @@ public class SmallSkeletonController: MonoBehaviour
             if (meleeTimer > meleeRate)
             {
                 meleeTimer = 0;
+
+                // Show damage indicator if damage comes from out of view
+                if (!DamageIndicatorUI.CheckIfObjectInSight(gameObject.transform))
+                {
+                    DamageIndicatorUI.CreateIndicator(gameObject.transform);
+                }
+
                 player.TakeDamage(meleeDamage);
             }
         }
