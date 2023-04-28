@@ -672,6 +672,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1236954069}
+  - component: {fileID: 1236954070}
   m_Layer: 0
   m_Name: LevelCompleteControl
   m_TagString: Untagged
@@ -694,6 +695,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1236954070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236954068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c2bd927dfc434b4fbf9c3eedb3aed38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisRoundTime: {fileID: 348155519}
+  bestTime: {fileID: 119596130}
 --- !u!1 &1304921743
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,33 +1238,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &2844837955269175545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2844837955269175551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a36a1d26e1f89243a93fbb6acde0c9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  totalAttributeValue: 0
-  presetMenu: {fileID: 2844837956386599653}
-  sightSlider: {fileID: 0}
-  hearingSlider: {fileID: 0}
-  movementSlider: {fileID: 0}
-  attackSlider: {fileID: 0}
-  defenseSlider: {fileID: 0}
-  totalAttributeValueText: {fileID: 0}
-  sightValueText: {fileID: 0}
-  hearingValueText: {fileID: 0}
-  movementValueText: {fileID: 0}
-  attackValueText: {fileID: 0}
-  defenseValueText: {fileID: 0}
-  infoTitleText: {fileID: 6910418842173505395}
-  infoDescriptionText: {fileID: 6910418841473165220}
 --- !u!4 &2844837955269175550
 Transform:
   m_ObjectHideFlags: 0
@@ -1276,7 +1264,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2844837955269175550}
-  - component: {fileID: 2844837955269175545}
   m_Layer: 0
   m_Name: Menu
   m_TagString: Untagged

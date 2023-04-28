@@ -5560,7 +5560,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2018693157}
         m_TargetAssemblyTypeName: MenuControl, Assembly-CSharp
-        m_MethodName: LoadLevel2
+        m_MethodName: LoadLevel3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
