@@ -1,126 +1,134 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using Visualization;
-using static UnityEngine.GraphicsBuffer;
 
-public class SkeletonEnemy : MonoBehaviour
+namespace Visualization
 {
-    private NavMeshAgent enemyNavMeshAgent;
-    private Animator animator;
-    private SphereCollider sphereCollider;
-    private int nextWaypoint;
-    private float waitTimer;
-
-    private float meleeTimer;
-
-    public Transform playerTransform; // Main Camera of the player has to be dragged here
-    public PlayerCharacter player;
-    public Path patrolPath;
-    public bool playerInDetectionRange = false;
-    public bool playerInAttackRange = false;
-    public float walkSpeed;
-    public float runSpeed;
-    public float sightRange;
-    public float patrolTurnWaitTime;
-    public float meleeDamage;
-    public float meleeRate;
-
-    private void Awake()
+    public class SkeletonEnemy : MonoBehaviour
     {
-        enemyNavMeshAgent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
-        sphereCollider = GetComponent<SphereCollider>();
-        sphereCollider.radius = sightRange;
-    }
+        private NavMeshAgent enemyNavMeshAgent;
+        private Animator animator;
+        private SphereCollider sphereCollider;
+        private int nextWaypoint;
+        private float waitTimer;
 
-    void FixedUpdate()
-    {
-        
-        if (playerInDetectionRange)
+        private float meleeTimer;
+
+        public Transform playerCameraTransform; // Main Camera of the player has to be dragged here
+        public PlayerCharacter player;
+        public Path patrolPath;
+        public bool playerInDetectionRange = false;
+        public bool playerInAttackRange = false;
+        public float walkSpeed;
+        public float runSpeed;
+        public float sightRange;
+        public float patrolTurnWaitTime;
+        public float meleeDamage;
+        public float meleeRate;
+
+        private void Awake()
         {
-            if(playerInAttackRange)
-            {
-                animator.SetTrigger("Attack");
-                Vector3 targetPosition = new Vector3(playerTransform.position.x, this.transform.position.y, playerTransform.position.z);
-                enemyNavMeshAgent.transform.LookAt(targetPosition);
+            enemyNavMeshAgent = GetComponent<NavMeshAgent>();
+            animator = GetComponent<Animator>();
+            sphereCollider = GetComponent<SphereCollider>();
+            sphereCollider.radius = sightRange;
+        }
 
-                meleeTimer += Time.fixedDeltaTime;
-                if(meleeTimer > meleeRate)
+        void FixedUpdate()
+        {
+        
+            if (playerInDetectionRange)
+            {
+                if(playerInAttackRange)
                 {
-                    meleeTimer = 0;
-                    player.TakeDamage(meleeDamage);
+                    animator.SetTrigger("Attack");
+                    Vector3 targetPosition = new Vector3(playerCameraTransform.position.x, this.transform.position.y, playerCameraTransform.position.z);
+                    enemyNavMeshAgent.transform.LookAt(targetPosition);
+
+                    meleeTimer += Time.fixedDeltaTime;
+                    if(meleeTimer > meleeRate)
+                    {
+                        meleeTimer = 0;
+
+                        // Show damage indicator if damage comes from out of view
+                        if (!DamageIndicatorUI.CheckIfObjectInSight(gameObject.transform))
+                        {
+                            DamageIndicatorUI.CreateIndicator(gameObject.transform);
+                        }
+
+                        player.TakeDamage(meleeDamage);
+                    }
                 }
+                else
+                {
+                    Run();
+                    Vector3 targetPosition = new Vector3(playerCameraTransform.position.x, this.transform.position.y, playerCameraTransform.position.z);
+                    enemyNavMeshAgent.transform.LookAt(targetPosition);
+                    enemyNavMeshAgent.SetDestination(playerCameraTransform.position + new Vector3(0, 0, 2f));
+                }
+            
             }
             else
             {
-                Run();
-                Vector3 targetPosition = new Vector3(playerTransform.position.x, this.transform.position.y, playerTransform.position.z);
-                enemyNavMeshAgent.transform.LookAt(targetPosition);
-                enemyNavMeshAgent.SetDestination(playerTransform.position + new Vector3(0, 0, 2f));
+                animator.SetBool("Run", false);
+                Patrol();
             }
-            
         }
-        else
-        {
-            animator.SetBool("Run", false);
-            Patrol();
-        }
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Player")
+        private void OnTriggerEnter(Collider other)
         {
-            playerInDetectionRange = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            playerInDetectionRange = false;
-        }
-    }
-
-    void Patrol()
-    {
-        enemyNavMeshAgent.destination = patrolPath.waypoints[nextWaypoint].position;
-        enemyNavMeshAgent.isStopped = false;
-        Walk();
-
-        // Changing waypoint when current waypoint is reached through the NavMeshAgent
-        if (enemyNavMeshAgent.remainingDistance <= enemyNavMeshAgent.stoppingDistance && !enemyNavMeshAgent.pathPending)
-        {
-            animator.SetBool("Walk", false);
-            waitTimer += Time.deltaTime;
-            if (waitTimer > patrolTurnWaitTime)
+            if(other.tag == "Player")
             {
-                // Looping through waypoints
-                nextWaypoint = (nextWaypoint + 1) % patrolPath.waypoints.Length;
-                waitTimer = 0;
-                Walk();
+                playerInDetectionRange = true;
             }
         }
-    }
 
-    public void Walk()
-    {
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.tag == "Player")
+            {
+                playerInDetectionRange = false;
+            }
+        }
+
+        void Patrol()
+        {
+            enemyNavMeshAgent.destination = patrolPath.waypoints[nextWaypoint].position;
+            enemyNavMeshAgent.isStopped = false;
+            Walk();
+
+            // Changing waypoint when current waypoint is reached through the NavMeshAgent
+            if (enemyNavMeshAgent.remainingDistance <= enemyNavMeshAgent.stoppingDistance && !enemyNavMeshAgent.pathPending)
+            {
+                animator.SetBool("Walk", false);
+                waitTimer += Time.deltaTime;
+                if (waitTimer > patrolTurnWaitTime)
+                {
+                    // Looping through waypoints
+                    nextWaypoint = (nextWaypoint + 1) % patrolPath.waypoints.Length;
+                    waitTimer = 0;
+                    Walk();
+                }
+            }
+        }
+
+        public void Walk()
+        {
         
-        enemyNavMeshAgent.speed = walkSpeed;
-        animator.SetBool("Walk", true);
-    }
+            enemyNavMeshAgent.speed = walkSpeed;
+            animator.SetBool("Walk", true);
+        }
 
-    public void Run()
-    {
+        public void Run()
+        {
         
-        enemyNavMeshAgent.speed = runSpeed;
-        animator.SetBool("Run", true);
-    }
+            enemyNavMeshAgent.speed = runSpeed;
+            animator.SetBool("Run", true);
+        }
 
-    public void Die()
-    {
-        animator.SetTrigger("Die");
+        public void Die()
+        {
+            animator.SetTrigger("Die");
+        }
     }
 }

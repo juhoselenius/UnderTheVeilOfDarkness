@@ -1,24 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeRangeDetection : MonoBehaviour
+namespace Visualization
 {
-    public SkeletonEnemy skelly;
-
-    private void OnTriggerEnter(Collider other)
+    public class MeleeRangeDetection : MonoBehaviour
     {
-        if(other.tag == "Player")
+        public SkeletonEnemy skelly;
+
+        private void OnTriggerEnter(Collider other)
         {
-            skelly.playerInAttackRange = true;
+            if(other.tag == "Player")
+            {
+                skelly.playerInAttackRange = true;
+            }
         }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
+        private void OnTriggerExit(Collider other)
         {
-            skelly.playerInAttackRange = false;
+            if (other.tag == "Player")
+            {
+                skelly.playerInAttackRange = false;
+            }
         }
     }
 }

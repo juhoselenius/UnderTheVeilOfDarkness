@@ -25,6 +25,9 @@ namespace Data
         public int level2ObjectivesLeft;
         public bool level2Cleared;
 
+        public int level2CurrentTime;
+        public int level2BestTime;
+
         public Game()
         {
             gamePaused = false;
@@ -43,9 +46,12 @@ namespace Data
             introLevelCleared = false;
 
             // Level 2
-            level2EnemiesLeft = 18;
+            level2EnemiesLeft = 12;
             level2ObjectivesLeft = 2;
             level2Cleared = false;
+
+            level2CurrentTime = 0;
+            level2BestTime = 1000000;
         }
     }
 }

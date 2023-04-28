@@ -167,5 +167,25 @@ namespace Logic.Game
             _gameState.level2Cleared = true;
             Level2Cleared?.Invoke(_gameState.level2Cleared);
         }
+
+        public int GetLevel2CurrentTime()
+        {
+            return _gameState.level2CurrentTime;
+        }
+
+        public void SetLevel2CurrentTime(int currentLevelTime)
+        {
+            _gameState.level2CurrentTime = currentLevelTime;
+        }
+
+        public int GetLevel2BestTime()
+        {
+            return _gameState.level2BestTime;
+        }
+
+        public void SetLevel2BestTime(int newTime)
+        {
+            _gameState.level2BestTime = newTime;
+        }
     }
 }

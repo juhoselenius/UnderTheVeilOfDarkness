@@ -43,5 +43,10 @@ namespace Logic.Game
         event Action<bool> Level2Cleared;
         bool GetLevel2Cleared();
         void SetLevel2Cleared();
+
+        int GetLevel2CurrentTime();
+        void SetLevel2CurrentTime(int currentLevelTime);
+        int GetLevel2BestTime();
+        void SetLevel2BestTime(int newTime);
     }
 }
