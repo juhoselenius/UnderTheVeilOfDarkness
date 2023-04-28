@@ -53,6 +53,12 @@ public class MenuControl : MonoBehaviour
         SceneManager.LoadScene("Level2");
     }
 
+    public void LoadLevel3()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        SceneManager.LoadScene("Level3");
+    }
+
     public void QuitApplication()
     {
         Application.Quit();

@@ -42,6 +42,13 @@ namespace Visualization
             if (other.gameObject.tag == "EnemyProjectile")
             {
                 Debug.Log("Player got hit by enemy projectile");
+
+                // Show damage indicator if damage comes from out of view
+                if(!DamageIndicatorUI.CheckIfObjectInSight(other.GetComponent<Projectile>().originTransform))
+                {
+                    DamageIndicatorUI.CreateIndicator(other.GetComponent<Projectile>().originTransform);
+                }
+
                 TakeDamage(other.gameObject.GetComponent<Projectile>().damage);
                 direction = (GameObject.FindGameObjectWithTag("Player").transform.position - other.gameObject.transform.position).normalized;
                 //Debug.Log("Direction PC: " + direction);

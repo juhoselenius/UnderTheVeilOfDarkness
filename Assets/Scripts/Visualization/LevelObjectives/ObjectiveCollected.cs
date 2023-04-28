@@ -19,7 +19,7 @@ namespace Visualization
         {
             if (other.tag == "Player")
             {
-                _gameManager.SetObjectivesCollected();
+                _gameManager.SetLevel2ObjectivesLeft();
                 Destroy(gameObject);
             }
         }

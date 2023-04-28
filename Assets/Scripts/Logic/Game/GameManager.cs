@@ -14,12 +14,32 @@ namespace Logic.Game
             _gameState = initialGameState;
         }
 
-        public event Action<bool> allEnemiesCleared;
-        public event Action<bool> objectivesCollected;
+        public event Action<bool> GamePaused;
         public event Action<bool> IntroLevelObjectivesCleared;
         public event Action<bool> IntroLevelCleared;
+        public event Action<int> Level2EnemiesLeftChanged;
+        public event Action<int> Level2ObjectivesLeftChanged;
         public event Action<bool> Level2Cleared;
 
+        public bool GetGamePaused()
+        {
+            return _gameState.gamePaused;
+        }
+
+        public void SetGamePaused()
+        {
+            if(_gameState.gamePaused)
+            {
+                _gameState.gamePaused = false;
+            }
+            else
+            {
+                _gameState.gamePaused = true;
+            }
+
+            GamePaused?.Invoke(_gameState.gamePaused);
+        }
+        
         public bool GetMoveLeft()
         {
             return _gameState.moveLeft;
@@ -58,16 +78,6 @@ namespace Logic.Game
         public bool GetIntroLevelObjectivesCleared()
         {
             return _gameState.introLevelObjectivesCleared;
-        }
-
-        public int GetallEnemiesCleared()
-        {
-            return _gameState.allEnemiesCleared;
-        }
-
-        public int GetObjectivesCollected()
-        {
-            return _gameState.objectivesCollected;
         }
 
         public void UpdateMoveLeft()
@@ -116,16 +126,39 @@ namespace Logic.Game
             return _gameState.introLevelCleared;
         }
 
-        public bool GetLevel2Cleared()
-        {
-            return _gameState.level2Cleared;
-        }
-
         public void SetIntroLevelCleared()
         {
             Debug.Log($"Finished Intro Level!");
             _gameState.introLevelCleared = true;
             IntroLevelCleared?.Invoke(_gameState.introLevelCleared);
+        }
+
+        public int GetLevel2EnemiesLeft()
+        {
+            return _gameState.level2EnemiesLeft;
+        }
+
+        public int GetLevel2ObjectivesLeft()
+        {
+            return _gameState.level2ObjectivesLeft;
+        }
+
+        public bool GetLevel2Cleared()
+        {
+            return _gameState.level2Cleared;
+        }
+
+        public void SetLevel2EnemiesLeft()
+        {
+            Debug.Log("Game Manager: Enemy is dead");
+            _gameState.level2EnemiesLeft -=1;
+            Level2EnemiesLeftChanged?.Invoke(GetLevel2EnemiesLeft());
+        }
+
+        public void SetLevel2ObjectivesLeft()
+        {
+            Debug.Log("Game Manager: Level 2 Objective Collected");
+            _gameState.level2ObjectivesLeft -= 1;
         }
 
         public void SetLevel2Cleared()
@@ -135,16 +168,24 @@ namespace Logic.Game
             Level2Cleared?.Invoke(_gameState.level2Cleared);
         }
 
-        public void SetallEnemiesCleared()
+        public int GetLevel2CurrentTime()
         {
-            Debug.Log("AllEnemiesDead");
-            _gameState.allEnemiesCleared +=1 ;
+            return _gameState.level2CurrentTime;
         }
 
-        public void SetObjectivesCollected()
+        public void SetLevel2CurrentTime(int currentLevelTime)
         {
-            _gameState.objectivesCollected += 1;
-            Debug.Log("Objectives Collected") ;
+            _gameState.level2CurrentTime = currentLevelTime;
+        }
+
+        public int GetLevel2BestTime()
+        {
+            return _gameState.level2BestTime;
+        }
+
+        public void SetLevel2BestTime(int newTime)
+        {
+            _gameState.level2BestTime = newTime;
         }
     }
 }

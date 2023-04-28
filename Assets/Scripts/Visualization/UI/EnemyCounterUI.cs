@@ -22,18 +22,18 @@ public class EnemyCounterUI : MonoBehaviour
         {
             enemyCounterText.text = "Enemies left: 0";
         }
-        if (SceneManager.GetActiveScene().name == "Level2")
+        if (SceneManager.GetActiveScene().name == "Level3")
         {
-            enemyCounterText.text = "Enemies left: 18";
+            enemyCounterText.text = "Enemies left: 12";
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(SceneManager.GetActiveScene().name == "Level2")
+        if(SceneManager.GetActiveScene().name == "Level3")
         {
-            enemyCounterText.text = "Enemies left: " + (18 - _gameManager.GetallEnemiesCleared()).ToString();
+            enemyCounterText.text = "Enemies left: " + (_gameManager.GetLevel2EnemiesLeft()).ToString();
         }
     }
 }

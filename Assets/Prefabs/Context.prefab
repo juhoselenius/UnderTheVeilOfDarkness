@@ -68,6 +68,7 @@ MonoBehaviour:
     projectileColliderRadiusFactor: 0.0079
     defenseFactor: 0.5
   initialGameState:
+    gamePaused: 0
     moveLeft: 0
     moveRight: 0
     moveForward: 0
@@ -77,9 +78,11 @@ MonoBehaviour:
     changePreset: 0
     introLevelObjectivesCleared: 0
     introLevelCleared: 0
-    allEnemiesCleared: 0
-    objectivesCollected: 0
+    level2EnemiesLeft: 12
+    level2ObjectivesLeft: 2
     level2Cleared: 0
+    level2CurrentTime: 0
+    level2BestTime: 0
   initialOptionsState:
     mouseSensitivity: 40
     reverseMouse: 0

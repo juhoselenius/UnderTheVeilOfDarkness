@@ -1,3 +1,4 @@
+using Logic.Game;
 using Logic.Player;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace Visualization
     public class WeaponManager : MonoBehaviour
     {
         public IPlayerManager _playerManager;
+        private IGameManager _gameManager;
 
         public Camera playerCam;
         public Transform projectileSpawn;
@@ -34,10 +36,14 @@ namespace Visualization
         
         [SerializeField] private float cooldownTimeOverload;
         [SerializeField] private float cooldownTimeShooting;
+
+        private bool paused;
         
         void Awake()
         {
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
+            _gameManager = ServiceLocator.GetService<IGameManager>();
+
             fireRate = baseFireRate + _playerManager.GetAttack() * 0.2f; // The fire rate factor
             attack = _playerManager.GetAttack();
             projectile = projectiles[(int)attack];
@@ -50,11 +56,13 @@ namespace Visualization
             currentOverLoad = 0f;
             cooldownTimeOverload = 5f;
             cooldownTimeShooting = 10f;
+
+            paused = false;
         }
 
         void Update()
         {
-            if(Input.GetButton("Fire1") && Time.time >= timeToFire)
+            if(Input.GetButton("Fire1") && Time.time >= timeToFire && !paused)
             {
                 if(overLoaded)
                 {
@@ -190,7 +198,10 @@ namespace Visualization
         private void OnEnable()
         {
             _playerManager.AttackChanged += ChangeFireRate;
-            ChangeFireRate(_playerManager.GetAttack());                  
+            ChangeFireRate(_playerManager.GetAttack());
+
+            _gameManager.GamePaused += PauseKeys;
+            PauseKeys(_gameManager.GetGamePaused());
         }
 
         private void OnDisable()
@@ -223,8 +234,12 @@ namespace Visualization
             {
                 primaryWeapon.SetActive(true);
                 hand.SetActive(false);
-                
             }
-        }     
+        }
+
+        private void PauseKeys(bool isGamePaused)
+        {
+            paused = isGamePaused;
+        }
     }
 }

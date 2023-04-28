@@ -1,8 +1,6 @@
 using Logic.Player;
 using UnityEngine;
 
-// https://www.youtube.com/watch?v=T5y7L1siFSY
-
 namespace Visualization
 {
     [RequireComponent(typeof(Rigidbody))]
@@ -24,6 +22,8 @@ namespace Visualization
         private float lifeTimer;
 
         public IPlayerManager _playerManager;
+
+        public Transform originTransform;
 
         private void Awake()
         {
@@ -81,24 +81,25 @@ namespace Visualization
 
         private void Update()
         {
-            if (gameObject.tag != "Bullet")
+            lifeTimer += Time.deltaTime;
+        
+            if(lifeTimer > lifetime)
             {
-                lifeTimer += Time.deltaTime;
-
-                if (lifeTimer > lifetime)
-                {
-                    Destroy(gameObject);
-                }
+                Destroy(gameObject);
             }
         }
 
         private void OnCollisionEnter(Collision collision)
         {
             // Player projectile collisions
-            
             if(gameObject.tag == "PlayerProjectile" && collision.gameObject.tag != "PlayerProjectile" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
             {
                 collided = true;
+
+                if(collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeleton")
+                {
+                    GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
+                }
 
                 GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
                
@@ -106,7 +107,6 @@ namespace Visualization
 
                 Destroy(gameObject);
             }
-            
 
             // Enemy projectile collisions
             if(gameObject.tag == "EnemyProjectile" && collision.gameObject.tag != "EnemyProjectile" && collision.gameObject.tag != "Enemy")
@@ -125,6 +125,12 @@ namespace Visualization
             if (gameObject.tag == "IceBullet" && collision.gameObject.tag != "IceBullet" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
             {
                 collided = true;
+
+                if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeletonEnemy")
+                {
+                    GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
+                }
+
                 GameObject impact = Instantiate(explosionFX, collision.contacts[0].point, Quaternion.identity);
                 //GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
 
@@ -136,6 +142,12 @@ namespace Visualization
             if (gameObject.tag == "FireBullet" && collision.gameObject.tag != "FireBullet" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
             {
                 collided = true;
+
+                if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeletonEnemy")
+                {
+                    GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
+                }
+
                 GameObject impact = Instantiate(explosionFX, collision.contacts[0].point, Quaternion.identity);
                 //GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
 
@@ -144,22 +156,25 @@ namespace Visualization
                 Destroy(gameObject);
             }
 
-            
             if (gameObject.tag == "Bullet" && collision.gameObject.tag != "Bullet" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
             {
                 collided = true;
-                //GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
-               
+
+                if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeletonEnemy")
+                {
+                    GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
+                }
+
+                GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
+
                 Debug.Log("EnemyProjectile collided with " + collision.gameObject.tag);
 
-                //Destroy(impact, 2f);
+                Destroy(impact, 2f);
                 FindObjectOfType<AudioManager>().Play("OnHit");
 
 
                 Destroy(gameObject);
-
             }
-            
         }
     }
 }

@@ -1,3 +1,4 @@
+using Logic.Game;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,15 +7,18 @@ using UnityEngine.SceneManagement;
 public class PauseMenuControl : MonoBehaviour
 {
     public GameObject pauseMenu;
-    private bool isPaused;
+    private IGameManager _gameManager;
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        _gameManager = ServiceLocator.GetService<IGameManager>();
+    }
+
     void Start()
     {
         pauseMenu.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Toggling Pause Menu on and off
@@ -22,32 +26,29 @@ public class PauseMenuControl : MonoBehaviour
         {
             if (!pauseMenu.activeInHierarchy)
             {
-                Time.timeScale = 0;
+                Pause();
                 pauseMenu.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                pause();
             }
             else
             {
+                Resume();
                 pauseMenu.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
-                Time.timeScale = 1;
-                resume();
             }
         }
     }
-    private void pause()
+
+    private void Pause()
     {
-        
         Time.timeScale = 0;
-        isPaused = true;
-
+        _gameManager.SetGamePaused();
     }
-    private void resume()
-    {
 
+    private void Resume()
+    {
         Time.timeScale = 1;
-        isPaused = false;
+        _gameManager.SetGamePaused();
     }
 }

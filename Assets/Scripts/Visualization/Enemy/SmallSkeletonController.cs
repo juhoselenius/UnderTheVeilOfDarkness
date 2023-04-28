@@ -12,6 +12,7 @@ public class SmallSkeletonController: MonoBehaviour
     public float meleeDamage;
     public float meleeRate;
     private float meleeTimer;
+    public bool playerInAttackRange = false;
 
     public PlayerCharacter player;
 
@@ -40,25 +41,34 @@ public class SmallSkeletonController: MonoBehaviour
         RotateToTarget();
         float distanceToTarget = Vector3.Distance(target.position, transform.position);
 
-        if (distanceToTarget <= enemyNavMeshAgent.stoppingDistance)
+        if (playerInAttackRange)
         {
             animator.SetBool("Run", false);
             animator.SetBool("Walk", false);
         
             animator.SetTrigger("Attack");
-            enemyNavMeshAgent.transform.LookAt(target);
+            Vector3 targetPosition = new Vector3(target.position.x, this.transform.position.y, target.position.z);
+            enemyNavMeshAgent.transform.LookAt(targetPosition);
 
             meleeTimer += Time.fixedDeltaTime;
             if (meleeTimer > meleeRate)
             {
                 meleeTimer = 0;
+
+                // Show damage indicator if damage comes from out of view
+                if (!DamageIndicatorUI.CheckIfObjectInSight(gameObject.transform))
+                {
+                    DamageIndicatorUI.CreateIndicator(gameObject.transform);
+                }
+
                 player.TakeDamage(meleeDamage);
             }
         }
         else
         {
             Run();
-            enemyNavMeshAgent.transform.LookAt(target);
+            Vector3 targetPosition = new Vector3(target.position.x, this.transform.position.y, target.position.z);
+            enemyNavMeshAgent.transform.LookAt(targetPosition);
             enemyNavMeshAgent.SetDestination(target.position);
         }
     }
@@ -70,7 +80,8 @@ public class SmallSkeletonController: MonoBehaviour
 
     private void RotateToTarget()
     {
-        enemyNavMeshAgent.transform.LookAt(target);
+        Vector3 targetPosition = new Vector3(target.position.x, this.transform.position.y, target.position.z);
+        enemyNavMeshAgent.transform.LookAt(targetPosition);
     }
 
     public void Walk()
@@ -88,5 +99,13 @@ public class SmallSkeletonController: MonoBehaviour
     public void Die()
     {
         animator.SetTrigger("Die");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            playerInAttackRange = true;
+        }
     }
 }

@@ -1,7 +1,5 @@
 using Logic.Game;
 using Logic.Player;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,18 +7,21 @@ namespace Visualization
 {
     public class LevelEndDoor : MonoBehaviour
     {
-        
         private IGameManager _gameManager;
         private IPlayerManager _playerManager;
         private ScreenFader fader;
         public Animator animator;
         public bool levelObjectivesDone;
+        public string sceneToLoad;
+
+        private float levelTime;
 
         private void Awake()
         {
             _gameManager = ServiceLocator.GetService<IGameManager>();
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
             fader = GetComponent<ScreenFader>();
+            levelTime = 0;
         }
 
         // Update is called once per frame
@@ -38,10 +39,12 @@ namespace Visualization
                 OpenDoor();
             }
             
-            if (_gameManager.GetObjectivesCollected() == 2 &&  SceneManager.GetActiveScene().name == "Level2" && _gameManager.GetallEnemiesCleared() == 18)
+            if (SceneManager.GetActiveScene().name == "Level3" && _gameManager.GetLevel2ObjectivesLeft() == 0 && _gameManager.GetLevel2EnemiesLeft() == 0)
             {
                 OpenDoor();
             }
+
+            levelTime += Time.deltaTime;
         }
 
         private void OnEnable()
@@ -57,10 +60,25 @@ namespace Visualization
 
         private void OnTriggerEnter(Collider other)
         {
+            // This ends the scene and trasitions to another
             if(other.tag == "Player")
             {
+                // Updating the level completion time to the Game Manager
+                if(SceneManager.GetActiveScene().name == "Level3")
+                {
+                    _gameManager.SetLevel2CurrentTime(Mathf.RoundToInt(levelTime));
+                    if(levelTime < _gameManager.GetLevel2BestTime())
+                    {
+                        _gameManager.SetLevel2BestTime(Mathf.RoundToInt(levelTime));
+                    }
+                }
+
+
                 fader.FadeOut();
-                SceneManager.LoadScene("PresetManagement");
+                if(sceneToLoad != null)
+                {
+                    SceneManager.LoadScene(sceneToLoad);
+                }
             }
         }
 

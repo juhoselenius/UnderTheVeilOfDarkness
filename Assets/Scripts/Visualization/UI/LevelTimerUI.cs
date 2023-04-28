@@ -32,12 +32,12 @@ namespace Visualization
 
         void Update()
         {
-            if(SceneManager.GetActiveScene().name == "Level2")
+            if(SceneManager.GetActiveScene().name == "Level3")
             {
-                if(_gameManager.GetallEnemiesCleared() < 18)
+                if(_gameManager.GetLevel2EnemiesLeft() > 0)
                 {
                     currentLevelTime -= Time.deltaTime;
-                    timeText.text = ((int)Mathf.Round(currentLevelTime)).ToString();
+                    timeText.text = Mathf.Round(currentLevelTime).ToString();
                 }
                 else
                 {

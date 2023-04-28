@@ -5,6 +5,8 @@ namespace Data
     [Serializable]
     public class Game
     {
+        public bool gamePaused;
+        
         // Intro Level objectives
         public bool moveLeft;
         public bool moveRight;
@@ -19,14 +21,17 @@ namespace Data
         public bool introLevelCleared;
 
         //Level 2 objectives
-        public int allEnemiesCleared;
-        public int objectivesCollected;
-        
-        //Level 2 objective booleans here
+        public int level2EnemiesLeft;
+        public int level2ObjectivesLeft;
         public bool level2Cleared;
+
+        public int level2CurrentTime;
+        public int level2BestTime;
 
         public Game()
         {
+            gamePaused = false;
+            
             // Intro level
             moveLeft = false;
             moveRight = false;
@@ -41,9 +46,12 @@ namespace Data
             introLevelCleared = false;
 
             // Level 2
-            allEnemiesCleared = 0;
-            objectivesCollected = 0;
+            level2EnemiesLeft = 12;
+            level2ObjectivesLeft = 2;
             level2Cleared = false;
+
+            level2CurrentTime = 0;
+            level2BestTime = 1000000;
         }
     }
 }

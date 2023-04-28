@@ -19,8 +19,7 @@ namespace Visualization
         public float brake;
         public float enemyBaseSpeed;
         public Vector3 direction;
-       
-        
+
         [SerializeField] private float cooldown = 5f;
 
         private void Awake()
@@ -33,7 +32,6 @@ namespace Visualization
         {
             direction = new Vector3(0,0,0); 
             health = maxHealth;
-            
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -72,7 +70,7 @@ namespace Visualization
         private void EnemyDie()
         {
             // Here code for what happens when the enemy dies
-            _gameManager.SetallEnemiesCleared();
+            _gameManager.SetLevel2EnemiesLeft();
             FindObjectOfType<AudioManager>().Play("EnemyDeath");
             FindObjectOfType<AudioManager>().StopPlay("EnemyWalk");
             Destroy(enemyPrefab);
