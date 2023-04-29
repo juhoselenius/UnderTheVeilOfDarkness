@@ -108,8 +108,8 @@ namespace Visualization
 
         void ChangeSpeed(float newValue)
         {
-            walkSpeed = 1f + 0.1f + 1f * newValue;
-            sprintSpeed = 2.5f + 0.2f + 1f * newValue;
+            walkSpeed = 1.5f + 0.375f * newValue;
+            sprintSpeed = 1f + newValue;
         }
 
         private void StateHandler()

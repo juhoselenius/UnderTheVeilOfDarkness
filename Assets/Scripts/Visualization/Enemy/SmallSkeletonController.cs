@@ -1,132 +1,134 @@
 using UnityEngine;
 using UnityEngine.AI;
-using Visualization;
 
-public class SmallSkeletonController: MonoBehaviour
+namespace Visualization
 {
-    private Animator animator;
-    private NavMeshAgent enemyNavMeshAgent = null;
-    public Transform target;
-    public float walkSpeed;
-    public float runSpeed;
-    public float meleeDamage;
-    public float meleeRate;
-    private float meleeTimer;
-    public bool playerInAttackRange = false;
-    private Transform playerCameraTransform; // Main Camera of the player has to be dragged here
-
-    public PlayerCharacter player;
-
-    public bool trapSet;
-
-    private bool hitDetected;
-    private Vector3 detectedPlayerPosition;
-
-    private void Awake()
+    public class SmallSkeletonController: MonoBehaviour
     {
-        GetReferences();
-        trapSet = false;
-        playerCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
-    }
+        private Animator animator;
+        private NavMeshAgent enemyNavMeshAgent = null;
+        public Transform target;
+        public float walkSpeed;
+        public float runSpeed;
+        public float meleeDamage;
+        public float meleeRate;
+        private float meleeTimer;
+        public bool playerInAttackRange = false;
+        private Transform playerCameraTransform; // Main Camera of the player has to be dragged here
 
-    private void Update()
-    {
-        if (trapSet == true || hitDetected)
+        public PlayerCharacter player;
+
+        public bool trapSet;
+
+        private bool hitDetected;
+        private Vector3 detectedPlayerPosition;
+
+        private void Awake()
         {
-            MoveToTarget();
+            GetReferences();
+            trapSet = false;
+            playerCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
         }
-    }
 
-    private void MoveToTarget()
-    {
-        enemyNavMeshAgent.SetDestination(target.position);
-        Walk();
-        Run();
-        RotateToTarget();
-        float distanceToTarget = Vector3.Distance(target.position, transform.position);
-
-        if (playerInAttackRange)
+        private void Update()
         {
-            animator.SetBool("Run", false);
-            animator.SetBool("Walk", false);
-        
-            animator.SetTrigger("Attack");
-            Vector3 targetPosition = new Vector3(target.position.x, this.transform.position.y, target.position.z);
-            enemyNavMeshAgent.transform.LookAt(targetPosition);
-
-            meleeTimer += Time.fixedDeltaTime;
-            if (meleeTimer > meleeRate)
+            if (trapSet == true || hitDetected)
             {
-                meleeTimer = 0;
-
-                // Show damage indicator if damage comes from out of view
-                if (!DamageIndicatorUI.CheckIfObjectInSight(gameObject.transform))
-                {
-                    DamageIndicatorUI.CreateIndicator(gameObject.transform);
-                }
-
-                player.TakeDamage(meleeDamage);
+                MoveToTarget();
             }
         }
-        else
+
+        private void MoveToTarget()
         {
+            enemyNavMeshAgent.SetDestination(target.position);
+            Walk();
             Run();
+            RotateToTarget();
+            float distanceToTarget = Vector3.Distance(target.position, transform.position);
+
+            if (playerInAttackRange)
+            {
+                animator.SetBool("Run", false);
+                animator.SetBool("Walk", false);
+        
+                animator.SetTrigger("Attack");
+                Vector3 targetPosition = new Vector3(target.position.x, this.transform.position.y, target.position.z);
+                enemyNavMeshAgent.transform.LookAt(targetPosition);
+
+                meleeTimer += Time.fixedDeltaTime;
+                if (meleeTimer > meleeRate)
+                {
+                    meleeTimer = 0;
+
+                    // Show damage indicator if damage comes from out of view
+                    if (!DamageIndicatorUI.CheckIfObjectInSight(gameObject.transform))
+                    {
+                        DamageIndicatorUI.CreateIndicator(gameObject.transform);
+                    }
+
+                    player.TakeDamage(meleeDamage);
+                }
+            }
+            else
+            {
+                Run();
+                Vector3 targetPosition = new Vector3(target.position.x, this.transform.position.y, target.position.z);
+                enemyNavMeshAgent.transform.LookAt(targetPosition);
+                enemyNavMeshAgent.SetDestination(target.position);
+            }
+        }
+        private void GetReferences()
+        {
+            enemyNavMeshAgent = GetComponent<NavMeshAgent>();
+            animator = GetComponent<Animator>();
+        }
+
+        private void RotateToTarget()
+        {
             Vector3 targetPosition = new Vector3(target.position.x, this.transform.position.y, target.position.z);
             enemyNavMeshAgent.transform.LookAt(targetPosition);
-            enemyNavMeshAgent.SetDestination(target.position);
         }
-    }
-    private void GetReferences()
-    {
-        enemyNavMeshAgent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
-    }
 
-    private void RotateToTarget()
-    {
-        Vector3 targetPosition = new Vector3(target.position.x, this.transform.position.y, target.position.z);
-        enemyNavMeshAgent.transform.LookAt(targetPosition);
-    }
-
-    public void Walk()
-    {
-        enemyNavMeshAgent.speed = walkSpeed;
-        animator.SetBool("Walk", true);
-    }
-
-    public void Run()
-    {
-        enemyNavMeshAgent.speed = runSpeed;
-        animator.SetBool("Run", true);
-    }
-
-    public void Die()
-    {
-        animator.SetTrigger("Die");
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
+        public void Walk()
         {
-            playerInAttackRange = true;
+            enemyNavMeshAgent.speed = walkSpeed;
+            animator.SetBool("Walk", true);
         }
-    }
 
-    private void OnEnable()
-    {
-        GetComponent<Enemy>().EnemyGotHit += DetectPlayerPosition;
-    }
+        public void Run()
+        {
+            enemyNavMeshAgent.speed = runSpeed;
+            animator.SetBool("Run", true);
+        }
 
-    private void OnDisable()
-    {
-        GetComponent<Enemy>().EnemyGotHit -= DetectPlayerPosition;
-    }
+        public void Die()
+        {
+            animator.SetTrigger("Die");
+        }
 
-    private void DetectPlayerPosition(bool detected)
-    {
-        hitDetected = detected;
-        detectedPlayerPosition = playerCameraTransform.position;
-        Debug.Log("Player detected");
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.tag == "Player")
+            {
+                playerInAttackRange = true;
+            }
+        }
+
+        private void OnEnable()
+        {
+            GetComponent<Enemy>().EnemyGotHit += DetectPlayerPosition;
+        }
+
+        private void OnDisable()
+        {
+            GetComponent<Enemy>().EnemyGotHit -= DetectPlayerPosition;
+        }
+
+        private void DetectPlayerPosition(bool detected)
+        {
+            hitDetected = detected;
+            detectedPlayerPosition = playerCameraTransform.position;
+            Debug.Log("Player detected");
+        }
     }
 }

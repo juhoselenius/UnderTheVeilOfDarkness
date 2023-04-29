@@ -1,26 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Trap : MonoBehaviour
+namespace Visualization
 {
-    private GameObject[] smallSkeletons;
-
-    private void Start()
+    public class Trap : MonoBehaviour
     {
-        smallSkeletons = GameObject.FindGameObjectsWithTag("SmallSkeleton");
-    }
+        private GameObject[] smallSkeletons;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
+        private void Start()
         {
-            for(int i = 0; i < smallSkeletons.Length; i++)
+            smallSkeletons = GameObject.FindGameObjectsWithTag("SmallSkeleton");
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.tag == "Player")
             {
-                Debug.Log("Activated skeletons");
-                if (smallSkeletons[i] != null)
+                for(int i = 0; i < smallSkeletons.Length; i++)
                 {
-                    smallSkeletons[i].GetComponent<SmallSkeletonController>().trapSet = true;
+                    Debug.Log("Activated skeletons");
+                    if (smallSkeletons[i] != null)
+                    {
+                        smallSkeletons[i].GetComponent<SmallSkeletonController>().trapSet = true;
+                    }
                 }
             }
         }
