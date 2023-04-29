@@ -14,20 +14,17 @@ namespace Visualization
         public float meleeRate;
         private float meleeTimer;
         public bool playerInAttackRange = false;
-        private Transform playerCameraTransform; // Main Camera of the player has to be dragged here
 
         public PlayerCharacter player;
 
         public bool trapSet;
 
         private bool hitDetected;
-        private Vector3 detectedPlayerPosition;
 
         private void Awake()
         {
             GetReferences();
             trapSet = false;
-            playerCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
         }
 
         private void Update()
@@ -97,7 +94,7 @@ namespace Visualization
 
         public void Run()
         {
-            enemyNavMeshAgent.speed = runSpeed;
+            enemyNavMeshAgent.speed = runSpeed * gameObject.GetComponent<Enemy>().enemyBaseSpeed;
             animator.SetBool("Run", true);
         }
 
@@ -114,6 +111,14 @@ namespace Visualization
             }
         }
 
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.tag == "Player")
+            {
+                playerInAttackRange = false;
+            }
+        }
+
         private void OnEnable()
         {
             GetComponent<Enemy>().EnemyGotHit += DetectPlayerPosition;
@@ -127,7 +132,6 @@ namespace Visualization
         private void DetectPlayerPosition(bool detected)
         {
             hitDetected = detected;
-            detectedPlayerPosition = playerCameraTransform.position;
             Debug.Log("Player detected");
         }
     }

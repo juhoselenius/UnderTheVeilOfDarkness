@@ -75,7 +75,7 @@ namespace Visualization
             else if (hitDetected)
             {
                 Run();
-                enemyNavMeshAgent.speed = runSpeed;
+                enemyNavMeshAgent.speed = runSpeed * gameObject.GetComponent<Enemy>().enemyBaseSpeed;
                 Vector3 targetPosition = new Vector3(detectedPlayerPosition.x, this.transform.position.y, detectedPlayerPosition.z);
                 enemyNavMeshAgent.transform.LookAt(targetPosition);
                 enemyNavMeshAgent.SetDestination(targetPosition);
@@ -140,7 +140,7 @@ namespace Visualization
 
         public void Run()
         {
-            enemyNavMeshAgent.speed = runSpeed;
+            enemyNavMeshAgent.speed = runSpeed * gameObject.GetComponent<Enemy>().enemyBaseSpeed;
             animator.SetBool("Run", true);
         }
 

@@ -91,7 +91,7 @@ namespace Visualization
             }
             else if (hitDetected)
             {
-                enemyNavMeshAgent.speed = runSpeed;
+                enemyNavMeshAgent.speed = runSpeed * gameObject.GetComponent<Enemy>().enemyBaseSpeed;
                 Vector3 targetPosition = new Vector3(detectedPlayerPosition.x, this.transform.position.y, detectedPlayerPosition.z);
                 enemyNavMeshAgent.transform.LookAt(targetPosition);
                 enemyNavMeshAgent.SetDestination(targetPosition);
