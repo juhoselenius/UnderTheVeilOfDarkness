@@ -22,6 +22,7 @@ namespace Visualization
         public GameObject firedProjectile;
         public AudioSource audioSource;
         public AudioClip clip;
+        public AudioClip cliprock;
         
         // Overloading variables
         public float overLoadMax;
@@ -136,7 +137,14 @@ namespace Visualization
                 }             
                 
                 InstantiateProjectile();
-                playSound();
+                if (attack == 0)
+                {
+                    playSoundrock();
+                }
+                else
+                {
+                    playSound();
+                }
             }
         }
 
@@ -233,6 +241,11 @@ namespace Visualization
         private void PauseKeys(bool isGamePaused)
         {
             paused = isGamePaused;
+        }
+
+        public void playSoundrock()
+        {
+            audioSource.PlayOneShot(cliprock);
         }
     }
 }

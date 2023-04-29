@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 6800580270835026592}
   - component: {fileID: 6800580270835026593}
   - component: {fileID: 1457822267005470403}
+  - component: {fileID: 3082498093848990329}
   m_Layer: 0
   m_Name: InvisibleEnemy
   m_TagString: Enemy
@@ -160,6 +161,129 @@ AudioSource:
     - serializedVersion: 3
       time: 0
       value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &3082498093848990329
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6800580270835026599}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 7680968365060564426, guid: 7f7d1d8a214fa4e429ef3428676ecec5, type: 2}
+  m_audioClip: {fileID: 8300000, guid: e31d946926e1a784aa7dd3f774a91602, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.286
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 50
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.07761791
+      value: 0.7723954
+      inSlope: -1.8173329
+      outSlope: -1.8173329
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.58027005
+    - serializedVersion: 3
+      time: 0.4854982
+      value: 0.20687926
+      inSlope: -0.5958836
+      outSlope: -0.5958836
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.54638624
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6952577
+      value: 0.11465985
+      inSlope: -0.33247882
+      outSlope: -0.33247882
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.68197286
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -584,6 +708,8 @@ MonoBehaviour:
   brake: 0
   enemyBaseSpeed: 0
   direction: {x: 0, y: 0, z: 0}
+  impact: {fileID: 0}
+  burnEffect: {x: 0, y: 0, z: 0}
   cooldown: 5
 --- !u!1 &6800580271803211979
 GameObject:
