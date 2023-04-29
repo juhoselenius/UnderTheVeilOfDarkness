@@ -120,11 +120,10 @@ namespace Visualization
             {
                 playerInDetectionRange = true;
             }
-            if (other.CompareTag("Rock") || other.CompareTag("Bullet") || other.CompareTag("PlayerProjectile") || other.CompareTag("FireBullet") || other.CompareTag("IceBullet"))
 
+            if (other.CompareTag("Rock") || other.CompareTag("StickyBullet") || other.CompareTag("PlayerProjectile") || other.CompareTag("FireBullet") || other.CompareTag("IceBullet"))
             {
                 hit = true;
-           
             }
         }
 

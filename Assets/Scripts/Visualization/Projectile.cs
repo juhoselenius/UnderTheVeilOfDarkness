@@ -66,7 +66,8 @@ namespace Visualization
 
             if (lifeTimer > lifetime)
             {
-                Instantiate(impactVFX, gameObject.transform.position, Quaternion.identity);
+                GameObject impact = Instantiate(impactVFX, gameObject.transform.position, Quaternion.identity);
+                Destroy(impact, 2f);
                 Destroy(gameObject);
             }
         }

@@ -18,6 +18,7 @@ public class SmallSkeletonController: MonoBehaviour
 
     public bool trapSet;
 
+    private bool hit;
 
     private void Awake()
     {
@@ -64,6 +65,12 @@ public class SmallSkeletonController: MonoBehaviour
                 player.TakeDamage(meleeDamage);
             }
         }
+        else if (hit)
+        {
+            enemyNavMeshAgent.speed = runSpeed;
+            enemyNavMeshAgent.transform.LookAt(target);
+            enemyNavMeshAgent.SetDestination(target.position + new Vector3(0, 0, 3f));
+        }
         else
         {
             Run();
@@ -106,6 +113,11 @@ public class SmallSkeletonController: MonoBehaviour
         if (other.tag == "Player")
         {
             playerInAttackRange = true;
+        }
+
+        if (other.CompareTag("Rock") || other.CompareTag("StickyBullet") || other.CompareTag("PlayerProjectile") || other.CompareTag("FireBullet") || other.CompareTag("IceBullet"))
+        {
+            hit = true;
         }
     }
 }

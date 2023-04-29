@@ -26,6 +26,8 @@ namespace Visualization
         public float meleeDamage;
         public float meleeRate;
 
+        private bool hit;
+
         private void Awake()
         {
             enemyNavMeshAgent = GetComponent<NavMeshAgent>();
@@ -36,7 +38,6 @@ namespace Visualization
 
         void FixedUpdate()
         {
-        
             if (playerInDetectionRange)
             {
                 if(playerInAttackRange)
@@ -68,6 +69,12 @@ namespace Visualization
                 }
             
             }
+            else if (hit)
+            {
+                enemyNavMeshAgent.speed = runSpeed;
+                enemyNavMeshAgent.transform.LookAt(playerCameraTransform);
+                enemyNavMeshAgent.SetDestination(playerCameraTransform.position + new Vector3(0, 0, 3f));
+            }
             else
             {
                 animator.SetBool("Run", false);
@@ -80,6 +87,11 @@ namespace Visualization
             if(other.tag == "Player")
             {
                 playerInDetectionRange = true;
+            }
+
+            if (other.CompareTag("Rock") || other.CompareTag("StickyBullet") || other.CompareTag("PlayerProjectile") || other.CompareTag("FireBullet") || other.CompareTag("IceBullet"))
+            {
+                hit = true;
             }
         }
 

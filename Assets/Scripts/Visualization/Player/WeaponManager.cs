@@ -158,7 +158,7 @@ namespace Visualization
             if(_playerManager.GetAttack() > 0)
             {
                 // This makes the projectile wobble a little at the beginning of the flight path
-                iTween.PunchPosition(firedProjectile, new Vector3(Random.Range(-arcRange, arcRange), Random.Range(-arcRange, arcRange), 0), Random.Range(0.5f, 1f));
+                //iTween.PunchPosition(firedProjectile, new Vector3(Random.Range(-arcRange, arcRange), Random.Range(-arcRange, arcRange), 0), Random.Range(0.5f, 1f));
                 
                 currentOverLoad += 10 + _playerManager.GetAttack() * 5f;
             }

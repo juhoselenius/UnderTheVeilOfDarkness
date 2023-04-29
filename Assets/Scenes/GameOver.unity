@@ -498,6 +498,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   presetInfoCanvas: {fileID: 0}
+  presetMenu: {fileID: 0}
+  attributeInfoCanvas: []
 --- !u!4 &600297278
 Transform:
   m_ObjectHideFlags: 0
@@ -599,7 +601,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 600297277}
         m_TargetAssemblyTypeName: MenuControl, Assembly-CSharp
-        m_MethodName: LoadLevel2
+        m_MethodName: LoadLevel3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

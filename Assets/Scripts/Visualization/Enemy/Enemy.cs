@@ -42,18 +42,18 @@ namespace Visualization
         private void OnCollisionEnter(Collision collision)
         {
             Debug.Log("Enemy was hit");
-            if(collision.gameObject.tag == "PlayerProjectile" || collision.gameObject.tag =="Bullet" || collision.gameObject.tag == "Rock")
+            if(collision.gameObject.tag == "PlayerProjectile" || collision.gameObject.tag =="StickyBullet" || collision.gameObject.tag == "Rock")
             {
-                health -= collision.gameObject.GetComponent<Projectile>().damage;                                        
+                health -= collision.gameObject.GetComponent<Projectile>().damage;
                 direction = (transform.position - collision.transform.position).normalized;
-                StartCoroutine(knockBack());
+                StartCoroutine(KnockBack());
                 
             }
             else if(collision.gameObject.tag == "IceBullet")
             {
                 health -= collision.gameObject.GetComponent<Projectile>().damage;
                 direction = (transform.position - collision.transform.position).normalized;
-                StartCoroutine(knockBack());
+                StartCoroutine(KnockBack());
                 enemyBaseSpeed -= 0.25f;
                 
                 /*
@@ -70,8 +70,8 @@ namespace Visualization
                 direction = (transform.position - collision.transform.position).normalized;              
                 
                 collidedObjectDamage = collision.gameObject.GetComponent<Projectile>().damage;
-                //StartCoroutine(knockBack());
-                burn();
+                //StartCoroutine(KnockBack());
+                Burn();
             }
 
             if (health <= 0)
@@ -88,7 +88,7 @@ namespace Visualization
             FindObjectOfType<AudioManager>().StopPlay("EnemyWalk");
             Destroy(enemyPrefab);
         }
-        IEnumerator knockBack()
+        IEnumerator KnockBack()
         {
            float knockBacktime = Time.time;
             while (Time.time < knockBacktime + 0.2f)
@@ -98,7 +98,7 @@ namespace Visualization
             }
         }
 
-        private void burn()
+        private void Burn()
         {
             float burntime = Time.time;
             
