@@ -26,6 +26,9 @@ namespace Visualization
         public float meleeDamage;
         public float meleeRate;
 
+        private Vector3 detectedPlayerPosition;
+        private bool hitDetected;
+
         private void Awake()
         {
             enemyNavMeshAgent = GetComponent<NavMeshAgent>();
@@ -36,9 +39,10 @@ namespace Visualization
 
         void FixedUpdate()
         {
-        
             if (playerInDetectionRange)
             {
+                hitDetected = false;
+
                 if(playerInAttackRange)
                 {
                     animator.SetTrigger("Attack");
@@ -67,6 +71,22 @@ namespace Visualization
                     enemyNavMeshAgent.SetDestination(playerCameraTransform.position + new Vector3(0, 0, 2f));
                 }
             
+            }
+            else if (hitDetected)
+            {
+                Run();
+                enemyNavMeshAgent.speed = runSpeed;
+                Vector3 targetPosition = new Vector3(detectedPlayerPosition.x, this.transform.position.y, detectedPlayerPosition.z);
+                enemyNavMeshAgent.transform.LookAt(targetPosition);
+                enemyNavMeshAgent.SetDestination(targetPosition);
+
+                // Changing waypoint when last seen player position is reached through the NavMeshAgent
+                if (enemyNavMeshAgent.remainingDistance <= enemyNavMeshAgent.stoppingDistance && !enemyNavMeshAgent.pathPending)
+                {
+                    hitDetected = false;
+                    animator.SetBool("Run", false);
+                    Patrol();
+                }
             }
             else
             {
@@ -114,14 +134,12 @@ namespace Visualization
 
         public void Walk()
         {
-        
             enemyNavMeshAgent.speed = walkSpeed;
             animator.SetBool("Walk", true);
         }
 
         public void Run()
         {
-        
             enemyNavMeshAgent.speed = runSpeed;
             animator.SetBool("Run", true);
         }
@@ -129,6 +147,23 @@ namespace Visualization
         public void Die()
         {
             animator.SetTrigger("Die");
+        }
+
+        private void OnEnable()
+        {
+            GetComponent<Enemy>().EnemyGotHit += DetectPlayerPosition;
+        }
+
+        private void OnDisable()
+        {
+            GetComponent<Enemy>().EnemyGotHit -= DetectPlayerPosition;
+        }
+
+        private void DetectPlayerPosition(bool detected)
+        {
+            hitDetected = detected;
+            detectedPlayerPosition = playerCameraTransform.position;
+            Debug.Log("Player detected");
         }
     }
 }

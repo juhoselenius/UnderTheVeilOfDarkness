@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3559864065853321381
 RectTransform:
   m_ObjectHideFlags: 0
@@ -364,6 +364,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   presetInfoCanvas: {fileID: 0}
+  presetMenu: {fileID: 0}
+  attributeInfoCanvas: []
 --- !u!1 &3628859900627607398
 GameObject:
   m_ObjectHideFlags: 0

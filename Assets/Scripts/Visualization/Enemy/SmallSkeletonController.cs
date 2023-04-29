@@ -13,21 +13,25 @@ public class SmallSkeletonController: MonoBehaviour
     public float meleeRate;
     private float meleeTimer;
     public bool playerInAttackRange = false;
+    private Transform playerCameraTransform; // Main Camera of the player has to be dragged here
 
     public PlayerCharacter player;
 
     public bool trapSet;
 
+    private bool hitDetected;
+    private Vector3 detectedPlayerPosition;
 
     private void Awake()
     {
         GetReferences();
         trapSet = false;
+        playerCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
     private void Update()
     {
-        if (trapSet == true)
+        if (trapSet == true || hitDetected)
         {
             MoveToTarget();
         }
@@ -107,5 +111,22 @@ public class SmallSkeletonController: MonoBehaviour
         {
             playerInAttackRange = true;
         }
+    }
+
+    private void OnEnable()
+    {
+        GetComponent<Enemy>().EnemyGotHit += DetectPlayerPosition;
+    }
+
+    private void OnDisable()
+    {
+        GetComponent<Enemy>().EnemyGotHit -= DetectPlayerPosition;
+    }
+
+    private void DetectPlayerPosition(bool detected)
+    {
+        hitDetected = detected;
+        detectedPlayerPosition = playerCameraTransform.position;
+        Debug.Log("Player detected");
     }
 }

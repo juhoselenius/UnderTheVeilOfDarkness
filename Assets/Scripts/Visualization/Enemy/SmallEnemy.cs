@@ -37,7 +37,9 @@ namespace Visualization
         public float soundTextOffset;
         public float soundTime;
         private float soundTimer;
-        private bool hit;
+        
+        private bool hitDetected;
+        private Vector3 detectedPlayerPosition;
 
         private IPlayerManager _playerManager;
 
@@ -87,11 +89,19 @@ namespace Visualization
                     enemyNavMeshAgent.SetDestination(playerCameraTransform.position + new Vector3(0, 0, 1f));
                 }
             }
-            else if (hit)
+            else if (hitDetected)
             {
-                enemyNavMeshAgent.speed = runSpeed * gameObject.GetComponent<Enemy>().enemyBaseSpeed * 2;
-                enemyNavMeshAgent.transform.LookAt(playerCameraTransform);         
-                enemyNavMeshAgent.SetDestination(playerCameraTransform.position + new Vector3(0, 0, 3f));
+                enemyNavMeshAgent.speed = runSpeed;
+                Vector3 targetPosition = new Vector3(detectedPlayerPosition.x, this.transform.position.y, detectedPlayerPosition.z);
+                enemyNavMeshAgent.transform.LookAt(targetPosition);
+                enemyNavMeshAgent.SetDestination(targetPosition);
+
+                // Changing waypoint when last seen player position is reached through the NavMeshAgent
+                if (enemyNavMeshAgent.remainingDistance <= enemyNavMeshAgent.stoppingDistance && !enemyNavMeshAgent.pathPending)
+                {
+                    hitDetected = false;
+                    Patrol();
+                }
             }
             else
             {
@@ -119,12 +129,6 @@ namespace Visualization
             if (other.tag == "Player")
             {
                 playerInDetectionRange = true;
-            }
-            if (other.CompareTag("Rock") || other.CompareTag("Bullet") || other.CompareTag("PlayerProjectile") || other.CompareTag("FireBullet") || other.CompareTag("IceBullet"))
-
-            {
-                hit = true;
-           
             }
         }
 
@@ -177,6 +181,23 @@ namespace Visualization
                 Vector3 newTextPosition = new Vector3(transform.position.x, transform.position.y + soundTextOffset, transform.position.z);
                 Instantiate(soundTextShoot, newTextPosition, Quaternion.identity);
             }
+        }
+
+        private void OnEnable()
+        {
+            GetComponent<Enemy>().EnemyGotHit += DetectPlayerPosition;
+        }
+
+        private void OnDisable()
+        {
+            GetComponent<Enemy>().EnemyGotHit -= DetectPlayerPosition;
+        }
+
+        private void DetectPlayerPosition(bool detected)
+        {
+            hitDetected = detected;
+            detectedPlayerPosition = playerCameraTransform.position;
+            Debug.Log("Player detected");
         }
     }
 }
