@@ -13,22 +13,25 @@ public class SmallSkeletonController: MonoBehaviour
     public float meleeRate;
     private float meleeTimer;
     public bool playerInAttackRange = false;
+    private Transform playerCameraTransform; // Main Camera of the player has to be dragged here
 
     public PlayerCharacter player;
 
     public bool trapSet;
 
-    private bool hit;
+    private bool hitDetected;
+    private Vector3 detectedPlayerPosition;
 
     private void Awake()
     {
         GetReferences();
         trapSet = false;
+        playerCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
     private void Update()
     {
-        if (trapSet == true)
+        if (trapSet == true || hitDetected)
         {
             MoveToTarget();
         }
@@ -64,12 +67,6 @@ public class SmallSkeletonController: MonoBehaviour
 
                 player.TakeDamage(meleeDamage);
             }
-        }
-        else if (hit)
-        {
-            enemyNavMeshAgent.speed = runSpeed;
-            enemyNavMeshAgent.transform.LookAt(target);
-            enemyNavMeshAgent.SetDestination(target.position + new Vector3(0, 0, 3f));
         }
         else
         {
@@ -114,10 +111,22 @@ public class SmallSkeletonController: MonoBehaviour
         {
             playerInAttackRange = true;
         }
+    }
 
-        if (other.CompareTag("Rock") || other.CompareTag("StickyBullet") || other.CompareTag("PlayerProjectile") || other.CompareTag("FireBullet") || other.CompareTag("IceBullet"))
-        {
-            hit = true;
-        }
+    private void OnEnable()
+    {
+        GetComponent<Enemy>().EnemyGotHit += DetectPlayerPosition;
+    }
+
+    private void OnDisable()
+    {
+        GetComponent<Enemy>().EnemyGotHit -= DetectPlayerPosition;
+    }
+
+    private void DetectPlayerPosition(bool detected)
+    {
+        hitDetected = detected;
+        detectedPlayerPosition = playerCameraTransform.position;
+        Debug.Log("Player detected");
     }
 }

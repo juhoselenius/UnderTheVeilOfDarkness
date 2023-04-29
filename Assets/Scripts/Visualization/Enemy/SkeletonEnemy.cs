@@ -26,7 +26,8 @@ namespace Visualization
         public float meleeDamage;
         public float meleeRate;
 
-        private bool hit;
+        private Vector3 detectedPlayerPosition;
+        private bool hitDetected;
 
         private void Awake()
         {
@@ -40,6 +41,8 @@ namespace Visualization
         {
             if (playerInDetectionRange)
             {
+                hitDetected = false;
+
                 if(playerInAttackRange)
                 {
                     animator.SetTrigger("Attack");
@@ -69,11 +72,21 @@ namespace Visualization
                 }
             
             }
-            else if (hit)
+            else if (hitDetected)
             {
+                Run();
                 enemyNavMeshAgent.speed = runSpeed;
-                enemyNavMeshAgent.transform.LookAt(playerCameraTransform);
-                enemyNavMeshAgent.SetDestination(playerCameraTransform.position + new Vector3(0, 0, 3f));
+                Vector3 targetPosition = new Vector3(detectedPlayerPosition.x, this.transform.position.y, detectedPlayerPosition.z);
+                enemyNavMeshAgent.transform.LookAt(targetPosition);
+                enemyNavMeshAgent.SetDestination(targetPosition);
+
+                // Changing waypoint when last seen player position is reached through the NavMeshAgent
+                if (enemyNavMeshAgent.remainingDistance <= enemyNavMeshAgent.stoppingDistance && !enemyNavMeshAgent.pathPending)
+                {
+                    hitDetected = false;
+                    animator.SetBool("Run", false);
+                    Patrol();
+                }
             }
             else
             {
@@ -87,11 +100,6 @@ namespace Visualization
             if(other.tag == "Player")
             {
                 playerInDetectionRange = true;
-            }
-
-            if (other.CompareTag("Rock") || other.CompareTag("StickyBullet") || other.CompareTag("PlayerProjectile") || other.CompareTag("FireBullet") || other.CompareTag("IceBullet"))
-            {
-                hit = true;
             }
         }
 
@@ -126,14 +134,12 @@ namespace Visualization
 
         public void Walk()
         {
-        
             enemyNavMeshAgent.speed = walkSpeed;
             animator.SetBool("Walk", true);
         }
 
         public void Run()
         {
-        
             enemyNavMeshAgent.speed = runSpeed;
             animator.SetBool("Run", true);
         }
@@ -141,6 +147,23 @@ namespace Visualization
         public void Die()
         {
             animator.SetTrigger("Die");
+        }
+
+        private void OnEnable()
+        {
+            GetComponent<Enemy>().EnemyGotHit += DetectPlayerPosition;
+        }
+
+        private void OnDisable()
+        {
+            GetComponent<Enemy>().EnemyGotHit -= DetectPlayerPosition;
+        }
+
+        private void DetectPlayerPosition(bool detected)
+        {
+            hitDetected = detected;
+            detectedPlayerPosition = playerCameraTransform.position;
+            Debug.Log("Player detected");
         }
     }
 }

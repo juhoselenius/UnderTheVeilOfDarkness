@@ -109,7 +109,7 @@ namespace Visualization
             {
                 collided = true;
 
-                if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeletonEnemy")
+                if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeleton")
                 {
                     GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
                 }
@@ -126,7 +126,7 @@ namespace Visualization
             {
                 collided = true;
 
-                if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeletonEnemy")
+                if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeleton")
                 {
                     GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
                 }
@@ -142,19 +142,32 @@ namespace Visualization
             if (gameObject.tag == "StickyBullet" && collision.gameObject.tag != "StickyBullet" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
             {
                 collided = true;
-                rb.velocity = new Vector3(0, 0, 0);
-                Debug.Log("StickyProjectile stuck into " + collision.gameObject.tag);
 
-                if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeletonEnemy")
+                if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeleton")
                 {
                     GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
                     GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
-                    Debug.Log("EnemyProjectile collided with " + collision.gameObject.tag);
+                    Debug.Log("StickyBullet collided with " + collision.gameObject.tag);
 
                     FindObjectOfType<AudioManager>().Play("OnHit");
 
                     Destroy(impact, 2f);
                     Destroy(gameObject);
+                }
+                else if(collision.gameObject.tag == "EnemyProjectile")
+                {
+                    GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
+                    Debug.Log("StickyBullet collided with " + collision.gameObject.tag);
+
+                    FindObjectOfType<AudioManager>().Play("OnHit");
+
+                    Destroy(impact, 2f);
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    rb.velocity = new Vector3(0, 0, 0);
+                    Debug.Log("StickyProjectile stuck into " + collision.gameObject.tag);
                 }
             }
         }

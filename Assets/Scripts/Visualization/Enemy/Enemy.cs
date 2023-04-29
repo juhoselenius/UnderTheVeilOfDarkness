@@ -1,4 +1,5 @@
 using Logic.Game;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -9,11 +10,11 @@ namespace Visualization
         private IGameManager _gameManager;
 
         public GameObject enemyPrefab;
-        
+
         public float maxHealth;
         [SerializeField] private float health;
         public float meleeDamage;
-        
+
         public float cooldownTimer;
         public float knockBackForce;
         public float brake;
@@ -26,6 +27,8 @@ namespace Visualization
 
         [SerializeField] private float cooldown = 5f;
 
+        public event Action<bool> EnemyGotHit;
+
         private void Awake()
         {
             _gameManager = ServiceLocator.GetService<IGameManager>();
@@ -35,27 +38,29 @@ namespace Visualization
 
         void Start()
         {
-            direction = new Vector3(0,0,0); 
+            direction = new Vector3(0, 0, 0);
             health = maxHealth;
         }
 
         private void OnCollisionEnter(Collision collision)
         {
             Debug.Log("Enemy was hit");
-            if(collision.gameObject.tag == "PlayerProjectile" || collision.gameObject.tag =="StickyBullet" || collision.gameObject.tag == "Rock")
+            if (collision.gameObject.tag == "PlayerProjectile" || collision.gameObject.tag == "StickyBullet" || collision.gameObject.tag == "Rock")
             {
+                EnemyGotHit?.Invoke(true);
                 health -= collision.gameObject.GetComponent<Projectile>().damage;
                 direction = (transform.position - collision.transform.position).normalized;
                 StartCoroutine(KnockBack());
-                
+
             }
-            else if(collision.gameObject.tag == "IceBullet")
+            else if (collision.gameObject.tag == "IceBullet")
             {
+                EnemyGotHit?.Invoke(true);
                 health -= collision.gameObject.GetComponent<Projectile>().damage;
                 direction = (transform.position - collision.transform.position).normalized;
                 StartCoroutine(KnockBack());
                 enemyBaseSpeed -= 0.25f;
-                
+
                 /*
                 rb.isKinematic = true;
                 cooldownTimer -= Time.deltaTime;
@@ -63,12 +68,13 @@ namespace Visualization
                 cooldownTimer = cooldown;
                 rb.isKinematic = false;
                 */
-                
+
             }
-            else if(collision.gameObject.tag == "FireBullet")
-            {             
-                direction = (transform.position - collision.transform.position).normalized;              
-                
+            else if (collision.gameObject.tag == "FireBullet")
+            {
+                EnemyGotHit?.Invoke(true);
+                direction = (transform.position - collision.transform.position).normalized;
+
                 collidedObjectDamage = collision.gameObject.GetComponent<Projectile>().damage;
                 //StartCoroutine(KnockBack());
                 Burn();
@@ -90,10 +96,10 @@ namespace Visualization
         }
         IEnumerator KnockBack()
         {
-           float knockBacktime = Time.time;
+            float knockBacktime = Time.time;
             while (Time.time < knockBacktime + 0.2f)
             {
-                transform.position += (direction * Time.deltaTime * knockBackForce);             
+                transform.position += (direction * Time.deltaTime * knockBackForce);
                 yield return null;
             }
         }
@@ -101,13 +107,13 @@ namespace Visualization
         private void Burn()
         {
             float burntime = Time.time;
-            
-                cooldownTimer -= Time.deltaTime;
-                health -= (collidedObjectDamage / 30);
-                Instantiate(impact, transform.position, Quaternion.identity);
-                if (cooldownTimer > 0)return;
-                cooldownTimer = burnCoolDown;                         
-            }
+
+            cooldownTimer -= Time.deltaTime;
+            health -= (collidedObjectDamage / 30);
+            Instantiate(impact, transform.position, Quaternion.identity);
+            if (cooldownTimer > 0) return;
+            cooldownTimer = burnCoolDown;
         }
     }
+}
 
