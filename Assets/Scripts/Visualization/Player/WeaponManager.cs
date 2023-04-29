@@ -22,7 +22,6 @@ namespace Visualization
         public GameObject firedProjectile;
         public AudioSource audioSource;
         public AudioClip clip;
-        //public GameObject muzzle;
         
         // Overloading variables
         public float overLoadMax;
@@ -151,11 +150,6 @@ namespace Visualization
             {
                 firedProjectile = Instantiate(projectile, projectileSpawn.position, Quaternion.identity);
             }
-            
-            /*if(projectile.tag == "PlayerProjectile" || projectile.tag =="Bullet")
-            {
-                Instantiate(muzzle, projectileSpawn.position, projectileSpawn.rotation, projectileSpawn.transform);
-            }*/
 
             float projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
             firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawn.position).normalized * projectileSpeed;
@@ -164,7 +158,7 @@ namespace Visualization
             if(_playerManager.GetAttack() > 0)
             {
                 // This makes the projectile wobble a little at the beginning of the flight path
-                //iTween.PunchPosition(firedProjectile, new Vector3(Random.Range(-arcRange, arcRange), Random.Range(-arcRange, arcRange), 0), Random.Range(0.5f, 2f));
+                iTween.PunchPosition(firedProjectile, new Vector3(Random.Range(-arcRange, arcRange), Random.Range(-arcRange, arcRange), 0), Random.Range(0.5f, 1f));
                 
                 currentOverLoad += 10 + _playerManager.GetAttack() * 5f;
             }
@@ -218,7 +212,6 @@ namespace Visualization
 
         public void playSound()
         {
-
             audioSource.PlayOneShot(clip);
         }
 

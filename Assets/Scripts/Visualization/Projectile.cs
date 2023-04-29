@@ -11,12 +11,10 @@ namespace Visualization
         public GameObject trailFX;
         public float damage;
         public float baseDamage;
-        private bool enemyCollided;
         public float projectileSpeed;
         public float projectileBaseSpeed;
-    
+
         private bool collided;
-        private SphereCollider projectileCollider;
         public ParticleSystem beam;
         private float lifetime;
         private float lifeTimer;
@@ -36,7 +34,7 @@ namespace Visualization
                 damage = baseDamage;
                 projectileSpeed = projectileBaseSpeed;
             }
-            else if(gameObject.tag == "IceBullet")
+            else if (gameObject.tag == "IceBullet")
             {
                 //damage = baseDamage + _playerManager.GetAttack() * 0.2f;
                 //projectileSpeed = projectileBaseSpeed - _playerManager.GetAttack() * 0.45f;
@@ -44,80 +42,63 @@ namespace Visualization
                 projectileSpeed = projectileBaseSpeed;
                 //Instantiate(trailFX, transform.position, Quaternion.identity);
             }
-            else if(gameObject.tag == "FireBullet")
+            else if (gameObject.tag == "FireBullet")
             {
                 damage = baseDamage;
                 projectileSpeed = projectileBaseSpeed;
                 //Instantiate(trailFX, transform.position, Quaternion.identity);
             }
-            else 
+            else
             {
                 damage = baseDamage;
                 projectileSpeed = projectileBaseSpeed;
             }
 
-            projectileCollider = GetComponent<SphereCollider>();
-        
+            rb = GetComponent<Rigidbody>();
+
             lifeTimer = 0;
             lifetime = 7f; // Projectile lives for 7 seconds if does not collide
-        }
-
-        private void Start()
-        {
-
-            // Increasing size of the projectile collider and the particle system
-            /*if (gameObject.tag == "PlayerProjectile")
-            {
-                projectileCollider.radius = 0.01f + _playerManager.GetAttack() * 0.0079f;
-                ParticleSystem.MainModule main = beam.main;
-                main.startSize = 0.1f + _playerManager.GetAttack() * 0.049f;
-            }
-            else if(gameObject.tag == "IceBullet")
-            {
-                projectileCollider.radius = 0.01f + _playerManager.GetAttack() * 0.0079f;
-                Instantiate(trailFX, transform.position, Quaternion.identity);
-            }*/
         }
 
         private void Update()
         {
             lifeTimer += Time.deltaTime;
-        
-            if(lifeTimer > lifetime)
+
+            if (lifeTimer > lifetime)
             {
+                Instantiate(impactVFX, gameObject.transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
-
         }
 
         private void OnCollisionEnter(Collision collision)
         {
             // Player projectile collisions
-            if(gameObject.tag == "PlayerProjectile" && collision.gameObject.tag != "PlayerProjectile" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
+            if (gameObject.tag == "PlayerProjectile" && collision.gameObject.tag != "PlayerProjectile" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
             {
                 collided = true;
 
-                if(collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeleton")
+                if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeleton")
                 {
                     GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
                 }
 
                 GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
-               
+
                 Destroy(impact, 2f);
 
                 Destroy(gameObject);
             }
 
             // Enemy projectile collisions
-            if(gameObject.tag == "EnemyProjectile" && collision.gameObject.tag != "EnemyProjectile" && collision.gameObject.tag != "Enemy")
+            if (gameObject.tag == "EnemyProjectile" && collision.gameObject.tag != "EnemyProjectile" && collision.gameObject.tag != "Enemy")
             {
                 collided = true;
 
                 GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
 
                 Debug.Log("EnemyProjectile collided with " + collision.gameObject.tag);
-               
+
                 Destroy(impact, 2f);
 
                 Destroy(gameObject);
@@ -132,8 +113,8 @@ namespace Visualization
                     GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
                 }
 
-                GameObject impact = Instantiate(explosionFX, collision.contacts[0].point, Quaternion.identity);
-                //GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
+                //GameObject impact = Instantiate(explosionFX, collision.contacts[0].point, Quaternion.identity);
+                GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
 
                 FindObjectOfType<AudioManager>().Play("OnHit");
 
@@ -149,30 +130,51 @@ namespace Visualization
                     GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
                 }
 
-                GameObject impact = Instantiate(explosionFX, collision.contacts[0].point, Quaternion.identity);
-                //GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
+                //GameObject impact = Instantiate(explosionFX, collision.contacts[0].point, Quaternion.identity);
+                GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
 
                 FindObjectOfType<AudioManager>().Play("OnHit");
 
                 Destroy(gameObject);
             }
 
-            if (gameObject.tag == "Bullet" && collision.gameObject.tag != "Bullet" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
+            if (gameObject.tag == "StickyBullet" && collision.gameObject.tag != "StickyBullet" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
             {
                 collided = true;
                 rb.velocity = new Vector3(0, 0, 0);
-            }
+                Debug.Log("StickyProjectile stuck into " + collision.gameObject.tag);
+
                 if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeletonEnemy")
                 {
-                    enemyCollided= true;    
                     GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
-                    GameObject impact = Instantiate(explosionFX, collision.contacts[0].point, Quaternion.identity);
+                    GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
                     Debug.Log("EnemyProjectile collided with " + collision.gameObject.tag);
-  
+
+                    FindObjectOfType<AudioManager>().Play("OnHit");
+
+                    Destroy(impact, 2f);
                     Destroy(gameObject);
                 }
-            
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (gameObject.tag == "StickyBullet" && other.gameObject.tag != "StickyBullet" && other.gameObject.tag != "Player" && other.gameObject.tag != "PlayerWeapon" && collided)
+            {
+                if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "SmallSkeletonEnemy")
+                {
+                    GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
+                    GameObject impact = Instantiate(impactVFX, transform.position, Quaternion.identity);
+                    Debug.Log("EnemyProjectile collided with " + other.gameObject.tag);
+
+                    FindObjectOfType<AudioManager>().Play("OnHit");
+
+                    Destroy(impact, 2f);
+                    Destroy(gameObject);
+                }
             }
         }
     }
+}
 

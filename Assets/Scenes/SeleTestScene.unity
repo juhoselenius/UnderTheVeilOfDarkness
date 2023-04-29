@@ -414,6 +414,10 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 336052539}
+    - target: {fileID: 4411053162758453190, guid: 1bbdb8056c62a3a47ab163d112129dcc, type: 3}
+      propertyPath: playerCameraTransform
+      value: 
+      objectReference: {fileID: 336052539}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bbdb8056c62a3a47ab163d112129dcc, type: 3}
 --- !u!1001 &480814867
@@ -706,6 +710,10 @@ PrefabInstance:
       objectReference: {fileID: 1761745123}
     - target: {fileID: 2765013784225042823, guid: 3a4abf399f11a964ba8b8d12352e2c71, type: 3}
       propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 336052539}
+    - target: {fileID: 2765013784225042823, guid: 3a4abf399f11a964ba8b8d12352e2c71, type: 3}
+      propertyPath: playerCameraTransform
       value: 
       objectReference: {fileID: 336052539}
     - target: {fileID: 5123345015890038147, guid: 3a4abf399f11a964ba8b8d12352e2c71, type: 3}
@@ -1375,6 +1383,10 @@ PrefabInstance:
       objectReference: {fileID: 612343542}
     - target: {fileID: 4411053162758453190, guid: 1bbdb8056c62a3a47ab163d112129dcc, type: 3}
       propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 336052539}
+    - target: {fileID: 4411053162758453190, guid: 1bbdb8056c62a3a47ab163d112129dcc, type: 3}
+      propertyPath: playerCameraTransform
       value: 
       objectReference: {fileID: 336052539}
     m_RemovedComponents: []

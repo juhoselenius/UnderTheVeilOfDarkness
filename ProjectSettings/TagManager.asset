@@ -21,6 +21,7 @@ TagManager:
   - SmallSkeleton
   - Hitmarker
   - Crosshair
+  - StickyBullet
   layers:
   - Default
   - TransparentFX
