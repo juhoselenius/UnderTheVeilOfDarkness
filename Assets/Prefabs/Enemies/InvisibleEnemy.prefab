@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 6800580270835026592}
   - component: {fileID: 6800580270835026593}
   - component: {fileID: 1457822267005470403}
-  - component: {fileID: 3082498093848990329}
+  - component: {fileID: 4235862377339055596}
   m_Layer: 0
   m_Name: InvisibleEnemy
   m_TagString: Enemy
@@ -102,8 +102,12 @@ MonoBehaviour:
   body: {fileID: 6800580272034142578}
   positionHeight: 5
   audioSource: {fileID: 1457822267005470403}
+  audioSourceidle: {fileID: 4235862377339055596}
   clip: {fileID: 8300000, guid: 1c296947519a8ef4380c5302267cf26d, type: 3}
   soundText: {fileID: 6995708917316292458, guid: 29f213387011784499a837b64b1e7df5, type: 3}
+  clipidle: {fileID: 8300000, guid: e31d946926e1a784aa7dd3f774a91602, type: 3}
+  soundtimer: 5
+  nextsound: 0
 --- !u!82 &1457822267005470403
 AudioSource:
   m_ObjectHideFlags: 0
@@ -116,7 +120,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -5114134115436403034, guid: 7f7d1d8a214fa4e429ef3428676ecec5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.442
+  m_Volume: 0.375
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -200,7 +204,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!82 &3082498093848990329
+--- !u!82 &4235862377339055596
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -209,12 +213,12 @@ AudioSource:
   m_GameObject: {fileID: 6800580270835026599}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 7680968365060564426, guid: 7f7d1d8a214fa4e429ef3428676ecec5, type: 2}
-  m_audioClip: {fileID: 8300000, guid: e31d946926e1a784aa7dd3f774a91602, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.286
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.514
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -240,32 +244,32 @@ AudioSource:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.07761791
-      value: 0.7723954
-      inSlope: -1.8173329
-      outSlope: -1.8173329
+      time: 0.14093304
+      value: 0.6754248
+      inSlope: -1.9093803
+      outSlope: -1.9093803
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.58027005
-    - serializedVersion: 3
-      time: 0.4854982
-      value: 0.20687926
-      inSlope: -0.5958836
-      outSlope: -0.5958836
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.54638624
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.6952577
-      value: 0.11465985
-      inSlope: -0.33247882
-      outSlope: -0.33247882
+      time: 0.32199627
+      value: 0.4171855
+      inSlope: -1.467943
+      outSlope: -1.467943
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.68197286
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6913527
+      value: 0.08829019
+      inSlope: -0.87930393
+      outSlope: -0.87930393
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 0
