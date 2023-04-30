@@ -4641,8 +4641,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MenuControl, Assembly-CSharp
+      - m_Target: {fileID: 3628859900997206083}
+        m_TargetAssemblyTypeName: Visualization.PauseMenuControl, Assembly-CSharp
         m_MethodName: LoadMainMenu
         m_Mode: 1
         m_Arguments:
@@ -4775,9 +4775,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MenuControl, Assembly-CSharp
-        m_MethodName: Retry
+      - m_Target: {fileID: 3628859900997206083}
+        m_TargetAssemblyTypeName: Visualization.PauseMenuControl, Assembly-CSharp
+        m_MethodName: LoadLevel3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5511,8 +5511,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MenuControl, Assembly-CSharp
+      - m_Target: {fileID: 3628859900997206083}
+        m_TargetAssemblyTypeName: Visualization.PauseMenuControl, Assembly-CSharp
         m_MethodName: LoadPresetManagement
         m_Mode: 1
         m_Arguments:
