@@ -712,7 +712,7 @@ MonoBehaviour:
   brake: 0
   enemyBaseSpeed: 0
   direction: {x: 0, y: 0, z: 0}
-  impact: {fileID: 0}
+  impact: {fileID: 4867995539832589939, guid: cfe820f90f2351e4a85fb43fe86f449a, type: 3}
   burnEffect: {x: 0, y: 0, z: 0}
   cooldown: 5
 --- !u!1 &6800580271803211979

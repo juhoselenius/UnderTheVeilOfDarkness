@@ -123,7 +123,7 @@ namespace Visualization
             //health -= (collidedObjectDamage / 30);
             var impactFire = Instantiate(impact, transform.position, Quaternion.identity);
             new WaitForSeconds(0.3f);
-            health -= (collidedObjectDamage);
+            health -= (collidedObjectDamage / 2f);
             Destroy(impactFire);
             Debug.Log("Health: " + health);
 

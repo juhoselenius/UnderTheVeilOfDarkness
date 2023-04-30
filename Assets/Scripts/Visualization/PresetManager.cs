@@ -236,25 +236,25 @@ namespace Visualization
                         break;
                     case 1:
                         infoTitleText.text = "Attack - 1";
-                        infoDescriptionText.text = "You get a gun... wow!\n\nBase fire rate and no ammo perks";
+                        infoDescriptionText.text = "You get a gun... wow!\n\nBetter fire rate, damage and ammo that stick to surfaces";
                         sliderFillImage.color = new Color(1f, 0.6f, 0.4f);
                         sliderHandleImage.color = new Color(1f, 0.4f, 0.1f);
                         break;
                     case 2:
                         infoTitleText.text = "Attack - 2";
-                        infoDescriptionText.text = "Increased fire rate from the previous point level\n\n!!!AMMO PERK???!!!";
+                        infoDescriptionText.text = "Increased fire rate and damage from the previous point level\n\nAmmo with no perks";
                         sliderFillImage.color = new Color(1f, 0.8f, 0.4f);
                         sliderHandleImage.color = new Color(1f, 0.8f, 0);
                         break;
                     case 3:
                         infoTitleText.text = "Attack - 3";
-                        infoDescriptionText.text = "Increased fire rate from the previous point level\n\nFire ammo that !!!DO What???!!!";
+                        infoDescriptionText.text = "Increased fire rate and damage from the previous point level\n\nFire ammo that deals damage over time";
                         sliderFillImage.color = new Color(0.6f, 0.8f, 0.4f);
                         sliderHandleImage.color = new Color(0.4f, 0.8f, 0.2f);
                         break;
                     case 4:
                         infoTitleText.text = "Attack - 4";
-                        infoDescriptionText.text = "Increased fire rate from the previous point level\n\nIce ammo that slow down the enemy";
+                        infoDescriptionText.text = "Increased fire rate and damage from the previous point level\n\nIce ammo that slow down the enemy";
                         sliderFillImage.color = new Color(0.3f, 0.6f, 0);
                         sliderHandleImage.color = new Color(0.2f, 0.4f, 0);
                         break;

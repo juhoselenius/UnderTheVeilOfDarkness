@@ -1861,13 +1861,14 @@ MonoBehaviour:
   firedProjectile: {fileID: 0}
   audioSource: {fileID: 2288191313208121289}
   clip: {fileID: 8300000, guid: 5ff5bd936a30a904da907f35c8dd382e, type: 3}
+  cliprock: {fileID: 0}
   overLoadMax: 0
   currentOverLoad: 0
   overLoaded: 0
   projectiles:
   - {fileID: 1348354880045463903, guid: f1589cd3d77ea064caee232e4f610451, type: 3}
-  - {fileID: 3235484826052913327, guid: 023b9ccbd6e86e8409f216a2025f9a0d, type: 3}
   - {fileID: 3235484826052913327, guid: 3b4e3a58ca1ea6d479f15e0d861c99bb, type: 3}
+  - {fileID: 3235484826052913327, guid: 023b9ccbd6e86e8409f216a2025f9a0d, type: 3}
   - {fileID: 4867995539832589939, guid: cfe820f90f2351e4a85fb43fe86f449a, type: 3}
   - {fileID: 3688773661204392409, guid: 2b22cfc46fcf6414e97bed14557f457d, type: 3}
   primaryWeapon: {fileID: 1128023947397005449}
