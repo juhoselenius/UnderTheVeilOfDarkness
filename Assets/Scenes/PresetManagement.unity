@@ -7394,7 +7394,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Gun and ammo with no perks
+  m_text: Gun with ammo that stick to surfaces
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7e368aaddf6eb3848a651c07d35d4661, type: 2}
   m_sharedMaterial: {fileID: 2120275704088736017, guid: 7e368aaddf6eb3848a651c07d35d4661, type: 2}
@@ -9499,7 +9499,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Gun with ammo that sticks to surfaces
+  m_text: Gun with regular straight shooting ammo
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7e368aaddf6eb3848a651c07d35d4661, type: 2}
   m_sharedMaterial: {fileID: 2120275704088736017, guid: 7e368aaddf6eb3848a651c07d35d4661, type: 2}
@@ -10574,7 +10574,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Issuing points to the attack attribute awards the player different types
-    of ammo and increases the fire rate
+    of ammo and increases the fire rate and projectile damage
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7e368aaddf6eb3848a651c07d35d4661, type: 2}
   m_sharedMaterial: {fileID: 2120275704088736017, guid: 7e368aaddf6eb3848a651c07d35d4661, type: 2}

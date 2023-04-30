@@ -71,13 +71,19 @@ namespace Visualization
             _gameManager.SetGamePaused();
         }
 
-        private void UpdateSliderValues()
+        public void UpdateSliderValues()
         {
             defenseSlider.value = _playerManager.GetDefense();
             attackSlider.value = _playerManager.GetAttack();
             movementSlider.value = _playerManager.GetMovement();
             hearingSlider.value = _playerManager.GetHearing();
             sightSlider.value = _playerManager.GetSight();
+
+            sightValueText.text = _playerManager.GetSight().ToString();
+            hearingValueText.text = _playerManager.GetHearing().ToString();
+            movementValueText.text = _playerManager.GetMovement().ToString();
+            attackValueText.text = _playerManager.GetAttack().ToString();
+            defenseValueText.text = _playerManager.GetDefense().ToString();
         }
 
         public void DropdownMenuChange(int value)
