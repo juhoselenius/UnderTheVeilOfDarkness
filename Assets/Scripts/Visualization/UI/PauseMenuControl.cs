@@ -2,6 +2,7 @@ using Logic.Game;
 using Logic.Player;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Visualization
@@ -44,31 +45,21 @@ namespace Visualization
             {
                 if (!pauseMenu.activeInHierarchy)
                 {
-                    Pause();
-                    UpdateSliderValues();
+                    _gameManager.SetGamePaused();
+                    Time.timeScale = 0;
                     pauseMenu.SetActive(true);
+                    UpdateSliderValues();
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
                 }
                 else
                 {
-                    Resume();
+                    _gameManager.SetGamePaused();
                     pauseMenu.SetActive(false);
                     Cursor.lockState = CursorLockMode.Locked;
+                    Time.timeScale = 1;
                 }
             }
-        }
-
-        private void Pause()
-        {
-            Time.timeScale = 0;
-            _gameManager.SetGamePaused();
-        }
-
-        private void Resume()
-        {
-            Time.timeScale = 1;
-            _gameManager.SetGamePaused();
         }
 
         public void UpdateSliderValues()
@@ -90,6 +81,28 @@ namespace Visualization
         {
             _playerManager.ChangePreset(value);
             UpdateSliderValues();
+        }
+
+        public void LoadMainMenu()
+        {
+            Time.timeScale = 1;
+            _gameManager.SetGamePaused();
+            SceneManager.LoadScene("MainMenu");
+        }
+
+        public void LoadPresetManagement()
+        {
+            Time.timeScale = 1;
+            _gameManager.SetGamePaused();
+            SceneManager.LoadScene("PresetManagement");
+        }
+
+        public void LoadLevel3()
+        {
+            Time.timeScale = 1;
+            _gameManager.SetGamePaused();
+            Cursor.lockState = CursorLockMode.Locked;
+            SceneManager.LoadScene("Level3");
         }
     }
 }
