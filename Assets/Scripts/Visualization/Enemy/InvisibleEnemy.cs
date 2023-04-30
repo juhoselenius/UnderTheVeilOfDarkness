@@ -17,8 +17,12 @@ namespace Visualization
         public GameObject body;
         public float positionHeight;
         public AudioSource audioSource;
+        public AudioSource audioSourceidle;
         public AudioClip clip;
         public GameObject soundText;
+        public AudioClip clipidle;
+        public float soundtimer = 10f;
+        public float nextsound;
 
         private IPlayerManager _playerManager;
 
@@ -37,7 +41,11 @@ namespace Visualization
 
         void Update()
         {
-        
+            if (Time.time  > nextsound)
+            {
+                playidlesound();
+                 nextsound = Time.time + soundtimer;
+            }
         }
 
         private void OnTriggerStay(Collider other)
@@ -75,6 +83,12 @@ namespace Visualization
                 soundText.GetComponent<SoundToText>().textSound = "Pew";
                 Instantiate(soundText, body.transform.position, Quaternion.identity);
             }
+        }
+
+
+        public void playidlesound()
+        {
+            audioSourceidle.PlayOneShot(clipidle);
         }
     }
 }
