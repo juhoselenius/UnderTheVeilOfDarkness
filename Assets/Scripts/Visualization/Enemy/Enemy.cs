@@ -24,6 +24,7 @@ namespace Visualization
         public GameObject impact;
         public Vector3 burnEffect;
         private float burnCoolDown;
+        private bool burning;
 
         [SerializeField] private float cooldown = 5f;
 
@@ -33,13 +34,26 @@ namespace Visualization
         {
             _gameManager = ServiceLocator.GetService<IGameManager>();
             enemyBaseSpeed = 1f;
-            burnCoolDown = 0.5f;
+            burnCoolDown = 0.7f;
+            burning = false;
         }
 
         void Start()
         {
             direction = new Vector3(0, 0, 0);
             health = maxHealth;
+        }
+
+        private void Update()
+        {
+            if (burning)
+            {
+                Burn();
+                cooldownTimer -= Time.deltaTime;
+                if (cooldownTimer > 0) return;
+                burning = false;
+                cooldownTimer = burnCoolDown;
+            }
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -76,8 +90,8 @@ namespace Visualization
                 direction = (transform.position - collision.transform.position).normalized;
 
                 collidedObjectDamage = collision.gameObject.GetComponent<Projectile>().damage;
-                //StartCoroutine(KnockBack());
-                Burn();
+                //StartCoroutine(KnockBack());               
+                burning = true;
             }
 
             if (health <= 0)
@@ -106,13 +120,13 @@ namespace Visualization
 
         private void Burn()
         {
-            float burntime = Time.time;
+            //health -= (collidedObjectDamage / 30);
+            var impactFire = Instantiate(impact, transform.position, Quaternion.identity);
+            new WaitForSeconds(0.3f);
+            health -= (collidedObjectDamage);
+            Destroy(impactFire);
+            Debug.Log("Health: " + health);
 
-            cooldownTimer -= Time.deltaTime;
-            health -= (collidedObjectDamage / 30);
-            Instantiate(impact, transform.position, Quaternion.identity);
-            if (cooldownTimer > 0) return;
-            cooldownTimer = burnCoolDown;
         }
     }
 }
