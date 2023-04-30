@@ -27,6 +27,8 @@ namespace Visualization
         public int jumpRemaining;
         public float dodgeSpeed;
         public float dodgeTime;
+        public float dodgetimer = 1.5f;
+        public float nextdodge;
  
 
         Vector3 velocity;
@@ -81,12 +83,13 @@ namespace Visualization
 
         
             
-            if (Input.GetKeyDown(KeyCode.LeftControl) && _playerManager.GetMovement() == 4)
+            if (Input.GetKeyDown(KeyCode.LeftControl) && _playerManager.GetMovement() == 4 && Time.time > nextdodge)
             {
-              
+                    
                     StartCoroutine(Dodge());
-                   
-                
+                nextdodge = Time.time + dodgetimer;
+
+
             }
            
 
@@ -135,6 +138,7 @@ namespace Visualization
 
         IEnumerator Dodge()
         {
+             
             float startTime = Time.time;
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");

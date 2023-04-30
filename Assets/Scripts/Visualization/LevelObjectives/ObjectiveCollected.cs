@@ -9,6 +9,8 @@ namespace Visualization
     public class ObjectiveCollected : MonoBehaviour
     {
         private IGameManager _gameManager;
+        public AudioSource audioSource;
+        public AudioClip clip;
 
         private void Awake()
         {
@@ -19,9 +21,15 @@ namespace Visualization
         {
             if (other.tag == "Player")
             {
+                playSound();
                 _gameManager.SetLevel2ObjectivesLeft();
-                Destroy(gameObject);
+                Destroy(gameObject, 0.5f);
             }
+        }
+
+        public void playSound()
+        {
+            audioSource.PlayOneShot(clip);
         }
     }
 }
