@@ -129,6 +129,8 @@ namespace Visualization
 
                 GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
 
+                Destroy(impact, 1f);
+
                 FindObjectOfType<AudioManager>().Play("OnHit");
 
                 Destroy(gameObject);
@@ -138,12 +140,18 @@ namespace Visualization
             {
                 collided = true;
 
+                GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
+                impact.transform.parent = collision.transform;
+
                 if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeleton")
                 {
                     GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
+                    Destroy(impact, 4f);
                 }
-
-                GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
+                else
+                {
+                    Destroy(impact, 1f);
+                }
 
                 FindObjectOfType<AudioManager>().Play("OnHit");
 
