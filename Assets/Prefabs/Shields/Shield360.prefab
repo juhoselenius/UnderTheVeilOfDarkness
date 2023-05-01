@@ -144,5 +144,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxLifetime: 5
   lifetime: 0
-  maxHealth: 30
+  maxHealth: 40
   health: 0

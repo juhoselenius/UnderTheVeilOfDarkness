@@ -7,7 +7,7 @@ namespace Visualization
     public class IceBullet : Projectile
     {
         public GameObject explosionFX;
-        public GameObject trailFX;
+        //public GameObject trailFX;
         private bool collided;
         private float lifetime;
         private float lifeTimer;
@@ -39,7 +39,7 @@ namespace Visualization
             if (gameObject.tag == "IceBullet")
             {
                 projectileCollider.radius = 0.01f + _playerManager.GetAttack() * 0.0079f;
-                Instantiate(trailFX, transform.position, Quaternion.identity);
+                //Instantiate(trailFX, transform.position, Quaternion.identity);
                 
             }
         }

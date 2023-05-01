@@ -7,7 +7,6 @@ namespace Visualization
     public class Projectile : MonoBehaviour
     {
         public GameObject impactVFX;
-        public GameObject explosionFX;
         public GameObject trailFX;
         public float damage;
         public float baseDamage;
@@ -40,13 +39,11 @@ namespace Visualization
                 //projectileSpeed = projectileBaseSpeed - _playerManager.GetAttack() * 0.45f;
                 damage = baseDamage;
                 projectileSpeed = projectileBaseSpeed;
-                //Instantiate(trailFX, transform.position, Quaternion.identity);
             }
             else if (gameObject.tag == "FireBullet")
             {
                 damage = baseDamage;
                 projectileSpeed = projectileBaseSpeed;
-                //Instantiate(trailFX, transform.position, Quaternion.identity);
             }
             else
             {
@@ -130,7 +127,6 @@ namespace Visualization
                     GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
                 }
 
-                //GameObject impact = Instantiate(explosionFX, collision.contacts[0].point, Quaternion.identity);
                 GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
 
                 FindObjectOfType<AudioManager>().Play("OnHit");
@@ -147,7 +143,6 @@ namespace Visualization
                     GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
                 }
 
-                //GameObject impact = Instantiate(explosionFX, collision.contacts[0].point, Quaternion.identity);
                 GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
 
                 FindObjectOfType<AudioManager>().Play("OnHit");
