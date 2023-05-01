@@ -85,6 +85,8 @@ namespace Visualization
 
         public void LoadMainMenu()
         {
+            _gameManager.ResetLevel2EnemiesLeft();
+            _gameManager.ResetLevel2ObjectivesLeft();
             Time.timeScale = 1;
             _gameManager.SetGamePaused();
             SceneManager.LoadScene("MainMenu");
@@ -92,6 +94,8 @@ namespace Visualization
 
         public void LoadPresetManagement()
         {
+            _gameManager.ResetLevel2EnemiesLeft();
+            _gameManager.ResetLevel2ObjectivesLeft();
             Time.timeScale = 1;
             _gameManager.SetGamePaused();
             SceneManager.LoadScene("PresetManagement");
@@ -99,6 +103,8 @@ namespace Visualization
 
         public void LoadLevel3()
         {
+            _gameManager.ResetLevel2EnemiesLeft();
+            _gameManager.ResetLevel2ObjectivesLeft();
             Time.timeScale = 1;
             _gameManager.SetGamePaused();
             Cursor.lockState = CursorLockMode.Locked;
