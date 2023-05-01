@@ -2425,6 +2425,8 @@ MonoBehaviour:
   jumpRemaining: 0
   dodgeSpeed: 10
   dodgeTime: 0.5
+  dodgetimer: 1.5
+  nextdodge: 0
 --- !u!114 &1188691806512712266
 MonoBehaviour:
   m_ObjectHideFlags: 0
