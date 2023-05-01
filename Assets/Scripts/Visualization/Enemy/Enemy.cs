@@ -18,13 +18,18 @@ namespace Visualization
         public float cooldownTimer;
         public float knockBackForce;
         public float brake;
+        public float initialEnemySpeed;
         public float enemyBaseSpeed;
+        private float speedTimer;
         public Vector3 direction;
         private float collidedObjectDamage;
-        public GameObject impact;
+        public GameObject iceImpact;
         public Vector3 burnEffect;
         private float burnCoolDown;
         private bool burning;
+        public float burningTime;
+        private float burnTimer;
+        private int burnTimes; // How many times burn damage is applied
 
         [SerializeField] private float cooldown = 5f;
 
@@ -34,26 +39,76 @@ namespace Visualization
         {
             _gameManager = ServiceLocator.GetService<IGameManager>();
             enemyBaseSpeed = 1f;
+            initialEnemySpeed = enemyBaseSpeed;
+            speedTimer = 0;
             burnCoolDown = 0.7f;
             burning = false;
+            burnTimer = 0;
+            burnTimes = 0;
+            burningTime = 4f;
         }
 
         void Start()
         {
             direction = new Vector3(0, 0, 0);
             health = maxHealth;
+            iceImpact.SetActive(false);
         }
 
         private void Update()
         {
-            if (burning)
+            // Defreezing the enemy (increasing the speed in seconds)
+            if(enemyBaseSpeed < initialEnemySpeed)
+            {
+                speedTimer += Time.deltaTime;
+                if(speedTimer > 1f)
+                {
+                    enemyBaseSpeed *= 1.25f;
+                    speedTimer = 0;
+                }
+            }
+            else
+            {
+                speedTimer = 0;
+                enemyBaseSpeed = initialEnemySpeed;
+                iceImpact.SetActive(false);
+            }
+
+            if(burning)
+            {
+                burnTimer += Time.deltaTime;
+                
+                if(burnTimes < burningTime)
+                {
+                    // Burn timer is reset after every second, burn damage is applied and burn times counter increased
+                    if(burnTimer > 1f)
+                    {
+                        health -= 5f;
+                        burnTimer = 0;
+                        burnTimes++;
+
+                        if (health <= 0)
+                        {
+                            EnemyDie();
+                        }
+                    }
+                }
+                else
+                {
+                    burning = false;
+                    burnTimer = 0;
+                    burnTimes = 0;
+                }
+            }
+            
+            /*if (burning)
             {
                 Burn();
                 cooldownTimer -= Time.deltaTime;
                 if (cooldownTimer > 0) return;
                 burning = false;
                 cooldownTimer = burnCoolDown;
-            }
+            }*/
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -73,7 +128,8 @@ namespace Visualization
                 health -= collision.gameObject.GetComponent<Projectile>().damage;
                 direction = (transform.position - collision.transform.position).normalized;
                 StartCoroutine(KnockBack());
-                enemyBaseSpeed -= 0.25f;
+                enemyBaseSpeed *= 0.75f;
+                iceImpact.SetActive(true);
 
                 /*
                 rb.isKinematic = true;
@@ -89,9 +145,14 @@ namespace Visualization
                 EnemyGotHit?.Invoke(true);
                 direction = (transform.position - collision.transform.position).normalized;
 
-                collidedObjectDamage = collision.gameObject.GetComponent<Projectile>().damage;
-                //StartCoroutine(KnockBack());               
+                health -= collision.gameObject.GetComponent<Projectile>().damage;
+                //collidedObjectDamage = collision.gameObject.GetComponent<Projectile>().damage;
+                StartCoroutine(KnockBack());
                 burning = true;
+                
+                // Resetting burn counters on every hit
+                burnTimer = 0;
+                burnTimes = 0;
             }
 
             if (health <= 0)
@@ -118,7 +179,7 @@ namespace Visualization
             }
         }
 
-        private void Burn()
+        /*private void Burn()
         {
             //health -= (collidedObjectDamage / 30);
             var impactFire = Instantiate(impact, transform.position, Quaternion.identity);
@@ -127,7 +188,7 @@ namespace Visualization
             Destroy(impactFire);
             Debug.Log("Health: " + health);
 
-        }
+        }*/
     }
 }
 

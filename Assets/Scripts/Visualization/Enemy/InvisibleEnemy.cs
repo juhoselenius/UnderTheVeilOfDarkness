@@ -44,7 +44,7 @@ namespace Visualization
             if (Time.time  > nextsound)
             {
                 playidlesound();
-                 nextsound = Time.time + soundtimer;
+                nextsound = Time.time + soundtimer;
             }
         }
 
@@ -89,6 +89,12 @@ namespace Visualization
         public void playidlesound()
         {
             audioSourceidle.PlayOneShot(clipidle);
+
+            if (_playerManager.GetHearing() == 2f)
+            {
+                soundText.GetComponent<SoundToText>().textSound = "Ping";
+                Instantiate(soundText, body.transform.position, Quaternion.identity);
+            }
         }
     }
 }
