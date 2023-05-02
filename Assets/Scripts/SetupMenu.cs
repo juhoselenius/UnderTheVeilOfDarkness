@@ -17,6 +17,7 @@ namespace Visualization
         public TextMeshProUGUI sfxValue;
         public TextMeshProUGUI reverseValue;
         
+
         private void Awake()
         {
             _optionsManager = ServiceLocator.GetService<IOptionsManager>();
@@ -32,10 +33,15 @@ namespace Visualization
 
             musicVolumeSlider.value = _optionsManager.getMusicVolume();
             musicValue.text = musicVolumeSlider.value.ToString();
+            
+           
 
             sfxVolumeSlider.value = _optionsManager.getSfxVolume();
             sfxValue.text = sfxVolumeSlider.value.ToString();
         }
+        
+            
+        
 
         public void setMouseSensitivity()
         {
@@ -53,6 +59,7 @@ namespace Visualization
         {
             _optionsManager.updateMusicVolume(musicVolumeSlider.value);
             musicValue.text = musicVolumeSlider.value.ToString();
+            
         }
         
         public void setSFXVolume()

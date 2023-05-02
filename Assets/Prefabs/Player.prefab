@@ -2140,6 +2140,9 @@ MonoBehaviour:
   audioSource: {fileID: 2288191313208121289}
   clip: {fileID: 8300000, guid: 5ff5bd936a30a904da907f35c8dd382e, type: 3}
   cliprock: {fileID: 8300000, guid: b549f55e56061b54b90e6f6c4559d0fe, type: 3}
+  SMG: {fileID: 8300000, guid: e0894d72d41ebbe49b525ac71176337b, type: 3}
+  Shotgun: {fileID: 8300000, guid: 23d80b5297162e9459fea98d1bec36f4, type: 3}
+  Pistol: {fileID: 8300000, guid: 60a0682fbc82bd244bdae3f3445cfd17, type: 3}
   overLoadMax: 0
   currentOverLoad: 0
   overLoaded: 0
