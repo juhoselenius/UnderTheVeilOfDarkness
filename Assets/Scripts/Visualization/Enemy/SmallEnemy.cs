@@ -57,6 +57,7 @@ namespace Visualization
             
             if (playerInDetectionRange)
             {
+                enemyNavMeshAgent.speed = runSpeed;
                 if (playerInAttackRange)
                 {
                     //animator.SetTrigger("Attack");
@@ -86,14 +87,14 @@ namespace Visualization
                         Shoot(playerCameraTransform.position);
                     }
 
-                    enemyNavMeshAgent.speed = runSpeed * gameObject.GetComponent<Enemy>().enemyBaseSpeed;
+                    enemyNavMeshAgent.speed = runSpeed;
                     enemyNavMeshAgent.transform.LookAt(playerCameraTransform);
                     enemyNavMeshAgent.SetDestination(playerCameraTransform.position + new Vector3(0, 0, 1f));
                 }
             }
             else if (hitDetected)
             {
-                enemyNavMeshAgent.speed = runSpeed * gameObject.GetComponent<Enemy>().enemyBaseSpeed;
+                enemyNavMeshAgent.speed = runSpeed;
                 Vector3 targetPosition = new Vector3(detectedPlayerPosition.x, this.transform.position.y, detectedPlayerPosition.z);
                 enemyNavMeshAgent.transform.LookAt(targetPosition);
                 enemyNavMeshAgent.SetDestination(targetPosition);

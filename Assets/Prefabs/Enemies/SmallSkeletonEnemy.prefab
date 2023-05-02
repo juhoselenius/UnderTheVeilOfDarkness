@@ -655,7 +655,7 @@ MonoBehaviour:
   walkSpeed: 2
   runSpeed: 4
   meleeDamage: 10
-  meleeRate: 0.75
+  meleeRate: 2
   playerInAttackRange: 0
   player: {fileID: 1188691806512712266, guid: c28c15efb53a11245b6dd9afac218c46, type: 3}
   trapSet: 0
