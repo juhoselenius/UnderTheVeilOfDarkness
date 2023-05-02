@@ -114,7 +114,7 @@ namespace Visualization
         private void OnCollisionEnter(Collision collision)
         {
             Debug.Log("Enemy was hit");
-            if (collision.gameObject.tag == "PlayerProjectile" || collision.gameObject.tag == "StickyBullet" || collision.gameObject.tag == "Rock")
+            if (collision.gameObject.tag == "PlayerProjectile" || collision.gameObject.tag == "StickyBullet" || collision.gameObject.tag == "Rock" || collision.gameObject.tag == "GreenProjectile")
             {
                 EnemyGotHit?.Invoke(true);
                 health -= collision.gameObject.GetComponent<Projectile>().damage;
