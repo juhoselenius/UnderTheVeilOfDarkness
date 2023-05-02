@@ -728,7 +728,7 @@ GameObject:
   - component: {fileID: 8247643162998239440}
   - component: {fileID: 8226123583237981523}
   m_Layer: 5
-  m_Name: ShieldBackground
+  m_Name: DashBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -922,65 +922,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &1598112747833067061
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3703122311283964264}
-  - component: {fileID: 6821288557757222352}
-  m_Layer: 0
-  m_Name: ShieldSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3703122311283964264
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1598112747833067061}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.42, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5086483059215192338}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6821288557757222352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1598112747833067061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48907880cafe8ef4b97fd72b21c6a449, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxShieldCooldown: 5
-  shieldSprite:
-  - {fileID: 21300000, guid: 52d470bae1a70764695bd86039a4e0ac, type: 3}
-  - {fileID: 21300000, guid: a436211445d3ded43825de0e157dc176, type: 3}
-  - {fileID: 21300000, guid: 1866b5061973f12479ab4e3cf43a6c30, type: 3}
-  - {fileID: 21300000, guid: 45791a86082bfcf4f90ac41b83d04a6a, type: 3}
-  - {fileID: 21300000, guid: ecab636722bd15f40a2c7e0910942748, type: 3}
-  shieldIcon: {fileID: 7308404757566926475}
-  filler: {fileID: 6626523948883976522}
-  shieldPrefabs:
-  - {fileID: 0}
-  - {fileID: 6122034718196711358, guid: 19a124fe583f9e046ae38a1314495277, type: 3}
-  - {fileID: 3580637635003737539, guid: 7d3910ba14875c844afa9e04f6413714, type: 3}
-  - {fileID: 8973129075113111314, guid: 81f6a09cbd6df624dae44ab867387947, type: 3}
-  - {fileID: 5267800074483019297, guid: bc07a1a9bac7e1f47b19fc7be3328a74, type: 3}
 --- !u!1 &1751648265121738687
 GameObject:
   m_ObjectHideFlags: 0
@@ -1011,7 +952,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5086483059215192338}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &2650657349188270753
 Camera:
@@ -1742,7 +1683,7 @@ GameObject:
   - component: {fileID: 7666394427408107478}
   - component: {fileID: 6626523948883976522}
   m_Layer: 5
-  m_Name: ShieldFiller
+  m_Name: DashFiller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1894,7 +1835,7 @@ GameObject:
   - component: {fileID: 1085398224137308495}
   - component: {fileID: 7308404757566926475}
   m_Layer: 5
-  m_Name: ShieldIcon
+  m_Name: DashIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1919,7 +1860,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 40, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1085398224137308495
 CanvasRenderer:
@@ -1949,7 +1890,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ecab636722bd15f40a2c7e0910942748, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d55cedbd1046c9b4e85759edf0b010d6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2001,7 +1942,7 @@ Transform:
   - {fileID: 946575988}
   - {fileID: 1961248168}
   m_Father: {fileID: 5086483059215192338}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &4920631385023035384
 MonoBehaviour:
@@ -2409,7 +2350,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3561213779476529181}
-  - {fileID: 3703122311283964264}
   - {fileID: 4920631385023035388}
   - {fileID: 6290691962969265429}
   m_Father: {fileID: 5086483060022182105}
@@ -2602,6 +2542,7 @@ MonoBehaviour:
   dodgeTimefull: 0.5
   dodgeSpeedfull: 10
   nextdodge: 0
+  filler: {fileID: 6626523948883976522}
 --- !u!114 &1188691806512712266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3175,7 +3116,7 @@ GameObject:
   - component: {fileID: 5594969356129041468}
   - component: {fileID: 526848474649887316}
   m_Layer: 5
-  m_Name: ShieldIcon
+  m_Name: DashIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3200,7 +3141,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 34, y: 15}
+  m_AnchoredPosition: {x: -34, y: 15}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &5594969356129041468
@@ -3675,7 +3616,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -34, y: 15}
+  m_AnchoredPosition: {x: 34, y: 15}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &4885588410252992153
