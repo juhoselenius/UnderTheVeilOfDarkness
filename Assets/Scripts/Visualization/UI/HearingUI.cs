@@ -1,6 +1,7 @@
 using Logic.Player;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 namespace Visualization
 {
@@ -17,6 +18,8 @@ namespace Visualization
         public Sprite[] hearingSprite;
         public Image hearingIcon;
         public Image filler;
+        public AudioMixerSnapshot Mute;
+        public AudioMixerSnapshot Unmute;
 
         void Awake()
         {
@@ -80,8 +83,9 @@ namespace Visualization
             switch(newValue)
             {
                 case 0:
-                    AudioListener.volume = 0f;
+                    AudioListener.volume = 1.0f;
                     hearingIcon.sprite = hearingSprite[0];
+                    
                     break;
                 case 1:
                     AudioListener.volume = 1.0f;
@@ -99,6 +103,19 @@ namespace Visualization
                     AudioListener.volume = 1.0f;
                     hearingIcon.sprite = hearingSprite[4];
                     break;
+            }
+        }
+
+        void Lowpass ()
+        {
+            if (Time.timeScale == 0)
+            {
+                Mute.TransitionTo(.01f);
+            }
+
+            else
+            {
+                Unmute.TransitionTo(0.1f);
             }
         }
     }

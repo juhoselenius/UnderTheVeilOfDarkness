@@ -14,6 +14,8 @@ namespace Visualization
         public float knockBackForce;
         private Vector3 direction;
         private float defense;
+        public AudioSource audioSource;
+        public AudioClip clip;
 
         private void Awake()
         {
@@ -30,7 +32,7 @@ namespace Visualization
         {
             defense = _playerManager.GetDefense();
             _playerManager.UpdateHealth(-amount * (1f - (defense * 0.125f))); // The defense reduction factor is 0.125 here
-
+            playSound();
             if (_playerManager.GetHealth() <= 0)
             {
                 Die();
@@ -77,6 +79,10 @@ namespace Visualization
                 GameObject.FindGameObjectWithTag("Player").transform.position += (direction * Time.deltaTime * knockBackForce);
                 yield return null;
             }
+        }
+        public void playSound()
+        {
+            audioSource.PlayOneShot(clip);
         }
     }
 }

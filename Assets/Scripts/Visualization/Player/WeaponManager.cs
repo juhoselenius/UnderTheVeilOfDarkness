@@ -15,7 +15,11 @@ namespace Visualization
         public Transform projectileSpawn;
         public Transform projectileSpawnGrim;
         public Transform projectileSpawnMauler;
+        public Transform projectileSpawn2;
+        public Transform projectileSpawn3;
         public Transform projectileSpawnFS;
+        public Transform projectileSpawnPistol;
+        
         public GameObject projectile;
         public float fireRate;
         public float baseFireRate;
@@ -39,6 +43,7 @@ namespace Visualization
         public GameObject mauler;
         public GameObject grimBrand;
         public GameObject fireSleet;
+        public GameObject pistol;
         private float projectileSpeed;
         
         [SerializeField] private float cooldownTimeOverload;
@@ -56,7 +61,7 @@ namespace Visualization
             attack = _playerManager.GetAttack();
             projectile = projectiles[(int)attack];
 
-            chooseWeapon();
+            ChooseWeapon();
             
             overLoaded = false;
             overLoadMin = 0f;
@@ -165,23 +170,49 @@ namespace Visualization
                 projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
                 firedProjectile.GetComponent<Rigidbody>().velocity = (destination - hand.transform.position).normalized * projectileSpeed;
             }
+            /*
             else if(projectile.tag == "StickyBullet")
             {
                 firedProjectile = Instantiate(projectile, projectileSpawnGrim.position, Quaternion.identity);
                 projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
                 firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawnGrim.position).normalized * projectileSpeed;
             }
+            */
+
+            else if(projectile.tag == "GreenProjectile")
+            {
+                firedProjectile = Instantiate(projectile, projectileSpawnGrim.position, Quaternion.identity);
+                projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
+                firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawnGrim.position).normalized * projectileSpeed;
+            }
+
             else if (projectile.tag == "PlayerProjectile")
             {
-                firedProjectile = Instantiate(projectile, projectileSpawn.position, Quaternion.identity);
+                firedProjectile = Instantiate(projectile, projectileSpawnPistol.position, Quaternion.identity);
                 projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
-                firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawn.position).normalized * projectileSpeed;
+                firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawnPistol.position).normalized * projectileSpeed;
             }
             else if (projectile.tag == "FireBullet")
             {
-                firedProjectile = Instantiate(projectile, projectileSpawnMauler.position, Quaternion.identity);
-                projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
-                firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawnMauler.position).normalized * projectileSpeed;
+                
+                for (int i = 0; i < 3; i++)
+                {
+                    if(i == 0)
+                    {
+                        firedProjectile = Instantiate(projectile, projectileSpawn.position, Quaternion.identity);
+                    }
+                    else if (i == 1)
+                    {
+                        firedProjectile = Instantiate(projectile, projectileSpawn2.position, Quaternion.identity);
+                    }
+                    if (i == 2)
+                    {
+                        firedProjectile = Instantiate(projectile, projectileSpawn3.position, Quaternion.identity);
+                    }                  
+                    projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
+                    firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawnMauler.position).normalized * projectileSpeed;
+                    iTween.PunchPosition(firedProjectile, new Vector3(Random.Range(-arcRange, arcRange), Random.Range(-arcRange, arcRange), 0), Random.Range(0.5f, 1f));
+                }
             }
             else if (projectile.tag == "IceBullet")
             {
@@ -196,7 +227,26 @@ namespace Visualization
                 // This makes the projectile wobble a little at the beginning of the flight path
                 //iTween.PunchPosition(firedProjectile, new Vector3(Random.Range(-arcRange, arcRange), Random.Range(-arcRange, arcRange), 0), Random.Range(0.5f, 1f));
                 
-                currentOverLoad += 10 + _playerManager.GetAttack() * 5f;
+                //currentOverLoad += 10 + _playerManager.GetAttack() * 5f;
+
+                // Add overload to the overload bar according to the used weapon
+                switch(_playerManager.GetAttack())
+                {
+                    case 1:
+                        currentOverLoad += 30f;
+                        break;
+                    case 2:
+                        currentOverLoad += 18f;
+                        break;
+                    case 3:
+                        currentOverLoad += 28f;
+                        break;
+                    case 4:
+                        currentOverLoad += 7.5f;
+                        break;
+                    default:
+                        break;
+                }
             }
 
             if (currentOverLoad >= overLoadMax)
@@ -204,25 +254,6 @@ namespace Visualization
                 currentOverLoad = overLoadMax;
                 overLoaded = true;
             }
-
-
-            /*if (projectile.tag == "Bullet")
-            {
-                currentOverLoad += 15;
-            }
-            if (projectile.tag == "PlayerProjectile")
-            {
-                currentOverLoad += 20;
-            }
-            if (projectile.tag == "FireBullet")
-            {
-                currentOverLoad += 25;
-            }
-
-            if (projectile.tag == "IceBullet")
-            {
-                currentOverLoad += 30;
-            }*/
         }
 
         private void OnEnable()
@@ -242,8 +273,30 @@ namespace Visualization
         void ChangeFireRate(float newValue)
         {
             //fireRate = baseFireRate + newValue * 0.15f;
-            chooseWeapon();
+            ChooseWeapon();
             projectile = projectiles[(int)_playerManager.GetAttack()];
+
+            // Change weapon overload cooldown time
+            switch (_playerManager.GetAttack())
+            {
+                case 0:
+                    cooldownTimeOverload = 0.1f;
+                    break;
+                case 1:
+                    cooldownTimeOverload = 1.2f;
+                    break;
+                case 2:
+                    cooldownTimeOverload = 2.1f;
+                    break;
+                case 3:
+                    cooldownTimeOverload = 3.2f;
+                    break;
+                case 4:
+                    cooldownTimeOverload = 3.7f;
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void playSound()
@@ -251,7 +304,7 @@ namespace Visualization
             audioSource.PlayOneShot(clip);
         }
 
-        private void chooseWeapon()
+        private void ChooseWeapon()
         {
             attack = _playerManager.GetAttack();
             if (attack == 0)
@@ -261,7 +314,8 @@ namespace Visualization
                 primaryWeapon.SetActive(false);
                 mauler.SetActive(false);
                 fireSleet.SetActive(false);
-                fireRate = 1;
+                pistol.SetActive(false);
+                fireRate = 1f;
             }
             else if (attack == 1)
             {
@@ -270,25 +324,28 @@ namespace Visualization
                 primaryWeapon.SetActive(false);
                 mauler.SetActive(false);
                 fireSleet.SetActive(false);
+                pistol.SetActive(false);
                 fireRate = 1.5f;
             }        
             else if (attack == 2)
              {
-                    primaryWeapon.SetActive(true);
-                    grimBrand.SetActive(false);
-                    mauler.SetActive(false);
-                    fireSleet.SetActive(false);
-                    hand.SetActive(false);
-                fireRate = 2;
+                pistol.SetActive(true);
+                primaryWeapon.SetActive(false);
+                grimBrand.SetActive(false);
+                mauler.SetActive(false);
+                fireSleet.SetActive(false);
+                hand.SetActive(false);
+                fireRate = 2.25f;
             }
             else if (attack == 3)
-            {
-                mauler.SetActive(true);
-                primaryWeapon.SetActive(false);
+            {             
+                primaryWeapon.SetActive(true);
+                mauler.SetActive(false);
                 fireSleet.SetActive(false);
                 hand.SetActive(false);
                 grimBrand.SetActive(false);
-                fireRate = 2.25f;
+                pistol.SetActive(false);
+                fireRate = 1.25f;
             }
             else if (attack == 4)
             {
@@ -297,7 +354,8 @@ namespace Visualization
                 hand.SetActive(false);
                 grimBrand.SetActive(false);
                 primaryWeapon.SetActive(false);
-                fireRate = 2.5f;
+                pistol.SetActive(false);
+                fireRate = 4f;
             }
         }
 

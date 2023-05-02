@@ -735,8 +735,6 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: Preset 2
       m_Image: {fileID: 0}
-    - m_Text: Preset 3
-      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

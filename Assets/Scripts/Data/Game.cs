@@ -46,7 +46,7 @@ namespace Data
             introLevelCleared = false;
 
             // Level 2
-            level2EnemiesLeft = 13;
+            level2EnemiesLeft = 15;
             level2ObjectivesLeft = 2;
             level2Cleared = false;
 
