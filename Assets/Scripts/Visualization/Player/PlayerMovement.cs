@@ -28,6 +28,8 @@ namespace Visualization
         public float dodgeSpeed;
         public float dodgeTime;
         public float dodgetimer = 1.5f;
+        public float dodgeTimefull;
+        public float dodgeSpeedfull;
         public float nextdodge;
  
 
@@ -37,7 +39,7 @@ namespace Visualization
         public enum MovementState
         {
             walking,
-            sprinting,
+            //sprinting,
             air
         }
 
@@ -83,7 +85,7 @@ namespace Visualization
 
         
             
-            if (Input.GetKeyDown(KeyCode.LeftControl) && _playerManager.GetMovement() == 4 && Time.time > nextdodge)
+            if (Input.GetKeyDown(sprintKey) && _playerManager.GetMovement() == 3 && Time.time > nextdodge)
             {
                     
                     StartCoroutine(Dodge());
@@ -91,7 +93,15 @@ namespace Visualization
 
 
             }
-           
+            if (Input.GetKeyDown(sprintKey) && _playerManager.GetMovement() == 4 && Time.time > nextdodge)
+            {
+
+                StartCoroutine(Dodgefull());
+                nextdodge = Time.time + dodgetimer;
+
+
+            }
+
 
             velocity.y += gravity * Time.deltaTime;
 
@@ -111,18 +121,37 @@ namespace Visualization
 
         void ChangeSpeed(float newValue)
         {
-            walkSpeed = 1.5f + 0.375f * newValue;
-            sprintSpeed = 1f + newValue;
+            switch(newValue)
+            {
+                case 0:
+                    walkSpeed = 1.5f;
+                    break;
+                case 1:
+                    walkSpeed = 2f;
+                    break;
+                case 2:
+                    walkSpeed = 3f;
+                    break;
+                case 3:
+                    walkSpeed = 4f;
+                    break;
+                case 4:
+                    walkSpeed = 5f;
+                    break;
+                
+            }
+            //walkSpeed = 1.5f + 0.375f * newValue;
+            //sprintSpeed = 1f + newValue;
         }
 
         private void StateHandler()
         {
-            if (isGrounded && Input.GetKey(sprintKey) && _playerManager.GetMovement() >= 3)
-            {
-                state = MovementState.sprinting;
-                speed = sprintSpeed;
-            }
-            else if (isGrounded)
+            //if (isGrounded && Input.GetKey(sprintKey) && _playerManager.GetMovement() >= 3)
+            //{
+              //  state = MovementState.sprinting;
+                //speed = sprintSpeed;
+            //}
+            if (isGrounded)
             {
                 state = MovementState.walking;
                 speed = walkSpeed;
@@ -147,6 +176,21 @@ namespace Visualization
             while (Time.time < startTime + dodgeTime)
             {
                 controller.Move(move * dodgeSpeed * Time.deltaTime);
+                yield return null;
+            }
+        }
+
+        IEnumerator Dodgefull()
+        {
+
+            float startTime = Time.time;
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
+            Vector3 move = transform.right * x + transform.forward * z;
+            controller.Move(move * speed * Time.deltaTime);
+            while (Time.time < startTime + dodgeTimefull)
+            {
+                controller.Move(move * dodgeSpeedfull * Time.deltaTime);
                 yield return null;
             }
         }

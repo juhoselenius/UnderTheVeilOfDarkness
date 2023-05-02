@@ -3,7 +3,12 @@ guid: fa37cf7a3ac63ae4399c4885db96a591
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - xRayCamera: {instanceID: 0}
+  - hearingIcon: {instanceID: 0}
+  - filler: {instanceID: 0}
+  - Mute: {fileID: -4000333016985840878, guid: 7f7d1d8a214fa4e429ef3428676ecec5, type: 2}
+  - Unmute: {fileID: -6595734341542426369, guid: 7f7d1d8a214fa4e429ef3428676ecec5, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
