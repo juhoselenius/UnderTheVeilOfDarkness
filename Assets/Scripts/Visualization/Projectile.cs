@@ -102,6 +102,23 @@ namespace Visualization
                 }
             }
 
+            if (gameObject.tag == "GreenProjectile" && collision.gameObject.tag != "GreenProjectile" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
+            {
+                collided = true;
+
+                if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeleton")
+                {
+                    GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
+                }
+
+                GameObject impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity);
+
+                Destroy(impact, 2f);
+
+                Destroy(gameObject);
+            }
+
+
             // Enemy projectile collisions
             if (gameObject.tag == "EnemyProjectile" && collision.gameObject.tag != "EnemyProjectile" && collision.gameObject.tag != "Enemy")
             {
@@ -156,6 +173,7 @@ namespace Visualization
                 Destroy(gameObject);
             }
 
+            /*
             if (gameObject.tag == "StickyBullet" && collision.gameObject.tag != "StickyBullet" && collision.gameObject.tag != "Player" && collision.gameObject.tag != "PlayerWeapon" && !collided)
             {
                 collided = true;
@@ -187,6 +205,7 @@ namespace Visualization
                     Debug.Log("StickyProjectile stuck into " + collision.gameObject.tag);
                 }
             }
+            */
         }
 
         private void OnTriggerEnter(Collider other)
