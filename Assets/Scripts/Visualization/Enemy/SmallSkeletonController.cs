@@ -52,7 +52,7 @@ namespace Visualization
                 Vector3 targetPosition = new Vector3(target.position.x, this.transform.position.y, target.position.z);
                 enemyNavMeshAgent.transform.LookAt(targetPosition);
 
-                meleeTimer += Time.fixedDeltaTime;
+                meleeTimer += Time.deltaTime;
                 if (meleeTimer > meleeRate)
                 {
                     meleeTimer = 0;
