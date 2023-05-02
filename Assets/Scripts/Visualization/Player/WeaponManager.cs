@@ -167,13 +167,15 @@ namespace Visualization
                 projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
                 firedProjectile.GetComponent<Rigidbody>().velocity = (destination - hand.transform.position).normalized * projectileSpeed;
             }
+            /*
             else if(projectile.tag == "StickyBullet")
             {
                 firedProjectile = Instantiate(projectile, projectileSpawnGrim.position, Quaternion.identity);
                 projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
                 firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawnGrim.position).normalized * projectileSpeed;
             }
-            else if (projectile.tag == "PlayerProjectile")
+            */
+            else if (projectile.tag == "PlayerProjectile" || projectile.tag == "GreenProjectile")
             {
                 firedProjectile = Instantiate(projectile, projectileSpawn.position, Quaternion.identity);
                 projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;

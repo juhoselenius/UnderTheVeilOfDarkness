@@ -10,6 +10,7 @@ public class EnemyCounterUI : MonoBehaviour
 {
     public IGameManager _gameManager;
     private TextMeshProUGUI enemyCounterText;
+    public TextMeshProUGUI objectivesCounterText;
 
     // Start is called before the first frame update
     void Awake()
@@ -21,10 +22,12 @@ public class EnemyCounterUI : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Level1")
         {
             enemyCounterText.text = "Enemies left: 0";
+            objectivesCounterText.text = "Objective spheres left: 0";
         }
         if (SceneManager.GetActiveScene().name == "Level3")
         {
             enemyCounterText.text = "Enemies left: 12";
+            objectivesCounterText.text = "Objective spheres left: 2";
         }
     }
 
@@ -33,7 +36,8 @@ public class EnemyCounterUI : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().name == "Level3")
         {
-            enemyCounterText.text = "Enemies left: " + (_gameManager.GetLevel2EnemiesLeft()).ToString();
+            enemyCounterText.text = "Enemies left: " + _gameManager.GetLevel2EnemiesLeft().ToString();
+            objectivesCounterText.text = "Objective spheres left: " + _gameManager.GetLevel2ObjectivesLeft().ToString();
         }
     }
 }
