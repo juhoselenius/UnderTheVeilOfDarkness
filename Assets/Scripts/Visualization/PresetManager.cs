@@ -148,19 +148,19 @@ namespace Visualization
                         break;
                     case 2:
                         infoTitleText.text = "Hearing - 2";
-                        infoDescriptionText.text = "Textual hearing\n\nNoises made by enemies are displayed as text";
+                        infoDescriptionText.text = "Read sounds?\n\nNoises made by enemies are displayed as text";
                         sliderFillImage.color = new Color(1f, 0.8f, 0.4f);
                         sliderHandleImage.color = new Color(1f, 0.8f, 0);
                         break;
                     case 3:
                         infoTitleText.text = "Hearing - 3";
-                        infoDescriptionText.text = "Sonar hearing\n\nEnemies that make noise are revealed briefly by a sonar pulse";
+                        infoDescriptionText.text = "You can see with your ears...kinda...\n\nActivate a sonar pulse that briefly reveals your enemies";
                         sliderFillImage.color = new Color(0.6f, 0.8f, 0.4f);
                         sliderHandleImage.color = new Color(0.4f, 0.8f, 0.2f);
                         break;
                     case 4:
                         infoTitleText.text = "Hearing - 4";
-                        infoDescriptionText.text = "Visual hearing\n\nEnemies that make noise are revealed instantly for a longer period of time";
+                        infoDescriptionText.text = "Sonar on for longer period of time\n\nGo at 'em like an effing dolphin";
                         sliderFillImage.color = new Color(0.3f, 0.6f, 0);
                         sliderHandleImage.color = new Color(0.2f, 0.4f, 0);
                         break;
@@ -189,25 +189,25 @@ namespace Visualization
                         break;
                     case 1:
                         infoTitleText.text = "Movement - 1";
-                        infoDescriptionText.text = "Increased movement speed from the previous point level\n\nAdded jump skill";
+                        infoDescriptionText.text = "Increased movement speed from the previous point level\n\nBut hey, we added a jump skill into the mix";
                         sliderFillImage.color = new Color(1f, 0.6f, 0.4f);
                         sliderHandleImage.color = new Color(1f, 0.4f, 0.1f);
                         break;
                     case 2:
                         infoTitleText.text = "Movement - 2";
-                        infoDescriptionText.text = "Increased movement speed from the previous point level\n\nAdded double jump skill";
+                        infoDescriptionText.text = "Increased movement speed from the previous point level\n\nAnd now you can double jump";
                         sliderFillImage.color = new Color(1f, 0.8f, 0.4f);
                         sliderHandleImage.color = new Color(1f, 0.8f, 0);
                         break;
                     case 3:
                         infoTitleText.text = "Movement - 3";
-                        infoDescriptionText.text = "Increased movement speed from the previous point level\n\nAdded double jump and sprint skills";
+                        infoDescriptionText.text = "Increased movement speed from the previous point level...again...\n\nAdded double jump and sprint skills";
                         sliderFillImage.color = new Color(0.6f, 0.8f, 0.4f);
                         sliderHandleImage.color = new Color(0.4f, 0.8f, 0.2f);
                         break;
                     case 4:
                         infoTitleText.text = "Movement - 4";
-                        infoDescriptionText.text = "Increased movement speed from the previous point level\n\nAdded double jump, sprint and dodge skills";
+                        infoDescriptionText.text = "Max speed\n\nAdded double jump, sprint and dodge skills";
                         sliderFillImage.color = new Color(0.3f, 0.6f, 0);
                         sliderHandleImage.color = new Color(0.2f, 0.4f, 0);
                         break;
@@ -283,25 +283,25 @@ namespace Visualization
                         break;
                     case 1:
                         infoTitleText.text = "Defense - 1";
-                        infoDescriptionText.text = "You get an itsy-bitsy shield which stays where you put it";
+                        infoDescriptionText.text = "Your enemies do a little less damage...\n\nStill better be careful";
                         sliderFillImage.color = new Color(1f, 0.6f, 0.4f);
                         sliderHandleImage.color = new Color(1f, 0.4f, 0.1f);
                         break;
                     case 2:
                         infoTitleText.text = "Defense - 2";
-                        infoDescriptionText.text = "You get a shield covering most of the front sector and it moves with you";
+                        infoDescriptionText.text = "Taking a quarter of the normal damage...\n\nYou little sissy";
                         sliderFillImage.color = new Color(1f, 0.8f, 0.4f);
                         sliderHandleImage.color = new Color(1f, 0.8f, 0);
                         break;
                     case 3:
                         infoTitleText.text = "Defense - 3";
-                        infoDescriptionText.text = "You get a half-sphere shield covering the whole front sector and it moves with you";
+                        infoDescriptionText.text = "The enemies do a little less damage than with 2 points...\n\nNow who's a big sissy?";
                         sliderFillImage.color = new Color(0.6f, 0.8f, 0.4f);
                         sliderHandleImage.color = new Color(0.4f, 0.8f, 0.2f);
                         break;
                     case 4:
                         infoTitleText.text = "Defense - 4";
-                        infoDescriptionText.text = "You get a full-sphere shield covering you from all directions and it moves with you";
+                        infoDescriptionText.text = "Your enemies do half the normal damage\n\nGo tank it out like we know you want to";
                         sliderFillImage.color = new Color(0.3f, 0.6f, 0);
                         sliderHandleImage.color = new Color(0.2f, 0.4f, 0);
                         break;

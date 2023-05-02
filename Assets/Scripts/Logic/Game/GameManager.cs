@@ -133,9 +133,27 @@ namespace Logic.Game
             IntroLevelCleared?.Invoke(_gameState.introLevelCleared);
         }
 
+        public bool GetLevel2Cleared()
+        {
+            return _gameState.level2Cleared;
+        }
+
         public int GetLevel2EnemiesLeft()
         {
             return _gameState.level2EnemiesLeft;
+        }
+
+        public void DecreaseLevel2EnemiesLeft()
+        {
+            Debug.Log("Game Manager: Enemy is dead");
+            _gameState.level2EnemiesLeft -=1;
+            Level2EnemiesLeftChanged?.Invoke(GetLevel2EnemiesLeft());
+        }
+
+        public void ResetLevel2EnemiesLeft()
+        {
+            Debug.Log("Game Manager: Level 2 enemies reset");
+            _gameState.level2EnemiesLeft = 13;
         }
 
         public int GetLevel2ObjectivesLeft()
@@ -143,19 +161,13 @@ namespace Logic.Game
             return _gameState.level2ObjectivesLeft;
         }
 
-        public bool GetLevel2Cleared()
+        public void ResetLevel2ObjectivesLeft()
         {
-            return _gameState.level2Cleared;
+            Debug.Log("Game Manager: Level 2 objectives reset");
+            _gameState.level2ObjectivesLeft = 2;
         }
 
-        public void SetLevel2EnemiesLeft()
-        {
-            Debug.Log("Game Manager: Enemy is dead");
-            _gameState.level2EnemiesLeft -=1;
-            Level2EnemiesLeftChanged?.Invoke(GetLevel2EnemiesLeft());
-        }
-
-        public void SetLevel2ObjectivesLeft()
+        public void DecreaseLevel2ObjectivesLeft()
         {
             Debug.Log("Game Manager: Level 2 Objective Collected");
             _gameState.level2ObjectivesLeft -= 1;

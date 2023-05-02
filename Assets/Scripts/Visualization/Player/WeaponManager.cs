@@ -13,6 +13,11 @@ namespace Visualization
 
         public Camera playerCam;
         public Transform projectileSpawn;
+        public Transform projectileSpawnGrim;
+        public Transform projectileSpawnMauler;
+        public Transform projectileSpawnMauler2;
+        public Transform projectileSpawnMauler3;
+        public Transform projectileSpawnFS;
         public GameObject projectile;
         public float fireRate;
         public float baseFireRate;
@@ -33,6 +38,10 @@ namespace Visualization
         private float attack;
         public GameObject primaryWeapon;
         public GameObject hand;
+        public GameObject mauler;
+        public GameObject grimBrand;
+        public GameObject fireSleet;
+        private float projectileSpeed;
         
         [SerializeField] private float cooldownTimeOverload;
         [SerializeField] private float cooldownTimeShooting;
@@ -44,7 +53,8 @@ namespace Visualization
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
             _gameManager = ServiceLocator.GetService<IGameManager>();
 
-            fireRate = baseFireRate + _playerManager.GetAttack() * 0.2f; // The fire rate factor
+            //fireRate = baseFireRate + _playerManager.GetAttack() * 0.2f; // The fire rate factor
+            fireRate = baseFireRate;
             attack = _playerManager.GetAttack();
             projectile = projectiles[(int)attack];
 
@@ -150,18 +160,54 @@ namespace Visualization
 
         void InstantiateProjectile()
         {
-            if(projectile.tag == "Rock")
+            
+            if (projectile.tag == "Rock")
             {
                 firedProjectile = Instantiate(projectile, hand.transform.position, Quaternion.identity);
+                projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
+                firedProjectile.GetComponent<Rigidbody>().velocity = (destination - hand.transform.position).normalized * projectileSpeed;
             }
-            else
+            else if(projectile.tag == "StickyBullet")
+            {
+                firedProjectile = Instantiate(projectile, projectileSpawnGrim.position, Quaternion.identity);
+                projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
+                firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawnGrim.position).normalized * projectileSpeed;
+            }
+            else if (projectile.tag == "PlayerProjectile")
             {
                 firedProjectile = Instantiate(projectile, projectileSpawn.position, Quaternion.identity);
+                projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
+                firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawn.position).normalized * projectileSpeed;
             }
-
-            float projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
-            firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawn.position).normalized * projectileSpeed;
-
+            else if (projectile.tag == "FireBullet")
+            {
+                
+                for (int i = 0; i < 3; i++)
+                {
+                    if(i == 0)
+                    {
+                        firedProjectile = Instantiate(projectile, projectileSpawnMauler.position, Quaternion.identity);
+                    }
+                    else if (i == 1)
+                    {
+                        firedProjectile = Instantiate(projectile, projectileSpawnMauler2.position, Quaternion.identity);
+                    }
+                    if (i == 2)
+                    {
+                        firedProjectile = Instantiate(projectile, projectileSpawnMauler3.position, Quaternion.identity);
+                    }                  
+                    projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
+                    firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawnMauler.position).normalized * projectileSpeed;
+                    iTween.PunchPosition(firedProjectile, new Vector3(Random.Range(-arcRange, arcRange), Random.Range(-arcRange, arcRange), 0), Random.Range(0.5f, 1f));
+                }
+            }
+            else if (projectile.tag == "IceBullet")
+            {
+                firedProjectile = Instantiate(projectile, projectileSpawnFS.position, Quaternion.identity);
+                projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
+                firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawnFS.position).normalized * projectileSpeed;
+            }
+ 
             // Increasing overload bar and checking if it filled up
             if(_playerManager.GetAttack() > 0)
             {
@@ -213,7 +259,7 @@ namespace Visualization
 
         void ChangeFireRate(float newValue)
         {
-            fireRate = baseFireRate + newValue * 0.15f;
+            //fireRate = baseFireRate + newValue * 0.15f;
             chooseWeapon();
             projectile = projectiles[(int)_playerManager.GetAttack()];
         }
@@ -229,12 +275,47 @@ namespace Visualization
             if (attack == 0)
             {
                 hand.SetActive(true);
+                grimBrand.SetActive(false);
                 primaryWeapon.SetActive(false);
+                mauler.SetActive(false);
+                fireSleet.SetActive(false);
+                fireRate = 1;
             }
-            else
+            else if (attack == 1)
             {
-                primaryWeapon.SetActive(true);
+                grimBrand.SetActive(true);
                 hand.SetActive(false);
+                primaryWeapon.SetActive(false);
+                mauler.SetActive(false);
+                fireSleet.SetActive(false);
+                fireRate = 1.5f;
+            }        
+            else if (attack == 2)
+             {
+                    primaryWeapon.SetActive(true);
+                    grimBrand.SetActive(false);
+                    mauler.SetActive(false);
+                    fireSleet.SetActive(false);
+                    hand.SetActive(false);
+                fireRate = 2;
+            }
+            else if (attack == 3)
+            {
+                mauler.SetActive(true);
+                primaryWeapon.SetActive(false);
+                fireSleet.SetActive(false);
+                hand.SetActive(false);
+                grimBrand.SetActive(false);
+                fireRate = 2.25f;
+            }
+            else if (attack == 4)
+            {
+                fireSleet.SetActive(true);
+                mauler.SetActive(false);
+                hand.SetActive(false);
+                grimBrand.SetActive(false);
+                primaryWeapon.SetActive(false);
+                fireRate = 2.5f;
             }
         }
 
