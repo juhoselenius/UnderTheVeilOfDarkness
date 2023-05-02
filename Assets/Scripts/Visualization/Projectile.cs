@@ -100,8 +100,6 @@ namespace Visualization
                 {
                     GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
                 }
-
-                Destroy(gameObject);
             }
 
             // Enemy projectile collisions
