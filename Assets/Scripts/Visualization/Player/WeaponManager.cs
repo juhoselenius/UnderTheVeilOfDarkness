@@ -292,7 +292,7 @@ namespace Visualization
                     cooldownTimeOverload = 3.2f;
                     break;
                 case 4:
-                    cooldownTimeOverload = 3.7f;
+                    cooldownTimeOverload = 4.2f;
                     break;
                 default:
                     break;

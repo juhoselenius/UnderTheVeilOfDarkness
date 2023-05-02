@@ -278,9 +278,9 @@ MonoBehaviour:
   transitionTimePulse: 4
   transitionTimeXRay: 8
   startNearClip: 0.5
-  endNearClip: 99
+  endNearClip: 49
   startFarClip: 1
-  endFarClip: 100
+  endFarClip: 50
 --- !u!1 &327956258933882442
 GameObject:
   m_ObjectHideFlags: 0
