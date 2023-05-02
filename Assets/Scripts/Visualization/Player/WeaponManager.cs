@@ -28,6 +28,9 @@ namespace Visualization
         public AudioSource audioSource;
         public AudioClip clip;
         public AudioClip cliprock;
+        public AudioClip SMG;
+        public AudioClip Shotgun;
+        public AudioClip Pistol;
         
         // Overloading variables
         public float overLoadMax;
@@ -151,9 +154,21 @@ namespace Visualization
                 {
                     playSoundrock();
                 }
-                else
+                if (attack == 1)
                 {
-                    playSound();
+                    playSoundpistol();
+                }
+                if (attack == 2)
+                {
+                    playSoundautomaticpistol();
+                }
+                if (attack == 3)
+                {
+                    playSoundShotgun();
+                }
+                if (attack == 4)
+                {
+                    playSoundSMG();
                 }
             }
         }
@@ -351,6 +366,26 @@ namespace Visualization
         public void playSoundrock()
         {
             audioSource.PlayOneShot(cliprock);
+        }
+
+        public void playSoundpistol()
+        {
+            audioSource.PlayOneShot(Pistol);
+        }
+        
+        public void playSoundautomaticpistol()
+        {
+            audioSource.PlayOneShot(clip);
+        }
+
+        public void playSoundShotgun()
+        {
+            audioSource.PlayOneShot(Shotgun);
+        }
+
+        public void playSoundSMG()
+        {
+            audioSource.PlayOneShot(SMG);
         }
     }
 }
