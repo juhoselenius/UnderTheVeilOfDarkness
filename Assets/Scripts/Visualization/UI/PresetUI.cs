@@ -39,11 +39,6 @@ namespace Visualization
                     _playerManager.ChangePreset(1);
                     currentPresetCooldown = maxPresetCooldown;
                 }
-                else if (Input.GetKeyDown("3") && _playerManager.GetCurrentPreset() != 2)
-                {
-                    _playerManager.ChangePreset(2);
-                    currentPresetCooldown = maxPresetCooldown;
-                }
             }
 
             filler.fillAmount = currentPresetCooldown / maxPresetCooldown;
