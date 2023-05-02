@@ -15,9 +15,11 @@ namespace Visualization
         public Transform projectileSpawn;
         public Transform projectileSpawnGrim;
         public Transform projectileSpawnMauler;
-        public Transform projectileSpawnMauler2;
-        public Transform projectileSpawnMauler3;
+        public Transform projectileSpawn2;
+        public Transform projectileSpawn3;
         public Transform projectileSpawnFS;
+        public Transform projectileSpawnPistol;
+        
         public GameObject projectile;
         public float fireRate;
         public float baseFireRate;
@@ -41,6 +43,7 @@ namespace Visualization
         public GameObject mauler;
         public GameObject grimBrand;
         public GameObject fireSleet;
+        public GameObject pistol;
         private float projectileSpeed;
         
         [SerializeField] private float cooldownTimeOverload;
@@ -175,11 +178,19 @@ namespace Visualization
                 firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawnGrim.position).normalized * projectileSpeed;
             }
             */
-            else if (projectile.tag == "PlayerProjectile" || projectile.tag == "GreenProjectile")
+
+            else if(projectile.tag == "GreenProjectile")
             {
-                firedProjectile = Instantiate(projectile, projectileSpawn.position, Quaternion.identity);
+                firedProjectile = Instantiate(projectile, projectileSpawnGrim.position, Quaternion.identity);
                 projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
-                firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawn.position).normalized * projectileSpeed;
+                firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawnGrim.position).normalized * projectileSpeed;
+            }
+
+            else if (projectile.tag == "PlayerProjectile")
+            {
+                firedProjectile = Instantiate(projectile, projectileSpawnPistol.position, Quaternion.identity);
+                projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
+                firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawnPistol.position).normalized * projectileSpeed;
             }
             else if (projectile.tag == "FireBullet")
             {
@@ -188,15 +199,15 @@ namespace Visualization
                 {
                     if(i == 0)
                     {
-                        firedProjectile = Instantiate(projectile, projectileSpawnMauler.position, Quaternion.identity);
+                        firedProjectile = Instantiate(projectile, projectileSpawn.position, Quaternion.identity);
                     }
                     else if (i == 1)
                     {
-                        firedProjectile = Instantiate(projectile, projectileSpawnMauler2.position, Quaternion.identity);
+                        firedProjectile = Instantiate(projectile, projectileSpawn2.position, Quaternion.identity);
                     }
                     if (i == 2)
                     {
-                        firedProjectile = Instantiate(projectile, projectileSpawnMauler3.position, Quaternion.identity);
+                        firedProjectile = Instantiate(projectile, projectileSpawn3.position, Quaternion.identity);
                     }                  
                     projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
                     firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawnMauler.position).normalized * projectileSpeed;
@@ -303,6 +314,7 @@ namespace Visualization
                 primaryWeapon.SetActive(false);
                 mauler.SetActive(false);
                 fireSleet.SetActive(false);
+                pistol.SetActive(false);
                 fireRate = 1f;
             }
             else if (attack == 1)
@@ -312,11 +324,13 @@ namespace Visualization
                 primaryWeapon.SetActive(false);
                 mauler.SetActive(false);
                 fireSleet.SetActive(false);
+                pistol.SetActive(false);
                 fireRate = 1.5f;
             }        
             else if (attack == 2)
              {
-                primaryWeapon.SetActive(true);
+                pistol.SetActive(true);
+                primaryWeapon.SetActive(false);
                 grimBrand.SetActive(false);
                 mauler.SetActive(false);
                 fireSleet.SetActive(false);
@@ -324,12 +338,13 @@ namespace Visualization
                 fireRate = 2.25f;
             }
             else if (attack == 3)
-            {
-                mauler.SetActive(true);
-                primaryWeapon.SetActive(false);
+            {             
+                primaryWeapon.SetActive(true);
+                mauler.SetActive(false);
                 fireSleet.SetActive(false);
                 hand.SetActive(false);
                 grimBrand.SetActive(false);
+                pistol.SetActive(false);
                 fireRate = 1.25f;
             }
             else if (attack == 4)
@@ -339,6 +354,7 @@ namespace Visualization
                 hand.SetActive(false);
                 grimBrand.SetActive(false);
                 primaryWeapon.SetActive(false);
+                pistol.SetActive(false);
                 fireRate = 4f;
             }
         }

@@ -23,6 +23,7 @@ TagManager:
   - Crosshair
   - StickyBullet
   - GreenProjectile
+  - PIstol
   layers:
   - Default
   - TransparentFX
