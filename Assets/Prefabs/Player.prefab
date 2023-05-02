@@ -1606,7 +1606,6 @@ GameObject:
   - component: {fileID: 2117663251751371797}
   - component: {fileID: 6505980454863413962}
   - component: {fileID: 7006821227053785174}
-  - component: {fileID: 6232864316336357349}
   m_Layer: 5
   m_Name: ObjectivesLeftText
   m_TagString: Untagged
@@ -1731,19 +1730,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &6232864316336357349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3545224713496804152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 023c34ed7cb935341ab5c8e7cdf15089, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectivesCounterText: {fileID: 0}
 --- !u!1 &3564805194581514794
 GameObject:
   m_ObjectHideFlags: 0
