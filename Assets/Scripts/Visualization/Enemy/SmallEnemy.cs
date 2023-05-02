@@ -53,6 +53,8 @@ namespace Visualization
 
         void FixedUpdate()
         {
+            Look();
+            
             if (playerInDetectionRange)
             {
                 if (playerInAttackRange)
@@ -198,6 +200,19 @@ namespace Visualization
             hitDetected = detected;
             detectedPlayerPosition = playerCameraTransform.position;
             Debug.Log("Player detected");
+        }
+
+        void Look()
+        {
+            // Visualize the ray in the Scene view (for debugging)
+            Debug.DrawRay(projectileSpawn.position, projectileSpawn.forward * 30f, Color.green);
+
+            RaycastHit hit;
+            if (Physics.Raycast(projectileSpawn.position, projectileSpawn.forward, out hit, 30f) && hit.collider.CompareTag("Player"))
+            {
+                // If the ray hits the player, the enemy gets into the chase state and assing the chase target as the player
+                playerInDetectionRange = true;
+            }
         }
     }
 }
