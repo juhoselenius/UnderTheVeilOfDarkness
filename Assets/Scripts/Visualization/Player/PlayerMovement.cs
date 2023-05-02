@@ -1,6 +1,7 @@
 using Logic.Player;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Visualization
 {
@@ -31,7 +32,8 @@ namespace Visualization
         public float dodgeTimefull;
         public float dodgeSpeedfull;
         public float nextdodge;
- 
+
+        public Image filler;
 
         Vector3 velocity;
         bool isGrounded;
@@ -64,6 +66,7 @@ namespace Visualization
                 velocity.y = -2f;
                 jumpRemaining = maxJumpCount;
             }
+
             StateHandler();
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
@@ -75,7 +78,6 @@ namespace Visualization
             {
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
                 jumpRemaining -= 1;
-               
             }
 
             if (Input.GetButtonDown("Jump") && isGrounded && _playerManager.GetMovement() == 1)
@@ -83,29 +85,29 @@ namespace Visualization
                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             }
 
-        
-            
             if (Input.GetKeyDown(sprintKey) && _playerManager.GetMovement() == 3 && Time.time > nextdodge)
             {
-                    
-                    StartCoroutine(Dodge());
+                StartCoroutine(Dodge());
                 nextdodge = Time.time + dodgetimer;
-
-
             }
+
             if (Input.GetKeyDown(sprintKey) && _playerManager.GetMovement() == 4 && Time.time > nextdodge)
             {
-
                 StartCoroutine(Dodgefull());
                 nextdodge = Time.time + dodgetimer;
-
-
             }
 
-
             velocity.y += gravity * Time.deltaTime;
-
             controller.Move(velocity * Time.deltaTime);
+
+            if(nextdodge > Time.time)
+            {
+                filler.fillAmount = (nextdodge - Time.time) / dodgetimer;
+            }
+            else
+            {
+                filler.fillAmount = 0;
+            }
         }
 
         private void OnEnable()
@@ -155,7 +157,6 @@ namespace Visualization
             {
                 state = MovementState.walking;
                 speed = walkSpeed;
-
             }
             else
             {
@@ -163,16 +164,14 @@ namespace Visualization
             }
         }
 
-       
-
         IEnumerator Dodge()
         {
-             
             float startTime = Time.time;
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
             Vector3 move = transform.right * x + transform.forward * z;
             controller.Move(move * speed * Time.deltaTime);
+            
             while (Time.time < startTime + dodgeTime)
             {
                 controller.Move(move * dodgeSpeed * Time.deltaTime);
@@ -182,12 +181,12 @@ namespace Visualization
 
         IEnumerator Dodgefull()
         {
-
             float startTime = Time.time;
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
             Vector3 move = transform.right * x + transform.forward * z;
             controller.Move(move * speed * Time.deltaTime);
+            
             while (Time.time < startTime + dodgeTimefull)
             {
                 controller.Move(move * dodgeSpeedfull * Time.deltaTime);
