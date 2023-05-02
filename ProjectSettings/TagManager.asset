@@ -24,6 +24,7 @@ TagManager:
   - StickyBullet
   - GreenProjectile
   - PIstol
+  - MainMenuMusic
   layers:
   - Default
   - TransparentFX

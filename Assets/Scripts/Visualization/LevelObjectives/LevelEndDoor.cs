@@ -80,6 +80,8 @@ namespace Visualization
                 fader.FadeOut();
                 if(sceneToLoad != null)
                 {
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
                     SceneManager.LoadScene(sceneToLoad);
                 }
             }
