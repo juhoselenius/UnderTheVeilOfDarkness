@@ -16,8 +16,8 @@ namespace Data
         {
             mouseSensitivity = 40f;
             reverseMouse = false;
-            musicVolume = 50f;
-            sfxVolume = 50f;
+            musicVolume = 0.5f;
+            sfxVolume = 0.5f;
         }
     }
 }
