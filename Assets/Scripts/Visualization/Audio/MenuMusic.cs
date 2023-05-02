@@ -9,16 +9,16 @@ namespace Visualization
     public class MenuMusic : MonoBehaviour
     {
 
-        public AudioSource AudioSource;
+        private AudioSource AudioSource;
         private IOptionsManager _optionsManager;
 
         public Slider volumeSlider;
         private void Awake()
-        {
-            
-            _optionsManager = ServiceLocator.GetService<IOptionsManager>();
-             AudioSource.volume = _optionsManager.getMusicVolume();
-            AudioSource.Play();
+        {         
+            _optionsManager = ServiceLocator.GetService<IOptionsManager>(); 
+            AudioSource = GameObject.FindGameObjectWithTag("MainMenuMusic").GetComponent<AudioSource>();
+            AudioSource.volume = _optionsManager.getMusicVolume();
+            //AudioSource.Play();
         }
        
 

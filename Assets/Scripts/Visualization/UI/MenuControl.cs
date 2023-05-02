@@ -1,3 +1,4 @@
+using Logic.Game;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,14 +7,14 @@ using UnityEngine.SceneManagement;
 public class MenuControl : MonoBehaviour
 {
     public GameObject presetInfoCanvas;
-    public GameObject presetMenu;
-
+    public GameObject presetMenu;  
     public GameObject[] attributeInfoCanvas;
-    
+    private IGameManager _gameManager;
     // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
-        
+        _gameManager = ServiceLocator.GetService<IGameManager>();
     }
 
     // Update is called once per frame
