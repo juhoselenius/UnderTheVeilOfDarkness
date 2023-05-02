@@ -2,7 +2,6 @@ using Logic.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using UnityEngine.UI;
 using Logic.Game;
 
 namespace Visualization
