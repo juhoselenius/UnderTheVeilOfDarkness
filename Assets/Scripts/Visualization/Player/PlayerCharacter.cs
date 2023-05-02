@@ -2,13 +2,14 @@ using Logic.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using UnityEngine.UI;
+using Logic.Game;
 
 namespace Visualization
 {
     public class PlayerCharacter : MonoBehaviour
     {
         public IPlayerManager _playerManager;
+        private IGameManager _gameManager;
 
         public float knockBackForce;
         private Vector3 direction;
@@ -17,6 +18,7 @@ namespace Visualization
         private void Awake()
         {
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
+            _gameManager = ServiceLocator.GetService<IGameManager>();
         }
 
         private void Update()
@@ -26,9 +28,8 @@ namespace Visualization
 
         public void TakeDamage(float amount)
         {
-            //defense = _playerManager.GetDefense();
-            //_playerManager.UpdateHealth(-amount * (1f - (defense * 0.005f))); // The defense reduction factor is 0.005 here
-            _playerManager.UpdateHealth(-amount);
+            defense = _playerManager.GetDefense();
+            _playerManager.UpdateHealth(-amount * (1f - (defense * 0.125f))); // The defense reduction factor is 0.125 here
 
             if (_playerManager.GetHealth() <= 0)
             {
@@ -63,6 +64,8 @@ namespace Visualization
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             _playerManager.UpdateHealth(1000f);
+            _gameManager.ResetLevel2EnemiesLeft();
+            _gameManager.ResetLevel2ObjectivesLeft();
             SceneManager.LoadScene("GameOver");
         }
 

@@ -22,7 +22,7 @@ namespace Visualization
             if (other.tag == "Player")
             {
                 playSound();
-                _gameManager.SetLevel2ObjectivesLeft();
+                _gameManager.DecreaseLevel2ObjectivesLeft();
                 Destroy(gameObject, 0.5f);
             }
         }

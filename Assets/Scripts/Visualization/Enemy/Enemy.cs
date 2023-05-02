@@ -164,7 +164,7 @@ namespace Visualization
         private void EnemyDie()
         {
             // Here code for what happens when the enemy dies
-            _gameManager.SetLevel2EnemiesLeft();
+            _gameManager.DecreaseLevel2EnemiesLeft();
             FindObjectOfType<AudioManager>().Play("EnemyDeath");
             FindObjectOfType<AudioManager>().StopPlay("EnemyWalk");
             Destroy(enemyPrefab);
