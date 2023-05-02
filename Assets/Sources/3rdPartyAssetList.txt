@@ -11,3 +11,5 @@
 - Basic Sci-fi Gui Asset Renpy by Kick14 (https://kick14.itch.io/basic-sci-fi-gui-asset-renpy)
 - Free UI Minimalism SciFi by Wenrexa (https://wenrexa.itch.io/kit-nesia2)
 - Robtronika Font by GGBotNet (https://ggbot.itch.io/robtronika-font)
+- Scifi Gun Collection by Black Curtain Studio (https://assetstore.unity.com/packages/3d/props/guns/scifi-gun-collection-56350)
+- Sci-fi Pistol [PBR] by StarGames studio (https://assetstore.unity.com/packages/3d/props/guns/sci-fi-pistol-pbr-213679)
