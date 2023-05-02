@@ -714,9 +714,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4411053162758453188}
-  maxHealth: 300
-  health: 300
-  meleeDamage: 20
+  maxHealth: 400
+  health: 400
+  meleeDamage: 30
   cooldownTimer: 0
   knockBackForce: 0
   brake: 0

@@ -53,8 +53,11 @@ namespace Visualization
 
         void FixedUpdate()
         {
+            Look();
+            
             if (playerInDetectionRange)
             {
+                enemyNavMeshAgent.speed = runSpeed;
                 if (playerInAttackRange)
                 {
                     //animator.SetTrigger("Attack");
@@ -84,14 +87,14 @@ namespace Visualization
                         Shoot(playerCameraTransform.position);
                     }
 
-                    enemyNavMeshAgent.speed = runSpeed * gameObject.GetComponent<Enemy>().enemyBaseSpeed;
+                    enemyNavMeshAgent.speed = runSpeed;
                     enemyNavMeshAgent.transform.LookAt(playerCameraTransform);
                     enemyNavMeshAgent.SetDestination(playerCameraTransform.position + new Vector3(0, 0, 1f));
                 }
             }
             else if (hitDetected)
             {
-                enemyNavMeshAgent.speed = runSpeed * gameObject.GetComponent<Enemy>().enemyBaseSpeed;
+                enemyNavMeshAgent.speed = runSpeed;
                 Vector3 targetPosition = new Vector3(detectedPlayerPosition.x, this.transform.position.y, detectedPlayerPosition.z);
                 enemyNavMeshAgent.transform.LookAt(targetPosition);
                 enemyNavMeshAgent.SetDestination(targetPosition);
@@ -198,6 +201,19 @@ namespace Visualization
             hitDetected = detected;
             detectedPlayerPosition = playerCameraTransform.position;
             Debug.Log("Player detected");
+        }
+
+        void Look()
+        {
+            // Visualize the ray in the Scene view (for debugging)
+            Debug.DrawRay(projectileSpawn.position, projectileSpawn.forward * 30f, Color.green);
+
+            RaycastHit hit;
+            if (Physics.Raycast(projectileSpawn.position, projectileSpawn.forward, out hit, 30f) && hit.collider.CompareTag("Player"))
+            {
+                // If the ray hits the player, the enemy gets into the chase state and assing the chase target as the player
+                playerInDetectionRange = true;
+            }
         }
     }
 }

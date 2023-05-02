@@ -3092,6 +3092,8 @@ MonoBehaviour:
   movementValueText: {fileID: 3307738002802122113}
   attackValueText: {fileID: 3307738002179006154}
   defenseValueText: {fileID: 3307738002982609536}
+  infoTitleText: {fileID: 0}
+  infoDescriptionText: {fileID: 0}
 --- !u!1 &3307738002532904081
 GameObject:
   m_ObjectHideFlags: 0
@@ -4916,6 +4918,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   presetInfoCanvas: {fileID: 0}
+  presetMenu: {fileID: 0}
+  attributeInfoCanvas: []
 --- !u!1 &5771092473220500077
 GameObject:
   m_ObjectHideFlags: 0
@@ -5512,8 +5516,6 @@ MonoBehaviour:
     - m_Text: Preset 1
       m_Image: {fileID: 0}
     - m_Text: Preset 2
-      m_Image: {fileID: 0}
-    - m_Text: Preset 3
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:

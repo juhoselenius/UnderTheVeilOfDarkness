@@ -29,7 +29,7 @@ namespace Visualization
 
         void Update()
         {
-            // Activating X-Ray camera with "Q"
+            // Activating X-Ray camera with "E"
             if (currentHearingCooldown > 0)
             {
                 currentHearingCooldown -= Time.deltaTime;
@@ -37,7 +37,7 @@ namespace Visualization
             else
             {
                 currentHearingCooldown = 0;
-                if (Input.GetKeyDown(KeyCode.Q))
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     if (_playerManager.GetHearing() >= 3f)
                     {

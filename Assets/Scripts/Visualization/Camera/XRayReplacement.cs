@@ -75,7 +75,7 @@ public class XRayReplacement : MonoBehaviour
     private IEnumerator StayInXRay()
     {
         cam.nearClipPlane = 0.5f;
-        cam.farClipPlane = 100f;
+        cam.farClipPlane = 20f;
 
         float timer = 0f;
         while (timer < transitionTimeXRay)
