@@ -38,6 +38,7 @@ public class MenuControl : MonoBehaviour
     public void LoadHowToPlay()
     {
         SceneManager.LoadScene("HowToPlay");
+        Destroy(GameObject.FindGameObjectWithTag("MainMenuMusic"));
     }
 
     public void LoadPresetManagement()
