@@ -58,7 +58,7 @@ namespace Visualization
             attack = _playerManager.GetAttack();
             projectile = projectiles[(int)attack];
 
-            chooseWeapon();
+            ChooseWeapon();
             
             overLoaded = false;
             overLoadMin = 0f;
@@ -214,7 +214,26 @@ namespace Visualization
                 // This makes the projectile wobble a little at the beginning of the flight path
                 //iTween.PunchPosition(firedProjectile, new Vector3(Random.Range(-arcRange, arcRange), Random.Range(-arcRange, arcRange), 0), Random.Range(0.5f, 1f));
                 
-                currentOverLoad += 10 + _playerManager.GetAttack() * 5f;
+                //currentOverLoad += 10 + _playerManager.GetAttack() * 5f;
+
+                // Add overload to the overload bar according to the used weapon
+                switch(_playerManager.GetAttack())
+                {
+                    case 1:
+                        currentOverLoad += 30f;
+                        break;
+                    case 2:
+                        currentOverLoad += 18f;
+                        break;
+                    case 3:
+                        currentOverLoad += 28f;
+                        break;
+                    case 4:
+                        currentOverLoad += 7.5f;
+                        break;
+                    default:
+                        break;
+                }
             }
 
             if (currentOverLoad >= overLoadMax)
@@ -222,25 +241,6 @@ namespace Visualization
                 currentOverLoad = overLoadMax;
                 overLoaded = true;
             }
-
-
-            /*if (projectile.tag == "Bullet")
-            {
-                currentOverLoad += 15;
-            }
-            if (projectile.tag == "PlayerProjectile")
-            {
-                currentOverLoad += 20;
-            }
-            if (projectile.tag == "FireBullet")
-            {
-                currentOverLoad += 25;
-            }
-
-            if (projectile.tag == "IceBullet")
-            {
-                currentOverLoad += 30;
-            }*/
         }
 
         private void OnEnable()
@@ -260,8 +260,30 @@ namespace Visualization
         void ChangeFireRate(float newValue)
         {
             //fireRate = baseFireRate + newValue * 0.15f;
-            chooseWeapon();
+            ChooseWeapon();
             projectile = projectiles[(int)_playerManager.GetAttack()];
+
+            // Change weapon overload cooldown time
+            switch (_playerManager.GetAttack())
+            {
+                case 0:
+                    cooldownTimeOverload = 0.1f;
+                    break;
+                case 1:
+                    cooldownTimeOverload = 1.2f;
+                    break;
+                case 2:
+                    cooldownTimeOverload = 2.1f;
+                    break;
+                case 3:
+                    cooldownTimeOverload = 3.2f;
+                    break;
+                case 4:
+                    cooldownTimeOverload = 3.7f;
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void playSound()
@@ -269,7 +291,7 @@ namespace Visualization
             audioSource.PlayOneShot(clip);
         }
 
-        private void chooseWeapon()
+        private void ChooseWeapon()
         {
             attack = _playerManager.GetAttack();
             if (attack == 0)
@@ -279,7 +301,7 @@ namespace Visualization
                 primaryWeapon.SetActive(false);
                 mauler.SetActive(false);
                 fireSleet.SetActive(false);
-                fireRate = 1;
+                fireRate = 1f;
             }
             else if (attack == 1)
             {
@@ -292,12 +314,12 @@ namespace Visualization
             }        
             else if (attack == 2)
              {
-                    primaryWeapon.SetActive(true);
-                    grimBrand.SetActive(false);
-                    mauler.SetActive(false);
-                    fireSleet.SetActive(false);
-                    hand.SetActive(false);
-                fireRate = 2;
+                primaryWeapon.SetActive(true);
+                grimBrand.SetActive(false);
+                mauler.SetActive(false);
+                fireSleet.SetActive(false);
+                hand.SetActive(false);
+                fireRate = 2.25f;
             }
             else if (attack == 3)
             {
@@ -306,7 +328,7 @@ namespace Visualization
                 fireSleet.SetActive(false);
                 hand.SetActive(false);
                 grimBrand.SetActive(false);
-                fireRate = 2.25f;
+                fireRate = 1.25f;
             }
             else if (attack == 4)
             {
@@ -315,7 +337,7 @@ namespace Visualization
                 hand.SetActive(false);
                 grimBrand.SetActive(false);
                 primaryWeapon.SetActive(false);
-                fireRate = 2.5f;
+                fireRate = 4f;
             }
         }
 
