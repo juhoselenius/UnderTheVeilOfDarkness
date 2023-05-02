@@ -2715,6 +2715,10 @@ MonoBehaviour:
   dodgeTimefull: 0.5
   dodgeSpeedfull: 10
   nextdodge: 0
+  movementSprite:
+  - {fileID: 21300000, guid: 52d470bae1a70764695bd86039a4e0ac, type: 3}
+  - {fileID: 21300000, guid: d55cedbd1046c9b4e85759edf0b010d6, type: 3}
+  movementIcon: {fileID: 7308404757566926475}
   filler: {fileID: 6626523948883976522}
 --- !u!114 &1188691806512712266
 MonoBehaviour:
