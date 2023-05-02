@@ -15,8 +15,8 @@ namespace Visualization
         public Transform projectileSpawn;
         public Transform projectileSpawnGrim;
         public Transform projectileSpawnMauler;
-        public Transform projectileSpawnMauler2;
-        public Transform projectileSpawnMauler3;
+        public Transform projectileSpawn2;
+        public Transform projectileSpawn3;
         public Transform projectileSpawnFS;
         public Transform projectileSpawnPistol;
         
@@ -199,15 +199,15 @@ namespace Visualization
                 {
                     if(i == 0)
                     {
-                        firedProjectile = Instantiate(projectile, projectileSpawnMauler.position, Quaternion.identity);
+                        firedProjectile = Instantiate(projectile, projectileSpawn.position, Quaternion.identity);
                     }
                     else if (i == 1)
                     {
-                        firedProjectile = Instantiate(projectile, projectileSpawnMauler2.position, Quaternion.identity);
+                        firedProjectile = Instantiate(projectile, projectileSpawn2.position, Quaternion.identity);
                     }
                     if (i == 2)
                     {
-                        firedProjectile = Instantiate(projectile, projectileSpawnMauler3.position, Quaternion.identity);
+                        firedProjectile = Instantiate(projectile, projectileSpawn3.position, Quaternion.identity);
                     }                  
                     projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
                     firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawnMauler.position).normalized * projectileSpeed;

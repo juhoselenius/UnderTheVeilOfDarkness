@@ -72,7 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 946575988}
   m_Layer: 0
-  m_Name: ProjectileSpawnMauler2
+  m_Name: ProjectileSpawn2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,7 +86,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 946575987}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.402, y: 1.151, z: -0.252}
+  m_LocalPosition: {x: 0.2407, y: 0.97, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -165,7 +165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1961248168}
   m_Layer: 0
-  m_Name: ProjectileSpawnMauler3
+  m_Name: ProjectileSpawn3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -179,7 +179,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1961248167}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.545, y: 1.151, z: -0.252}
+  m_LocalPosition: {x: -0.21, y: 0.964, z: -0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -681,7 +681,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1128023947397045417
 Transform:
   m_ObjectHideFlags: 0
@@ -2128,8 +2128,8 @@ MonoBehaviour:
   projectileSpawn: {fileID: 4920631385675242137}
   projectileSpawnGrim: {fileID: 671694499}
   projectileSpawnMauler: {fileID: 431189246}
-  projectileSpawnMauler2: {fileID: 946575988}
-  projectileSpawnMauler3: {fileID: 1961248168}
+  projectileSpawn2: {fileID: 946575988}
+  projectileSpawn3: {fileID: 1961248168}
   projectileSpawnFS: {fileID: 1601256596}
   projectileSpawnPistol: {fileID: 1277341982}
   projectile: {fileID: 5405972755638468422, guid: 9023b0a71194c9f479cd45973caabbf9, type: 3}
