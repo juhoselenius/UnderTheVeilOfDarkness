@@ -134,7 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxLifetime: 4
   lifetime: 0
-  maxHealth: 40
+  maxHealth: 30
   health: 0
 --- !u!4 &1729508306684967902 stripped
 Transform:

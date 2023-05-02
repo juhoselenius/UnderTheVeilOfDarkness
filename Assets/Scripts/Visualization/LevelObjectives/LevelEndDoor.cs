@@ -73,6 +73,9 @@ namespace Visualization
                     }
                 }
 
+                // Resetting the objectives for next run
+                _gameManager.ResetLevel2EnemiesLeft();
+                _gameManager.ResetLevel2ObjectivesLeft();
 
                 fader.FadeOut();
                 if(sceneToLoad != null)

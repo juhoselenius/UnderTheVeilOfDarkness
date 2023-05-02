@@ -59,6 +59,11 @@ public class MenuControl : MonoBehaviour
         SceneManager.LoadScene("Level3");
     }
 
+    public void LoadCredits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+
     public void QuitApplication()
     {
         Application.Quit();
