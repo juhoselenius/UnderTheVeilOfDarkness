@@ -3242,7 +3242,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Your objective is to destroy every enemy in the level and find the objective
-    spheres to unlock the door to the next level
+    spheres to unlock the door at the end of the level
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7e368aaddf6eb3848a651c07d35d4661, type: 2}
   m_sharedMaterial: {fileID: 2120275704088736017, guid: 7e368aaddf6eb3848a651c07d35d4661, type: 2}
