@@ -7,12 +7,14 @@ using UnityEngine.SceneManagement;
 public class MenuControl : MonoBehaviour
 {
     public GameObject presetInfoCanvas;
-    public GameObject presetMenu;  
-    public GameObject[] attributeInfoCanvas;
-    private IGameManager _gameManager;
-    // Start is called before the first frame update
+    public GameObject presetMenu;
 
-    private void Awake()
+    public GameObject[] attributeInfoCanvas;
+
+    private IGameManager _gameManager;
+
+    // Start is called before the first frame update
+    void Awake()
     {
         _gameManager = ServiceLocator.GetService<IGameManager>();
     }
@@ -40,6 +42,8 @@ public class MenuControl : MonoBehaviour
 
     public void LoadPresetManagement()
     {
+        _gameManager.ResetLevel2EnemiesLeft();
+        _gameManager.ResetLevel2ObjectivesLeft();
         SceneManager.LoadScene("PresetManagement");
     }
 
@@ -56,6 +60,8 @@ public class MenuControl : MonoBehaviour
 
     public void LoadLevel3()
     {
+        _gameManager.ResetLevel2EnemiesLeft();
+        _gameManager.ResetLevel2ObjectivesLeft();
         Cursor.lockState = CursorLockMode.Locked;
         SceneManager.LoadScene("Level3");
     }
@@ -72,6 +78,8 @@ public class MenuControl : MonoBehaviour
 
     public void Retry()
     {
+        _gameManager.ResetLevel2EnemiesLeft();
+        _gameManager.ResetLevel2ObjectivesLeft();
         Cursor.lockState = CursorLockMode.Locked;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
