@@ -15,6 +15,8 @@ namespace Visualization
         public Transform projectileSpawn;
         public Transform projectileSpawnGrim;
         public Transform projectileSpawnMauler;
+        public Transform projectileSpawnMauler2;
+        public Transform projectileSpawnMauler3;
         public Transform projectileSpawnFS;
         public GameObject projectile;
         public float fireRate;
@@ -179,9 +181,25 @@ namespace Visualization
             }
             else if (projectile.tag == "FireBullet")
             {
-                firedProjectile = Instantiate(projectile, projectileSpawnMauler.position, Quaternion.identity);
-                projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
-                firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawnMauler.position).normalized * projectileSpeed;
+                
+                for (int i = 0; i < 3; i++)
+                {
+                    if(i == 0)
+                    {
+                        firedProjectile = Instantiate(projectile, projectileSpawnMauler.position, Quaternion.identity);
+                    }
+                    else if (i == 1)
+                    {
+                        firedProjectile = Instantiate(projectile, projectileSpawnMauler2.position, Quaternion.identity);
+                    }
+                    if (i == 2)
+                    {
+                        firedProjectile = Instantiate(projectile, projectileSpawnMauler3.position, Quaternion.identity);
+                    }                  
+                    projectileSpeed = firedProjectile.GetComponent<Projectile>().projectileSpeed;
+                    firedProjectile.GetComponent<Rigidbody>().velocity = (destination - projectileSpawnMauler.position).normalized * projectileSpeed;
+                    iTween.PunchPosition(firedProjectile, new Vector3(Random.Range(-arcRange, arcRange), Random.Range(-arcRange, arcRange), 0), Random.Range(0.5f, 1f));
+                }
             }
             else if (projectile.tag == "IceBullet")
             {
