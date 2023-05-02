@@ -52,16 +52,16 @@ namespace Visualization
         {
             direction = new Vector3(0, 0, 0);
             health = maxHealth;
-            iceImpact.SetActive(false);
+            //iceImpact.SetActive(false);
         }
 
         private void Update()
         {
             // Defreezing the enemy (increasing the speed in seconds)
-            if(enemyBaseSpeed < initialEnemySpeed)
+            if (enemyBaseSpeed < initialEnemySpeed)
             {
                 speedTimer += Time.deltaTime;
-                if(speedTimer > 1f)
+                if (speedTimer > 1f)
                 {
                     enemyBaseSpeed *= 1.25f;
                     speedTimer = 0;
@@ -71,9 +71,9 @@ namespace Visualization
             {
                 speedTimer = 0;
                 enemyBaseSpeed = initialEnemySpeed;
-                iceImpact.SetActive(false);
+               // iceImpact.SetActive(false);
             }
-
+            /*
             if(burning)
             {
                 burnTimer += Time.deltaTime;
@@ -95,21 +95,23 @@ namespace Visualization
                 }
                 else
                 {
-                    burning = false;
-                    burnTimer = 0;
-                    burnTimes = 0;
+                    //burning = false;
+                    //burnTimer = 0;
+                    //burnTimes = 0;
                 }
-            }
-            
-            /*if (burning)
-            {
-                Burn();
-                cooldownTimer -= Time.deltaTime;
-                if (cooldownTimer > 0) return;
-                burning = false;
-                cooldownTimer = burnCoolDown;
-            }*/
+            */
         }
+
+        /*if (burning)
+        {
+            Burn();
+            cooldownTimer -= Time.deltaTime;
+            if (cooldownTimer > 0) return;
+            burning = false;
+            cooldownTimer = burnCoolDown;
+        }*/
+    
+
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -129,7 +131,7 @@ namespace Visualization
                 direction = (transform.position - collision.transform.position).normalized;
                 StartCoroutine(KnockBack());
                 enemyBaseSpeed *= 0.75f;
-                iceImpact.SetActive(true);
+                //iceImpact.SetActive(true);
 
                 /*
                 rb.isKinematic = true;
@@ -148,11 +150,11 @@ namespace Visualization
                 health -= collision.gameObject.GetComponent<Projectile>().damage;
                 //collidedObjectDamage = collision.gameObject.GetComponent<Projectile>().damage;
                 StartCoroutine(KnockBack());
-                burning = true;
+                //burning = true;
                 
                 // Resetting burn counters on every hit
-                burnTimer = 0;
-                burnTimes = 0;
+                //burnTimer = 0;
+                //burnTimes = 0;
             }
 
             if (health <= 0)
