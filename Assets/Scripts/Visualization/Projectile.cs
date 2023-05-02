@@ -20,6 +20,8 @@ namespace Visualization
         public Rigidbody rb;
         public IPlayerManager _playerManager;
 
+        private float attack;
+
         public Transform originTransform;
 
         private void Awake()
@@ -55,6 +57,8 @@ namespace Visualization
 
             lifeTimer = 0;
             lifetime = 7f; // Projectile lives for 7 seconds if does not collide
+
+            attack = _playerManager.GetAttack();
         }
 
         private void Update()
@@ -63,7 +67,7 @@ namespace Visualization
 
             if (lifeTimer > lifetime)
             {
-                if(_playerManager.GetAttack() != 0)
+                if(attack != 0)
                 {
                     GameObject impact = Instantiate(impactVFX, gameObject.transform.position, Quaternion.identity);
                     Destroy(impact, 2f);
