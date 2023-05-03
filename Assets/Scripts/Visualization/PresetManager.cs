@@ -201,7 +201,7 @@ namespace Visualization
                         break;
                     case 3:
                         infoTitleText.text = "Movement - 3";
-                        infoDescriptionText.text = "Increased movement speed from the previous point level...again...\n\nAdded double jump and dash skills";
+                        infoDescriptionText.text = "Increased movement speed from the previous point level...again...\n\nRetain double jump skill and added dash skill";
                         sliderFillImage.color = new Color(0.6f, 0.8f, 0.4f);
                         sliderHandleImage.color = new Color(0.4f, 0.8f, 0.2f);
                         break;
