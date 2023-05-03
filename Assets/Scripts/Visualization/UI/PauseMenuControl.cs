@@ -13,6 +13,7 @@ namespace Visualization
         private IGameManager _gameManager;
     
         public GameObject pauseMenu;
+        public GameObject optionsMenu;
 
         public Slider sightSlider;
         public Slider hearingSlider;
@@ -37,6 +38,7 @@ namespace Visualization
         void Start()
         {
             pauseMenu.SetActive(false);
+            optionsMenu.SetActive(false);
             UpdateSliderValues();
         }
 
@@ -45,7 +47,7 @@ namespace Visualization
             // Toggling Pause Menu on and off
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (!pauseMenu.activeInHierarchy)
+                if (!pauseMenu.activeInHierarchy && !optionsMenu.activeInHierarchy)
                 {
                     tempCurrentPreset = _playerManager.GetCurrentPreset();
                     _gameManager.SetGamePaused();
@@ -60,6 +62,7 @@ namespace Visualization
                     _playerManager.ChangePreset(tempCurrentPreset);
                     _gameManager.SetGamePaused();
                     pauseMenu.SetActive(false);
+                    optionsMenu.SetActive(false);
                     Cursor.lockState = CursorLockMode.Locked;
                     Time.timeScale = 1;
                 }
@@ -113,6 +116,20 @@ namespace Visualization
             _gameManager.SetGamePaused();
             Cursor.lockState = CursorLockMode.Locked;
             SceneManager.LoadScene("Level3");
+        }
+
+        public void ToggleOptions()
+        {
+            if(!optionsMenu.activeInHierarchy)
+            {
+                pauseMenu.SetActive(false);
+                optionsMenu.SetActive(true);
+            }
+            else
+            {
+                pauseMenu.SetActive(true);
+                optionsMenu.SetActive(false);
+            }
         }
     }
 }
