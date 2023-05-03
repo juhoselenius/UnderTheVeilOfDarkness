@@ -31,6 +31,8 @@ namespace Visualization
         private float burnTimer;
         private int burnTimes; // How many times burn damage is applied
 
+        public bool dead;
+
         [SerializeField] private float cooldown = 5f;
 
         public event Action<bool> EnemyGotHit;
@@ -46,6 +48,7 @@ namespace Visualization
             burnTimer = 0;
             burnTimes = 0;
             burningTime = 4f;
+            dead = false;
         }
 
         void Start()
@@ -158,8 +161,9 @@ namespace Visualization
                 //burnTimes = 0;
             }
 
-            if (health <= 0)
+            if (health <= 0 && !dead)
             {
+                dead = true;
                 EnemyDie();
             }
         }

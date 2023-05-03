@@ -164,8 +164,11 @@ namespace Visualization
 
                 if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "SmallSkeleton")
                 {
-                    GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
-                    Destroy(impact, 4f);
+                    if (!collision.gameObject.GetComponent<Enemy>().dead)
+                    {
+                        GameObject.FindGameObjectWithTag("Crosshair").GetComponent<HitmarkerUI>().SetHitmarker();
+                        Destroy(impact, 1f);
+                    }
                 }
                 else
                 {

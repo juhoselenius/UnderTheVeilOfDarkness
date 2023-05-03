@@ -76,6 +76,7 @@ namespace Visualization
                 // Resetting the objectives for next run
                 _gameManager.ResetLevel2EnemiesLeft();
                 _gameManager.ResetLevel2ObjectivesLeft();
+                _playerManager.UpdateHealth(1000f);
 
                 fader.FadeOut();
                 if(sceneToLoad != null)

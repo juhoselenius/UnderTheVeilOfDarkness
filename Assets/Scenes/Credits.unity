@@ -917,7 +917,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 602574855}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.1754386
+  m_Size: 0.12500001
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1407,7 +1407,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 570}
+  m_SizeDelta: {x: 0, y: 800}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1355198246
 GameObject:
@@ -1911,7 +1911,21 @@ MonoBehaviour:
 
 
     - Robtronika Font
-    by GGBotNet'
+    by GGBotNet
+
+
+    - Scifi Gun Collection by Black Curtain Studio
+
+
+    - Sci-fi
+    Pistol [PBR] by StarGames studio
+
+
+    - Free Laser Weapons by DanielSoundsGood
+
+
+    -
+    FootSteppes - Essentials by Nox-Sound'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7e368aaddf6eb3848a651c07d35d4661, type: 2}
   m_sharedMaterial: {fileID: 2120275704088736017, guid: 7e368aaddf6eb3848a651c07d35d4661, type: 2}
