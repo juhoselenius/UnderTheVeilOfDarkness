@@ -26,6 +26,8 @@ namespace Visualization
         public TextMeshProUGUI attackValueText;
         public TextMeshProUGUI defenseValueText;
 
+        private int tempCurrentPreset;
+
         private void Awake()
         {
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
@@ -45,6 +47,7 @@ namespace Visualization
             {
                 if (!pauseMenu.activeInHierarchy)
                 {
+                    tempCurrentPreset = _playerManager.GetCurrentPreset();
                     _gameManager.SetGamePaused();
                     Time.timeScale = 0;
                     pauseMenu.SetActive(true);
@@ -54,6 +57,7 @@ namespace Visualization
                 }
                 else
                 {
+                    _playerManager.ChangePreset(tempCurrentPreset);
                     _gameManager.SetGamePaused();
                     pauseMenu.SetActive(false);
                     Cursor.lockState = CursorLockMode.Locked;
