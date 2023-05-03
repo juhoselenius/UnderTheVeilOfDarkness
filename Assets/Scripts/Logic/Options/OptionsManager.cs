@@ -5,13 +5,13 @@ namespace Logic.Options
 {
     public class OptionsManager : IOptionsManager
     {
-        private Data.Options _optionsState;
-
+        private Data.Options _optionsState;     
         public OptionsManager() : this(new Data.Options()) { }
 
         public OptionsManager(Data.Options initialOptionsState)
         {
-            _optionsState = initialOptionsState;
+              _optionsState = initialOptionsState;          
+               LoadState();                     
         }
 
         public event Action<float> mouseSensitivityChanged;
@@ -29,6 +29,7 @@ namespace Logic.Options
             Debug.Log($"Mouse sensitivity in OptionsManager: {value}!");
             _optionsState.mouseSensitivity = value;
             mouseSensitivityChanged?.Invoke(_optionsState.mouseSensitivity);
+            SaveState();
         }
 
         public bool getReverseMouse()
@@ -41,6 +42,7 @@ namespace Logic.Options
             Debug.Log($"Reverse mouse in OptionsManager: {value}!");
             _optionsState.reverseMouse = value;
             reverseMouseChanged?.Invoke(_optionsState.reverseMouse);
+            SaveState();
         }
 
         public float getMusicVolume()
@@ -53,6 +55,7 @@ namespace Logic.Options
             Debug.Log($"Music volume in OptionsManager: {value}!");
             _optionsState.musicVolume = value;
             musicVolumeChanged?.Invoke(_optionsState.musicVolume);
+            SaveState();
         }
 
         public float getSfxVolume()
@@ -65,17 +68,30 @@ namespace Logic.Options
             Debug.Log($"SFX volume in OptionsManager: {value}!");
             _optionsState.sfxVolume = value;
             sfxVolumeChanged?.Invoke(_optionsState.sfxVolume);
+            SaveState();
         }
 
         public void SaveState()
         {
-            JsonUtility.ToJson(_optionsState);
+            string optionsData = JsonUtility.ToJson(_optionsState);
+            string filepath = Application.persistentDataPath + "/optionsData.json";
+            System.IO.File.WriteAllText(filepath, optionsData);
         }
 
         public void LoadState()
         {
-            var stateFromFile = "";
-            _optionsState = JsonUtility.FromJson<Data.Options>(stateFromFile);
+            
+            if(System.IO.File.Exists(Application.persistentDataPath + "/optionsData.json"))
+                {
+                string filepath = Application.persistentDataPath + "/optionsData.json";
+                string optionsData = System.IO.File.ReadAllText(filepath);
+                _optionsState = JsonUtility.FromJson<Data.Options>(optionsData);
+            }
+          else
+            {
+                return;
+            }
+                   
         }
     }
 }
