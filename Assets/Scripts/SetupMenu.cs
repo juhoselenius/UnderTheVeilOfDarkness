@@ -58,14 +58,14 @@ namespace Visualization
         public void setMusicVolume()
         {
             _optionsManager.updateMusicVolume(musicVolumeSlider.value);
-            musicValue.text = musicVolumeSlider.value.ToString();
+            musicValue.text = Mathf.RoundToInt(musicVolumeSlider.value * 100).ToString();
             
         }
         
         public void setSFXVolume()
         {
             _optionsManager.updateSfxVolume(sfxVolumeSlider.value);
-            sfxValue.text = sfxVolumeSlider.value.ToString();
+            sfxValue.text = Mathf.RoundToInt(sfxVolumeSlider.value * 100).ToString();
         }
     }
 }
