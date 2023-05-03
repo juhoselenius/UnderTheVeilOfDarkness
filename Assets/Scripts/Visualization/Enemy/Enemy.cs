@@ -57,6 +57,7 @@ namespace Visualization
 
         private void Update()
         {
+            /*
             // Defreezing the enemy (increasing the speed in seconds)
             if (enemyBaseSpeed < initialEnemySpeed)
             {
@@ -72,7 +73,7 @@ namespace Visualization
                 speedTimer = 0;
                 enemyBaseSpeed = initialEnemySpeed;
                // iceImpact.SetActive(false);
-            }
+            }*
             /*
             if(burning)
             {
@@ -130,7 +131,7 @@ namespace Visualization
                 health -= collision.gameObject.GetComponent<Projectile>().damage;
                 direction = (transform.position - collision.transform.position).normalized;
                 StartCoroutine(KnockBack());
-                enemyBaseSpeed *= 0.75f;
+                //enemyBaseSpeed *= 0.75f;
                 //iceImpact.SetActive(true);
 
                 /*
@@ -171,6 +172,7 @@ namespace Visualization
             FindObjectOfType<AudioManager>().StopPlay("EnemyWalk");
             Destroy(enemyPrefab);
         }
+
         IEnumerator KnockBack()
         {
             float knockBacktime = Time.time;

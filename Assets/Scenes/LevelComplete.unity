@@ -2057,9 +2057,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MenuControl, Assembly-CSharp
-        m_MethodName: TogglePresetInfo
+      - m_Target: {fileID: 1236954070}
+        m_TargetAssemblyTypeName: LevelCompleteControl, Assembly-CSharp
+        m_MethodName: LoadMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2723,9 +2723,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MenuControl, Assembly-CSharp
-        m_MethodName: LoadLevel2
+      - m_Target: {fileID: 1236954070}
+        m_TargetAssemblyTypeName: LevelCompleteControl, Assembly-CSharp
+        m_MethodName: LoadPresetManagement
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
