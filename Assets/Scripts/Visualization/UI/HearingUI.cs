@@ -2,13 +2,14 @@ using Logic.Player;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using Logic.Options;
 
 namespace Visualization
 {
     public class HearingUI : MonoBehaviour
     {
         public IPlayerManager _playerManager;
-
+        private IOptionsManager _optionsManager;
         public float currentHearingCooldown;
         public float maxHearingCooldown;
         public float maxPulseCooldown;
@@ -24,7 +25,8 @@ namespace Visualization
         void Awake()
         {
             _playerManager = ServiceLocator.GetService<IPlayerManager>();
-            currentHearingCooldown = 0;
+            _optionsManager = ServiceLocator.GetService<IOptionsManager>();
+        currentHearingCooldown = 0;
         }
 
         void Update()
@@ -83,24 +85,29 @@ namespace Visualization
             switch(newValue)
             {
                 case 0:
-                    AudioListener.volume = 1.0f;
+                    //AudioListener.volume = 1.0f;
+                    AudioListener.volume = _optionsManager.getSfxVolume();
                     hearingIcon.sprite = hearingSprite[0];
                     
                     break;
                 case 1:
-                    AudioListener.volume = 1.0f;
+                    //AudioListener.volume = 1.0f;
+                    AudioListener.volume = _optionsManager.getSfxVolume();
                     hearingIcon.sprite = hearingSprite[1];
                     break;
                 case 2:
-                    AudioListener.volume = 1.0f;
+                    //AudioListener.volume = 1.0f;
+                    AudioListener.volume = _optionsManager.getSfxVolume();
                     hearingIcon.sprite = hearingSprite[2];
                     break;
                 case 3:
-                    AudioListener.volume = 1.0f;
+                    //AudioListener.volume = 1.0f;
+                    AudioListener.volume = _optionsManager.getSfxVolume();
                     hearingIcon.sprite = hearingSprite[3];
                     break;
                 case 4:
-                    AudioListener.volume = 1.0f;
+                    //AudioListener.volume = 1.0f;
+                    AudioListener.volume = _optionsManager.getSfxVolume();
                     hearingIcon.sprite = hearingSprite[4];
                     break;
             }
