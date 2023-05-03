@@ -31,7 +31,7 @@ namespace Visualization
         private float burnTimer;
         private int burnTimes; // How many times burn damage is applied
 
-        private bool dead;
+        public bool dead;
 
         [SerializeField] private float cooldown = 5f;
 
