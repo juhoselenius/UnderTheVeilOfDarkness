@@ -153,7 +153,7 @@ namespace Logic.Game
         public void ResetLevel2EnemiesLeft()
         {
             Debug.Log("Game Manager: Level 2 enemies reset");
-            _gameState.level2EnemiesLeft = 13;
+            _gameState.level2EnemiesLeft = 15;
         }
 
         public int GetLevel2ObjectivesLeft()

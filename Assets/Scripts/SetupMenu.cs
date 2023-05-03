@@ -32,17 +32,12 @@ namespace Visualization
             reverseValue.text = reverseToggle.isOn.ToString();
 
             musicVolumeSlider.value = _optionsManager.getMusicVolume();
-            musicValue.text = musicVolumeSlider.value.ToString();
-            
-           
+            musicValue.text = Mathf.RoundToInt(musicVolumeSlider.value * 100).ToString();
 
             sfxVolumeSlider.value = _optionsManager.getSfxVolume();
             sfxValue.text = sfxVolumeSlider.value.ToString();
         }
         
-            
-        
-
         public void setMouseSensitivity()
         {
             _optionsManager.updateMouseSensitivity(mouseSensitivitySlider.value);
@@ -58,7 +53,7 @@ namespace Visualization
         public void setMusicVolume()
         {
             _optionsManager.updateMusicVolume(musicVolumeSlider.value);
-            musicValue.text = musicVolumeSlider.value.ToString();
+            musicValue.text = Mathf.RoundToInt(musicVolumeSlider.value * 100).ToString();
             
         }
         

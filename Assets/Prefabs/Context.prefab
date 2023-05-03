@@ -78,11 +78,11 @@ MonoBehaviour:
     changePreset: 0
     introLevelObjectivesCleared: 0
     introLevelCleared: 0
-    level2EnemiesLeft: 12
+    level2EnemiesLeft: 15
     level2ObjectivesLeft: 2
     level2Cleared: 0
     level2CurrentTime: 0
-    level2BestTime: 0
+    level2BestTime: 10000
   initialOptionsState:
     mouseSensitivity: 40
     reverseMouse: 0

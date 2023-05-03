@@ -33,6 +33,8 @@ namespace Visualization
         public float dodgeSpeedfull;
         public float nextdodge;
 
+        public Sprite[] movementSprite;
+        public Image movementIcon;
         public Image filler;
 
         Vector3 velocity;
@@ -113,12 +115,15 @@ namespace Visualization
         private void OnEnable()
         {
             _playerManager.MovementChanged += ChangeSpeed;
+            _playerManager.MovementChanged += UpdateDash;
             ChangeSpeed(_playerManager.GetMovement());
+            UpdateDash(_playerManager.GetMovement());
         }
 
         private void OnDisable()
         {
             _playerManager.MovementChanged -= ChangeSpeed;
+            _playerManager.MovementChanged -= UpdateDash;
         }
 
         void ChangeSpeed(float newValue)
@@ -191,6 +196,28 @@ namespace Visualization
             {
                 controller.Move(move * dodgeSpeedfull * Time.deltaTime);
                 yield return null;
+            }
+        }
+
+        void UpdateDash(float newValue)
+        {
+            switch (newValue)
+            {
+                case 0:
+                    movementIcon.sprite = movementSprite[0];
+                    break;
+                case 1:
+                    movementIcon.sprite = movementSprite[0];
+                    break;
+                case 2:
+                    movementIcon.sprite = movementSprite[0];
+                    break;
+                case 3:
+                    movementIcon.sprite = movementSprite[1];
+                    break;
+                case 4:
+                    movementIcon.sprite = movementSprite[1];
+                    break;
             }
         }
     }

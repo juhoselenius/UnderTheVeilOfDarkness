@@ -29,7 +29,7 @@ public class BasementDoorScript : MonoBehaviour
     void Update()
     {
 
-        if (_gameManager.GetLevel2ObjectivesLeft() == 0)
+        if (_gameManager.GetLevel2ObjectivesLeft() == 0 && _gameManager.GetLevel2EnemiesLeft() == 1)
         {
             OpenDoor();
         }

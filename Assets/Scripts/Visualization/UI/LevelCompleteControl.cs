@@ -25,12 +25,15 @@ public class LevelCompleteControl : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        _gameManager.ResetLevel2EnemiesLeft();
+        _gameManager.ResetLevel2ObjectivesLeft();
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void LoadLevel3()
+    public void LoadPresetManagement()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        SceneManager.LoadScene("Level3");
+        _gameManager.ResetLevel2EnemiesLeft();
+        _gameManager.ResetLevel2ObjectivesLeft();
+        SceneManager.LoadScene("PresetManagement");
     }
 }
