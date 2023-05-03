@@ -35,7 +35,7 @@ namespace Visualization
             musicValue.text = Mathf.RoundToInt(musicVolumeSlider.value * 100).ToString();
 
             sfxVolumeSlider.value = _optionsManager.getSfxVolume();
-            sfxValue.text = sfxVolumeSlider.value.ToString();
+            sfxValue.text = Mathf.RoundToInt(sfxVolumeSlider.value * 100).ToString();
         }
         
         public void setMouseSensitivity()
@@ -60,7 +60,7 @@ namespace Visualization
         public void setSFXVolume()
         {
             _optionsManager.updateSfxVolume(sfxVolumeSlider.value);
-            sfxValue.text = sfxVolumeSlider.value.ToString();
+            sfxValue.text = Mathf.RoundToInt(sfxVolumeSlider.value * 100).ToString();
         }
     }
 }
