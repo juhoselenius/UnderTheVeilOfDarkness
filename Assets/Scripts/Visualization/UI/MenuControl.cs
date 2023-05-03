@@ -1,4 +1,5 @@
 using Logic.Game;
+using Logic.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,10 +13,12 @@ public class MenuControl : MonoBehaviour
     public GameObject[] attributeInfoCanvas;
 
     private IGameManager _gameManager;
+    private IPlayerManager _playerManager;
 
     // Start is called before the first frame update
     void Awake()
     {
+        _playerManager = ServiceLocator.GetService<IPlayerManager>();
         _gameManager = ServiceLocator.GetService<IGameManager>();
     }
 
@@ -43,6 +46,7 @@ public class MenuControl : MonoBehaviour
 
     public void LoadPresetManagement()
     {
+        _playerManager.UpdateHealth(1000f);
         _gameManager.ResetLevel2EnemiesLeft();
         _gameManager.ResetLevel2ObjectivesLeft();
         SceneManager.LoadScene("PresetManagement");
@@ -61,6 +65,7 @@ public class MenuControl : MonoBehaviour
 
     public void LoadLevel3()
     {
+        _playerManager.UpdateHealth(1000f);
         _gameManager.ResetLevel2EnemiesLeft();
         _gameManager.ResetLevel2ObjectivesLeft();
         Cursor.lockState = CursorLockMode.Locked;
@@ -79,6 +84,7 @@ public class MenuControl : MonoBehaviour
 
     public void Retry()
     {
+        _playerManager.UpdateHealth(1000f);
         _gameManager.ResetLevel2EnemiesLeft();
         _gameManager.ResetLevel2ObjectivesLeft();
         Cursor.lockState = CursorLockMode.Locked;

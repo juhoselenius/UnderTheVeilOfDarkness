@@ -47,6 +47,8 @@ namespace Visualization
             // Toggling Pause Menu on and off
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                UpdateSliderValues();
+
                 if (!pauseMenu.activeInHierarchy && !optionsMenu.activeInHierarchy)
                 {
                     tempCurrentPreset = _playerManager.GetCurrentPreset();
@@ -92,6 +94,7 @@ namespace Visualization
 
         public void LoadMainMenu()
         {
+            _playerManager.UpdateHealth(1000f);
             _gameManager.ResetLevel2EnemiesLeft();
             _gameManager.ResetLevel2ObjectivesLeft();
             Time.timeScale = 1;
@@ -101,6 +104,7 @@ namespace Visualization
 
         public void LoadPresetManagement()
         {
+            _playerManager.UpdateHealth(1000f);
             _gameManager.ResetLevel2EnemiesLeft();
             _gameManager.ResetLevel2ObjectivesLeft();
             Time.timeScale = 1;
@@ -110,6 +114,7 @@ namespace Visualization
 
         public void LoadLevel3()
         {
+            _playerManager.UpdateHealth(1000f);
             _gameManager.ResetLevel2EnemiesLeft();
             _gameManager.ResetLevel2ObjectivesLeft();
             Time.timeScale = 1;
