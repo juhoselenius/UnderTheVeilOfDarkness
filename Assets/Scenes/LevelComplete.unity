@@ -1014,7 +1014,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2054880615}
   - component: {fileID: 2054880614}
-  - component: {fileID: 2054880613}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1022,14 +1021,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &2054880613
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2054880612}
-  m_Enabled: 1
 --- !u!20 &2054880614
 Camera:
   m_ObjectHideFlags: 0
@@ -2057,9 +2048,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MenuControl, Assembly-CSharp
-        m_MethodName: TogglePresetInfo
+      - m_Target: {fileID: 1236954070}
+        m_TargetAssemblyTypeName: LevelCompleteControl, Assembly-CSharp
+        m_MethodName: LoadMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2723,9 +2714,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MenuControl, Assembly-CSharp
-        m_MethodName: LoadLevel2
+      - m_Target: {fileID: 1236954070}
+        m_TargetAssemblyTypeName: LevelCompleteControl, Assembly-CSharp
+        m_MethodName: LoadPresetManagement
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

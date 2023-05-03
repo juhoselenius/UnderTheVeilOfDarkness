@@ -23,9 +23,9 @@ namespace Visualization
             _gameManager = ServiceLocator.GetService<IGameManager>();
         }
 
-        private void Update()
+        private void Start()
         {
-            
+            _playerManager.ChangePreset(0);
         }
 
         public void TakeDamage(float amount)

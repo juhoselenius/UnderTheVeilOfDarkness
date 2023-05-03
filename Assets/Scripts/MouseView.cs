@@ -34,4 +34,27 @@ public class MouseView : MonoBehaviour
 
         playerObject.Rotate(Vector3.up * mouseX);
     }
+
+    private void OnEnable()
+    {
+        _ioptionsManager.mouseSensitivityChanged += UpdateMouseSensitivity;
+        _ioptionsManager.reverseMouseChanged += UpdateReverseMouse;
+        UpdateMouseSensitivity(_ioptionsManager.getMouseSensitivity());
+        UpdateReverseMouse(_ioptionsManager.getReverseMouse());
+    }
+
+    private void OnDisable()
+    {
+        _ioptionsManager.mouseSensitivityChanged -= UpdateMouseSensitivity;
+    }
+
+    void UpdateMouseSensitivity(float value)
+    {
+        mouseSensitivity = value;
+    }
+
+    void UpdateReverseMouse(bool value)
+    {
+        reverseMouse = value;
+    }
 }
